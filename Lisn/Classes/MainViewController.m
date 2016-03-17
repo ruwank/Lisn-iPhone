@@ -7,7 +7,8 @@
 //
 
 #import "MainViewController.h"
-
+#import <AFNetworking/AFNetworking.h>
+#import "AppConstant.h"
 @interface MainViewController ()
 
 @end
@@ -24,7 +25,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)downloadNewReleaseBookList{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURL *URL = [NSURL URLWithString:home_book_list_url]; ///
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+}
 /*
 #pragma mark - Navigation
 
