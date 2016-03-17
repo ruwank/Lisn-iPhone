@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 @interface AppDelegate ()
 
 @end
@@ -16,14 +17,17 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    //[Fabric with:@[[Crashlytics class]]];
+
     // Override point for customization after application launch.
     
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    MainViewController *mainViewController = [[MainViewController alloc] init];
-    UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-    mainNav.navigationBar.hidden = YES;
-    self.window.rootViewController = mainNav;
-    [self.window makeKeyAndVisible];
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    MainViewController *mainViewController = [[MainViewController alloc] init];
+//    UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+//    mainNav.navigationBar.hidden = YES;
+//    self.window.rootViewController = mainNav;
+//    [self.window makeKeyAndVisible];
     return YES;
 }
 
