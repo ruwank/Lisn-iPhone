@@ -15,7 +15,6 @@
 		84018E081C9936DD009C9403 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018E041C9936DD009C9403 /* AppDelegate.m */; settings = {ASSET_TAGS = (); }; };
 		84018E091C9936DD009C9403 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018E061C9936DD009C9403 /* MainViewController.m */; settings = {ASSET_TAGS = (); }; };
 		FD0C50541C99B88C00D42B05 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0C50521C99B88C00D42B05 /* HomeViewController.m */; settings = {ASSET_TAGS = (); }; };
-		FD0C50551C99B88C00D42B05 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD0C50531C99B88C00D42B05 /* HomeViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		FD0C50571C99BDC400D42B05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD0C50561C99BDC400D42B05 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -39,7 +38,6 @@
 		84018E061C9936DD009C9403 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		FD0C50511C99B88C00D42B05 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		FD0C50521C99B88C00D42B05 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		FD0C50531C99B88C00D42B05 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		FD0C50561C99BDC400D42B05 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,7 +139,6 @@
 			children = (
 				FD0C50511C99B88C00D42B05 /* HomeViewController.h */,
 				FD0C50521C99B88C00D42B05 /* HomeViewController.m */,
-				FD0C50531C99B88C00D42B05 /* HomeViewController.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -217,7 +214,6 @@
 				84018DE21C992CAE009C9403 /* LaunchScreen.storyboard in Resources */,
 				FD0C50571C99BDC400D42B05 /* Main.storyboard in Resources */,
 				84018DDF1C992CAE009C9403 /* Assets.xcassets in Resources */,
-				FD0C50551C99B88C00D42B05 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
