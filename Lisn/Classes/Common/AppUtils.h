@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface AppUtils : NSObject
-
++(NSString *)  getCredentialsData;
++(AFHTTPSessionManager*)getAFHTTPSessionManager;
 @end

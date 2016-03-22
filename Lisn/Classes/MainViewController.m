@@ -9,6 +9,8 @@
 #import "MainViewController.h"
 #import <AFNetworking/AFNetworking.h>
 #import "AppConstant.h"
+#import "AppUtils.h"
+
 @interface MainViewController ()
 
 @end
@@ -17,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self downloadNewReleaseBookList];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -26,11 +28,22 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)downloadNewReleaseBookList{
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+  
+    AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
     
-    NSURL *URL = [NSURL URLWithString:home_book_list_url]; ///
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    [manager POST:home_book_list_url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if(responseObject != NULL){
+            NSArray *dataArray=(NSArray*)responseObject;
+            for (int i=0; i<[dataArray count]; i++) {
+                NSDictionary *dataDic=(NSDictionary*)[dataArray objectAtIndex:i];
+                NSLog(@"dataDic %@",dataDic);
+            }
+        }
+        NSLog(@"class %@",[responseObject class]);
+        NSLog(@"success! %@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error: %@", error);
+    }];
 }
 /*
 #pragma mark - Navigation
