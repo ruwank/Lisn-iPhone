@@ -16,6 +16,8 @@
 		84018E091C9936DD009C9403 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018E061C9936DD009C9403 /* MainViewController.m */; settings = {ASSET_TAGS = (); }; };
 		FD0C50541C99B88C00D42B05 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0C50521C99B88C00D42B05 /* HomeViewController.m */; settings = {ASSET_TAGS = (); }; };
 		FD0C50571C99BDC400D42B05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD0C50561C99BDC400D42B05 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
+		FD60DFD11CA234F6007ED360 /* AudioBook.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD01CA234F6007ED360 /* AudioBook.m */; settings = {ASSET_TAGS = (); }; };
+		FD60DFD41CA23523007ED360 /* BookCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD31CA23523007ED360 /* BookCategory.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,10 @@
 		FD0C50511C99B88C00D42B05 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		FD0C50521C99B88C00D42B05 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		FD0C50561C99BDC400D42B05 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		FD60DFCF1CA234F6007ED360 /* AudioBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioBook.h; sourceTree = "<group>"; };
+		FD60DFD01CA234F6007ED360 /* AudioBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioBook.m; sourceTree = "<group>"; };
+		FD60DFD21CA23523007ED360 /* BookCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCategory.h; sourceTree = "<group>"; };
+		FD60DFD31CA23523007ED360 /* BookCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCategory.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +136,10 @@
 				84018DFA1C99350C009C9403 /* AppUtils.m */,
 				84018DFB1C99350C009C9403 /* Messages.h */,
 				84018DFC1C99350C009C9403 /* WebServiceURLs.h */,
+				FD60DFCF1CA234F6007ED360 /* AudioBook.h */,
+				FD60DFD01CA234F6007ED360 /* AudioBook.m */,
+				FD60DFD21CA23523007ED360 /* BookCategory.h */,
+				FD60DFD31CA23523007ED360 /* BookCategory.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -275,8 +285,10 @@
 				84018E011C99350C009C9403 /* AppUtils.m in Sources */,
 				84018DD41C992CAE009C9403 /* main.m in Sources */,
 				84018E081C9936DD009C9403 /* AppDelegate.m in Sources */,
+				FD60DFD11CA234F6007ED360 /* AudioBook.m in Sources */,
 				FD0C50541C99B88C00D42B05 /* HomeViewController.m in Sources */,
 				84018E091C9936DD009C9403 /* MainViewController.m in Sources */,
+				FD60DFD41CA23523007ED360 /* BookCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
