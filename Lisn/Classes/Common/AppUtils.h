@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AFNetworking/AFNetworking.h>
 
 @interface AppUtils : NSObject
 +(NSString *)  getCredentialsData;
