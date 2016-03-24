@@ -10,8 +10,13 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
+- (BOOL)isNetworkRechable;
+
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) NSMutableArray *topRatedBookList, *topDownloadedBookList, *topReleaseBookList ;
+@property (strong, nonatomic) NSMutableArray *bookCategories;
 //@property (strong,nonatomic)
+//@property (strong, nonatomic) NSMutableArray *newReleaseBookList, *topRatedBookList, *topDownloadedBookList;
 
 @end
 

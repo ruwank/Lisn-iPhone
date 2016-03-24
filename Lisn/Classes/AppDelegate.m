@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <AFNetworking/AFNetworking.h>
+
 @interface AppDelegate ()
 
 @end
@@ -51,6 +53,28 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(void)startMonitoringReachability{
+    [AFNetworkReachabilityManager managerForDomain:@"google.com"];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+}
+- (BOOL)isNetworkRechable {
+    
+    if ([AFNetworkReachabilityManager sharedManager].reachable) {
+        
+        if ([AFNetworkReachabilityManager sharedManager].isReachableViaWiFi)
+            NSLog(@"Network reachable via WWAN");
+        else
+            NSLog(@"Network reachable via Wifi");
+        
+        return YES;
+    }
+    else {
+        
+        NSLog(@"Network is not reachable");
+        return NO;
+    }
 }
 
 @end

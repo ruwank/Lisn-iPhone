@@ -8,10 +8,15 @@
 
 #import "MainViewController.h"
 #import <AFNetworking/AFNetworking.h>
-#import "AppConstant.h"
+#import "WebServiceURLs.h"
 #import "AppUtils.h"
+#import "AppDelegate.h"
+#import "BookCategory.h"
 
-@interface MainViewController ()
+@interface MainViewController (){
+    bool finishDelay,finishDownload;
+    int downloadCount,finishCount;
+}
 
 @end
 
@@ -19,7 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self downloadNewReleaseBookList];
+    [self performSelector:@selector(finishSplash:) withObject:nil afterDelay:3.0 inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
+
+    [self downloadInitialData];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -27,23 +34,97 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)downloadNewReleaseBookList{
-  
+#pragma mark
+
+-(void)loadHomeScreen{
+    
+    if(finishDelay && finishDownload){
+        [self performSegueWithIdentifier:@"segue_home" sender:nil];
+    }
+
+}
+
+-(void)finishSplash:(id)sender{
+    finishDelay=TRUE;
+    [self loadHomeScreen];
+
+}
+-(void)finishDownload{
+    finishCount ++;
+    if (downloadCount == finishCount) {
+        finishDownload=TRUE;
+        [self loadHomeScreen];
+    }
+}
+-(void)downloadInitialData{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+
+   // if ([appDelegate isNetworkRechable]) {
+        finishDownload=FALSE;
+        downloadCount=4;
+        finishCount=0;
+    
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
     
-    [manager POST:home_book_list_url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if(responseObject != NULL){
-            NSArray *dataArray=(NSArray*)responseObject;
+    
+    [manager POST:book_category_list_url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
+            NSMutableArray *dataArray=(NSMutableArray*)responseObject;
+            NSMutableArray *categoryArray=[[NSMutableArray alloc] init];
             for (int i=0; i<[dataArray count]; i++) {
-                NSDictionary *dataDic=(NSDictionary*)[dataArray objectAtIndex:i];
-                NSLog(@"dataDic %@",dataDic);
+                NSDictionary *dataDic=[dataArray objectAtIndex:i];
+                BookCategory *bookCategory=[[BookCategory alloc] initWithDataDic:dataDic];
+                [categoryArray addObject:bookCategory];
             }
+            appDelegate.bookCategories=categoryArray;
+            [self finishDownload];
+            
         }
-        NSLog(@"class %@",[responseObject class]);
-        NSLog(@"success! %@",responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error: %@", error);
+        [self finishDownload];
+
     }];
+    
+    [manager POST:top_release_book_list_url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
+            NSMutableArray *dataArray=(NSMutableArray*)responseObject;
+            appDelegate.topReleaseBookList=dataArray;
+            [self finishDownload];
+
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self finishDownload];
+
+    }];
+    
+    [manager POST:top_rated_book_list_url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
+            NSMutableArray *dataArray=(NSMutableArray*)responseObject;
+            appDelegate.topRatedBookList=dataArray;
+            [self finishDownload];
+
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self finishDownload];
+
+    }];
+    
+    [manager POST:top_download_book_list_url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
+            NSMutableArray *dataArray=(NSMutableArray*)responseObject;
+            appDelegate.topDownloadedBookList=dataArray;
+            [self finishDownload];
+
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self finishDownload];
+
+    }];
+//    }else{
+//        finishDownload=TRUE;
+//        [self loadHomeScreen];
+//    }
 }
 /*
 #pragma mark - Navigation
