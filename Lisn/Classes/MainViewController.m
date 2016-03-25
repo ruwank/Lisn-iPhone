@@ -39,7 +39,7 @@
 -(void)loadHomeScreen{
     
     if(finishDelay && finishDownload){
-        [self performSegueWithIdentifier:@"segue_home" sender:nil];
+        [self performSegueWithIdentifier:@"segue_main" sender:nil];
     }
 
 }

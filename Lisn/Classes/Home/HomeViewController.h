@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LisnBaseViewController.h"
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : LisnBaseViewController
 
 @end

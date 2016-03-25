@@ -19,6 +19,8 @@
 		FD459F031CA3957900387C5D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD459F021CA3957900387C5D /* SWRevealViewController.m */; settings = {ASSET_TAGS = (); }; };
 		FD60DFD11CA234F6007ED360 /* AudioBook.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD01CA234F6007ED360 /* AudioBook.m */; settings = {ASSET_TAGS = (); }; };
 		FD60DFD41CA23523007ED360 /* BookCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD31CA23523007ED360 /* BookCategory.m */; settings = {ASSET_TAGS = (); }; };
+		FDB10E201CA4CF210079FB5B /* LisnBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDB10E1F1CA4CF210079FB5B /* LisnBaseViewController.m */; settings = {ASSET_TAGS = (); }; };
+		FDB10E231CA4CF7D0079FB5B /* NavigationMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDB10E221CA4CF7D0079FB5B /* NavigationMenuViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,10 @@
 		FD60DFD01CA234F6007ED360 /* AudioBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioBook.m; sourceTree = "<group>"; };
 		FD60DFD21CA23523007ED360 /* BookCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCategory.h; sourceTree = "<group>"; };
 		FD60DFD31CA23523007ED360 /* BookCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCategory.m; sourceTree = "<group>"; };
+		FDB10E1E1CA4CF210079FB5B /* LisnBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LisnBaseViewController.h; sourceTree = "<group>"; };
+		FDB10E1F1CA4CF210079FB5B /* LisnBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LisnBaseViewController.m; sourceTree = "<group>"; };
+		FDB10E211CA4CF7D0079FB5B /* NavigationMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationMenuViewController.h; sourceTree = "<group>"; };
+		FDB10E221CA4CF7D0079FB5B /* NavigationMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationMenuViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +150,10 @@
 				FD60DFD01CA234F6007ED360 /* AudioBook.m */,
 				FD60DFD21CA23523007ED360 /* BookCategory.h */,
 				FD60DFD31CA23523007ED360 /* BookCategory.m */,
+				FDB10E1E1CA4CF210079FB5B /* LisnBaseViewController.h */,
+				FDB10E1F1CA4CF210079FB5B /* LisnBaseViewController.m */,
+				FDB10E211CA4CF7D0079FB5B /* NavigationMenuViewController.h */,
+				FDB10E221CA4CF7D0079FB5B /* NavigationMenuViewController.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -296,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84018E011C99350C009C9403 /* AppUtils.m in Sources */,
+				FDB10E201CA4CF210079FB5B /* LisnBaseViewController.m in Sources */,
 				84018DD41C992CAE009C9403 /* main.m in Sources */,
 				84018E081C9936DD009C9403 /* AppDelegate.m in Sources */,
 				FD459F031CA3957900387C5D /* SWRevealViewController.m in Sources */,
@@ -303,6 +314,7 @@
 				FD0C50541C99B88C00D42B05 /* HomeViewController.m in Sources */,
 				84018E091C9936DD009C9403 /* MainViewController.m in Sources */,
 				FD60DFD41CA23523007ED360 /* BookCategory.m in Sources */,
+				FDB10E231CA4CF7D0079FB5B /* NavigationMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
