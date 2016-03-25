@@ -18,6 +18,11 @@
 		FD0C50571C99BDC400D42B05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD0C50561C99BDC400D42B05 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
 		FD2A690F1CA5A30A00B63131 /* LisnBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A690C1CA5A30A00B63131 /* LisnBaseViewController.m */; settings = {ASSET_TAGS = (); }; };
 		FD2A69101CA5A30A00B63131 /* NavigationMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A690E1CA5A30A00B63131 /* NavigationMenuViewController.m */; settings = {ASSET_TAGS = (); }; };
+		FD2A69181CA5A45B00B63131 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A69171CA5A45B00B63131 /* AboutUsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		FD2A691B1CA5A47400B63131 /* ContactUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A691A1CA5A47400B63131 /* ContactUsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		FD2A691E1CA5A48600B63131 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A691D1CA5A48600B63131 /* FeedbackViewController.m */; settings = {ASSET_TAGS = (); }; };
+		FD2A69211CA5A49900B63131 /* MyBooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A69201CA5A49900B63131 /* MyBooksViewController.m */; settings = {ASSET_TAGS = (); }; };
+		FD2A69241CA5A4A800B63131 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A69231CA5A4A800B63131 /* StoreViewController.m */; settings = {ASSET_TAGS = (); }; };
 		FD459F031CA3957900387C5D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD459F021CA3957900387C5D /* SWRevealViewController.m */; settings = {ASSET_TAGS = (); }; };
 		FD60DFD11CA234F6007ED360 /* AudioBook.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD01CA234F6007ED360 /* AudioBook.m */; settings = {ASSET_TAGS = (); }; };
 		FD60DFD41CA23523007ED360 /* BookCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD31CA23523007ED360 /* BookCategory.m */; settings = {ASSET_TAGS = (); }; };
@@ -48,6 +53,16 @@
 		FD2A690C1CA5A30A00B63131 /* LisnBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LisnBaseViewController.m; sourceTree = "<group>"; };
 		FD2A690D1CA5A30A00B63131 /* NavigationMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationMenuViewController.h; sourceTree = "<group>"; };
 		FD2A690E1CA5A30A00B63131 /* NavigationMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationMenuViewController.m; sourceTree = "<group>"; };
+		FD2A69161CA5A45B00B63131 /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
+		FD2A69171CA5A45B00B63131 /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		FD2A69191CA5A47400B63131 /* ContactUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactUsViewController.h; sourceTree = "<group>"; };
+		FD2A691A1CA5A47400B63131 /* ContactUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactUsViewController.m; sourceTree = "<group>"; };
+		FD2A691C1CA5A48600B63131 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		FD2A691D1CA5A48600B63131 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		FD2A691F1CA5A49900B63131 /* MyBooksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBooksViewController.h; sourceTree = "<group>"; };
+		FD2A69201CA5A49900B63131 /* MyBooksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBooksViewController.m; sourceTree = "<group>"; };
+		FD2A69221CA5A4A800B63131 /* StoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreViewController.h; sourceTree = "<group>"; };
+		FD2A69231CA5A4A800B63131 /* StoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreViewController.m; sourceTree = "<group>"; };
 		FD459F011CA3957900387C5D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		FD459F021CA3957900387C5D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		FD60DFCF1CA234F6007ED360 /* AudioBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioBook.h; sourceTree = "<group>"; };
@@ -119,6 +134,11 @@
 		84018DF31C99350C009C9403 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				FD2A69111CA5A42200B63131 /* AboutUs */,
+				FD2A69121CA5A42200B63131 /* ContactUs */,
+				FD2A69131CA5A42200B63131 /* Feedback */,
+				FD2A69141CA5A42200B63131 /* MyBooks */,
+				FD2A69151CA5A42200B63131 /* Store */,
 				84018DF61C99350C009C9403 /* AppSupport */,
 				84018DF71C99350C009C9403 /* Common */,
 				84018DFD1C99350C009C9403 /* Home */,
@@ -181,6 +201,51 @@
 				FD2A690E1CA5A30A00B63131 /* NavigationMenuViewController.m */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FD2A69111CA5A42200B63131 /* AboutUs */ = {
+			isa = PBXGroup;
+			children = (
+				FD2A69161CA5A45B00B63131 /* AboutUsViewController.h */,
+				FD2A69171CA5A45B00B63131 /* AboutUsViewController.m */,
+			);
+			path = AboutUs;
+			sourceTree = "<group>";
+		};
+		FD2A69121CA5A42200B63131 /* ContactUs */ = {
+			isa = PBXGroup;
+			children = (
+				FD2A69191CA5A47400B63131 /* ContactUsViewController.h */,
+				FD2A691A1CA5A47400B63131 /* ContactUsViewController.m */,
+			);
+			path = ContactUs;
+			sourceTree = "<group>";
+		};
+		FD2A69131CA5A42200B63131 /* Feedback */ = {
+			isa = PBXGroup;
+			children = (
+				FD2A691C1CA5A48600B63131 /* FeedbackViewController.h */,
+				FD2A691D1CA5A48600B63131 /* FeedbackViewController.m */,
+			);
+			path = Feedback;
+			sourceTree = "<group>";
+		};
+		FD2A69141CA5A42200B63131 /* MyBooks */ = {
+			isa = PBXGroup;
+			children = (
+				FD2A691F1CA5A49900B63131 /* MyBooksViewController.h */,
+				FD2A69201CA5A49900B63131 /* MyBooksViewController.m */,
+			);
+			path = MyBooks;
+			sourceTree = "<group>";
+		};
+		FD2A69151CA5A42200B63131 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				FD2A69221CA5A4A800B63131 /* StoreViewController.h */,
+				FD2A69231CA5A4A800B63131 /* StoreViewController.m */,
+			);
+			path = Store;
 			sourceTree = "<group>";
 		};
 		FD459F001CA3957900387C5D /* SWRevealViewController */ = {
@@ -316,13 +381,18 @@
 				84018E011C99350C009C9403 /* AppUtils.m in Sources */,
 				FD2A690F1CA5A30A00B63131 /* LisnBaseViewController.m in Sources */,
 				84018DD41C992CAE009C9403 /* main.m in Sources */,
+				FD2A691B1CA5A47400B63131 /* ContactUsViewController.m in Sources */,
 				84018E081C9936DD009C9403 /* AppDelegate.m in Sources */,
 				FD459F031CA3957900387C5D /* SWRevealViewController.m in Sources */,
 				FD60DFD11CA234F6007ED360 /* AudioBook.m in Sources */,
 				FD0C50541C99B88C00D42B05 /* HomeViewController.m in Sources */,
+				FD2A69181CA5A45B00B63131 /* AboutUsViewController.m in Sources */,
+				FD2A69211CA5A49900B63131 /* MyBooksViewController.m in Sources */,
 				84018E091C9936DD009C9403 /* MainViewController.m in Sources */,
 				FD60DFD41CA23523007ED360 /* BookCategory.m in Sources */,
+				FD2A691E1CA5A48600B63131 /* FeedbackViewController.m in Sources */,
 				FD2A69101CA5A30A00B63131 /* NavigationMenuViewController.m in Sources */,
+				FD2A69241CA5A4A800B63131 /* StoreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
