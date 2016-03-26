@@ -8,7 +8,6 @@
 
 #import "AppUtils.h"
 #import "AppConstant.h"
-#import <AFNetworking/AFNetworking.h>
 
 @implementation AppUtils
 
