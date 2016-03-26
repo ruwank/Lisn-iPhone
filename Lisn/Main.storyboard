@@ -17,7 +17,23 @@
                     <view key="view" contentMode="scaleToFill" id="hVg-is-6q6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ui_bg_logo" translatesAutoresizingMaskIntoConstraints="NO" id="3r6-LJ-8fg">
+                                <rect key="frame" x="100" y="224" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="T82-sN-jKK"/>
+                                    <constraint firstAttribute="width" constant="120" id="kYu-uM-qUI"/>
+                                </constraints>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="JUV-yv-azF">
+                                <rect key="frame" x="150" y="352" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.62352941176470589" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="3r6-LJ-8fg" firstAttribute="centerX" secondItem="hVg-is-6q6" secondAttribute="centerX" id="0LB-hM-ieU"/>
+                            <constraint firstItem="3r6-LJ-8fg" firstAttribute="centerY" secondItem="hVg-is-6q6" secondAttribute="centerY" id="PpN-q4-bHu"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qxM-DP-GlB"/>
                     <connections>
@@ -551,6 +567,6 @@
         <image name="ui_bg_side_menu_top" width="320" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MYx-te-oBT"/>
+        <segue reference="K8r-uG-0rJ"/>
     </inferredMetricsTieBreakers>
 </document>
