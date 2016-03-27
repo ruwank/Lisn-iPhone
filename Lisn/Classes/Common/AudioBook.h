@@ -30,4 +30,6 @@ typedef enum  {
 @property (strong, nonatomic) NSMutableArray* reviews;
 @property LanguageCode lanCode;
 
+- (instancetype)initWithDataDictionary:(NSDictionary *)jsonDic;
+
 @end
