@@ -8,30 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		403BA092F3D8A32DB98FE139 /* libPods-Lisn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 236BF7C633958496C14FE0A0 /* libPods-Lisn.a */; };
+		74F9F5781CA6FEB40025FE88 /* MyBookCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F9F5771CA6FEB40025FE88 /* MyBookCollectionViewCell.m */; };
+		74F9F57B1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F9F57A1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m */; };
 		84018DD41C992CAE009C9403 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018DD31C992CAE009C9403 /* main.m */; };
 		84018DDF1C992CAE009C9403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84018DDE1C992CAE009C9403 /* Assets.xcassets */; };
 		84018DE21C992CAE009C9403 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84018DE01C992CAE009C9403 /* LaunchScreen.storyboard */; };
-		84018E011C99350C009C9403 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018DFA1C99350C009C9403 /* AppUtils.m */; settings = {ASSET_TAGS = (); }; };
-		84018E081C9936DD009C9403 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018E041C9936DD009C9403 /* AppDelegate.m */; settings = {ASSET_TAGS = (); }; };
-		84018E091C9936DD009C9403 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018E061C9936DD009C9403 /* MainViewController.m */; settings = {ASSET_TAGS = (); }; };
-		FD0C50541C99B88C00D42B05 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0C50521C99B88C00D42B05 /* HomeViewController.m */; settings = {ASSET_TAGS = (); }; };
-		FD0C50571C99BDC400D42B05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD0C50561C99BDC400D42B05 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
-		FD2A690F1CA5A30A00B63131 /* LisnBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A690C1CA5A30A00B63131 /* LisnBaseViewController.m */; settings = {ASSET_TAGS = (); }; };
-		FD2A69101CA5A30A00B63131 /* NavigationMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A690E1CA5A30A00B63131 /* NavigationMenuViewController.m */; settings = {ASSET_TAGS = (); }; };
-		FD2A69181CA5A45B00B63131 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A69171CA5A45B00B63131 /* AboutUsViewController.m */; settings = {ASSET_TAGS = (); }; };
-		FD2A691B1CA5A47400B63131 /* ContactUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A691A1CA5A47400B63131 /* ContactUsViewController.m */; settings = {ASSET_TAGS = (); }; };
-		FD2A691E1CA5A48600B63131 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A691D1CA5A48600B63131 /* FeedbackViewController.m */; settings = {ASSET_TAGS = (); }; };
-		FD2A69211CA5A49900B63131 /* MyBooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A69201CA5A49900B63131 /* MyBooksViewController.m */; settings = {ASSET_TAGS = (); }; };
-		FD2A69241CA5A4A800B63131 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A69231CA5A4A800B63131 /* StoreViewController.m */; settings = {ASSET_TAGS = (); }; };
-		FD459F031CA3957900387C5D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD459F021CA3957900387C5D /* SWRevealViewController.m */; settings = {ASSET_TAGS = (); }; };
-		FD60DFD11CA234F6007ED360 /* AudioBook.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD01CA234F6007ED360 /* AudioBook.m */; settings = {ASSET_TAGS = (); }; };
-		FD60DFD41CA23523007ED360 /* BookCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD31CA23523007ED360 /* BookCategory.m */; settings = {ASSET_TAGS = (); }; };
+		84018E011C99350C009C9403 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018DFA1C99350C009C9403 /* AppUtils.m */; };
+		84018E081C9936DD009C9403 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018E041C9936DD009C9403 /* AppDelegate.m */; };
+		84018E091C9936DD009C9403 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018E061C9936DD009C9403 /* MainViewController.m */; };
+		FD0C50541C99B88C00D42B05 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0C50521C99B88C00D42B05 /* HomeViewController.m */; };
+		FD0C50571C99BDC400D42B05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD0C50561C99BDC400D42B05 /* Main.storyboard */; };
+		FD2A690F1CA5A30A00B63131 /* LisnBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A690C1CA5A30A00B63131 /* LisnBaseViewController.m */; };
+		FD2A69101CA5A30A00B63131 /* NavigationMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A690E1CA5A30A00B63131 /* NavigationMenuViewController.m */; };
+		FD2A69181CA5A45B00B63131 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A69171CA5A45B00B63131 /* AboutUsViewController.m */; };
+		FD2A691B1CA5A47400B63131 /* ContactUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A691A1CA5A47400B63131 /* ContactUsViewController.m */; };
+		FD2A691E1CA5A48600B63131 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A691D1CA5A48600B63131 /* FeedbackViewController.m */; };
+		FD2A69211CA5A49900B63131 /* MyBooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A69201CA5A49900B63131 /* MyBooksViewController.m */; };
+		FD2A69241CA5A4A800B63131 /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A69231CA5A4A800B63131 /* StoreViewController.m */; };
+		FD459F031CA3957900387C5D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD459F021CA3957900387C5D /* SWRevealViewController.m */; };
+		FD60DFD11CA234F6007ED360 /* AudioBook.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD01CA234F6007ED360 /* AudioBook.m */; };
+		FD60DFD41CA23523007ED360 /* BookCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD31CA23523007ED360 /* BookCategory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		236BF7C633958496C14FE0A0 /* libPods-Lisn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34909B7B9377810C302EB1C4 /* Pods-Lisn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.debug.xcconfig"; sourceTree = "<group>"; };
 		6C4155140A66D7744A226C0C /* Pods-Lisn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.release.xcconfig"; sourceTree = "<group>"; };
+		74F9F5761CA6FEB40025FE88 /* MyBookCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBookCollectionViewCell.h; sourceTree = "<group>"; };
+		74F9F5771CA6FEB40025FE88 /* MyBookCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBookCollectionViewCell.m; sourceTree = "<group>"; };
+		74F9F5791CA6FF0D0025FE88 /* StoreBookCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreBookCollectionViewCell.h; sourceTree = "<group>"; };
+		74F9F57A1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreBookCollectionViewCell.m; sourceTree = "<group>"; };
 		84018DCF1C992CAE009C9403 /* Lisn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lisn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84018DD31C992CAE009C9403 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		84018DDE1C992CAE009C9403 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,6 +96,17 @@
 				6C4155140A66D7744A226C0C /* Pods-Lisn.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		74F9F5751CA6FE6B0025FE88 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				74F9F5761CA6FEB40025FE88 /* MyBookCollectionViewCell.h */,
+				74F9F5771CA6FEB40025FE88 /* MyBookCollectionViewCell.m */,
+				74F9F5791CA6FF0D0025FE88 /* StoreBookCollectionViewCell.h */,
+				74F9F57A1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		84018DC61C992CAE009C9403 = {
@@ -178,6 +195,7 @@
 		84018DFD1C99350C009C9403 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				74F9F5751CA6FE6B0025FE88 /* Views */,
 				FD0C50511C99B88C00D42B05 /* HomeViewController.h */,
 				FD0C50521C99B88C00D42B05 /* HomeViewController.m */,
 			);
@@ -382,6 +400,7 @@
 				FD2A690F1CA5A30A00B63131 /* LisnBaseViewController.m in Sources */,
 				84018DD41C992CAE009C9403 /* main.m in Sources */,
 				FD2A691B1CA5A47400B63131 /* ContactUsViewController.m in Sources */,
+				74F9F57B1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m in Sources */,
 				84018E081C9936DD009C9403 /* AppDelegate.m in Sources */,
 				FD459F031CA3957900387C5D /* SWRevealViewController.m in Sources */,
 				FD60DFD11CA234F6007ED360 /* AudioBook.m in Sources */,
@@ -391,6 +410,7 @@
 				84018E091C9936DD009C9403 /* MainViewController.m in Sources */,
 				FD60DFD41CA23523007ED360 /* BookCategory.m in Sources */,
 				FD2A691E1CA5A48600B63131 /* FeedbackViewController.m in Sources */,
+				74F9F5781CA6FEB40025FE88 /* MyBookCollectionViewCell.m in Sources */,
 				FD2A69101CA5A30A00B63131 /* NavigationMenuViewController.m in Sources */,
 				FD2A69241CA5A4A800B63131 /* StoreViewController.m in Sources */,
 			);
