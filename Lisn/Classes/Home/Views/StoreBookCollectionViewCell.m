@@ -7,6 +7,7 @@
 //
 
 #import "StoreBookCollectionViewCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface StoreBookCollectionViewCell()
 
@@ -68,6 +69,25 @@
 - (void)setCellObject:(AudioBook *)cellObject
 {
     _cellObject = cellObject;
+    
+    if(_cellObject.lanCode == LAN_SI){
+        _bookName.font = [UIFont fontWithName:@"FMAbhaya" size:10];
+
+    }else{
+        _bookName.font = [UIFont fontWithName:@"HelveticaNeue" size:10];
+  
+    }
+
+    _bookName.text=_cellObject.title;
+    NSString *imageURL=_cellObject.cover_image;
+    
+    NSMutableURLRequest *imageRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:imageURL]
+                                                                cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                            timeoutInterval:60];
+    [_thumbImageView setImageWithURLRequest:imageRequest
+                          placeholderImage:[UIImage imageNamed:@"AppIcon"]
+                                   success:nil
+                                   failure:nil];
 }
 
 @end

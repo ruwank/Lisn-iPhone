@@ -17,6 +17,7 @@
     bool finishDelay,finishDownload;
     int downloadCount,finishCount;
 }
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -53,6 +54,8 @@
     finishCount ++;
     if (downloadCount == finishCount) {
         finishDownload=TRUE;
+        [_activityIndicator stopAnimating];
+
         [self loadHomeScreen];
     }
 }
@@ -66,6 +69,7 @@
     
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
     
+    [_activityIndicator startAnimating];
     
     [manager POST:book_category_list_url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){

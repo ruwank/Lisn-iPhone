@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YpL-rS-UxS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YpL-rS-UxS">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -44,6 +44,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="qxM-DP-GlB"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="JUV-yv-azF" id="FSh-yC-pCU"/>
                         <segue destination="WOy-Oa-HSc" kind="push" identifier="segue_main" id="pOu-ux-JeT"/>
                     </connections>
                 </viewController>
@@ -105,10 +106,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_menu_home" translatesAutoresizingMaskIntoConstraints="NO" id="dax-j3-FGh">
-                                                    <rect key="frame" x="15" y="4" width="36" height="36"/>
+                                                    <rect key="frame" x="15" y="10" width="24" height="24"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AbQ-XK-eRs">
-                                                    <rect key="frame" x="75" y="11" width="46" height="21"/>
+                                                    <rect key="frame" x="65" y="11" width="46" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -127,10 +128,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_menu_store" translatesAutoresizingMaskIntoConstraints="NO" id="lLg-Xe-YxD">
-                                                    <rect key="frame" x="15" y="4" width="36" height="36"/>
+                                                    <rect key="frame" x="15" y="10" width="24" height="24"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Store" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7e-g0-37P">
-                                                    <rect key="frame" x="75" y="11" width="41" height="21"/>
+                                                    <rect key="frame" x="65" y="11" width="41" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -149,10 +150,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_menu_mybook" translatesAutoresizingMaskIntoConstraints="NO" id="YBM-zc-vgq">
-                                                    <rect key="frame" x="15" y="4" width="36" height="36"/>
+                                                    <rect key="frame" x="15" y="10" width="24" height="24"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Books" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euw-P9-s4k">
-                                                    <rect key="frame" x="75" y="11" width="75" height="21"/>
+                                                    <rect key="frame" x="65" y="11" width="75" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -171,10 +172,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_menu_feedback" translatesAutoresizingMaskIntoConstraints="NO" id="w73-G3-FfQ">
-                                                    <rect key="frame" x="16" y="4" width="36" height="36"/>
+                                                    <rect key="frame" x="16" y="10" width="24" height="24"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NLu-wD-5z5">
-                                                    <rect key="frame" x="75" y="11" width="76" height="21"/>
+                                                    <rect key="frame" x="65" y="11" width="76" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -193,10 +194,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_menu_about" translatesAutoresizingMaskIntoConstraints="NO" id="NUj-8d-ks0">
-                                                    <rect key="frame" x="16" y="4" width="36" height="36"/>
+                                                    <rect key="frame" x="16" y="10" width="24" height="24"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About Us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jb-oI-DsS">
-                                                    <rect key="frame" x="75" y="11" width="72" height="21"/>
+                                                    <rect key="frame" x="65" y="11" width="72" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -215,10 +216,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_menu_contacts" translatesAutoresizingMaskIntoConstraints="NO" id="mis-MJ-WRN">
-                                                    <rect key="frame" x="16" y="4" width="36" height="36"/>
+                                                    <rect key="frame" x="16" y="10" width="24" height="24"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contact Us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyC-dT-Xvx">
-                                                    <rect key="frame" x="75" y="11" width="86" height="21"/>
+                                                    <rect key="frame" x="65" y="11" width="86" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1578,6 +1579,6 @@
         <image name="ui_bg_side_menu_top" width="320" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="K8r-uG-0rJ"/>
+        <segue reference="MYx-te-oBT"/>
     </inferredMetricsTieBreakers>
 </document>
