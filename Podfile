@@ -10,5 +10,6 @@ target 'Lisn' do
     pod 'AFNetworking', '~> 3.0'
     pod 'Fabric'
     pod 'Crashlytics'
+    pod 'ResponsiveLabel', '~> 1.0.10'
 end
 

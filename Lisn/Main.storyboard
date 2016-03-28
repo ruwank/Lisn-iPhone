@@ -546,7 +546,7 @@
                                                                     </constraints>
                                                                     <state key="normal" image="ic_menu_more_option"/>
                                                                 </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plP-Kq-fj6">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plP-Kq-fj6" customClass="ResponsiveLabel">
                                                                     <rect key="frame" x="6" y="132" width="61" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="SHl-5v-0t5"/>
@@ -554,6 +554,9 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
+                                                                    </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0oF-MO-0Ai">
                                                                     <rect key="frame" x="6" y="144" width="61" height="15"/>
@@ -686,7 +689,7 @@
                                                             <outlet property="alphaView" destination="7EE-0m-1Lb" id="U0v-DE-Hwe"/>
                                                             <outlet property="bgView" destination="cTa-TZ-fNR" id="2t2-Oc-lhD"/>
                                                             <outlet property="bookAuther" destination="0oF-MO-0Ai" id="ULB-4i-mCW"/>
-                                                            <outlet property="bookName" destination="plP-Kq-fj6" id="Xnr-Nj-IrR"/>
+                                                            <outlet property="bookName" destination="plP-Kq-fj6" id="CLK-fL-miH"/>
                                                             <outlet property="loadingLabel" destination="z55-ou-gA7" id="Ws5-3s-Ttq"/>
                                                             <outlet property="playButton" destination="bdo-Ws-Q7r" id="oBI-l8-dvO"/>
                                                             <outlet property="previewView" destination="f1g-6a-cTr" id="2Vw-P3-izX"/>
@@ -814,7 +817,7 @@
                                                                     </constraints>
                                                                     <state key="normal" image="ic_menu_more_option"/>
                                                                 </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCn-8K-pDU">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCn-8K-pDU" customClass="ResponsiveLabel">
                                                                     <rect key="frame" x="6" y="132" width="61" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="OXs-qt-1BR"/>
@@ -954,7 +957,7 @@
                                                             <outlet property="alphaView" destination="Tiw-Xv-sRt" id="yUx-TT-juW"/>
                                                             <outlet property="bgView" destination="QSN-Dp-ugn" id="pAl-xG-SSh"/>
                                                             <outlet property="bookAuther" destination="9Oj-Zu-gof" id="R9k-ru-3FS"/>
-                                                            <outlet property="bookName" destination="ZCn-8K-pDU" id="cKp-L3-xlM"/>
+                                                            <outlet property="bookName" destination="ZCn-8K-pDU" id="BMb-fH-bzc"/>
                                                             <outlet property="loadingLabel" destination="bOo-lC-cra" id="xch-OF-ckl"/>
                                                             <outlet property="playButton" destination="kge-nj-aWq" id="iId-sO-ZUn"/>
                                                             <outlet property="previewView" destination="azd-EY-AwA" id="f9a-u6-IV9"/>
@@ -1082,7 +1085,7 @@
                                                                     </constraints>
                                                                     <state key="normal" image="ic_menu_more_option"/>
                                                                 </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3s1-aD-mtZ">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3s1-aD-mtZ" customClass="ResponsiveLabel">
                                                                     <rect key="frame" x="6" y="132" width="61" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="Ybp-Ie-77k"/>
@@ -1222,7 +1225,7 @@
                                                             <outlet property="alphaView" destination="62M-Se-TX4" id="Pbw-Sn-SHX"/>
                                                             <outlet property="bgView" destination="vjK-g9-BwA" id="YD6-hU-WS0"/>
                                                             <outlet property="bookAuther" destination="jaE-Mp-XUF" id="B0e-Ja-P68"/>
-                                                            <outlet property="bookName" destination="3s1-aD-mtZ" id="Htk-Bs-JsD"/>
+                                                            <outlet property="bookName" destination="3s1-aD-mtZ" id="yJf-TP-jyx"/>
                                                             <outlet property="loadingLabel" destination="fAH-ZA-1bw" id="9Hr-iH-l6v"/>
                                                             <outlet property="playButton" destination="LJY-8k-O8Z" id="KBx-DW-gVa"/>
                                                             <outlet property="previewView" destination="d3m-Pf-Dtj" id="QVO-mB-828"/>

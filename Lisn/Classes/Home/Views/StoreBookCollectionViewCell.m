@@ -8,6 +8,7 @@
 
 #import "StoreBookCollectionViewCell.h"
 #import "UIImageView+AFNetworking.h"
+#import <ResponsiveLabel.h>
 
 @interface StoreBookCollectionViewCell()
 
@@ -18,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *loadingLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
-@property (weak, nonatomic) IBOutlet UILabel *bookName;
+@property (weak, nonatomic) IBOutlet ResponsiveLabel *bookName;
 @property (weak, nonatomic) IBOutlet UILabel *bookAuther;
 @property (weak, nonatomic) IBOutlet UIView *rankView;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
@@ -72,9 +73,13 @@
     
     if(_cellObject.lanCode == LAN_SI){
         _bookName.font = [UIFont fontWithName:@"FMAbhaya" size:10];
+        [self.bookName setTruncationToken:@"'''"];
+
 
     }else{
         _bookName.font = [UIFont fontWithName:@"HelveticaNeue" size:10];
+        [self.bookName setTruncationToken:@"..."];
+
   
     }
 
@@ -88,6 +93,9 @@
                           placeholderImage:[UIImage imageNamed:@"AppIcon"]
                                    success:nil
                                    failure:nil];
+    
+    
+    
 }
 
 @end
