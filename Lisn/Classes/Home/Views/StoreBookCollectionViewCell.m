@@ -79,10 +79,8 @@
     }else{
         _bookName.font = [UIFont fontWithName:@"HelveticaNeue" size:10];
         [self.bookName setTruncationToken:@"..."];
-
   
     }
-
     _bookName.text=_cellObject.title;
     NSString *imageURL=_cellObject.cover_image;
     
