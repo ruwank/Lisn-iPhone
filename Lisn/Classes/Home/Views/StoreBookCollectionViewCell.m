@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet ResponsiveLabel *bookName;
-@property (weak, nonatomic) IBOutlet UILabel *bookAuther;
+@property (weak, nonatomic) IBOutlet ResponsiveLabel *bookAuther;
 @property (weak, nonatomic) IBOutlet UIView *rankView;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 
@@ -73,15 +73,23 @@
     
     if(_cellObject.lanCode == LAN_SI){
         _bookName.font = [UIFont fontWithName:@"FMAbhaya" size:10];
-        [self.bookName setTruncationToken:@"'''"];
+        [_bookName setTruncationToken:@"'''"];
+        
+        _bookAuther.font = [UIFont fontWithName:@"FMAbhaya" size:10];
+        [_bookAuther setTruncationToken:@"'''"];
 
 
     }else{
         _bookName.font = [UIFont fontWithName:@"HelveticaNeue" size:10];
-        [self.bookName setTruncationToken:@"..."];
+        [_bookName setTruncationToken:@"..."];
+        
+        _bookAuther.font = [UIFont fontWithName:@"HelveticaNeue" size:10];
+        [_bookAuther setTruncationToken:@"..."];
+
   
     }
     _bookName.text=_cellObject.title;
+    _bookAuther.text=_cellObject.author;
     NSString *imageURL=_cellObject.cover_image;
     
     NSMutableURLRequest *imageRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:imageURL]

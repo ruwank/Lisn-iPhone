@@ -560,7 +560,7 @@
                                                                         <userDefinedRuntimeAttribute type="string" keyPath="truncationToken" value="..."/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0oF-MO-0Ai">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0oF-MO-0Ai" customClass="ResponsiveLabel">
                                                                     <rect key="frame" x="6" y="144" width="61" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="kjS-1Q-vhx"/>
@@ -568,6 +568,9 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
+                                                                    </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZf-j7-NOz" userLabel="Menu Button">
                                                                     <rect key="frame" x="42" y="135" width="44" height="33"/>
@@ -690,7 +693,7 @@
                                                         <connections>
                                                             <outlet property="alphaView" destination="7EE-0m-1Lb" id="U0v-DE-Hwe"/>
                                                             <outlet property="bgView" destination="cTa-TZ-fNR" id="2t2-Oc-lhD"/>
-                                                            <outlet property="bookAuther" destination="0oF-MO-0Ai" id="ULB-4i-mCW"/>
+                                                            <outlet property="bookAuther" destination="0oF-MO-0Ai" id="sCT-99-EdJ"/>
                                                             <outlet property="bookName" destination="plP-Kq-fj6" id="CLK-fL-miH"/>
                                                             <outlet property="loadingLabel" destination="z55-ou-gA7" id="Ws5-3s-Ttq"/>
                                                             <outlet property="playButton" destination="bdo-Ws-Q7r" id="oBI-l8-dvO"/>
@@ -832,7 +835,7 @@
                                                                         <userDefinedRuntimeAttribute type="string" keyPath="truncationToken" value="..."/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Oj-Zu-gof">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Oj-Zu-gof" customClass="ResponsiveLabel">
                                                                     <rect key="frame" x="6" y="144" width="61" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="elF-DV-nLA"/>
@@ -840,6 +843,9 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
+                                                                    </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2N-jy-w4c" userLabel="Menu Button">
                                                                     <rect key="frame" x="42" y="135" width="44" height="33"/>
@@ -962,7 +968,7 @@
                                                         <connections>
                                                             <outlet property="alphaView" destination="Tiw-Xv-sRt" id="yUx-TT-juW"/>
                                                             <outlet property="bgView" destination="QSN-Dp-ugn" id="pAl-xG-SSh"/>
-                                                            <outlet property="bookAuther" destination="9Oj-Zu-gof" id="R9k-ru-3FS"/>
+                                                            <outlet property="bookAuther" destination="9Oj-Zu-gof" id="sAU-YU-88P"/>
                                                             <outlet property="bookName" destination="ZCn-8K-pDU" id="BMb-fH-bzc"/>
                                                             <outlet property="loadingLabel" destination="bOo-lC-cra" id="xch-OF-ckl"/>
                                                             <outlet property="playButton" destination="kge-nj-aWq" id="iId-sO-ZUn"/>
@@ -1104,7 +1110,7 @@
                                                                         <userDefinedRuntimeAttribute type="string" keyPath="truncationToken" value="..."/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaE-Mp-XUF">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaE-Mp-XUF" customClass="ResponsiveLabel">
                                                                     <rect key="frame" x="6" y="144" width="61" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="L9J-5t-Dg0"/>
@@ -1112,6 +1118,9 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
+                                                                    </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9GM-Tw-bii" userLabel="Menu Button">
                                                                     <rect key="frame" x="42" y="135" width="44" height="33"/>
@@ -1234,7 +1243,7 @@
                                                         <connections>
                                                             <outlet property="alphaView" destination="62M-Se-TX4" id="Pbw-Sn-SHX"/>
                                                             <outlet property="bgView" destination="vjK-g9-BwA" id="YD6-hU-WS0"/>
-                                                            <outlet property="bookAuther" destination="jaE-Mp-XUF" id="B0e-Ja-P68"/>
+                                                            <outlet property="bookAuther" destination="jaE-Mp-XUF" id="SF6-AX-8pN"/>
                                                             <outlet property="bookName" destination="3s1-aD-mtZ" id="yJf-TP-jyx"/>
                                                             <outlet property="loadingLabel" destination="fAH-ZA-1bw" id="9Hr-iH-l6v"/>
                                                             <outlet property="playButton" destination="LJY-8k-O8Z" id="KBx-DW-gVa"/>
