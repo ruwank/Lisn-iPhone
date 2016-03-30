@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YpL-rS-UxS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YpL-rS-UxS">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -43,7 +43,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qxM-DP-GlB"/>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="JUV-yv-azF" id="FSh-yC-pCU"/>
                         <segue destination="WOy-Oa-HSc" kind="push" identifier="segue_main" id="pOu-ux-JeT"/>
                     </connections>
                 </viewController>
@@ -105,10 +107,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_menu_home" translatesAutoresizingMaskIntoConstraints="NO" id="dax-j3-FGh">
-                                                    <rect key="frame" x="15" y="4" width="36" height="36"/>
+                                                    <rect key="frame" x="15" y="10" width="24" height="24"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AbQ-XK-eRs">
-                                                    <rect key="frame" x="75" y="11" width="46" height="21"/>
+                                                    <rect key="frame" x="65" y="11" width="46" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -127,10 +129,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_menu_store" translatesAutoresizingMaskIntoConstraints="NO" id="lLg-Xe-YxD">
-                                                    <rect key="frame" x="15" y="4" width="36" height="36"/>
+                                                    <rect key="frame" x="15" y="10" width="24" height="24"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Store" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7e-g0-37P">
-                                                    <rect key="frame" x="75" y="11" width="41" height="21"/>
+                                                    <rect key="frame" x="65" y="11" width="41" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -149,10 +151,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_menu_mybook" translatesAutoresizingMaskIntoConstraints="NO" id="YBM-zc-vgq">
-                                                    <rect key="frame" x="15" y="4" width="36" height="36"/>
+                                                    <rect key="frame" x="15" y="10" width="24" height="24"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Books" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euw-P9-s4k">
-                                                    <rect key="frame" x="75" y="11" width="75" height="21"/>
+                                                    <rect key="frame" x="65" y="11" width="75" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -171,10 +173,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_menu_feedback" translatesAutoresizingMaskIntoConstraints="NO" id="w73-G3-FfQ">
-                                                    <rect key="frame" x="16" y="4" width="36" height="36"/>
+                                                    <rect key="frame" x="16" y="10" width="24" height="24"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NLu-wD-5z5">
-                                                    <rect key="frame" x="75" y="11" width="76" height="21"/>
+                                                    <rect key="frame" x="65" y="11" width="76" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -193,10 +195,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_menu_about" translatesAutoresizingMaskIntoConstraints="NO" id="NUj-8d-ks0">
-                                                    <rect key="frame" x="16" y="4" width="36" height="36"/>
+                                                    <rect key="frame" x="16" y="10" width="24" height="24"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="About Us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jb-oI-DsS">
-                                                    <rect key="frame" x="75" y="11" width="72" height="21"/>
+                                                    <rect key="frame" x="65" y="11" width="72" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -215,10 +217,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_menu_contacts" translatesAutoresizingMaskIntoConstraints="NO" id="mis-MJ-WRN">
-                                                    <rect key="frame" x="16" y="4" width="36" height="36"/>
+                                                    <rect key="frame" x="16" y="10" width="24" height="24"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contact Us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyC-dT-Xvx">
-                                                    <rect key="frame" x="75" y="11" width="86" height="21"/>
+                                                    <rect key="frame" x="65" y="11" width="86" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -281,7 +283,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="skP-2X-ABx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1962" y="960"/>
+            <point key="canvasLocation" x="1962" y="964"/>
         </scene>
         <!--Home-->
         <scene sceneID="sPt-34-rsJ">
@@ -295,7 +297,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n8J-rR-gZb" userLabel="Content Scroll View">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n8J-rR-gZb" userLabel="Content Scroll View">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PQR-AY-lwN" userLabel="My Books">
@@ -545,7 +547,7 @@
                                                                     </constraints>
                                                                     <state key="normal" image="ic_menu_more_option"/>
                                                                 </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plP-Kq-fj6">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="plP-Kq-fj6" customClass="ResponsiveLabel">
                                                                     <rect key="frame" x="6" y="132" width="61" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="SHl-5v-0t5"/>
@@ -553,8 +555,12 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="truncationToken" value="..."/>
+                                                                    </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0oF-MO-0Ai">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0oF-MO-0Ai" customClass="ResponsiveLabel">
                                                                     <rect key="frame" x="6" y="144" width="61" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="kjS-1Q-vhx"/>
@@ -562,6 +568,9 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
+                                                                    </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZf-j7-NOz" userLabel="Menu Button">
                                                                     <rect key="frame" x="42" y="135" width="44" height="33"/>
@@ -684,8 +693,8 @@
                                                         <connections>
                                                             <outlet property="alphaView" destination="7EE-0m-1Lb" id="U0v-DE-Hwe"/>
                                                             <outlet property="bgView" destination="cTa-TZ-fNR" id="2t2-Oc-lhD"/>
-                                                            <outlet property="bookAuther" destination="0oF-MO-0Ai" id="ULB-4i-mCW"/>
-                                                            <outlet property="bookName" destination="plP-Kq-fj6" id="Xnr-Nj-IrR"/>
+                                                            <outlet property="bookAuther" destination="0oF-MO-0Ai" id="sCT-99-EdJ"/>
+                                                            <outlet property="bookName" destination="plP-Kq-fj6" id="CLK-fL-miH"/>
                                                             <outlet property="loadingLabel" destination="z55-ou-gA7" id="Ws5-3s-Ttq"/>
                                                             <outlet property="playButton" destination="bdo-Ws-Q7r" id="oBI-l8-dvO"/>
                                                             <outlet property="previewView" destination="f1g-6a-cTr" id="2Vw-P3-izX"/>
@@ -813,7 +822,7 @@
                                                                     </constraints>
                                                                     <state key="normal" image="ic_menu_more_option"/>
                                                                 </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCn-8K-pDU">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCn-8K-pDU" customClass="ResponsiveLabel">
                                                                     <rect key="frame" x="6" y="132" width="61" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="OXs-qt-1BR"/>
@@ -821,8 +830,12 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="truncationToken" value="..."/>
+                                                                    </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Oj-Zu-gof">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Oj-Zu-gof" customClass="ResponsiveLabel">
                                                                     <rect key="frame" x="6" y="144" width="61" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="elF-DV-nLA"/>
@@ -830,6 +843,9 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
+                                                                    </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2N-jy-w4c" userLabel="Menu Button">
                                                                     <rect key="frame" x="42" y="135" width="44" height="33"/>
@@ -952,8 +968,8 @@
                                                         <connections>
                                                             <outlet property="alphaView" destination="Tiw-Xv-sRt" id="yUx-TT-juW"/>
                                                             <outlet property="bgView" destination="QSN-Dp-ugn" id="pAl-xG-SSh"/>
-                                                            <outlet property="bookAuther" destination="9Oj-Zu-gof" id="R9k-ru-3FS"/>
-                                                            <outlet property="bookName" destination="ZCn-8K-pDU" id="cKp-L3-xlM"/>
+                                                            <outlet property="bookAuther" destination="9Oj-Zu-gof" id="sAU-YU-88P"/>
+                                                            <outlet property="bookName" destination="ZCn-8K-pDU" id="BMb-fH-bzc"/>
                                                             <outlet property="loadingLabel" destination="bOo-lC-cra" id="xch-OF-ckl"/>
                                                             <outlet property="playButton" destination="kge-nj-aWq" id="iId-sO-ZUn"/>
                                                             <outlet property="previewView" destination="azd-EY-AwA" id="f9a-u6-IV9"/>
@@ -1081,7 +1097,7 @@
                                                                     </constraints>
                                                                     <state key="normal" image="ic_menu_more_option"/>
                                                                 </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3s1-aD-mtZ">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3s1-aD-mtZ" customClass="ResponsiveLabel">
                                                                     <rect key="frame" x="6" y="132" width="61" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="Ybp-Ie-77k"/>
@@ -1089,8 +1105,12 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="truncationToken" value="..."/>
+                                                                    </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaE-Mp-XUF">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaE-Mp-XUF" customClass="ResponsiveLabel">
                                                                     <rect key="frame" x="6" y="144" width="61" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="L9J-5t-Dg0"/>
@@ -1098,6 +1118,9 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                     <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
+                                                                    </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9GM-Tw-bii" userLabel="Menu Button">
                                                                     <rect key="frame" x="42" y="135" width="44" height="33"/>
@@ -1220,8 +1243,8 @@
                                                         <connections>
                                                             <outlet property="alphaView" destination="62M-Se-TX4" id="Pbw-Sn-SHX"/>
                                                             <outlet property="bgView" destination="vjK-g9-BwA" id="YD6-hU-WS0"/>
-                                                            <outlet property="bookAuther" destination="jaE-Mp-XUF" id="B0e-Ja-P68"/>
-                                                            <outlet property="bookName" destination="3s1-aD-mtZ" id="Htk-Bs-JsD"/>
+                                                            <outlet property="bookAuther" destination="jaE-Mp-XUF" id="SF6-AX-8pN"/>
+                                                            <outlet property="bookName" destination="3s1-aD-mtZ" id="yJf-TP-jyx"/>
                                                             <outlet property="loadingLabel" destination="fAH-ZA-1bw" id="9Hr-iH-l6v"/>
                                                             <outlet property="playButton" destination="LJY-8k-O8Z" id="KBx-DW-gVa"/>
                                                             <outlet property="previewView" destination="d3m-Pf-Dtj" id="QVO-mB-828"/>
