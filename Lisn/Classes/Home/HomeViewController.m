@@ -57,7 +57,7 @@
 
 - (void)adjustViewHeights
 {
-    _cellW = (SCREEN_WIDTH - 60)/3.0;
+    _cellW = (SCREEN_WIDTH - 40)/3.0;
     
     float imgW = _cellW - 12;
     float imgH = imgW * 1.5;
@@ -83,16 +83,31 @@
     _topRatedArray = [[NSMutableArray alloc] init];
     _topDownArray = [[NSMutableArray alloc] init];
     
+    int count = 0;
     for (NSDictionary *dic in appDelegate.topReleaseBookList) {
         [_nReleseArray addObject:[[AudioBook alloc] initWithDataDictionary:dic]];
+        count ++;
+        if (count >= 3) {
+            break;
+        }
     }
     
+    count = 0;
     for (NSDictionary *dic in appDelegate.topRatedBookList) {
         [_topRatedArray addObject:[[AudioBook alloc] initWithDataDictionary:dic]];
+        count ++;
+        if (count >= 3) {
+            break;
+        }
     }
     
+    count = 0;
     for (NSDictionary *dic in appDelegate.topDownloadedBookList) {
         [_topDownArray addObject:[[AudioBook alloc] initWithDataDictionary:dic]];
+        count ++;
+        if (count >= 3) {
+            break;
+        }
     }
 }
 
@@ -130,7 +145,7 @@
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 20.0;
+    return 10.0;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
