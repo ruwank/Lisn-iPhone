@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet ResponsiveLabel *bookAuther;
 @property (weak, nonatomic) IBOutlet UIView *rankView;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIImageView *imgAwardIcon;
 
 
 @end
@@ -54,6 +56,11 @@
     _loadingLabel.hidden = !show;
 }
 
+- (void)setLoadingLableText:(NSString *)text
+{
+    _loadingLabel.text = text ? text : @"";
+}
+
 - (void)setTime:(NSString *)time
 {
     _timeLabel.text = time ? time : @"";
@@ -65,6 +72,7 @@
     _bgView.layer.masksToBounds = YES;
     
     _previewView.hidden = YES;
+    _imgAwardIcon.hidden = YES;
 }
 
 - (void)setCellObject:(AudioBook *)cellObject

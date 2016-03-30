@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		403BA092F3D8A32DB98FE139 /* libPods-Lisn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 236BF7C633958496C14FE0A0 /* libPods-Lisn.a */; };
+		7419B94B1CAB8CE7002D59E9 /* TopTabsScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7419B94A1CAB8CE7002D59E9 /* TopTabsScrollView.m */; };
 		74F9F5781CA6FEB40025FE88 /* MyBookCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F9F5771CA6FEB40025FE88 /* MyBookCollectionViewCell.m */; };
 		74F9F57B1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F9F57A1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m */; };
 		84018DD41C992CAE009C9403 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018DD31C992CAE009C9403 /* main.m */; };
@@ -28,15 +29,17 @@
 		FD459F031CA3957900387C5D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD459F021CA3957900387C5D /* SWRevealViewController.m */; };
 		FD60DFD11CA234F6007ED360 /* AudioBook.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD01CA234F6007ED360 /* AudioBook.m */; };
 		FD60DFD41CA23523007ED360 /* BookCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD31CA23523007ED360 /* BookCategory.m */; };
-		FD99A7DD1CA83DBF000F57EC /* FMAbhaya.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DA1CA83DBF000F57EC /* FMAbhaya.ttf */; settings = {ASSET_TAGS = (); }; };
-		FD99A7DE1CA83DBF000F57EC /* HelveticaNeue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DB1CA83DBF000F57EC /* HelveticaNeue.ttf */; settings = {ASSET_TAGS = (); }; };
-		FD99A7DF1CA83DBF000F57EC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DC1CA83DBF000F57EC /* OpenSans-Regular.ttf */; settings = {ASSET_TAGS = (); }; };
+		FD99A7DD1CA83DBF000F57EC /* FMAbhaya.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DA1CA83DBF000F57EC /* FMAbhaya.ttf */; };
+		FD99A7DE1CA83DBF000F57EC /* HelveticaNeue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DB1CA83DBF000F57EC /* HelveticaNeue.ttf */; };
+		FD99A7DF1CA83DBF000F57EC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DC1CA83DBF000F57EC /* OpenSans-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		236BF7C633958496C14FE0A0 /* libPods-Lisn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34909B7B9377810C302EB1C4 /* Pods-Lisn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.debug.xcconfig"; sourceTree = "<group>"; };
 		6C4155140A66D7744A226C0C /* Pods-Lisn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.release.xcconfig"; sourceTree = "<group>"; };
+		7419B9491CAB8CE7002D59E9 /* TopTabsScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopTabsScrollView.h; sourceTree = "<group>"; };
+		7419B94A1CAB8CE7002D59E9 /* TopTabsScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopTabsScrollView.m; sourceTree = "<group>"; };
 		74F9F5761CA6FEB40025FE88 /* MyBookCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBookCollectionViewCell.h; sourceTree = "<group>"; };
 		74F9F5771CA6FEB40025FE88 /* MyBookCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBookCollectionViewCell.m; sourceTree = "<group>"; };
 		74F9F5791CA6FF0D0025FE88 /* StoreBookCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreBookCollectionViewCell.h; sourceTree = "<group>"; };
@@ -269,6 +272,8 @@
 			children = (
 				FD2A69221CA5A4A800B63131 /* StoreViewController.h */,
 				FD2A69231CA5A4A800B63131 /* StoreViewController.m */,
+				7419B9491CAB8CE7002D59E9 /* TopTabsScrollView.h */,
+				7419B94A1CAB8CE7002D59E9 /* TopTabsScrollView.m */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -427,6 +432,7 @@
 				84018E011C99350C009C9403 /* AppUtils.m in Sources */,
 				FD2A690F1CA5A30A00B63131 /* LisnBaseViewController.m in Sources */,
 				84018DD41C992CAE009C9403 /* main.m in Sources */,
+				7419B94B1CAB8CE7002D59E9 /* TopTabsScrollView.m in Sources */,
 				FD2A691B1CA5A47400B63131 /* ContactUsViewController.m in Sources */,
 				74F9F57B1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m in Sources */,
 				84018E081C9936DD009C9403 /* AppDelegate.m in Sources */,
