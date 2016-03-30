@@ -80,18 +80,18 @@
     _cellObject = cellObject;
     
     if(_cellObject.lanCode == LAN_SI){
-        _bookName.font = [UIFont fontWithName:@"FMAbhaya" size:10];
+        _bookName.font = [UIFont fontWithName:@"FMAbhaya" size:9];
         [_bookName setTruncationToken:@"'''"];
         
-        _bookAuther.font = [UIFont fontWithName:@"FMAbhaya" size:10];
+        _bookAuther.font = [UIFont fontWithName:@"FMAbhaya" size:9];
         [_bookAuther setTruncationToken:@"'''"];
 
 
     }else{
-        _bookName.font = [UIFont fontWithName:@"HelveticaNeue" size:10];
+        _bookName.font = [UIFont fontWithName:@"HelveticaNeue" size:9];
         [_bookName setTruncationToken:@"..."];
         
-        _bookAuther.font = [UIFont fontWithName:@"HelveticaNeue" size:10];
+        _bookAuther.font = [UIFont fontWithName:@"HelveticaNeue" size:9];
         [_bookAuther setTruncationToken:@"..."];
 
   
