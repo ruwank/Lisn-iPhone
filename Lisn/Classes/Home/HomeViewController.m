@@ -63,7 +63,7 @@
     float imgH = imgW * 1.5;
     
     _cellH = imgH + 39;
-    _cellHLong = imgH + 89;
+    _cellHLong = imgH + 89 - 15;
     
     float myViewH = _cellH + 54;
     float othersH = _cellHLong + 54;
