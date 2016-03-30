@@ -22,6 +22,7 @@
 - (void)setPlayButtonStateTo:(BOOL)play;
 - (void)showPrivewView:(BOOL)show;
 - (void)showLoadingLabel:(BOOL)show;
+- (void)setLoadingLableText:(NSString *)text;
 - (void)setTime:(NSString *)time;
 
 @end
