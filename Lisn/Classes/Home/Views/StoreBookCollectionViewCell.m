@@ -9,6 +9,7 @@
 #import "StoreBookCollectionViewCell.h"
 #import "UIImageView+AFNetworking.h"
 #import <ResponsiveLabel.h>
+#import "AppUtils.h"
 
 @interface StoreBookCollectionViewCell()
 
@@ -31,9 +32,18 @@
 
 @implementation StoreBookCollectionViewCell
 
+
 - (IBAction)playButtonTapped:(id)sender {
+    if([AppUtils isNetworkRechable]){
     if (_delegate) {
         [_delegate storeBookCollectionViewCellPlayButtontapped:self lastState:_playButton.selected];
+        [self showPrivewView:!_playButton.selected];
+        [self setTime:@""];
+        
+    }
+    }else{
+       //TO DO
+        //no inetrnet message
     }
 }
 
@@ -68,6 +78,9 @@
 
 - (void)awakeFromNib {
     
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yourmethod) name:@"notificationName" object:nil];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"notificationName" object:nil];
+
     _bgView.layer.cornerRadius = 2.0;
     _bgView.layer.masksToBounds = YES;
     
@@ -111,5 +124,6 @@
     
     
 }
+
 
 @end

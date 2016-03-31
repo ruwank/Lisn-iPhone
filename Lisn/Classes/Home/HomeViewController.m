@@ -11,6 +11,7 @@
 #import "StoreBookCollectionViewCell.h"
 #import "AppConstant.h"
 #import "AppDelegate.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface HomeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, StoreBookCollectionViewCellDelegate>
 
@@ -41,6 +42,8 @@
 @property (nonatomic, assign) float cellH;
 @property (nonatomic, assign) float cellHLong;
 
+@property (nonatomic, strong) StoreBookCollectionViewCell *selectedStoreBookCell;
+@property (nonatomic, strong) AVPlayer *previewPlayer;
 
 @end
 
@@ -204,6 +207,20 @@
 #pragma mark - StoreBookCollectionViewCellDelegate
 
 - (void)storeBookCollectionViewCellPlayButtontapped:(StoreBookCollectionViewCell *)storeBookCollectionViewCell lastState:(BOOL)playing {
+    
+    if(self.selectedStoreBookCell != NULL){
+        [_selectedStoreBookCell showPrivewView:NO];
+    }
+    self.selectedStoreBookCell=storeBookCollectionViewCell;
+    
+    if(playing){
+        NSLog(@"playing");
+    }else{
+        [self playSelectedPreview];
+        NSLog(@"not playing");
+
+    }
+    /*
     if (storeBookCollectionViewCell.bookCellType == BookCellTypeNewReleased) {
         if (playing) {
             [storeBookCollectionViewCell setPlayButtonStateTo:NO];
@@ -217,6 +234,62 @@
     }else if (storeBookCollectionViewCell.bookCellType == BookCellTypeTopDownload) {
         
     }
+     */
+}
+#pragma mark - Preview Play
+
+-(void)playSelectedPreview{
+    if(self.previewPlayer != NULL){
+        [self.previewPlayer removeObserver:self forKeyPath:@"status"];
+        
+    }
+    NSString *audioFileUrl=_selectedStoreBookCell.cellObject.preview_audio;
+    AVPlayer *player = [[AVPlayer alloc]initWithURL:[NSURL URLWithString:audioFileUrl]];
+    self.previewPlayer = player;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playerItemDidReachEnd:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:[_previewPlayer currentItem]];
+    [self.previewPlayer addObserver:self forKeyPath:@"status" options:0 context:nil];
+   // [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
+    
+    
+    
+}
+-(void)updateSelectedPreviewCell{
+    [_selectedStoreBookCell setPlayButtonStateTo:YES];
+}
+-(void)removeSelectedPreviewCell{
+    [self.previewPlayer removeObserver:self forKeyPath:@"status"];
+    [_selectedStoreBookCell showPrivewView:NO];
+}
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    if (object == self.previewPlayer && [keyPath isEqualToString:@"status"]) {
+        if (_previewPlayer.status == AVPlayerStatusFailed) {
+            NSLog(@"AVPlayer Failed");
+            [self removeSelectedPreviewCell];
+            
+        } else if (_previewPlayer.status == AVPlayerStatusReadyToPlay) {
+            NSLog(@"AVPlayerStatusReadyToPlay");
+            [self updateSelectedPreviewCell];
+            [self.previewPlayer play];
+            
+            
+        } else if (_previewPlayer.status == AVPlayerItemStatusUnknown) {
+            NSLog(@"AVPlayer Unknown");
+            [self removeSelectedPreviewCell];
+
+            
+        }
+    }
+}
+
+- (void)playerItemDidReachEnd:(NSNotification *)notification {
+    [self removeSelectedPreviewCell];
+
+    //  code here to play next sound file
+    
 }
 
 /*

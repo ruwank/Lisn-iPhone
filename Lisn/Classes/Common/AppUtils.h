@@ -12,4 +12,5 @@
 @interface AppUtils : NSObject
 +(NSString *)  getCredentialsData;
 +(AFHTTPSessionManager*)getAFHTTPSessionManager;
++ (BOOL)isNetworkRechable;
 @end
