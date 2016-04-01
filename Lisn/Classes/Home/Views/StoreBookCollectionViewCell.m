@@ -10,6 +10,7 @@
 #import "UIImageView+AFNetworking.h"
 #import <ResponsiveLabel.h>
 #import "AppUtils.h"
+#import "Messages.h"
 
 @interface StoreBookCollectionViewCell()
 
@@ -37,13 +38,14 @@
     if([AppUtils isNetworkRechable]){
     if (_delegate) {
         [_delegate storeBookCollectionViewCellPlayButtontapped:self lastState:_playButton.selected];
-        [self showPrivewView:!_playButton.selected];
+        //[self showPrivewView:!_playButton.selected];
         [self setTime:@""];
         
     }
     }else{
-       //TO DO
-        //no inetrnet message
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NO_INTERNET_TITLE message:NO_INTERNET_MESSAGE delegate:nil cancelButtonTitle:BUTTON_OK otherButtonTitles:nil];
+        [alert show];
+      
     }
 }
 
@@ -64,6 +66,9 @@
 - (void)showLoadingLabel:(BOOL)show
 {
     _loadingLabel.hidden = !show;
+}
+- (void)showActivityIndicator:(BOOL)show{
+    _activityIndicator.hidden=!show;
 }
 
 - (void)setLoadingLableText:(NSString *)text

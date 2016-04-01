@@ -12,8 +12,13 @@
 #import "AppConstant.h"
 #import "AppDelegate.h"
 #import <AVFoundation/AVFoundation.h>
+#import <AVFoundation/AVPlayer.h>
+#import <AVFoundation/AVPlayerItem.h>
+#import <AVFoundation/AVAsset.h>
 
-@interface HomeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, StoreBookCollectionViewCellDelegate>
+@interface HomeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, StoreBookCollectionViewCellDelegate>{
+    NSTimer *_timer;
+}
 
 @property (weak, nonatomic) IBOutlet UIScrollView *contentScrollView;
 
@@ -210,12 +215,24 @@
     
     if(self.selectedStoreBookCell != NULL){
         [_selectedStoreBookCell showPrivewView:NO];
+        [_selectedStoreBookCell setPlayButtonStateTo:NO];
+        if(self.previewPlayer){
+            [self.previewPlayer pause];
+        }
+        if ([_timer isValid]) {
+            [_timer invalidate];
+        }
+        _timer = nil;
     }
     self.selectedStoreBookCell=storeBookCollectionViewCell;
     
     if(playing){
+        [_selectedStoreBookCell showPrivewView:NO];
+
         NSLog(@"playing");
     }else{
+        [_selectedStoreBookCell showPrivewView:YES];
+
         [self playSelectedPreview];
         NSLog(@"not playing");
 
@@ -258,10 +275,16 @@
 }
 -(void)updateSelectedPreviewCell{
     [_selectedStoreBookCell setPlayButtonStateTo:YES];
+    [_selectedStoreBookCell setLoadingLableText:@"Preview"];
+    [_selectedStoreBookCell showActivityIndicator:NO];
 }
 -(void)removeSelectedPreviewCell{
     [self.previewPlayer removeObserver:self forKeyPath:@"status"];
     [_selectedStoreBookCell showPrivewView:NO];
+    if ([_timer isValid]) {
+        [_timer invalidate];
+    }
+    _timer = nil;
 }
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
@@ -274,6 +297,13 @@
             NSLog(@"AVPlayerStatusReadyToPlay");
             [self updateSelectedPreviewCell];
             [self.previewPlayer play];
+            if (!_timer) {
+                _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f
+                                                          target:self
+                                                        selector:@selector(updateProgress:)
+                                                        userInfo:nil
+                                                         repeats:YES];
+            }
             
             
         } else if (_previewPlayer.status == AVPlayerItemStatusUnknown) {
@@ -291,7 +321,28 @@
     //  code here to play next sound file
     
 }
+- (void)updateProgress:(NSTimer *)timer {
+//    AVPlayerItem *currentItem = _previewPlayer.currentItem;
+//    CMTime duration = currentItem.duration; //total time
+    CMTime currentTime = self.previewPlayer.currentItem.currentTime; //playing time
+//    NSLog(@"ping %lld",duration.value -currentTime.value);
+    CMTime duration = self.previewPlayer.currentItem.asset.duration;
+    int durationSeconds = CMTimeGetSeconds(duration);
+    int currentTimeSeconds = CMTimeGetSeconds(currentTime);
+    int remainTime=durationSeconds-currentTimeSeconds;
+    int minutes = remainTime / 60;
+    int seconds = remainTime % 60;
+    
+    NSString *time = [NSString stringWithFormat:@"%d:%02d", minutes, seconds];
+    [_selectedStoreBookCell setTime:time];
 
+    NSLog(@"duration: %@ ", time);
+   // NSLog(@"remain time: %.2f",(seconds-currentTimeSeconds)/100.0);
+
+
+    
+
+}
 /*
 #pragma mark - Navigation
 
