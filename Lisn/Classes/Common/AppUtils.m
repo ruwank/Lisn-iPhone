@@ -32,4 +32,21 @@
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"Basic %@", encodedUsernameAndPassword] forHTTPHeaderField:@"Authorization"];
     return manager;
 }
++ (BOOL)isNetworkRechable {
+    
+    if ([AFNetworkReachabilityManager sharedManager].reachable) {
+        
+        if ([AFNetworkReachabilityManager sharedManager].isReachableViaWiFi)
+            NSLog(@"Network reachable via WWAN");
+        else
+            NSLog(@"Network reachable via Wifi");
+        
+        return YES;
+    }
+    else {
+        
+        NSLog(@"Network is not reachable");
+        return NO;
+    }
+}
 @end

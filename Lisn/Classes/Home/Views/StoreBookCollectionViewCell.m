@@ -9,6 +9,8 @@
 #import "StoreBookCollectionViewCell.h"
 #import "UIImageView+AFNetworking.h"
 #import <ResponsiveLabel.h>
+#import "AppUtils.h"
+#import "Messages.h"
 
 @interface StoreBookCollectionViewCell()
 
@@ -31,9 +33,19 @@
 
 @implementation StoreBookCollectionViewCell
 
+
 - (IBAction)playButtonTapped:(id)sender {
+    if([AppUtils isNetworkRechable]){
     if (_delegate) {
         [_delegate storeBookCollectionViewCellPlayButtontapped:self lastState:_playButton.selected];
+        //[self showPrivewView:!_playButton.selected];
+        [self setTime:@""];
+        
+    }
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NO_INTERNET_TITLE message:NO_INTERNET_MESSAGE delegate:nil cancelButtonTitle:BUTTON_OK otherButtonTitles:nil];
+        [alert show];
+      
     }
 }
 
@@ -55,6 +67,9 @@
 {
     _loadingLabel.hidden = !show;
 }
+- (void)showActivityIndicator:(BOOL)show{
+    _activityIndicator.hidden=!show;
+}
 
 - (void)setLoadingLableText:(NSString *)text
 {
@@ -68,6 +83,9 @@
 
 - (void)awakeFromNib {
     
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yourmethod) name:@"notificationName" object:nil];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"notificationName" object:nil];
+
     _bgView.layer.cornerRadius = 2.0;
     _bgView.layer.masksToBounds = YES;
     
@@ -80,18 +98,18 @@
     _cellObject = cellObject;
     
     if(_cellObject.lanCode == LAN_SI){
-        _bookName.font = [UIFont fontWithName:@"FMAbhaya" size:10];
+        _bookName.font = [UIFont fontWithName:@"FMAbhaya" size:9];
         [_bookName setTruncationToken:@"'''"];
         
-        _bookAuther.font = [UIFont fontWithName:@"FMAbhaya" size:10];
+        _bookAuther.font = [UIFont fontWithName:@"FMAbhaya" size:9];
         [_bookAuther setTruncationToken:@"'''"];
 
 
     }else{
-        _bookName.font = [UIFont fontWithName:@"HelveticaNeue" size:10];
+        _bookName.font = [UIFont fontWithName:@"HelveticaNeue" size:9];
         [_bookName setTruncationToken:@"..."];
         
-        _bookAuther.font = [UIFont fontWithName:@"HelveticaNeue" size:10];
+        _bookAuther.font = [UIFont fontWithName:@"HelveticaNeue" size:9];
         [_bookAuther setTruncationToken:@"..."];
 
   
@@ -111,5 +129,6 @@
     
     
 }
+
 
 @end

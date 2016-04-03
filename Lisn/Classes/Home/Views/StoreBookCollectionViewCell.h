@@ -24,6 +24,7 @@
 - (void)showLoadingLabel:(BOOL)show;
 - (void)setLoadingLableText:(NSString *)text;
 - (void)setTime:(NSString *)time;
+- (void)showActivityIndicator:(BOOL)show;
 
 @end
 
