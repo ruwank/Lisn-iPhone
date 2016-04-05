@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		403BA092F3D8A32DB98FE139 /* libPods-Lisn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 236BF7C633958496C14FE0A0 /* libPods-Lisn.a */; };
 		7419B94B1CAB8CE7002D59E9 /* TopTabsScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7419B94A1CAB8CE7002D59E9 /* TopTabsScrollView.m */; };
+		7448D2491CB16CF0004A1190 /* TabButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448D2481CB16CF0004A1190 /* TabButtonView.m */; };
+		745952D11CB2BDC800A3A204 /* BookCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 745952D01CB2BDC800A3A204 /* BookCategoryCell.m */; };
 		74F9F5781CA6FEB40025FE88 /* MyBookCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F9F5771CA6FEB40025FE88 /* MyBookCollectionViewCell.m */; };
 		74F9F57B1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F9F57A1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m */; };
 		84018DD41C992CAE009C9403 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018DD31C992CAE009C9403 /* main.m */; };
@@ -40,6 +42,10 @@
 		6C4155140A66D7744A226C0C /* Pods-Lisn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.release.xcconfig"; sourceTree = "<group>"; };
 		7419B9491CAB8CE7002D59E9 /* TopTabsScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopTabsScrollView.h; sourceTree = "<group>"; };
 		7419B94A1CAB8CE7002D59E9 /* TopTabsScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopTabsScrollView.m; sourceTree = "<group>"; };
+		7448D2471CB16CF0004A1190 /* TabButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabButtonView.h; sourceTree = "<group>"; };
+		7448D2481CB16CF0004A1190 /* TabButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabButtonView.m; sourceTree = "<group>"; };
+		745952CF1CB2BDC800A3A204 /* BookCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCategoryCell.h; sourceTree = "<group>"; };
+		745952D01CB2BDC800A3A204 /* BookCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCategoryCell.m; sourceTree = "<group>"; };
 		74F9F5761CA6FEB40025FE88 /* MyBookCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBookCollectionViewCell.h; sourceTree = "<group>"; };
 		74F9F5771CA6FEB40025FE88 /* MyBookCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBookCollectionViewCell.m; sourceTree = "<group>"; };
 		74F9F5791CA6FF0D0025FE88 /* StoreBookCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreBookCollectionViewCell.h; sourceTree = "<group>"; };
@@ -274,6 +280,10 @@
 				FD2A69231CA5A4A800B63131 /* StoreViewController.m */,
 				7419B9491CAB8CE7002D59E9 /* TopTabsScrollView.h */,
 				7419B94A1CAB8CE7002D59E9 /* TopTabsScrollView.m */,
+				7448D2471CB16CF0004A1190 /* TabButtonView.h */,
+				7448D2481CB16CF0004A1190 /* TabButtonView.m */,
+				745952CF1CB2BDC800A3A204 /* BookCategoryCell.h */,
+				745952D01CB2BDC800A3A204 /* BookCategoryCell.m */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -439,12 +449,14 @@
 				FD459F031CA3957900387C5D /* SWRevealViewController.m in Sources */,
 				FD60DFD11CA234F6007ED360 /* AudioBook.m in Sources */,
 				FD0C50541C99B88C00D42B05 /* HomeViewController.m in Sources */,
+				745952D11CB2BDC800A3A204 /* BookCategoryCell.m in Sources */,
 				FD2A69181CA5A45B00B63131 /* AboutUsViewController.m in Sources */,
 				FD2A69211CA5A49900B63131 /* MyBooksViewController.m in Sources */,
 				84018E091C9936DD009C9403 /* MainViewController.m in Sources */,
 				FD60DFD41CA23523007ED360 /* BookCategory.m in Sources */,
 				FD2A691E1CA5A48600B63131 /* FeedbackViewController.m in Sources */,
 				74F9F5781CA6FEB40025FE88 /* MyBookCollectionViewCell.m in Sources */,
+				7448D2491CB16CF0004A1190 /* TabButtonView.m in Sources */,
 				FD2A69101CA5A30A00B63131 /* NavigationMenuViewController.m in Sources */,
 				FD2A69241CA5A4A800B63131 /* StoreViewController.m in Sources */,
 			);

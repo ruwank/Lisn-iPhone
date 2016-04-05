@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIImageView *imgAwardIcon;
-
+@property (weak, nonatomic) IBOutlet UIImageView *imgDownloadedIcon;
 
 @end
 
@@ -91,6 +91,8 @@
     
     _previewView.hidden = YES;
     _imgAwardIcon.hidden = YES;
+    
+    _imgDownloadedIcon.hidden = YES;
 }
 
 - (void)setCellObject:(AudioBook *)cellObject
