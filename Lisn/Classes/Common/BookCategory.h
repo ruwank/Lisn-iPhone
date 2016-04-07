@@ -12,6 +12,6 @@
 
 -(id)initWithDataDic:(NSDictionary*)dataDic;
 
-@property int _id;
-@property (strong, nonatomic) NSString *name,*english_name;
+//@property int _id;
+@property (strong, nonatomic) NSString *_id,*name,*english_name;
 @end

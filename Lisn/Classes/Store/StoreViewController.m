@@ -121,7 +121,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     BookCategoryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BookCategoryCellId" forIndexPath:indexPath];
-    cell.bookCategory = [_categoriesArray objectAtIndex:[indexPath item]];
+    [cell setBookCategory:[_categoriesArray objectAtIndex:[indexPath item]]];
+    //cell.bookCategory = [_categoriesArray objectAtIndex:[indexPath item]];
     return cell;
 }
 
