@@ -91,8 +91,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MyBookCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyBookCollectionViewCellId" forIndexPath:indexPath];
-    //int index = (int)[indexPath item];
-    //[cell setCellObject:[_myBooksArray objectAtIndex:index]];
+    int index = (int)[indexPath item];
+    [cell setCellObject:[_myBooksArray objectAtIndex:index]];
     return cell;
 }
 
