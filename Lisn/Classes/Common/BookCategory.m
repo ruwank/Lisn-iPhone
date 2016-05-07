@@ -12,8 +12,8 @@
 -(id)initWithDataDic:(NSDictionary*)dataDic{
     self=[super init];
     if(self){
-        
-        self._id=(int)[dataDic objectForKey:@"id"];
+        NSLog(@"dataDic %@",dataDic);
+        self._id=(NSString*)[dataDic objectForKey:@"id"];
         self.name=(NSString*)[dataDic objectForKey:@"name"];
         self.english_name=(NSString*)[dataDic objectForKey:@"english_name"];
     }

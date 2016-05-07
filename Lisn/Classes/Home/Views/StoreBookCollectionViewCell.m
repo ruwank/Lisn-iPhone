@@ -116,6 +116,7 @@
 
   
     }
+    NSLog(@"_cellObject.title %@",_cellObject.title);
     _bookName.text=_cellObject.title;
     _bookAuther.text=_cellObject.author;
     NSString *imageURL=_cellObject.cover_image;

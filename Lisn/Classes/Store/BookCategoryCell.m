@@ -10,6 +10,8 @@
 #import "StoreBookCollectionViewCell.h"
 #import "AppConstant.h"
 #import "AppDelegate.h"
+#import "AppUtils.h"
+#import "WebServiceURLs.h"
 
 @interface BookCategoryCell() <UICollectionViewDataSource, UICollectionViewDelegate, StoreBookCollectionViewCellDelegate>
 
@@ -46,8 +48,41 @@
 - (void)setBookCategory:(BookCategory *)bookCategory
 {
     _bookCategory = bookCategory;
-}
+    AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
+    
+    
+    
 
+    [_booksArray removeAllObjects];
+    [_cellCollectionView reloadData];
+
+    if([_booksArray count] ==0){
+      
+        NSDictionary *params = @ {@"cat" :bookCategory._id};
+
+        [manager POST:book_category_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
+                NSMutableArray *booksDataArray=(NSMutableArray*)responseObject;
+                for (NSDictionary *dic in booksDataArray) {
+                    AudioBook *audioBook=[[AudioBook alloc] initWithDataDictionary:dic];
+                    [_booksArray addObject:audioBook];
+                
+                }
+                
+                [self finishDownload];
+                
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"error %@",error);
+            [self finishDownload];
+            
+        }];
+    }
+}
+-(void)finishDownload{
+    [_cellCollectionView reloadData];
+
+}
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -57,8 +92,8 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;
-    //return _booksArray.count;
+   // return 10;
+    return _booksArray.count;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -86,8 +121,8 @@
     StoreBookCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"StoreBookCollectionViewCellId" forIndexPath:indexPath];
     cell.bookCellType = BookCellTypeNewReleased;
     cell.delegate = self;
-//    int index = (int)[indexPath item];
-//    [cell setCellObject:[_booksArray objectAtIndex:index]];
+    int index = (int)[indexPath item];
+    [cell setCellObject:[_booksArray objectAtIndex:index]];
     return cell;
 }
 
