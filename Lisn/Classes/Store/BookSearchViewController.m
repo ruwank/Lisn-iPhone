@@ -1,22 +1,22 @@
 //
-//  BookCategoryCell.m
+//  BookSearchViewController.m
 //  Lisn
 //
-//  Created by A M S Sumanasooriya on 4/4/16.
+//  Created by A M S Sumanasooriya on 5/7/16.
 //  Copyright © 2016 Lisn. All rights reserved.
 //
 
-#import "BookCategoryCell.h"
+#import "BookSearchViewController.h"
 #import "StoreBookCollectionViewCell.h"
 #import "AppConstant.h"
 #import "AppDelegate.h"
 #import "AppUtils.h"
 #import "WebServiceURLs.h"
 
-@interface BookCategoryCell() <UICollectionViewDataSource, UICollectionViewDelegate, StoreBookCollectionViewCellDelegate>
+@interface BookSearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, StoreBookCollectionViewCellDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *cellView;
 @property (weak, nonatomic) IBOutlet UICollectionView *cellCollectionView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (nonatomic, strong) NSMutableArray *booksArray;
 @property (nonatomic, assign) float cellW;
@@ -26,13 +26,19 @@
 
 @end
 
-@implementation BookCategoryCell
+@implementation BookSearchViewController
 
-- (void)awakeFromNib
-{
-    [self adjustViewHeights];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
     
     _booksArray = [[NSMutableArray alloc] init];
+    [self adjustViewHeights];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (void)adjustViewHeights
@@ -45,41 +51,16 @@
     _cellHLong = imgH + 89 - 15;
 }
 
-- (void)setBookCategory:(BookCategory *)bookCategory
+- (void)finishDownload
 {
-    _bookCategory = bookCategory;
-    AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
-
-    [_booksArray removeAllObjects];
     [_cellCollectionView reloadData];
-
-    if([_booksArray count] ==0){
-      
-        NSDictionary *params = @ {@"cat" :bookCategory._id};
-
-        [manager POST:book_category_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
-                NSMutableArray *booksDataArray=(NSMutableArray*)responseObject;
-                for (NSDictionary *dic in booksDataArray) {
-                    AudioBook *audioBook=[[AudioBook alloc] initWithDataDictionary:dic];
-                    [_booksArray addObject:audioBook];
-                
-                }
-                
-                [self finishDownload];
-                
-            }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"error %@",error);
-            [self finishDownload];
-            
-        }];
-    }
 }
--(void)finishDownload{
-    [_cellCollectionView reloadData];
 
+- (void)searchBooksFor:(NSString *)searchText
+{
+    
 }
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -89,7 +70,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-   // return 10;
+    //return 10;
     return _booksArray.count;
 }
 
@@ -137,5 +118,14 @@
     
 }
 
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSString *searchText = [AppUtils trimmedStringOfString:searchBar.text];
+    if (searchText.length > 0) {
+        [searchBar resignFirstResponder];
+        [self searchBooksFor:searchText];
+    }
+}
 
 @end
