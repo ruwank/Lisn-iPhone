@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		403BA092F3D8A32DB98FE139 /* libPods-Lisn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 236BF7C633958496C14FE0A0 /* libPods-Lisn.a */; };
+		741080591CDD9E89007F9849 /* BookSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741080581CDD9E89007F9849 /* BookSearchViewController.m */; };
 		7419B94B1CAB8CE7002D59E9 /* TopTabsScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7419B94A1CAB8CE7002D59E9 /* TopTabsScrollView.m */; };
 		7448D2491CB16CF0004A1190 /* TabButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448D2481CB16CF0004A1190 /* TabButtonView.m */; };
 		745952D11CB2BDC800A3A204 /* BookCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 745952D01CB2BDC800A3A204 /* BookCategoryCell.m */; };
@@ -40,6 +41,8 @@
 		236BF7C633958496C14FE0A0 /* libPods-Lisn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34909B7B9377810C302EB1C4 /* Pods-Lisn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.debug.xcconfig"; sourceTree = "<group>"; };
 		6C4155140A66D7744A226C0C /* Pods-Lisn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.release.xcconfig"; sourceTree = "<group>"; };
+		741080571CDD9E89007F9849 /* BookSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookSearchViewController.h; sourceTree = "<group>"; };
+		741080581CDD9E89007F9849 /* BookSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookSearchViewController.m; sourceTree = "<group>"; };
 		7419B9491CAB8CE7002D59E9 /* TopTabsScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopTabsScrollView.h; sourceTree = "<group>"; };
 		7419B94A1CAB8CE7002D59E9 /* TopTabsScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopTabsScrollView.m; sourceTree = "<group>"; };
 		7448D2471CB16CF0004A1190 /* TabButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabButtonView.h; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 				7448D2481CB16CF0004A1190 /* TabButtonView.m */,
 				745952CF1CB2BDC800A3A204 /* BookCategoryCell.h */,
 				745952D01CB2BDC800A3A204 /* BookCategoryCell.m */,
+				741080571CDD9E89007F9849 /* BookSearchViewController.h */,
+				741080581CDD9E89007F9849 /* BookSearchViewController.m */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -454,6 +459,7 @@
 				FD2A69211CA5A49900B63131 /* MyBooksViewController.m in Sources */,
 				84018E091C9936DD009C9403 /* MainViewController.m in Sources */,
 				FD60DFD41CA23523007ED360 /* BookCategory.m in Sources */,
+				741080591CDD9E89007F9849 /* BookSearchViewController.m in Sources */,
 				FD2A691E1CA5A48600B63131 /* FeedbackViewController.m in Sources */,
 				74F9F5781CA6FEB40025FE88 /* MyBookCollectionViewCell.m in Sources */,
 				7448D2491CB16CF0004A1190 /* TabButtonView.m in Sources */,
