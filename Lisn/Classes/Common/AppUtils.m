@@ -50,4 +50,27 @@
         return NO;
     }
 }
+
++ (BOOL)isValidString:(NSString *)str
+{
+    if (str != nil
+        && ![str isKindOfClass:[NSNull class]]
+        && [str isKindOfClass:[NSString class]]
+        && str.length > 0) {
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (NSString *)trimmedStringOfString:(NSString *)string
+{
+    if ([AppUtils isValidString:string]) {
+        return [string stringByTrimmingCharactersInSet:
+                [NSCharacterSet whitespaceCharacterSet]];
+    }
+    
+    return @"";
+}
+
 @end

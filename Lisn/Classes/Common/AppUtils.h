@@ -13,4 +13,6 @@
 +(NSString *)  getCredentialsData;
 +(AFHTTPSessionManager*)getAFHTTPSessionManager;
 + (BOOL)isNetworkRechable;
++ (BOOL)isValidString:(NSString *)str;
++ (NSString *)trimmedStringOfString:(NSString *)string;
 @end
