@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		403BA092F3D8A32DB98FE139 /* libPods-Lisn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 236BF7C633958496C14FE0A0 /* libPods-Lisn.a */; };
 		741080591CDD9E89007F9849 /* BookSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741080581CDD9E89007F9849 /* BookSearchViewController.m */; };
+		741565311CDF591700795F82 /* aboutus.html in Resources */ = {isa = PBXBuildFile; fileRef = 741565301CDF591700795F82 /* aboutus.html */; };
+		741565351CDF5DC800795F82 /* contactus.html in Resources */ = {isa = PBXBuildFile; fileRef = 741565341CDF5DC800795F82 /* contactus.html */; };
+		741565371CDF612D00795F82 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 741565361CDF612D00795F82 /* MessageUI.framework */; };
 		7419B94B1CAB8CE7002D59E9 /* TopTabsScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7419B94A1CAB8CE7002D59E9 /* TopTabsScrollView.m */; };
 		7448D2491CB16CF0004A1190 /* TabButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448D2481CB16CF0004A1190 /* TabButtonView.m */; };
 		745952D11CB2BDC800A3A204 /* BookCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 745952D01CB2BDC800A3A204 /* BookCategoryCell.m */; };
@@ -43,6 +46,9 @@
 		6C4155140A66D7744A226C0C /* Pods-Lisn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.release.xcconfig"; sourceTree = "<group>"; };
 		741080571CDD9E89007F9849 /* BookSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookSearchViewController.h; sourceTree = "<group>"; };
 		741080581CDD9E89007F9849 /* BookSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookSearchViewController.m; sourceTree = "<group>"; };
+		741565301CDF591700795F82 /* aboutus.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = aboutus.html; sourceTree = "<group>"; };
+		741565341CDF5DC800795F82 /* contactus.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = contactus.html; sourceTree = "<group>"; };
+		741565361CDF612D00795F82 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		7419B9491CAB8CE7002D59E9 /* TopTabsScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopTabsScrollView.h; sourceTree = "<group>"; };
 		7419B94A1CAB8CE7002D59E9 /* TopTabsScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopTabsScrollView.m; sourceTree = "<group>"; };
 		7448D2471CB16CF0004A1190 /* TabButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabButtonView.h; sourceTree = "<group>"; };
@@ -100,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				741565371CDF612D00795F82 /* MessageUI.framework in Frameworks */,
 				403BA092F3D8A32DB98FE139 /* libPods-Lisn.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,6 +121,15 @@
 				6C4155140A66D7744A226C0C /* Pods-Lisn.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		7415652F1CDF57A800795F82 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				741565341CDF5DC800795F82 /* contactus.html */,
+				741565301CDF591700795F82 /* aboutus.html */,
+			);
+			path = Others;
 			sourceTree = "<group>";
 		};
 		74F9F5751CA6FE6B0025FE88 /* Views */ = {
@@ -224,6 +240,7 @@
 		8E23F17858C39FE9B28E1F30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				741565361CDF612D00795F82 /* MessageUI.framework */,
 				236BF7C633958496C14FE0A0 /* libPods-Lisn.a */,
 			);
 			name = Frameworks;
@@ -305,6 +322,7 @@
 		FD99A7D81CA83DBF000F57EC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7415652F1CDF57A800795F82 /* Others */,
 				FD99A7D91CA83DBF000F57EC /* Fonts */,
 			);
 			path = Resources;
@@ -385,6 +403,8 @@
 				FD99A7DD1CA83DBF000F57EC /* FMAbhaya.ttf in Resources */,
 				FD0C50571C99BDC400D42B05 /* Main.storyboard in Resources */,
 				FD99A7DF1CA83DBF000F57EC /* OpenSans-Regular.ttf in Resources */,
+				741565351CDF5DC800795F82 /* contactus.html in Resources */,
+				741565311CDF591700795F82 /* aboutus.html in Resources */,
 				84018DDF1C992CAE009C9403 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
