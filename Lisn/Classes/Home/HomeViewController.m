@@ -282,6 +282,8 @@
 -(void)removeSelectedPreviewCell{
     [self.previewPlayer removeObserver:self forKeyPath:@"status"];
     [_selectedStoreBookCell showPrivewView:NO];
+    [_selectedStoreBookCell setPlayButtonStateTo:NO];
+
     if ([_timer isValid]) {
         [_timer invalidate];
     }

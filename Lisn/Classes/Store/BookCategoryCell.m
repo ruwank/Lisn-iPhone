@@ -7,13 +7,14 @@
 //
 
 #import "BookCategoryCell.h"
-#import "StoreBookCollectionViewCell.h"
 #import "AppConstant.h"
 #import "AppDelegate.h"
 #import "AppUtils.h"
 #import "WebServiceURLs.h"
 
-@interface BookCategoryCell() <UICollectionViewDataSource, UICollectionViewDelegate, StoreBookCollectionViewCellDelegate>
+@interface BookCategoryCell() <UICollectionViewDataSource, UICollectionViewDelegate>{
+
+}
 
 @property (weak, nonatomic) IBOutlet UIView *cellView;
 @property (weak, nonatomic) IBOutlet UICollectionView *cellCollectionView;
@@ -22,7 +23,7 @@
 @property (nonatomic, assign) float cellW;
 @property (nonatomic, assign) float cellHLong;
 
-@property (nonatomic, strong) StoreBookCollectionViewCell *selectedStoreBookCell;
+
 
 @end
 
@@ -51,8 +52,6 @@
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
     
     
-    
-
     [_booksArray removeAllObjects];
     [_cellCollectionView reloadData];
 
@@ -120,9 +119,11 @@
 {
     StoreBookCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"StoreBookCollectionViewCellId" forIndexPath:indexPath];
     cell.bookCellType = BookCellTypeNewReleased;
-    cell.delegate = self;
+    cell.delegate = self.delegate;
     int index = (int)[indexPath item];
     [cell setCellObject:[_booksArray objectAtIndex:index]];
+    [cell showPrivewView:NO];
+    [cell setPlayButtonStateTo:NO];
     return cell;
 }
 
@@ -133,12 +134,7 @@
     
 }
 
-#pragma mark - StoreBookCollectionViewCellDelegate
 
-- (void)storeBookCollectionViewCellPlayButtontapped:(StoreBookCollectionViewCell *)storeBookCollectionViewCell lastState:(BOOL)playing {
-    
-    
-}
 
 
 @end

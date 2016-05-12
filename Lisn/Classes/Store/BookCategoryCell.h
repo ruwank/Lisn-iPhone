@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "BookCategory.h"
+#import "StoreBookCollectionViewCell.h"
 
 @interface BookCategoryCell : UICollectionViewCell
 
 @property (nonatomic, strong) BookCategory *bookCategory;
+@property (nonatomic, assign) id<StoreBookCollectionViewCellDelegate> delegate;
 
 @end
