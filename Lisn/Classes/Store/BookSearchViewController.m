@@ -1,34 +1,38 @@
 //
-//  MyBooksViewController.m
+//  BookSearchViewController.m
 //  Lisn
 //
-//  Created by Rasika Kumara on 3/25/16.
+//  Created by A M S Sumanasooriya on 5/7/16.
 //  Copyright © 2016 Lisn. All rights reserved.
 //
 
-#import "MyBooksViewController.h"
-#import "MyBookCollectionViewCell.h"
+#import "BookSearchViewController.h"
+#import "StoreBookCollectionViewCell.h"
 #import "AppConstant.h"
 #import "AppDelegate.h"
+#import "AppUtils.h"
+#import "WebServiceURLs.h"
 
-@interface MyBooksViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface BookSearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, StoreBookCollectionViewCellDelegate>
 
-@property (weak, nonatomic) IBOutlet UICollectionView *myBooksCollectionView;
+@property (weak, nonatomic) IBOutlet UICollectionView *cellCollectionView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
-@property (nonatomic, strong) NSMutableArray *myBooksArray;
-
+@property (nonatomic, strong) NSMutableArray *booksArray;
 @property (nonatomic, assign) float cellW;
-@property (nonatomic, assign) float cellH;
+@property (nonatomic, assign) float cellHLong;
+
+@property (nonatomic, strong) StoreBookCollectionViewCell *selectedStoreBookCell;
 
 @end
 
-@implementation MyBooksViewController
+@implementation BookSearchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self loadData];
+    _booksArray = [[NSMutableArray alloc] init];
     [self adjustViewHeights];
 }
 
@@ -44,14 +48,16 @@
     float imgW = _cellW - 12;
     float imgH = imgW * 1.5;
     
-    _cellH = imgH + 39;
+    _cellHLong = imgH + 89 - 15;
 }
 
-- (void)loadData
+- (void)finishDownload
 {
-    //AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    _myBooksArray = [[NSMutableArray alloc] init];
+    [_cellCollectionView reloadData];
+}
+
+- (void)searchBooksFor:(NSString *)searchText
+{
     
 }
 
@@ -65,7 +71,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     //return 10;
-    return _myBooksArray.count;
+    return _booksArray.count;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -85,14 +91,16 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(_cellW, _cellH);
+    return CGSizeMake(_cellW, _cellHLong);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MyBookCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyBookCollectionViewCellId" forIndexPath:indexPath];
+    StoreBookCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"StoreBookCollectionViewCellId" forIndexPath:indexPath];
+    cell.bookCellType = BookCellTypeNewReleased;
+    cell.delegate = self;
     int index = (int)[indexPath item];
-    [cell setCellObject:[_myBooksArray objectAtIndex:index]];
+    [cell setCellObject:[_booksArray objectAtIndex:index]];
     return cell;
 }
 
@@ -101,6 +109,23 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
+}
+
+#pragma mark - StoreBookCollectionViewCellDelegate
+
+- (void)storeBookCollectionViewCellPlayButtontapped:(StoreBookCollectionViewCell *)storeBookCollectionViewCell lastState:(BOOL)playing {
+    
+    
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSString *searchText = [AppUtils trimmedStringOfString:searchBar.text];
+    if (searchText.length > 0) {
+        [searchBar resignFirstResponder];
+        [self searchBooksFor:searchText];
+    }
 }
 
 @end

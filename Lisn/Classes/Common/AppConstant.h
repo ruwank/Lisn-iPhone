@@ -25,3 +25,6 @@ typedef enum {
 }BookCellType;
 
 #define RGBA(r, g, b, a)            [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+
+
+#define CONTACT_US_MAIL     @"info@lisn.audio"

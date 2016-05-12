@@ -49,9 +49,6 @@
 {
     _bookCategory = bookCategory;
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
-    
-    
-    
 
     [_booksArray removeAllObjects];
     [_cellCollectionView reloadData];
