@@ -31,5 +31,6 @@
 @protocol StoreBookCollectionViewCellDelegate <NSObject>
 
 - (void)storeBookCollectionViewCellPlayButtontapped:(StoreBookCollectionViewCell *)storeBookCollectionViewCell lastState:(BOOL)playing;
+- (void)storeBookCollectionViewCellMenuButtontapped:(StoreBookCollectionViewCell *)storeBookCollectionViewCell;
 
 @end

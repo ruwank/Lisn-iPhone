@@ -72,5 +72,26 @@
     
     return @"";
 }
++(UIActionSheet*)getActionSheetForAudioBook:(AudioBook*)audioBook{
+    UIActionSheet *actionSheet;
+    //login status also
+    if(audioBook.isPurchase){
+        actionSheet= [[UIActionSheet alloc] initWithTitle:@""
+                                                 delegate:nil
+                                        cancelButtonTitle:@"Cancel"
+                                   destructiveButtonTitle:nil
+                                        otherButtonTitles:@"Red", @"Green", @"Blue", @"Orange", @"Purple", nil];
+    }else{
+        actionSheet= [[UIActionSheet alloc] initWithTitle:@""
+                                                 delegate:nil
+                                        cancelButtonTitle:@"Cancel"
+                                   destructiveButtonTitle:nil
+                                        otherButtonTitles:@"Red", @"Green", @"Blue", @"Orange", @"Purple", nil];
+    }
+    
+    
+    return actionSheet;
+    
+}
 
 @end

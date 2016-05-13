@@ -15,8 +15,9 @@
 #import <AVFoundation/AVPlayer.h>
 #import <AVFoundation/AVPlayerItem.h>
 #import <AVFoundation/AVAsset.h>
+#import "AppUtils.h"
 
-@interface HomeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, StoreBookCollectionViewCellDelegate>{
+@interface HomeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, StoreBookCollectionViewCellDelegate,UIActionSheetDelegate>{
     NSTimer *_timer;
 }
 
@@ -253,6 +254,13 @@
         
     }
      */
+}
+- (void)storeBookCollectionViewCellMenuButtontapped:(StoreBookCollectionViewCell *)storeBookCollectionViewCell{
+    self.selectedStoreBookCell=storeBookCollectionViewCell;
+    
+    UIActionSheet *actionSheet = [AppUtils getActionSheetForAudioBook:self.selectedStoreBookCell.cellObject];
+    actionSheet.delegate=self;
+    [actionSheet showInView:self.view];
 }
 #pragma mark - Preview Play
 

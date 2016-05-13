@@ -50,7 +50,9 @@
 }
 
 - (IBAction)menuButtonTapped:(id)sender {
-    
+    if(_delegate){
+        [_delegate storeBookCollectionViewCellMenuButtontapped:self];
+    }
 }
 
 - (void)setPlayButtonStateTo:(BOOL)play
