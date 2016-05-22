@@ -16,6 +16,7 @@
 @interface BookSearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, StoreBookCollectionViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *cellCollectionView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property (nonatomic, strong) NSMutableArray *booksArray;
@@ -54,12 +55,38 @@
 - (void)finishDownload
 {
     [_cellCollectionView reloadData];
+    [_activityIndicator stopAnimating];
+
 }
 
 - (void)searchBooksFor:(NSString *)searchText
 {
+    [_activityIndicator startAnimating];
+
+    AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
+    NSDictionary *params = @ {@"searchstr" :searchText};
+    [manager POST:search_book_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
+            [_booksArray removeAllObjects];
+
+            NSMutableArray *booksDataArray=(NSMutableArray*)responseObject;
+            for (NSDictionary *dic in booksDataArray) {
+                AudioBook *audioBook=[[AudioBook alloc] initWithDataDictionary:dic];
+                [_booksArray addObject:audioBook];
+                
+            }
+            
+            [self finishDownload];
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error %@",error);
+        [self finishDownload];
+        
+    }];
     
 }
+
 
 #pragma mark - UICollectionViewDataSource
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
+#import "AudioBook.h"
 
 @interface AppUtils : NSObject
 +(NSString *)  getCredentialsData;
@@ -15,4 +16,5 @@
 + (BOOL)isNetworkRechable;
 + (BOOL)isValidString:(NSString *)str;
 + (NSString *)trimmedStringOfString:(NSString *)string;
++(UIActionSheet*)getActionSheetForAudioBook:(AudioBook*)audioBook;
 @end
