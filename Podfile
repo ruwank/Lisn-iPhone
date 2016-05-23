@@ -11,5 +11,8 @@ target 'Lisn' do
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'ResponsiveLabel', '~> 1.0.10'
+    pod 'FBSDKCoreKit'
+    pod 'FBSDKLoginKit'
+    pod 'FBSDKShareKit'
 end
 

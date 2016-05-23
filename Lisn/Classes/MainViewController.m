@@ -37,12 +37,11 @@
 }
 #pragma mark
 
--(void)loadHomeScreen{
-    
+- (void)loadHomeScreen
+{
     if(finishDelay && finishDownload){
         [self performSegueWithIdentifier:@"segue_main" sender:nil];
     }
-
 }
 
 -(void)finishSplash:(id)sender{

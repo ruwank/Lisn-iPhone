@@ -119,6 +119,12 @@
             break;
         }
     }
+    
+    if (_myBooksArray.count == 0) {
+        _myBookLayConstHeight.constant = 0;
+    }else {
+        _myBookLayConstHeight.constant = 204;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
