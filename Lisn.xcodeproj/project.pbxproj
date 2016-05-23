@@ -15,6 +15,7 @@
 		7419B94B1CAB8CE7002D59E9 /* TopTabsScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7419B94A1CAB8CE7002D59E9 /* TopTabsScrollView.m */; };
 		7448D2491CB16CF0004A1190 /* TabButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7448D2481CB16CF0004A1190 /* TabButtonView.m */; };
 		745952D11CB2BDC800A3A204 /* BookCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 745952D01CB2BDC800A3A204 /* BookCategoryCell.m */; };
+		746F676C1CF2D663003F3F3B /* BookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746F676B1CF2D663003F3F3B /* BookDetailViewController.m */; };
 		74F9F5781CA6FEB40025FE88 /* MyBookCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F9F5771CA6FEB40025FE88 /* MyBookCollectionViewCell.m */; };
 		74F9F57B1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F9F57A1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m */; };
 		74FDF28D1CF1EB9100D14617 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FDF28C1CF1EB9100D14617 /* SignUpViewController.m */; };
@@ -56,6 +57,8 @@
 		7448D2481CB16CF0004A1190 /* TabButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabButtonView.m; sourceTree = "<group>"; };
 		745952CF1CB2BDC800A3A204 /* BookCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCategoryCell.h; sourceTree = "<group>"; };
 		745952D01CB2BDC800A3A204 /* BookCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCategoryCell.m; sourceTree = "<group>"; };
+		746F676A1CF2D663003F3F3B /* BookDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailViewController.h; sourceTree = "<group>"; };
+		746F676B1CF2D663003F3F3B /* BookDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailViewController.m; sourceTree = "<group>"; };
 		74F9F5761CA6FEB40025FE88 /* MyBookCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBookCollectionViewCell.h; sourceTree = "<group>"; };
 		74F9F5771CA6FEB40025FE88 /* MyBookCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBookCollectionViewCell.m; sourceTree = "<group>"; };
 		74F9F5791CA6FF0D0025FE88 /* StoreBookCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreBookCollectionViewCell.h; sourceTree = "<group>"; };
@@ -256,6 +259,8 @@
 				FD2A690C1CA5A30A00B63131 /* LisnBaseViewController.m */,
 				FD2A690D1CA5A30A00B63131 /* NavigationMenuViewController.h */,
 				FD2A690E1CA5A30A00B63131 /* NavigationMenuViewController.m */,
+				746F676A1CF2D663003F3F3B /* BookDetailViewController.h */,
+				746F676B1CF2D663003F3F3B /* BookDetailViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -488,6 +493,7 @@
 				FD2A691E1CA5A48600B63131 /* FeedbackViewController.m in Sources */,
 				74F9F5781CA6FEB40025FE88 /* MyBookCollectionViewCell.m in Sources */,
 				7448D2491CB16CF0004A1190 /* TabButtonView.m in Sources */,
+				746F676C1CF2D663003F3F3B /* BookDetailViewController.m in Sources */,
 				FD2A69101CA5A30A00B63131 /* NavigationMenuViewController.m in Sources */,
 				74FDF28D1CF1EB9100D14617 /* SignUpViewController.m in Sources */,
 				FD2A69241CA5A4A800B63131 /* StoreViewController.m in Sources */,

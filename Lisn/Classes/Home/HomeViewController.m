@@ -16,6 +16,7 @@
 #import <AVFoundation/AVPlayerItem.h>
 #import <AVFoundation/AVAsset.h>
 #import "AppUtils.h"
+#import "BookDetailViewController.h"
 
 @interface HomeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, StoreBookCollectionViewCellDelegate,UIActionSheetDelegate>{
     NSTimer *_timer;
@@ -214,7 +215,17 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    AudioBook *audioBook = nil;
     
+    if ([collectionView isEqual:_myBooksCollectionView]) {
+        MyBookCollectionViewCell *cell = (MyBookCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        audioBook = cell.cellObject;
+    }else {
+        StoreBookCollectionViewCell *cell = (StoreBookCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        audioBook = cell.cellObject;
+    }
+    
+    [self performSegueWithIdentifier:@"book_detail_segue" sender:audioBook];
 }
 
 #pragma mark - StoreBookCollectionViewCellDelegate
@@ -360,14 +371,15 @@
     
 
 }
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"book_detail_segue"]) {
+        BookDetailViewController *detailController = segue.destinationViewController;
+        detailController.audioBook = sender;
+    }
 }
-*/
 
 @end
