@@ -10,10 +10,21 @@
 #import "MyBookCollectionViewCell.h"
 #import "AppConstant.h"
 #import "AppDelegate.h"
+#import "AppUtils.h"
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-@interface MyBooksViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface MyBooksViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *myBooksCollectionView;
+
+@property (weak, nonatomic) IBOutlet UIView *loginView;
+@property (weak, nonatomic) IBOutlet FBSDKLoginButton *fbLoginButton;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UIButton *forgotPassBtn;
+@property (weak, nonatomic) IBOutlet UIButton *createAccBtn;
+
 
 @property (nonatomic, strong) NSMutableArray *myBooksArray;
 
@@ -24,17 +35,58 @@
 
 @implementation MyBooksViewController
 
+- (IBAction)loginButtonTapped:(id)sender {
+    [self doLogin];
+}
+
+- (IBAction)forgotPasswordButtonTapped:(id)sender {
+    
+}
+
+- (IBAction)createAccountButtonTapped:(id)sender {
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     [self loadData];
     [self adjustViewHeights];
+    
+    _fbLoginButton.delegate = self;
+    _fbLoginButton.readPermissions = @[@"public_profile", @"email"];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)doLogin
+{
+    NSString *email = [AppUtils trimmedStringOfString:_emailField.text];
+    BOOL validEmail = email.length > 0;
+    validEmail = [AppUtils isValidEmail:email];
+    
+    NSString *password = [AppUtils trimmedStringOfString:_passwordField.text];
+    BOOL validPassword = password.length > 0;
+    
+    if (validEmail && validPassword) {
+        [self sendLoginRequest];
+    }else if (!validEmail) {
+        [[[UIAlertView alloc] initWithTitle:@"Invalid Email." message:@"Please enter a valid email." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    }else if (!validPassword) {
+        [[[UIAlertView alloc] initWithTitle:@"Invalid Password." message:@"Please enter a valid Password." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    }
+}
+
+- (void)sendLoginRequest
+{
+    NSString *email = [AppUtils trimmedStringOfString:_emailField.text];
+    NSString *password = [AppUtils trimmedStringOfString:_passwordField.text];
+    
+    //TODO
 }
 
 - (void)adjustViewHeights
@@ -101,6 +153,41 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
+}
+
+#pragma mark - FBSDKLoginButtonDelegate
+
+- (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
+    if (result && result.grantedPermissions && [result.grantedPermissions containsObject:@"public_profile"] && [result.grantedPermissions containsObject:@"email"]) {
+        //TODO continue login process
+    }else if (result && result.declinedPermissions && [result.declinedPermissions containsObject:@"email"]) {
+        [[FBSDKLoginManager new] logOut];
+        [[[UIAlertView alloc] initWithTitle:@"Email not available." message:@"The email address is required for Lisn login process. Please allow it to continue login." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    }else {
+        [[[UIAlertView alloc] initWithTitle:@"Something went wrong." message:@"Please try again." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    }
+}
+
+- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
+    
+}
+
+- (BOOL)loginButtonWillLogin:(FBSDKLoginButton *)loginButton {
+    return YES;
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [textField resignFirstResponder];
+    if ([textField isEqual:_emailField]) {
+        [_passwordField becomeFirstResponder];
+    }else if ([textField isEqual:_passwordField]) {
+        [self doLogin];
+    }
+    
+    return YES;
 }
 
 @end

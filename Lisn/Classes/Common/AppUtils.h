@@ -16,5 +16,6 @@
 + (BOOL)isNetworkRechable;
 + (BOOL)isValidString:(NSString *)str;
 + (NSString *)trimmedStringOfString:(NSString *)string;
-+(UIActionSheet*)getActionSheetForAudioBook:(AudioBook*)audioBook;
++ (UIActionSheet*)getActionSheetForAudioBook:(AudioBook*)audioBook;
++ (BOOL) isValidEmail:(NSString *)checkString;
 @end
