@@ -9,24 +9,24 @@
 #ifndef WebServiceURLs_h
 #define WebServiceURLs_h
 
-static NSString * const top_release_book_list_url = @"https://app.lisn.audio/api/1.3/homebooklist.php";
-static NSString * const top_rated_book_list_url = @"https://app.lisn.audio/api/1.3/topratedbooklist.php";
-static NSString * const top_download_book_list_url = @"https://app.lisn.audio/api/1.3/topdownloadedbooklist.php";
-static NSString * const user_book_list_url = @"https://app.lisn.audio/api/1.3/userbooklist.php";
-static NSString * const book_info_url = @"https://app.lisn.audio/api/1.3/bookinfo.php";
-static NSString * const add_user_url = @"https://app.lisn.audio/api/1.3/adduser.php";
-static NSString * const forget_password_url = @"https://app.lisn.audio/api/1.3/forgotpassword.php";
-static NSString * const user_login_url = @"https://app.lisn.audio/api/1.3/login.php";
-static NSString * const user_download_activity_url = @"http://app.lisn.audio/api/1.3/downloadactivity.php";
-static NSString * const search_book_url = @"https://app.lisn.audio/api/1.2/searchedbooklist.php";
-static NSString * const book_category_list_url = @"https://app.lisn.audio/api/1.3/categorylist.php";
+static NSString * const top_release_book_list_url = @"https://app.lisn.audio/api/1.4/homebooklist.php";
+static NSString * const top_rated_book_list_url = @"https://app.lisn.audio/api/1.4/topratedbooklist.php";
+static NSString * const top_download_book_list_url = @"https://app.lisn.audio/api/1.4/topdownloadedbooklist.php";
+static NSString * const user_book_list_url = @"https://app.lisn.audio/api/1.4/userbooklist.php";
+static NSString * const book_info_url = @"https://app.lisn.audio/api/1.4/bookinfo.php";
+static NSString * const add_user_url = @"https://app.lisn.audio/api/1.4/adduser.php";
+static NSString * const forget_password_url = @"https://app.lisn.audio/api/1.4/forgotpassword.php";
+static NSString * const user_login_url = @"https://app.lisn.audio/api/1.4/login.php";
+static NSString * const user_download_activity_url = @"http://app.lisn.audio/api/1.4/downloadactivity.php";
+static NSString * const search_book_url = @"https://app.lisn.audio/api/1.4/searchedbooklist.php";
+static NSString * const book_category_list_url = @"https://app.lisn.audio/api/1.4/categorylist.php";
 
-static NSString * const book_category_url =@"https://app.lisn.audio/api/1.3/categorybooklist.php";
-static NSString * const book_download_url =@"https://app.lisn.audio/api/1.3/download.php";
-static NSString * const add_review_url =@"https://app.lisn.audio/api/1.3/reviewactivity.php";
-static NSString * const verify_user_url =@"https://app.lisn.audio/api/1.3/verifyuser.php";
-static NSString * const user_feedback_url =@"https://app.lisn.audio/api/1.3/feedbackactivity.php";
-static NSString * const update_mobile_no_url =@"https://app.lisn.audio/api/1.3/updatemobile.php";
+static NSString * const book_category_url =@"https://app.lisn.audio/api/1.4/categorybooklist.php";
+static NSString * const book_download_url =@"https://app.lisn.audio/api/1.4/download.php";
+static NSString * const add_review_url =@"https://app.lisn.audio/api/1.4/reviewactivity.php";
+static NSString * const verify_user_url =@"https://app.lisn.audio/api/1.4/verifyuser.php";
+static NSString * const user_feedback_url =@"https://app.lisn.audio/api/1.4/feedbackactivity.php";
+static NSString * const update_mobile_no_url =@"https://app.lisn.audio/api/1.4/updatemobile.php";
 
 static NSString * const purchase_book_url =@"https://app.lisn.audio/spgw/1.5.6/payment/init.php";
 static NSString * const purchase_success_url =@"https://app.lisn.audio/spgw/1.5.6/payment/success.php";
