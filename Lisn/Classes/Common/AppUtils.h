@@ -18,4 +18,5 @@
 + (NSString *)trimmedStringOfString:(NSString *)string;
 + (UIActionSheet*)getActionSheetForAudioBook:(AudioBook*)audioBook;
 + (BOOL) isValidEmail:(NSString *)checkString;
++(NSString*)getDeviceId;
 @end

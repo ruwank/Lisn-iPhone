@@ -90,15 +90,13 @@
     
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
     
-    NSString *deviceId=[self getDeviceId];
+    NSString *deviceId=[AppUtils getDeviceId];
 
         NSDictionary *params = @ {@"email" :email ,@"password":password,@"usertype":@"email",@"os":@"iPhone",@"device":deviceId};
     
         [manager POST:user_login_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
-                
-                
-            }
+            //TODO
+            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"error %@",error);
             
@@ -106,14 +104,9 @@
         }];
     
 
-    //TODO
-}
--(NSString*)getDeviceId{
-    UIDevice *device = [UIDevice currentDevice];
     
-    NSString  *currentDeviceId = [[device identifierForVendor]UUIDString];
-    return currentDeviceId;
 }
+
 - (void)adjustViewHeights
 {
     _cellW = (SCREEN_WIDTH - 30)/3.0;
