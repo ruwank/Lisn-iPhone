@@ -85,13 +85,24 @@
     
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
     
+   // manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    responseSerializer.acceptableContentTypes = nil;
+    
+   // manager.responseSerializer=responseSerializer;
+manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *deviceId=[AppUtils getDeviceId];
     
     NSDictionary *params = @ {@"fname": firstName, @"lname": lastName, @"email" :email ,@"password":password,@"usertype":@"email",@"os":@"iPhone",@"device":deviceId ,@"username":@"NULL" ,@"fbname":@"NULL" ,@"loc":@"NULL", @"bday":@"NULL" ,@"mobile":@"NULL" ,@"age":@"NULL" ,@"pref":@"NULL" ,@"fbid":@"NULL" ,@"mname":@"NULL" ,@"fburl":@"NULL"};
     
+    NSLog(@"params %@",params);
     [manager POST:user_add_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
          //TODO
-        NSLog(@"responseObject %@",[responseObject class]);
+        NSString* responseString = [NSString stringWithUTF8String:[responseObject bytes]];
+
+        NSLog(@"responseObject %@",responseObject);
+        NSLog(@"responseObject class %@",responseString);
         if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
             //TODO
             
