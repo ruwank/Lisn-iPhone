@@ -11,8 +11,9 @@
 #import <ResponsiveLabel.h>
 #import "AppConstant.h"
 #import "AppUtils.h"
+#import "DetailViewTableViewCell.h"
 
-@interface BookDetailViewController ()
+@interface BookDetailViewController () <UITableViewDelegate, UITableViewDataSource, DetailViewTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 @property (weak, nonatomic) IBOutlet UIView *thumbDetailView;
@@ -34,9 +35,63 @@
 @property (weak, nonatomic) IBOutlet ResponsiveLabel *booKAutherLbl;
 @property (weak, nonatomic) IBOutlet ResponsiveLabel *bookReaderLbl;
 
+@property (weak, nonatomic) IBOutlet UITableView *chapterTableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewH;
+
+@property (weak, nonatomic) IBOutlet UIView *middleView;
+@property (weak, nonatomic) IBOutlet UIButton *viewAllBtn;
+@property (weak, nonatomic) IBOutlet ResponsiveLabel *discriptionLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *middleViewTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *middleViewH;
+
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIButton *readMoreBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewTop;
+
+@property (nonatomic, strong) NSMutableArray *chapterArray;
+@property (nonatomic, assign) float tableViewHeight;
+
+@property (nonatomic, assign) BOOL shouldShrinkTableView;
+@property (nonatomic, assign) float shrinkGapMiddleView;
+@property (nonatomic, assign) float extractGapMiddleView;
+
+@property (nonatomic, assign) float middleViewHeight;
+@property (nonatomic, assign) BOOL shouldShrinkMiddleView;
+@property (nonatomic, assign) float shrinkGapBottomView;
+@property (nonatomic, assign) float extractGapBottomView;
+
 @end
 
 @implementation BookDetailViewController
+
+- (IBAction)payByCardButtonTapped:(id)sender {
+    
+}
+
+- (IBAction)viewAllButtonTapped:(id)sender {
+    if (_shouldShrinkTableView) {
+        _middleViewTop.constant = _shrinkGapMiddleView;
+        _shouldShrinkTableView = NO;
+        [_viewAllBtn setTitle:@"VIEW ALL" forState:UIControlStateNormal];
+    }else {
+        _middleViewTop.constant = _extractGapMiddleView;
+        _shouldShrinkTableView = YES;
+        [_viewAllBtn setTitle:@"VIEW LESS" forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)readMoreButtonTapped:(id)sender {
+    if (_shouldShrinkMiddleView) {
+        _bottomViewTop.constant = _shrinkGapBottomView;
+        _shouldShrinkMiddleView = NO;
+        [_readMoreBtn setTitle:@"READ MORE" forState:UIControlStateNormal];
+    }else {
+        _bottomViewTop.constant = _extractGapBottomView;
+        _shouldShrinkMiddleView = YES;
+        [_readMoreBtn setTitle:@"READ LESS" forState:UIControlStateNormal];
+    }
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -99,6 +154,46 @@
                           placeholderImage:[UIImage imageNamed:@"AppIcon"]
                                    success:nil
                                    failure:nil];
+    
+    //Temp
+    _chapterArray = [[NSMutableArray alloc] init];
+    
+    for (int i = 1; i < 10; i++) {
+        BookChapter *chapter = [[BookChapter alloc] init];
+        chapter.chapterName = [NSString stringWithFormat:@"Chapter %d", i];
+        chapter.chapterPrice = [NSString stringWithFormat:@"Rs. 15.0"];
+        if (i == 1) {
+            chapter.isFree = YES;
+        }
+        
+        [_chapterArray addObject:chapter];
+    }
+    //End Temp
+    
+    float tableH = _chapterArray.count * 44;
+    _tableViewH.constant = tableH;
+    _tableViewHeight = tableH;
+    
+    _shouldShrinkTableView = YES;
+    _shrinkGapMiddleView = 44*3 - tableH;
+    _extractGapMiddleView = 0;
+    
+    [self viewAllButtonTapped:nil];
+    
+    [_chapterTableView reloadData];
+    
+    //156
+    //Calculate discriptionLabel height
+    float discLblH = 100;
+    _middleViewHeight = 148 + discLblH + 8;
+    _middleViewH.constant = _middleViewHeight;
+    
+    _shouldShrinkMiddleView = YES;
+    _shrinkGapBottomView = 50 - discLblH - 8;
+    _extractGapBottomView = 0;
+    
+    [self readMoreButtonTapped:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -115,5 +210,42 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [_chapterArray count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    DetailViewTableViewCell *cell = (DetailViewTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"DetailViewTableViewCellId"];
+    
+    if (cell == nil) {
+        cell = [[DetailViewTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DetailViewTableViewCellId"];
+    }
+    
+    BookChapter *chapter = [_chapterArray objectAtIndex:[indexPath row]];
+    [cell setChapter:chapter];
+    cell.delegate = self;
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
+#pragma mark - DetailViewTableViewCellDelegate
+- (void)detailViewTableViewCellButtonTapped:(DetailViewTableViewCell *)detailViewTableViewCell {
+    
+}
+
 
 @end
