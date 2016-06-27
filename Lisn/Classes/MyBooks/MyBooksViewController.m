@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import "AppUtils.h"
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "WebServiceURLs.h"
 
 @interface MyBooksViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate>
 
@@ -86,7 +88,23 @@
     NSString *email = [AppUtils trimmedStringOfString:_emailField.text];
     NSString *password = [AppUtils trimmedStringOfString:_passwordField.text];
     
-    //TODO
+    AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
+    
+    NSString *deviceId=[AppUtils getDeviceId];
+
+        NSDictionary *params = @ {@"email" :email ,@"password":password,@"usertype":@"email",@"os":@"iPhone",@"device":deviceId};
+    
+        [manager POST:user_login_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            //TODO
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"error %@",error);
+            
+            
+        }];
+    
+
+    
 }
 
 - (void)adjustViewHeights
@@ -159,6 +177,18 @@
 
 - (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
     if (result && result.grantedPermissions && [result.grantedPermissions containsObject:@"public_profile"] && [result.grantedPermissions containsObject:@"email"]) {
+        
+        if ([FBSDKAccessToken currentAccessToken]) {
+            [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id, name, link, first_name, last_name, email, birthday,middle_name"}]
+             startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                          id result, NSError *error) {
+                 if (!error) {
+                     NSDictionary *userDic=(NSDictionary*)result;
+                     NSLog(@"fetched userDic:%@", userDic);
+
+                 }
+             }];
+        }
         //TODO continue login process
     }else if (result && result.declinedPermissions && [result.declinedPermissions containsObject:@"email"]) {
         [[FBSDKLoginManager new] logOut];

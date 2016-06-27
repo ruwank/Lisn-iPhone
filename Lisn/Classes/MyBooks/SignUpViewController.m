@@ -8,6 +8,7 @@
 
 #import "SignUpViewController.h"
 #import "AppUtils.h"
+#import "WebServiceURLs.h"
 
 @interface SignUpViewController () <UITextFieldDelegate>
 
@@ -82,6 +83,25 @@
     NSString *email = [AppUtils trimmedStringOfString:_emailField.text];
     NSString *password = [AppUtils trimmedStringOfString:_passwordField.text];
     
+    AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
+    
+    NSString *deviceId=[AppUtils getDeviceId];
+    
+    NSDictionary *params = @ {@"fname": firstName, @"lname": lastName, @"email" :email ,@"password":password,@"usertype":@"email",@"os":@"iPhone",@"device":deviceId ,@"username":@"NULL" ,@"fbname":@"NULL" ,@"loc":@"NULL", @"bday":@"NULL" ,@"mobile":@"NULL" ,@"age":@"NULL" ,@"pref":@"NULL" ,@"fbid":@"NULL" ,@"mname":@"NULL" ,@"fburl":@"NULL"};
+    
+    [manager POST:user_add_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+         //TODO
+        NSLog(@"responseObject %@",[responseObject class]);
+        if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
+            //TODO
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error %@",error);
+        
+        
+    }];
+
     //TODO
 }
 
