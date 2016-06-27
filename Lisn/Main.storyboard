@@ -2096,11 +2096,8 @@
                                                     <constraint firstAttribute="height" constant="1" id="DHK-ML-b2A"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMe-ty-INe">
-                                                <rect key="frame" x="8" y="148" width="304" height="100"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="100" id="DfC-27-DQX"/>
-                                                </constraints>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMe-ty-INe" customClass="ResponsiveLabel">
+                                                <rect key="frame" x="8" y="148" width="304" height="192"/>
                                                 <string key="text">Make a symbolic breakpoint at UIViewAlertFor Unsatisfiabl eConstraints to catch this in the debugger.
 The methods in the UIConstrain tBasedLa youtDebugging category on UIView listed in. Make a symbolic breakpoint at UIViewAlert ForUnsatisfiabl eConstraints to catch this in the debugger.
 The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed in</string>
@@ -2112,6 +2109,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="fCk-Ue-Dvg" secondAttribute="trailing" id="0ls-lL-yus"/>
+                                            <constraint firstAttribute="bottom" secondItem="UMe-ty-INe" secondAttribute="bottom" constant="8" id="1QE-i1-Mg0"/>
                                             <constraint firstAttribute="trailing" secondItem="Xqj-CG-gC6" secondAttribute="trailing" constant="8" id="3yk-ba-fMf"/>
                                             <constraint firstItem="fCk-Ue-Dvg" firstAttribute="top" secondItem="mxe-yx-XOJ" secondAttribute="bottom" constant="8" id="4pV-Z1-kYZ"/>
                                             <constraint firstItem="mxe-yx-XOJ" firstAttribute="top" secondItem="MWE-MP-zbq" secondAttribute="top" constant="8" id="6RP-XJ-ppy"/>
@@ -2128,7 +2126,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                             <constraint firstItem="t7G-p9-1zF" firstAttribute="top" secondItem="Xqj-CG-gC6" secondAttribute="bottom" id="uA9-l8-ch1"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGh-fB-mZ4">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGh-fB-mZ4" userLabel="Bottom View">
                                         <rect key="frame" x="0.0" y="796" width="320" height="175"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vUW-1A-7rq">
@@ -2141,8 +2139,11 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                                 <state key="normal" title="READ MORE">
                                                     <color key="titleColor" red="0.93333333330000001" green="0.62352941179999999" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="readMoreButtonTapped:" destination="7j5-wo-zqx" eventType="touchUpInside" id="mpk-wg-dfI"/>
+                                                </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3y4-Yv-rBa">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3y4-Yv-rBa" userLabel="Line View">
                                                 <rect key="frame" x="0.0" y="46" width="320" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -2157,7 +2158,6 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                             <constraint firstItem="vUW-1A-7rq" firstAttribute="top" secondItem="fGh-fB-mZ4" secondAttribute="top" constant="8" id="HQM-yY-8bE"/>
                                             <constraint firstItem="3y4-Yv-rBa" firstAttribute="top" secondItem="vUW-1A-7rq" secondAttribute="bottom" constant="8" id="fas-Sr-j2q"/>
                                             <constraint firstAttribute="trailing" secondItem="3y4-Yv-rBa" secondAttribute="trailing" id="iVB-RH-l5n"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="175" id="pxh-Ac-h29"/>
                                             <constraint firstAttribute="height" constant="175" id="sTb-Lf-NE4"/>
                                         </constraints>
                                     </view>
@@ -2201,11 +2201,16 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                         <outlet property="bookReaderLbl" destination="xsm-32-QpT" id="Dvv-6k-bPF"/>
                         <outlet property="bookThumbVW" destination="xzR-Ot-dqU" id="aRC-Fj-xMh"/>
                         <outlet property="bookThumbView" destination="G80-J3-pN3" id="wA6-WN-G0r"/>
+                        <outlet property="bottomView" destination="fGh-fB-mZ4" id="pkb-mi-syA"/>
+                        <outlet property="bottomViewTop" destination="ZBW-HH-lDB" id="J9H-k0-lUX"/>
                         <outlet property="chapterTableView" destination="EOE-Ug-fLM" id="iB1-Wg-w8U"/>
+                        <outlet property="discriptionLabel" destination="UMe-ty-INe" id="i9Z-P0-qNB"/>
                         <outlet property="mainScrollView" destination="JUK-qK-m8k" id="ilW-zb-PJ8"/>
                         <outlet property="middleView" destination="MWE-MP-zbq" id="tcx-dP-BsN"/>
+                        <outlet property="middleViewH" destination="q0y-XD-CzI" id="sSb-wg-YEG"/>
                         <outlet property="middleViewTop" destination="GKB-nS-YBf" id="oe2-bf-k1u"/>
                         <outlet property="rankStarsView" destination="yaH-oz-S63" id="MUk-bB-Tlq"/>
+                        <outlet property="readMoreBtn" destination="vUW-1A-7rq" id="jE0-oU-LcZ"/>
                         <outlet property="star1" destination="s05-ec-Iyv" id="oSs-Ml-inU"/>
                         <outlet property="star2" destination="YMp-3a-dVF" id="WWY-dJ-L4v"/>
                         <outlet property="star3" destination="MtR-AY-YSJ" id="Z15-S2-nPT"/>

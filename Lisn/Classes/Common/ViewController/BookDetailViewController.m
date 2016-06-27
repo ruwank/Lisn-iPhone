@@ -40,8 +40,13 @@
 
 @property (weak, nonatomic) IBOutlet UIView *middleView;
 @property (weak, nonatomic) IBOutlet UIButton *viewAllBtn;
+@property (weak, nonatomic) IBOutlet ResponsiveLabel *discriptionLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *middleViewTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *middleViewH;
 
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIButton *readMoreBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewTop;
 
 @property (nonatomic, strong) NSMutableArray *chapterArray;
 @property (nonatomic, assign) float tableViewHeight;
@@ -49,6 +54,11 @@
 @property (nonatomic, assign) BOOL shouldShrinkTableView;
 @property (nonatomic, assign) float shrinkGapMiddleView;
 @property (nonatomic, assign) float extractGapMiddleView;
+
+@property (nonatomic, assign) float middleViewHeight;
+@property (nonatomic, assign) BOOL shouldShrinkMiddleView;
+@property (nonatomic, assign) float shrinkGapBottomView;
+@property (nonatomic, assign) float extractGapBottomView;
 
 @end
 
@@ -67,6 +77,18 @@
         _middleViewTop.constant = _extractGapMiddleView;
         _shouldShrinkTableView = YES;
         [_viewAllBtn setTitle:@"VIEW LESS" forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)readMoreButtonTapped:(id)sender {
+    if (_shouldShrinkMiddleView) {
+        _bottomViewTop.constant = _shrinkGapBottomView;
+        _shouldShrinkMiddleView = NO;
+        [_readMoreBtn setTitle:@"READ MORE" forState:UIControlStateNormal];
+    }else {
+        _bottomViewTop.constant = _extractGapBottomView;
+        _shouldShrinkMiddleView = YES;
+        [_readMoreBtn setTitle:@"READ LESS" forState:UIControlStateNormal];
     }
 }
 
@@ -159,6 +181,19 @@
     [self viewAllButtonTapped:nil];
     
     [_chapterTableView reloadData];
+    
+    //156
+    //Calculate discriptionLabel height
+    float discLblH = 100;
+    _middleViewHeight = 148 + discLblH + 8;
+    _middleViewH.constant = _middleViewHeight;
+    
+    _shouldShrinkMiddleView = YES;
+    _shrinkGapBottomView = 50 - discLblH - 8;
+    _extractGapBottomView = 0;
+    
+    [self readMoreButtonTapped:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning {
