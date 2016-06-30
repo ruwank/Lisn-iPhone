@@ -89,7 +89,7 @@
     AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
     
     responseSerializer.acceptableContentTypes = nil;
-    
+    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
    // manager.responseSerializer=responseSerializer;
 manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *deviceId=[AppUtils getDeviceId];
