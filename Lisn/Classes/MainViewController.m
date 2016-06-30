@@ -28,6 +28,7 @@
     [self performSelector:@selector(finishSplash:) withObject:nil afterDelay:3.0 inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
 
     [self downloadInitialData];
+
     // Do any additional setup after loading the view from its nib.
 }
 
