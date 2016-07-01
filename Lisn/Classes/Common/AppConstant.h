@@ -24,6 +24,28 @@ typedef enum {
     BookCellTypeTopDownload
 }BookCellType;
 
+
+//typedef enum  {
+//    ACTION_MORE, ACTION_PREVIEW,ACTION_DETAIL,ACTION_PURCHASE,ACTION_PLAY,ACTION_DELETE,ACTION_DOWNLOAD
+//}SelectedAction;
+
+typedef enum  {
+    PROVIDER_NONE,
+    PROVIDER_MOBITEL,
+    PROVIDER_DIALOG,
+    PROVIDER_ETISALAT
+}ServiceProvider;
+
+typedef enum  {
+    OPTION_NONE,
+    OPTION_CARD,
+    OPTION_MOBITEL,
+    OPTION_DIALOG,
+    OPTION_ETISALAT
+}PaymentOption;
+
+
+
 #define RGBA(r, g, b, a)            [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
 

@@ -25,9 +25,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 
-    CTTelephonyNetworkInfo *netinfo = [[CTTelephonyNetworkInfo alloc] init];
-    CTCarrier *carrier = [netinfo subscriberCellularProvider];
-    NSLog(@"Carrier Name: %@", [carrier mobileNetworkCode]);
+    
     
     //[Fabric with:@[[Crashlytics class]]];
 
@@ -41,7 +39,7 @@
 //    [self.window makeKeyAndVisible];
     
     
-    
+    [self setServiceProvider];
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     
@@ -79,5 +77,23 @@
                                                        annotation:annotation
             ];
 }
+#pragma mark 
+-(void)setServiceProvider{
+    CTTelephonyNetworkInfo *netinfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = [netinfo subscriberCellularProvider];
+    NSString *mobileNetworkCode=[carrier mobileNetworkCode];
+    NSLog(@"Carrier Name: %@", [carrier mobileNetworkCode]);
+    if(mobileNetworkCode){
+        if([mobileNetworkCode isEqualToString:@"01"]){
+            _serviceProvider=PROVIDER_MOBITEL;
+        }
+        else if([mobileNetworkCode isEqualToString:@"02"]){
+            _serviceProvider=PROVIDER_DIALOG;
+        }
+        else if([mobileNetworkCode isEqualToString:@"03"]){
+            _serviceProvider=PROVIDER_ETISALAT;
+        }
 
+    }
+}
 @end

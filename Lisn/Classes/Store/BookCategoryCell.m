@@ -50,21 +50,16 @@
 {
     _bookCategory = bookCategory;
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
     
     [_booksArray removeAllObjects];
     [_cellCollectionView reloadData];
 
     if([_booksArray count] ==0){
-      
-       // NSDictionary *params = @ {@"cat" :bookCategory._id};
-        NSDictionary *params = @ {@"cat" :@"1"};
+        NSDictionary *params = @ {@"cat" :_bookCategory._id};
 
+        
         [manager POST:book_category_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-          //  NSLog(@"responseObject %@",[responseObject]);
-            //NSString* responseString = [NSString stringWithUTF8String:[responseObject bytes]];
-            
-           // NSLog(@"responseObject %@",responseString);
             if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
                 
                 NSMutableArray *booksDataArray=(NSMutableArray*)responseObject;
