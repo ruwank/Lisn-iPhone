@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		403BA092F3D8A32DB98FE139 /* libPods-Lisn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 236BF7C633958496C14FE0A0 /* libPods-Lisn.a */; };
 		741080591CDD9E89007F9849 /* BookSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 741080581CDD9E89007F9849 /* BookSearchViewController.m */; };
 		741565311CDF591700795F82 /* aboutus.html in Resources */ = {isa = PBXBuildFile; fileRef = 741565301CDF591700795F82 /* aboutus.html */; };
 		741565351CDF5DC800795F82 /* contactus.html in Resources */ = {isa = PBXBuildFile; fileRef = 741565341CDF5DC800795F82 /* contactus.html */; };
@@ -27,6 +26,7 @@
 		84018E011C99350C009C9403 /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018DFA1C99350C009C9403 /* AppUtils.m */; };
 		84018E081C9936DD009C9403 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018E041C9936DD009C9403 /* AppDelegate.m */; };
 		84018E091C9936DD009C9403 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018E061C9936DD009C9403 /* MainViewController.m */; };
+		D8756BA62C350F9A135E9325 /* libPods-Lisn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBAABC87738C3AD3D6511FA5 /* libPods-Lisn.a */; };
 		FD0C50541C99B88C00D42B05 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0C50521C99B88C00D42B05 /* HomeViewController.m */; };
 		FD0C50571C99BDC400D42B05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD0C50561C99BDC400D42B05 /* Main.storyboard */; };
 		FD2A690F1CA5A30A00B63131 /* LisnBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2A690C1CA5A30A00B63131 /* LisnBaseViewController.m */; };
@@ -45,9 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		236BF7C633958496C14FE0A0 /* libPods-Lisn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		34909B7B9377810C302EB1C4 /* Pods-Lisn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.debug.xcconfig"; sourceTree = "<group>"; };
-		6C4155140A66D7744A226C0C /* Pods-Lisn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.release.xcconfig"; sourceTree = "<group>"; };
+		4AE4D4A2ACAD11DF6AEA9DBD /* Pods-Lisn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.debug.xcconfig"; sourceTree = "<group>"; };
 		741080571CDD9E89007F9849 /* BookSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookSearchViewController.h; sourceTree = "<group>"; };
 		741080581CDD9E89007F9849 /* BookSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookSearchViewController.m; sourceTree = "<group>"; };
 		741565301CDF591700795F82 /* aboutus.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = aboutus.html; sourceTree = "<group>"; };
@@ -85,6 +83,8 @@
 		84018E041C9936DD009C9403 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		84018E051C9936DD009C9403 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		84018E061C9936DD009C9403 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		91FA9C6F7EAC319E679639F7 /* Pods-Lisn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.release.xcconfig"; sourceTree = "<group>"; };
+		FBAABC87738C3AD3D6511FA5 /* libPods-Lisn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD0C50511C99B88C00D42B05 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		FD0C50521C99B88C00D42B05 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		FD0C50561C99BDC400D42B05 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -119,18 +119,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				741565371CDF612D00795F82 /* MessageUI.framework in Frameworks */,
-				403BA092F3D8A32DB98FE139 /* libPods-Lisn.a in Frameworks */,
+				D8756BA62C350F9A135E9325 /* libPods-Lisn.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5D413B3FAF0A8AB2D8CC32AD /* Pods */ = {
+		17CEBB4B8B197CA414B3E017 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				34909B7B9377810C302EB1C4 /* Pods-Lisn.debug.xcconfig */,
-				6C4155140A66D7744A226C0C /* Pods-Lisn.release.xcconfig */,
+				4AE4D4A2ACAD11DF6AEA9DBD /* Pods-Lisn.debug.xcconfig */,
+				91FA9C6F7EAC319E679639F7 /* Pods-Lisn.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -169,8 +169,8 @@
 			children = (
 				84018DD11C992CAE009C9403 /* Lisn */,
 				84018DD01C992CAE009C9403 /* Products */,
-				5D413B3FAF0A8AB2D8CC32AD /* Pods */,
 				8E23F17858C39FE9B28E1F30 /* Frameworks */,
+				17CEBB4B8B197CA414B3E017 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -265,7 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				741565361CDF612D00795F82 /* MessageUI.framework */,
-				236BF7C633958496C14FE0A0 /* libPods-Lisn.a */,
+				FBAABC87738C3AD3D6511FA5 /* libPods-Lisn.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -373,12 +373,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84018DE61C992CAE009C9403 /* Build configuration list for PBXNativeTarget "Lisn" */;
 			buildPhases = (
-				F24D35F8109A47D867DDA30D /* Check Pods Manifest.lock */,
+				BC8C373325BEF8D192E96A8A /* [CP] Check Pods Manifest.lock */,
 				84018DCB1C992CAE009C9403 /* Sources */,
 				84018DCC1C992CAE009C9403 /* Frameworks */,
 				84018DCD1C992CAE009C9403 /* Resources */,
-				6B2524DABB73701750A10450 /* Embed Pods Frameworks */,
-				49F1B407A389C5BC1C5CC694 /* Copy Pods Resources */,
+				518FC93C80F730FB71F19589 /* [CP] Embed Pods Frameworks */,
+				00FBC49C0574ED596E93BC2A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -440,14 +440,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		49F1B407A389C5BC1C5CC694 /* Copy Pods Resources */ = {
+		00FBC49C0574ED596E93BC2A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,14 +455,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lisn/Pods-Lisn-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6B2524DABB73701750A10450 /* Embed Pods Frameworks */ = {
+		518FC93C80F730FB71F19589 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,14 +470,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lisn/Pods-Lisn-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F24D35F8109A47D867DDA30D /* Check Pods Manifest.lock */ = {
+		BC8C373325BEF8D192E96A8A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -616,27 +616,31 @@
 		};
 		84018DE71C992CAE009C9403 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34909B7B9377810C302EB1C4 /* Pods-Lisn.debug.xcconfig */;
+			baseConfigurationReference = 4AE4D4A2ACAD11DF6AEA9DBD /* Pods-Lisn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Buddika Witharana (64B694U75E)";
 				INFOPLIST_FILE = Lisn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = audio.lisn.Lisn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ef313560-b0b1-482b-80e3-5a75736ce544";
 			};
 			name = Debug;
 		};
 		84018DE81C992CAE009C9403 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C4155140A66D7744A226C0C /* Pods-Lisn.release.xcconfig */;
+			baseConfigurationReference = 91FA9C6F7EAC319E679639F7 /* Pods-Lisn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Buddika Witharana (64B694U75E)";
 				INFOPLIST_FILE = Lisn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = audio.lisn.Lisn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ef313560-b0b1-482b-80e3-5a75736ce544";
 			};
 			name = Release;
 		};

@@ -11,6 +11,8 @@
 #import <Crashlytics/Crashlytics.h>
 #import <AFNetworking/AFNetworking.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
 
 @interface AppDelegate ()
 
@@ -23,6 +25,10 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 
+    CTTelephonyNetworkInfo *netinfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = [netinfo subscriberCellularProvider];
+    NSLog(@"Carrier Name: %@", [carrier mobileNetworkCode]);
+    
     //[Fabric with:@[[Crashlytics class]]];
 
     // Override point for customization after application launch.
