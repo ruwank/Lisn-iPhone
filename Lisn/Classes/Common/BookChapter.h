@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BookChapter : NSObject
+@interface BookChapter : NSObject<NSCoding>
 
-@property (nonatomic, strong) NSString *chapterId;
-@property (nonatomic, strong) NSString *chapterName;
-@property (nonatomic, strong) NSString *chapterPrice;
-@property (nonatomic, assign) BOOL isFree;
-@property (nonatomic, assign) BOOL isBuy;
+@property (nonatomic, strong) NSString *title,*english_title;
+@property float discount,size,price;
+@property int chapter_id;
 
+
+- (instancetype)initWithDataDictionary:(NSDictionary *)jsonDic;
 
 @end

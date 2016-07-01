@@ -25,6 +25,35 @@ typedef enum {
 }BookCellType;
 
 
+/***************************** Network Error related constants *****************************/
+
+#define ERROR_BAD_REQUEST                   400
+#define ERROR_UNAUTHORIZED                  401
+#define ERROR_FORBIDDEN                     403
+#define ERROR_RESOURCE_NOT_FOUND            404
+#define ERROR_METHOD_NOT_ALLOWED            405
+#define ERROR_CONFLICT                      409
+#define ERROR_EXPIERD                       410
+#define ERROR_INTERNAL_ERROR                500
+#define ERROR_NOT_IMPLEMENTED               501
+#define ERROR_SERVICE_UNAVAILABLE           503
+
+typedef enum{
+    ErrorTypeNone=0,
+    ErrorTypeNetworkNotAvailable,
+    ErrorTypeBadRequest=ERROR_BAD_REQUEST,
+    ErrorTypeUnauthorized=ERROR_UNAUTHORIZED,
+    ErrorTypeForbidden=ERROR_FORBIDDEN,
+    ErrorTypeResourceNotFound=ERROR_RESOURCE_NOT_FOUND,
+    ErrorTypeMethodNotAllowed=ERROR_METHOD_NOT_ALLOWED,
+    ErrorTypeConflict=ERROR_CONFLICT,
+    ErrorTypeExpierd=ERROR_EXPIERD,
+    ErrorTypeInternalError=ERROR_INTERNAL_ERROR,
+    ErrorTypeNotImplemented=ERROR_NOT_IMPLEMENTED,
+    ErrorTypeSeviceUnavailable=ERROR_SERVICE_UNAVAILABLE,
+}ErrorType;
+
+
 //typedef enum  {
 //    ACTION_MORE, ACTION_PREVIEW,ACTION_DETAIL,ACTION_PURCHASE,ACTION_PLAY,ACTION_DELETE,ACTION_DOWNLOAD
 //}SelectedAction;

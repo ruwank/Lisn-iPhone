@@ -154,21 +154,21 @@
                           placeholderImage:[UIImage imageNamed:@"AppIcon"]
                                    success:nil
                                    failure:nil];
-    
-    //Temp
-    _chapterArray = [[NSMutableArray alloc] init];
-    
-    for (int i = 1; i < 10; i++) {
-        BookChapter *chapter = [[BookChapter alloc] init];
-        chapter.chapterName = [NSString stringWithFormat:@"Chapter %d", i];
-        chapter.chapterPrice = [NSString stringWithFormat:@"Rs. 15.0"];
-        if (i == 1) {
-            chapter.isFree = YES;
-        }
-        
-        [_chapterArray addObject:chapter];
-    }
-    //End Temp
+    _chapterArray=_audioBook.chapters;
+//    //Temp
+//    _chapterArray = [[NSMutableArray alloc] init];
+//    
+//    for (int i = 1; i < 10; i++) {
+//        BookChapter *chapter = [[BookChapter alloc] init];
+////        chapter.chapterName = [NSString stringWithFormat:@"Chapter %d", i];
+////        chapter.chapterPrice = [NSString stringWithFormat:@"Rs. 15.0"];
+////        if (i == 1) {
+////            chapter.isFree = YES;
+////        }
+//        
+//        [_chapterArray addObject:chapter];
+//    }
+//    //End Temp
     
     float tableH = _chapterArray.count * 44;
     _tableViewH.constant = tableH;

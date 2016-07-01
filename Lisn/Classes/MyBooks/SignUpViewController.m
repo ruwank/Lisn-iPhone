@@ -9,6 +9,7 @@
 #import "SignUpViewController.h"
 #import "AppUtils.h"
 #import "WebServiceURLs.h"
+#import "WebServiceManager.h"
 
 @interface SignUpViewController () <UITextFieldDelegate>
 
@@ -83,19 +84,22 @@
     NSString *email = [AppUtils trimmedStringOfString:_emailField.text];
     NSString *password = [AppUtils trimmedStringOfString:_passwordField.text];
     
-    AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
-    
-   // manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
-    
-    responseSerializer.acceptableContentTypes = nil;
-    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-   // manager.responseSerializer=responseSerializer;
-manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
+//    
+//   // manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+//    AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+//    
+//    responseSerializer.acceptableContentTypes = nil;
+//    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//   // manager.responseSerializer=responseSerializer;
+//manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *deviceId=[AppUtils getDeviceId];
     
     NSDictionary *params = @ {@"fname": firstName, @"lname": lastName, @"email" :email ,@"password":password,@"usertype":@"email",@"os":@"iPhone",@"device":deviceId ,@"username":@"NULL" ,@"fbname":@"NULL" ,@"loc":@"NULL", @"bday":@"NULL" ,@"mobile":@"NULL" ,@"age":@"NULL" ,@"pref":@"NULL" ,@"fbid":@"NULL" ,@"mname":@"NULL" ,@"fburl":@"NULL"};
-    
+    [WebServiceManager createUserAcoount:params withResponseHandler:^(BOOL success, NSString *statusText, ErrorType errorType){
+        
+         }];
+    /*
     NSLog(@"params %@",params);
     [manager POST:user_add_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
          //TODO
@@ -112,7 +116,7 @@ manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         
         
     }];
-
+*/
     //TODO
 }
 

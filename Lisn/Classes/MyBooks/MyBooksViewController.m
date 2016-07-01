@@ -14,6 +14,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "WebServiceURLs.h"
+#import "WebServiceManager.h"
 
 @interface MyBooksViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate>
 
@@ -96,6 +97,7 @@
     
         [manager POST:user_login_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             //TODO
+            NSLog(@"responseObject %@",responseObject);
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"error %@",error);
@@ -173,6 +175,38 @@
     
 }
 
+#pragma mark user login metods
+
+-(void)createUserAccount:(NSDictionary*)jsonDic{
+    
+    NSString *deviceId=[AppUtils getDeviceId];
+    
+    NSString *firstName=@"";
+    NSString *lastName=@"";
+    NSString *middle_name=@"";
+    NSString *email=@"";
+    NSString *fbid=@"";
+    NSString *fburl=@"";
+    
+    if([jsonDic valueForKey:@"first_name"]!= nil)
+        firstName = [jsonDic valueForKey:@"first_name"];
+    if([jsonDic valueForKey:@"id"]!= nil)
+        fbid = [jsonDic valueForKey:@"id"];
+    if([jsonDic valueForKey:@"email"]!= nil)
+        email = [jsonDic valueForKey:@"email"];
+    if([jsonDic valueForKey:@"last_name"]!= nil)
+        lastName = [jsonDic valueForKey:@"last_name"];
+    if([jsonDic valueForKey:@"link"]!= nil)
+        fburl = [jsonDic valueForKey:@"link"];
+    if([jsonDic valueForKey:@"middle_name"]!= nil)
+        middle_name = [jsonDic valueForKey:@"middle_name"];
+    
+    NSDictionary *params = @ {@"fname": firstName, @"lname": lastName ,@"mname":middle_name, @"email" :email ,@"password":@"NULL",@"usertype":@"fb",@"os":@"iPhone",@"device":deviceId ,@"username":@"NULL" ,@"fbname":@"NULL" ,@"loc":@"NULL", @"bday":@"NULL" ,@"mobile":@"NULL" ,@"age":@"NULL" ,@"pref":@"NULL" ,@"fbid":fbid  ,@"fburl":fburl};
+    
+    [WebServiceManager createUserAcoount:params withResponseHandler:^(BOOL success, NSString *statusText, ErrorType errorType) {
+        
+    }];
+}
 #pragma mark - FBSDKLoginButtonDelegate
 
 - (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
@@ -185,6 +219,8 @@
                  if (!error) {
                      NSDictionary *userDic=(NSDictionary*)result;
                      NSLog(@"fetched userDic:%@", userDic);
+                     [self createUserAccount:userDic];
+                     
 
                  }
              }];
