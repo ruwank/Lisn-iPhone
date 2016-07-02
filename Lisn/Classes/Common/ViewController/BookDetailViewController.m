@@ -124,7 +124,38 @@
     }
 }
 
+-(void)updateButton{
+    if(_audioBook.isTotalBookPurchased ||([_audioBook.price floatValue]< 1)){
+        _payByBillBtn.hidden=YES;
+        _payByCardBtn.hidden=YES;
+        _playBtn.hidden=NO;
+    }else{
+        _payByBillBtn.hidden=NO;
+        _payByCardBtn.hidden=NO;
+        _playBtn.hidden=YES;
+        
+        if([AppUtils getServiceProvider] ==PROVIDER_NONE){
+            _payByBillBtn.hidden=YES;
+            
+        }
+        else if([AppUtils getServiceProvider] ==PROVIDER_MOBITEL){
+            [_payByBillBtn setTitle:@"Add to Mobitel bill" forState:UIControlStateNormal];
+        }
+        else if([AppUtils getServiceProvider] ==PROVIDER_DIALOG){
+            [_payByBillBtn setTitle:@"Add to Dialog bill" forState:UIControlStateNormal];
 
+        }
+        else if([AppUtils getServiceProvider] ==PROVIDER_ETISALAT){
+            [_payByBillBtn setTitle:@"Add to Etisalat bill" forState:UIControlStateNormal];
+
+        }
+        NSString *buttonText=[NSString stringWithFormat:@"Pay by Card ( %d %% discount)",_audioBook.discount];
+        [_payByCardBtn setTitle:buttonText forState:UIControlStateNormal];
+
+        //btnPayFromCard.setText("Pay by Card (" + audioBook.getDiscount() + "% discount)");
+
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -190,21 +221,7 @@
                                    success:nil
                                    failure:nil];
     _chapterArray=_audioBook.chapters;
-//    //Temp
-//    _chapterArray = [[NSMutableArray alloc] init];
-//    
-//    for (int i = 1; i < 10; i++) {
-//        BookChapter *chapter = [[BookChapter alloc] init];
-////        chapter.chapterName = [NSString stringWithFormat:@"Chapter %d", i];
-////        chapter.chapterPrice = [NSString stringWithFormat:@"Rs. 15.0"];
-////        if (i == 1) {
-////            chapter.isFree = YES;
-////        }
-//        
-//        [_chapterArray addObject:chapter];
-//    }
-//    //End Temp
-    
+
     float tableH = _chapterArray.count * 44;
     _tableViewH.constant = tableH;
     _tableViewHeight = tableH;
@@ -258,6 +275,7 @@
     _extractGapBottomView = 0;
     
     [self readMoreButtonTapped:nil];
+    [self updateButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -297,7 +315,7 @@
     }
     
     BookChapter *chapter = [_chapterArray objectAtIndex:[indexPath row]];
-    [cell setChapter:chapter];
+    [cell setChapter:chapter andBookId:_audioBook.book_id andLanguageCode:_audioBook.lanCode];
     cell.delegate = self;
     
     return cell;
@@ -309,6 +327,7 @@
 
 #pragma mark - DetailViewTableViewCellDelegate
 - (void)detailViewTableViewCellButtonTapped:(DetailViewTableViewCell *)detailViewTableViewCell {
+    BookChapter *chapter=detailViewTableViewCell.chapter;
     
 }
 

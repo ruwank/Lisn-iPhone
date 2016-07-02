@@ -17,5 +17,5 @@
 -(void)saveUserBook:(NSMutableDictionary *)theBook;
 -(UserProfile*)getProfileInfo;
 -(void)saveProfileInfo:(UserProfile*)profileInfo;
-
+-(BOOL)isUserLogin;
 @end

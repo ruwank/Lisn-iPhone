@@ -101,6 +101,7 @@
     [coder encodeObject:_english_title    forKey:@"english_title"];
     [coder encodeObject:_english_description    forKey:@"english_description"];
     [coder encodeObject:_chapters    forKey:@"chapters"];
+    [coder encodeBool:_isTotalBookPurchased  forKey:@"isTotalBookPurchased"];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -123,6 +124,7 @@
     self.english_title    = [coder decodeObjectForKey:@"english_title"];
     self.english_description    = [coder decodeObjectForKey:@"english_description"];
     self.chapters    = [coder decodeObjectForKey:@"chapters"];
+    self.isTotalBookPurchased=[coder decodeBoolForKey:@"isTotalBookPurchased"];
     return self;
 }
 

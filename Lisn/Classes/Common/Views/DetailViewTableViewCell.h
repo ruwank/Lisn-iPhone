@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BookChapter.h"
-
+#import "AudioBook.h"
 @protocol DetailViewTableViewCellDelegate;
 
 @interface DetailViewTableViewCell : UITableViewCell
@@ -17,6 +17,8 @@
 
 @property (nonatomic, assign) id<DetailViewTableViewCellDelegate> delegate;
 
+- (void)setChapter:(BookChapter *)chapter andBookId:(NSString*)bookId andLanguageCode:(LanguageCode)languageCode
+;
 @end
 
 @protocol DetailViewTableViewCellDelegate <NSObject>

@@ -28,4 +28,6 @@
 +(BOOL) fileExists:(NSString *)type;
 +(void)deleteFileType:(NSString *)type;
 
++(NSString*)getAudioFilePath:(NSString*)bookId andFileIndex:(int)index;
++(BOOL)isAudioFileExists:(NSString*)bookId andFileIndex:(int)index;
 @end

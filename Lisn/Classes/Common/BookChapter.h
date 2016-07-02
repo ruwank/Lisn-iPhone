@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *title,*english_title;
 @property float discount,size,price;
 @property int chapter_id;
+@property  BOOL isPurchased;
 
 
 - (instancetype)initWithDataDictionary:(NSDictionary *)jsonDic;

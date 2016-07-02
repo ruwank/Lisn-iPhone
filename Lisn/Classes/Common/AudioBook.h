@@ -22,7 +22,7 @@ typedef enum  {
 
 @property (strong, nonatomic) NSString *ISBN,*book_id,*duration,*narrator,*title, *book_description, *author, *language, *price, *category,*rate,
 *cover_image,*banner_image, *preview_audio,*english_title,*english_description,*downloads;
-@property  BOOL isPurchase,isAwarded,isDownloaded;
+@property  BOOL isPurchase,isAwarded,isDownloaded,isTotalBookPurchased;
 @property int lastPlayFileIndex,lastSeekPoint,downloadCount,discount,audioFileCount,fileSize;
 @property float previewDuration;
 
