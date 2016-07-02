@@ -17,6 +17,7 @@
 #import <AVFoundation/AVAsset.h>
 #import "AppUtils.h"
 #import "BookDetailViewController.h"
+#import "DataSource.h"
 
 @interface HomeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, StoreBookCollectionViewCellDelegate,UIActionSheetDelegate>{
     NSTimer *_timer;
@@ -64,6 +65,12 @@
     // Do any additional setup after loading the view from its nib.
     [self adjustViewHeights];
     [self loadData];
+
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self loadMyBookData];
+
 }
 
 - (void)adjustViewHeights
@@ -120,19 +127,44 @@
             break;
         }
     }
+   // [self loadMyBookData];
     
+    
+}
+
+-(void)loadMyBookData{
+    [_myBooksArray removeAllObjects ];
+
+   UserProfile *userProfile= [[DataSource sharedInstance] getProfileInfo];
+    if(userProfile && userProfile.userId !=nil){
+        NSMutableDictionary *userBook=[[DataSource sharedInstance] getUserBook];
+        NSInteger count=3;
+        NSArray *uesrBook=[userBook allValues];
+        
+        if([uesrBook count]<3){
+            count=[uesrBook count];
+        }
+        for (int index=0; index<count; index++) {
+            [_myBooksArray addObject:[uesrBook objectAtIndex:index]];
+        }
+    }
     if (_myBooksArray.count == 0) {
         _myBookLayConstHeight.constant = 0;
     }else {
         _myBookLayConstHeight.constant = 204;
     }
+    [_myBooksCollectionView reloadData];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)dealloc{
+    if(self.previewPlayer != NULL){
+        [self.previewPlayer removeObserver:self forKeyPath:@"status"];
+        
+    }
+}
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

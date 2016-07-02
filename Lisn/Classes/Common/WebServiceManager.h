@@ -12,6 +12,7 @@
 #import "WebServiceURLs.h"
 
 typedef void (^CreateUserResponseHandler)(BOOL success, NSString *statusText, ErrorType errorType);
+//typedef void (^LoginUserResponseHandler)(BOOL success, ErrorType errorType);
 
 @interface WebServiceManager : NSObject
 +(void)createUserAcoount:(NSDictionary*)params withResponseHandler:(CreateUserResponseHandler)block;

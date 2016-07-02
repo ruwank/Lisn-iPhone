@@ -13,6 +13,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
+#import "FileOperator.h"
 
 @interface AppDelegate ()
 
@@ -25,7 +26,8 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 
-    
+    [FileOperator checkAndCreateRootDirectory];
+
     
     //[Fabric with:@[[Crashlytics class]]];
 

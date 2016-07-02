@@ -39,21 +39,23 @@
             for (int i=1; i<[createResponse count]; i++) {
                 NSString *separate1=[createResponse objectAtIndex:i];
                 NSArray* separate2 = [separate1 componentsSeparatedByString: @"="];
-                NSString *separate3=[separate2 objectAtIndex:0];
-
-                if(separate3 && [separate3 isEqualToString:@"UID"]){
+                NSString *key=[separate2 objectAtIndex:0];
+               key= [key stringByTrimmingCharactersInSet:
+                 [NSCharacterSet whitespaceCharacterSet]];
+                NSLog(@"separate3 %@",key);
+                if(key && [key isEqualToString:@"UID"]){
                     uid=[separate2 objectAtIndex:1];
                 }
-                if(separate3 && [separate3 isEqualToString:@"USERNAME"]){
+                if(key && [key isEqualToString:@"USERNAME"]){
                     userName=[separate2 objectAtIndex:1];
                 }
-                if(separate3 && [separate3 isEqualToString:@"FBID"]){
+                if(key && [key isEqualToString:@"FBID"]){
                     fbId=[separate2 objectAtIndex:1];
                 }
-                if(separate3 && [separate3 isEqualToString:@"TYPE"]){
+                if(key && [key isEqualToString:@"TYPE"]){
                     type=[separate2 objectAtIndex:1];
                 }
-                if(separate3 && [separate3 isEqualToString:@"STATUS"]){
+                if(key && [key isEqualToString:@"STATUS"]){
                     statusString=[separate2 objectAtIndex:1];
                 }
 
@@ -87,4 +89,7 @@
     }];
     
 }
+//+(void)loginUser:(NSDictionary*)params withResponseHandeler:(LoginUserResponseHandler)block{
+//    
+//}
 @end
