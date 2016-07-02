@@ -47,6 +47,11 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UIButton *readMoreBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewH;
+
+@property (weak, nonatomic) IBOutlet UIButton *payByCardBtn;
+@property (weak, nonatomic) IBOutlet UIButton *playBtn;
+@property (weak, nonatomic) IBOutlet UIButton *payByBillBtn;
 
 @property (nonatomic, strong) NSMutableArray *chapterArray;
 @property (nonatomic, assign) float tableViewHeight;
@@ -60,6 +65,10 @@
 @property (nonatomic, assign) float shrinkGapBottomView;
 @property (nonatomic, assign) float extractGapBottomView;
 
+@property (nonatomic, assign) int rowLimit;
+@property (nonatomic, assign) float lblHeightLimit;
+@property (nonatomic, assign) float lblHeight;
+
 @end
 
 @implementation BookDetailViewController
@@ -68,27 +77,50 @@
     
 }
 
+- (IBAction)payByBillButtonTapped:(id)sender {
+    
+}
+
+- (IBAction)playButtonTapped:(id)sender {
+    
+}
+
 - (IBAction)viewAllButtonTapped:(id)sender {
     if (_shouldShrinkTableView) {
         _middleViewTop.constant = _shrinkGapMiddleView;
         _shouldShrinkTableView = NO;
         [_viewAllBtn setTitle:@"VIEW ALL" forState:UIControlStateNormal];
+        
+        if (_chapterArray.count > 3) {
+            _rowLimit = 4;
+        }else {
+            _rowLimit = (int)_chapterArray.count;
+        }
+        
     }else {
         _middleViewTop.constant = _extractGapMiddleView;
         _shouldShrinkTableView = YES;
         [_viewAllBtn setTitle:@"VIEW LESS" forState:UIControlStateNormal];
+        
+        _rowLimit = (int)_chapterArray.count;
     }
+    
+    [_chapterTableView reloadData];
 }
 
 - (IBAction)readMoreButtonTapped:(id)sender {
     if (_shouldShrinkMiddleView) {
-        _bottomViewTop.constant = _shrinkGapBottomView;
+        //_bottomViewTop.constant = _shrinkGapBottomView;
         _shouldShrinkMiddleView = NO;
         [_readMoreBtn setTitle:@"READ MORE" forState:UIControlStateNormal];
+        
+        _middleViewH.constant = 47 + _lblHeightLimit + 8;
     }else {
-        _bottomViewTop.constant = _extractGapBottomView;
+        //_bottomViewTop.constant = _extractGapBottomView;
         _shouldShrinkMiddleView = YES;
         [_readMoreBtn setTitle:@"READ LESS" forState:UIControlStateNormal];
+        
+        _middleViewH.constant = 47 + _lblHeight + 8;
     }
 }
 
@@ -96,6 +128,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _payByBillBtn.layer.borderWidth = 1.0f;
+    _payByBillBtn.layer.borderColor = RGBA(255, 255, 255, 1).CGColor;
     
     [self adjustViewHeights];
     [self setInitialData];
@@ -180,20 +215,49 @@
     
     [self viewAllButtonTapped:nil];
     
-    [_chapterTableView reloadData];
-    
     //156
     //Calculate discriptionLabel height
-    float discLblH = 100;
-    _middleViewHeight = 148 + discLblH + 8;
+    if(_audioBook.lanCode == LAN_SI){
+        
+        [_discriptionLabel setTruncationToken:@"'''"];
+        
+        NSDictionary *ats = @{NSForegroundColorAttributeName : RGBA(0, 0, 0, 1),
+                              NSFontAttributeName : [UIFont fontWithName:@"FMAbhaya" size:16.0f]
+                              };
+        CGRect textRect = [_audioBook.book_description boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 16, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:ats context:nil];
+        NSAttributedString *attribDisc= [[NSAttributedString alloc] initWithString:_audioBook.book_description attributes:ats];
+        _discriptionLabel.attributedText = attribDisc;
+        
+        _lblHeight = textRect.size.height;
+        
+    }else {
+        [_discriptionLabel setTruncationToken:@"..."];
+        
+        NSDictionary *ats = @{NSForegroundColorAttributeName : RGBA(0, 0, 0, 1),
+                              NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:16.0f]
+                              };
+        CGRect textRect = [_audioBook.english_description boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 16, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:ats context:nil];
+        NSAttributedString *attribDisc= [[NSAttributedString alloc] initWithString:_audioBook.english_description attributes:ats];
+        _discriptionLabel.attributedText = attribDisc;
+        
+        _lblHeight = textRect.size.height;
+    }
+    
+    if (_discriptionLabel.text.length == 0) {
+        _readMoreBtn.hidden = YES;
+    }
+    
+    _lblHeightLimit = 60;
+    
+    //_middleViewHeight = 148 + discLblH + 8;
+    _middleViewHeight = 47 + _lblHeight + 8;
     _middleViewH.constant = _middleViewHeight;
     
     _shouldShrinkMiddleView = YES;
-    _shrinkGapBottomView = 50 - discLblH - 8;
+    _shrinkGapBottomView = 50 - _lblHeight - 8;
     _extractGapBottomView = 0;
     
     [self readMoreButtonTapped:nil];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -220,7 +284,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_chapterArray count];
+    //return [_chapterArray count];
+    return _rowLimit;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
