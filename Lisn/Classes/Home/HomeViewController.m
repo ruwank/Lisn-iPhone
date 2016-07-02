@@ -72,6 +72,11 @@
     [self loadMyBookData];
 
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self removePreviewPlayer];
+    
+}
 
 - (void)adjustViewHeights
 {
@@ -160,11 +165,25 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)dealloc{
-    if(self.previewPlayer != NULL){
-        [self.previewPlayer removeObserver:self forKeyPath:@"status"];
-        
-    }
+//    if(self.previewPlayer != NULL){
+//        [self.previewPlayer removeObserver:self forKeyPath:@"status"];
+//        
+//    }
 }
+-(void)removePreviewPlayer{
+    if(self.selectedStoreBookCell != NULL){
+        [_selectedStoreBookCell showPrivewView:NO];
+        [_selectedStoreBookCell setPlayButtonStateTo:NO];
+    }
+    if(self.previewPlayer){
+        [self.previewPlayer pause];
+    }
+    if ([_timer isValid]) {
+        [_timer invalidate];
+    }
+    _timer = nil;
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -264,17 +283,9 @@
 
 - (void)storeBookCollectionViewCellPlayButtontapped:(StoreBookCollectionViewCell *)storeBookCollectionViewCell lastState:(BOOL)playing {
     
-    if(self.selectedStoreBookCell != NULL){
-        [_selectedStoreBookCell showPrivewView:NO];
-        [_selectedStoreBookCell setPlayButtonStateTo:NO];
-        if(self.previewPlayer){
-            [self.previewPlayer pause];
-        }
-        if ([_timer isValid]) {
-            [_timer invalidate];
-        }
-        _timer = nil;
-    }
+    
+    [self removePreviewPlayer];
+
     self.selectedStoreBookCell=storeBookCollectionViewCell;
     
     if(playing){
@@ -314,16 +325,16 @@
 #pragma mark - Preview Play
 
 -(void)playSelectedPreview{
-    if(self.previewPlayer != NULL){
-        [self.previewPlayer removeObserver:self forKeyPath:@"status"];
-        
-    }
+//    if(self.previewPlayer != NULL){
+//        [self.previewPlayer removeObserver:self forKeyPath:@"status"];
+//        
+//    }
     NSString *audioFileUrl=_selectedStoreBookCell.cellObject.preview_audio;
     AVPlayer *player = [[AVPlayer alloc]initWithURL:[NSURL URLWithString:audioFileUrl]];
     self.previewPlayer = player;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(playerItemDidReachEnd:)
-                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                                name:AVPlayerItemDidPlayToEndTimeNotification
                                                object:[_previewPlayer currentItem]];
     [self.previewPlayer addObserver:self forKeyPath:@"status" options:0 context:nil];
    // [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
@@ -337,7 +348,7 @@
     [_selectedStoreBookCell showActivityIndicator:NO];
 }
 -(void)removeSelectedPreviewCell{
-    [self.previewPlayer removeObserver:self forKeyPath:@"status"];
+    //[self.previewPlayer removeObserver:self forKeyPath:@"status"];
     [_selectedStoreBookCell showPrivewView:NO];
     [_selectedStoreBookCell setPlayButtonStateTo:NO];
 
@@ -349,6 +360,8 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
     if (object == self.previewPlayer && [keyPath isEqualToString:@"status"]) {
+        [self.previewPlayer removeObserver:self forKeyPath:@"status"];
+
         if (_previewPlayer.status == AVPlayerStatusFailed) {
             NSLog(@"AVPlayer Failed");
             [self removeSelectedPreviewCell];
