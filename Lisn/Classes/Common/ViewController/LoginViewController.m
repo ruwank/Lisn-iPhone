@@ -31,6 +31,13 @@
 
 @implementation LoginViewController
 
++ (LoginViewController *)getInstance
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewControllerId"];
+    return viewController;
+}
+
 - (IBAction)cancelButtonTapped:(id)sender {
     if (_delegate) {
         [_delegate loginCancelled];
