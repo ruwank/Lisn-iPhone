@@ -48,13 +48,13 @@
         return;
     }
     
-    _chapterNameLbl.text = _chapter.chapterName ? _chapter.chapterName : @"";
-    _priceLabel.text = _chapter.chapterPrice ? _chapter.chapterPrice : @"";
-    [_buyButton setTitle: (_chapter.isBuy || _chapter.isFree) ? @"DOWNLOAD" : @"BUY" forState:UIControlStateNormal];
-    
-    if (_chapter.isFree) {
-        _priceLabel.text = @"Free";
-    }
+    _chapterNameLbl.text = _chapter.english_title ? _chapter.english_title : @"";
+    _priceLabel.text = _chapter.price ? [NSString stringWithFormat:@"Rs: %f",_chapter.price] : @"";
+//    [_buyButton setTitle: (_chapter.isBuy || _chapter.isFree) ? @"DOWNLOAD" : @"BUY" forState:UIControlStateNormal];
+//    
+//    if (_chapter.isFree) {
+//        _priceLabel.text = @"Free";
+//    }
 }
 
 @end

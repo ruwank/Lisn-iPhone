@@ -23,14 +23,13 @@
 +(AFHTTPSessionManager*)getAFHTTPSessionManager{
     NSData *plainData = [[self getCredentialsData] dataUsingEncoding:NSUTF8StringEncoding];
     NSString *encodedUsernameAndPassword = [plainData base64EncodedStringWithOptions:0];
-    
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    
     manager.securityPolicy.allowInvalidCertificates = YES; // not recommended for production
     manager.securityPolicy.validatesDomainName=NO;
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
-    //[manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"Basic %@", encodedUsernameAndPassword] forHTTPHeaderField:@"Authorization"];
+    
+    [manager.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
     return manager;
 }
 + (BOOL)isNetworkRechable {

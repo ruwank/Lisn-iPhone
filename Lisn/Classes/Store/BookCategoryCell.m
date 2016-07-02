@@ -56,11 +56,12 @@
     [_cellCollectionView reloadData];
 
     if([_booksArray count] ==0){
-      
-        NSDictionary *params = @ {@"cat" :bookCategory._id};
+        NSDictionary *params = @ {@"cat" :_bookCategory._id};
 
+        
         [manager POST:book_category_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
+                
                 NSMutableArray *booksDataArray=(NSMutableArray*)responseObject;
                 for (NSDictionary *dic in booksDataArray) {
                     AudioBook *audioBook=[[AudioBook alloc] initWithDataDictionary:dic];

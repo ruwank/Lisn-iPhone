@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AudioBook : NSObject
+@interface AudioBook : NSObject<NSCoding>
 
 
 typedef enum  {
@@ -28,6 +28,7 @@ typedef enum  {
 
 @property (strong, nonatomic) NSMutableArray* downloadedChapter;
 @property (strong, nonatomic) NSMutableArray* reviews;
+@property (strong, nonatomic) NSMutableArray* chapters;
 @property LanguageCode lanCode;
 
 - (instancetype)initWithDataDictionary:(NSDictionary *)jsonDic;

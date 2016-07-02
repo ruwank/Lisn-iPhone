@@ -7,6 +7,7 @@
 //
 
 #import "AudioBook.h"
+#import "BookChapter.h"
 
 @implementation AudioBook
 
@@ -68,8 +69,60 @@
             if ([_language isEqualToString:@"SI"]) {
                 _lanCode = LAN_SI;
             }
+            
+            if([jsonDic valueForKey:@"chapters"]!= nil && [[jsonDic valueForKey:@"chapters"] isKindOfClass:[NSArray class]] ){
+                NSMutableArray *chapterArray=[[NSMutableArray alloc] init];
+                for (NSDictionary *chapter in [jsonDic valueForKey:@"chapters"]) {
+                    BookChapter *bookChapter=[[BookChapter alloc] initWithDataDictionary:chapter];
+                    [chapterArray addObject:bookChapter];
+                }
+                _chapters=chapterArray;
+                NSLog(@"[jsonDic valueForKey %@",[jsonDic valueForKey:@"chapters"]);
+            }
         }
     }
+    return self;
+}
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:_ISBN    forKey:@"ISBN"];
+    [coder encodeObject:_book_id    forKey:@"book_id"];
+    [coder encodeObject:_duration    forKey:@"duration"];
+    [coder encodeObject:_narrator    forKey:@"narrator"];
+    [coder encodeObject:_title    forKey:@"title"];
+    [coder encodeObject:_book_description    forKey:@"description"];
+    [coder encodeObject:_author    forKey:@"author"];
+    [coder encodeObject:_language    forKey:@"language"];
+    [coder encodeObject:_price    forKey:@"price"];
+    [coder encodeObject:_category    forKey:@"category"];
+    [coder encodeObject:_rate    forKey:@"rate"];
+    [coder encodeObject:_cover_image    forKey:@"cover_image"];
+    [coder encodeObject:_banner_image    forKey:@"banner_image"];
+    [coder encodeObject:_preview_audio    forKey:@"preview_audio"];
+    [coder encodeObject:_english_title    forKey:@"english_title"];
+    [coder encodeObject:_english_description    forKey:@"english_description"];
+    [coder encodeObject:_chapters    forKey:@"chapters"];
+}
+
+- (id)initWithCoder:(NSCoder *)coder {
+    self = [self init];
+    self.ISBN    = [coder decodeObjectForKey:@"ISBN"];
+    self.book_id    = [coder decodeObjectForKey:@"book_id"];
+    self.duration    = [coder decodeObjectForKey:@"duration"];
+    self.narrator    = [coder decodeObjectForKey:@"narrator"];
+    self.title    = [coder decodeObjectForKey:@"title"];
+    self.book_description    = [coder decodeObjectForKey:@"description"];
+    self.author    = [coder decodeObjectForKey:@"author"];
+    self.language    = [coder decodeObjectForKey:@"language"];
+    self.price    = [coder decodeObjectForKey:@"price"];
+    self.category    = [coder decodeObjectForKey:@"category"];
+    self.rate    = [coder decodeObjectForKey:@"rate"];
+    self.cover_image    = [coder decodeObjectForKey:@"cover_image"];
+    self.banner_image    = [coder decodeObjectForKey:@"banner_image"];
+    self.preview_audio    = [coder decodeObjectForKey:@"preview_audio"];
+    self.banner_image    = [coder decodeObjectForKey:@"banner_image"];
+    self.english_title    = [coder decodeObjectForKey:@"english_title"];
+    self.english_description    = [coder decodeObjectForKey:@"english_description"];
+    self.chapters    = [coder decodeObjectForKey:@"chapters"];
     return self;
 }
 

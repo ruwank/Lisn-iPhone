@@ -11,6 +11,8 @@
 #import <Crashlytics/Crashlytics.h>
 #import <AFNetworking/AFNetworking.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
 
 @interface AppDelegate ()
 
@@ -23,6 +25,8 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 
+    
+    
     //[Fabric with:@[[Crashlytics class]]];
 
     // Override point for customization after application launch.
@@ -35,7 +39,7 @@
 //    [self.window makeKeyAndVisible];
     
     
-    
+    [self setServiceProvider];
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     
@@ -73,5 +77,23 @@
                                                        annotation:annotation
             ];
 }
+#pragma mark 
+-(void)setServiceProvider{
+    CTTelephonyNetworkInfo *netinfo = [[CTTelephonyNetworkInfo alloc] init];
+    CTCarrier *carrier = [netinfo subscriberCellularProvider];
+    NSString *mobileNetworkCode=[carrier mobileNetworkCode];
+    NSLog(@"Carrier Name: %@", [carrier mobileNetworkCode]);
+    if(mobileNetworkCode){
+        if([mobileNetworkCode isEqualToString:@"01"]){
+            _serviceProvider=PROVIDER_MOBITEL;
+        }
+        else if([mobileNetworkCode isEqualToString:@"02"]){
+            _serviceProvider=PROVIDER_DIALOG;
+        }
+        else if([mobileNetworkCode isEqualToString:@"03"]){
+            _serviceProvider=PROVIDER_ETISALAT;
+        }
 
+    }
+}
 @end
