@@ -8,6 +8,7 @@
 
 #import "NavigationMenuViewController.h"
 #import "LoginViewController.h"
+#import "DataSource.h"
 
 @interface NavigationMenuViewController () <UITableViewDelegate, UITableViewDataSource, LoginViewControllerDelegate>
 
@@ -81,9 +82,7 @@
     
     if ([identifier isEqualToString:@"my_books_segue_id"]) {
         
-        BOOL haveToLog = YES;
-        if (haveToLog) {
-            
+        if (![[DataSource sharedInstance] isUserLogin]) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             LoginViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewControllerId"];
             viewController.delegate = self;
