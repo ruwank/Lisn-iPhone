@@ -28,7 +28,7 @@
 }
 
 - (IBAction)loginButtonTapped:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)keyboardHideTapped:(id)sender {
@@ -84,15 +84,7 @@
     NSString *email = [AppUtils trimmedStringOfString:_emailField.text];
     NSString *password = [AppUtils trimmedStringOfString:_passwordField.text];
     
-//    AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
-//    
-//   // manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-//    AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
-//    
-//    responseSerializer.acceptableContentTypes = nil;
-//    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//   // manager.responseSerializer=responseSerializer;
-//manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+
     NSString *deviceId=[AppUtils getDeviceId];
     
     NSDictionary *params = @ {@"fname": firstName, @"lname": lastName, @"email" :email ,@"password":password,@"usertype":@"email",@"os":@"iPhone",@"device":deviceId ,@"username":@"NULL" ,@"fbname":@"NULL" ,@"loc":@"NULL", @"bday":@"NULL" ,@"mobile":@"NULL" ,@"age":@"NULL" ,@"pref":@"NULL" ,@"fbid":@"NULL" ,@"mname":@"NULL" ,@"fburl":@"NULL"};
@@ -100,29 +92,13 @@
         
         if(success){
             [[[UIAlertView alloc] initWithTitle:USER_EMAIL_SIGNUP_SUCCESS_TITLE message:USER_EMAIL_SIGNUP_SUCCESS_MESSAGE delegate:nil cancelButtonTitle:BUTTON_OK otherButtonTitles:nil] show];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
         }else{
             [[[UIAlertView alloc] initWithTitle:SERVER_ERROR_TITLE message:SERVER_ERROR_MESSAGE delegate:nil cancelButtonTitle:BUTTON_OK otherButtonTitles:nil] show];
         }
          }];
-    /*
-    NSLog(@"params %@",params);
-    [manager POST:user_add_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-         //TODO
-        NSString* responseString = [NSString stringWithUTF8String:[responseObject bytes]];
-
-        NSLog(@"responseObject %@",responseObject);
-        NSLog(@"responseObject class %@",responseString);
-        if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
-            //TODO
-            
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error %@",error);
-        
-        
-    }];
-*/
-    //TODO
 }
 
 #pragma mark - UITextFieldDelegate
