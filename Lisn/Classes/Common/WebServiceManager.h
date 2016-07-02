@@ -17,4 +17,5 @@ typedef void (^LoginUserResponseHandler)(BOOL success, ErrorType errorType);
 @interface WebServiceManager : NSObject
 +(void)createUserAcoount:(NSDictionary*)params withResponseHandler:(CreateUserResponseHandler)block;
 +(void)loginUser:(NSDictionary*)params withResponseHandeler:(LoginUserResponseHandler)block;
++(void)downloadAudioFile:(NSString*)bookId andFileIndex:(int)index;
 @end

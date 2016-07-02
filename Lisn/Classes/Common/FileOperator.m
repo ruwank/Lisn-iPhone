@@ -76,7 +76,8 @@
     return [self pathForType:PATH_PROFILE];
 }
 +(NSString*)getAudioFilePath:(NSString*)bookId andFileIndex:(int)index{
-    NSString *bookSavepath = [[self getRootSavePath] stringByAppendingPathComponent:bookId];
+    
+    NSString *bookSavepath = [[self getRootSavePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@",bookId]];
     NSFileManager *manager = [NSFileManager defaultManager];
 
     if([manager fileExistsAtPath:bookSavepath]==NO){

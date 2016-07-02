@@ -132,7 +132,14 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    StoreBookCollectionViewCell *cell = (StoreBookCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    AudioBook *audioBook = cell.cellObject;
     
+    if(_delegate){
+        [_delegate storeBookCollectionViewCellSelect:audioBook];
+    }
+
+
 }
 
 

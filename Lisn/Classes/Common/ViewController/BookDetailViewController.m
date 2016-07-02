@@ -16,6 +16,7 @@
 #import "WebServiceURLs.h"
 #import "DataSource.h"
 #import "LoginViewController.h"
+#import "WebServiceManager.h"
 
 @interface BookDetailViewController () <UITableViewDelegate, UITableViewDataSource, DetailViewTableViewCellDelegate,PurchaseViewControllerDelegate,LoginViewControllerDelegate>{
     BOOL isSelectChapter;
@@ -110,8 +111,11 @@
     }else{
         if(!_audioBook.isTotalBookPurchased && [_audioBook.price floatValue]< 1){
            //Log downlaod
+            [WebServiceManager downloadAudioFile:_audioBook.book_id andFileIndex:1];
+
         }else{
            //Download
+            [WebServiceManager downloadAudioFile:_audioBook.book_id andFileIndex:1];
         }
         
     }
@@ -154,6 +158,9 @@
         
         _middleViewH.constant = 47 + _lblHeight + 8;
     }
+}
+-(void)downloadAudioFile{
+    
 }
 -(void)loadPurchaseViewController:(NSString*)url{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

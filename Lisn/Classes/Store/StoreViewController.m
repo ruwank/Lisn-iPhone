@@ -18,6 +18,7 @@
 #import <AVFoundation/AVPlayer.h>
 #import <AVFoundation/AVPlayerItem.h>
 #import <AVFoundation/AVAsset.h>
+#import "BookDetailViewController.h"
 
 @interface StoreViewController () <TabButtonViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate,StoreBookCollectionViewCellDelegate>{
     NSTimer *_timer;
@@ -209,6 +210,12 @@
      
      }
      */
+}
+-(void)storeBookCollectionViewCellSelect:(AudioBook*)audioBook{
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        BookDetailViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"BookDetailViewControllerId"];
+    viewController.audioBook=audioBook;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 #pragma mark - Preview Play
 -(void)removePlayer{
