@@ -35,10 +35,11 @@
 - (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject:_title    forKey:@"title"];
     [coder encodeObject:_english_title    forKey:@"english_title"];
-    [coder encodeObject:[NSNumber numberWithInt:_chapter_id]    forKey:@"chapter_id"];
-    [coder encodeObject:[NSNumber numberWithFloat:_discount]     forKey:@"discount"];
-    [coder encodeObject:[NSNumber numberWithFloat:_price]     forKey:@"price"];
-    [coder encodeObject:[NSNumber numberWithFloat:_size]     forKey:@"size"];
+    [coder encodeInt: _chapter_id forKey:@"chapter_id"];
+    [coder encodeFloat:_discount     forKey:@"discount"];
+    [coder encodeFloat:_price     forKey:@"price"];
+    [coder encodeFloat:_size     forKey:@"size"];
+    [coder encodeBool:_isPurchased forKey:@"isPurchased"];
     
 }
 
@@ -46,10 +47,11 @@
     self = [self init];
     self.title    = [coder decodeObjectForKey:@"title"];
     self.english_title    = [coder decodeObjectForKey:@"english_title"];
-    self.chapter_id    = [[coder decodeObjectForKey:@"chapter_id"] intValue];
-    self.discount    = [[coder decodeObjectForKey:@"discount"] floatValue];
-    self.price    = [[coder decodeObjectForKey:@"price"] floatValue];
-    self.size    = [[coder decodeObjectForKey:@"size"] floatValue];
+    self.chapter_id    = [coder decodeIntForKey:@"chapter_id"];
+    self.discount    = [coder decodeFloatForKey:@"discount"];
+    self.price    = [coder decodeFloatForKey:@"price"] ;
+    self.size    = [coder decodeFloatForKey:@"size"];
+    self.isPurchased=[coder decodeBoolForKey:@"isPurchased"];
    
     return self;
 }

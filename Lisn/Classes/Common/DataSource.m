@@ -69,7 +69,14 @@
 
 //Image cache realted methods
 
-
+-(BOOL)isUserLogin{
+    BOOL returnValue=false;
+    UserProfile *profile=[self getProfileInfo];
+    if(profile && profile.userId && profile.userId.length>0){
+        returnValue=true;
+    }
+    return returnValue;
+}
 
 -(UserProfile*)getProfileInfo{
     if(!userProfile){

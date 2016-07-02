@@ -11,7 +11,12 @@
 
 @implementation AppUtils
 
-
++ (AppDelegate *)appDelegate {
+    return (AppDelegate *)[UIApplication sharedApplication].delegate;
+}
++(ServiceProvider)getServiceProvider{
+    return [self appDelegate].serviceProvider;
+}
 +(NSString *)  getCredentialsData {
     NSString* USERNAME=@"app";
     NSString* PASSWORD=@"Kn@sw7*d#b";
@@ -109,4 +114,5 @@
     NSString  *currentDeviceId = [[device identifierForVendor]UUIDString];
     return currentDeviceId;
 }
+
 @end

@@ -93,15 +93,16 @@
     
     NSDictionary *params = @ {@"email" :email ,@"password":password,@"usertype":@"email",@"os":@"iPhone",@"device":deviceId};
     
-    [manager POST:user_login_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"responseObject %@",responseObject);
-        
-        [self userLoginCompleted:YES];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"error %@",error);
-        [self userLoginCompleted:NO];
+    [WebServiceManager loginUser:params withResponseHandeler:^(BOOL success, ErrorType errorType) {
+        if(success){
+            [self userLoginCompleted:YES];
+  
+        }else{
+            [self userLoginCompleted:NO];
+ 
+        }
     }];
+    
 }
 
 #pragma mark user login metods
@@ -172,13 +173,18 @@
         }
         
         if (_delegate) {
+            
             [_delegate loginSucceeded];
+            [self dismissViewControllerAnimated:YES completion:nil];
+
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error %@",error);
         if (_delegate) {
             [_delegate loginSucceeded];
+            [self dismissViewControllerAnimated:YES completion:nil];
+
         }
     }];
 }

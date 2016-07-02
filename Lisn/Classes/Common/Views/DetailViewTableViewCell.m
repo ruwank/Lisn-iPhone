@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewTableViewCell.h"
+#import "FileOperator.h"
 
 @interface DetailViewTableViewCell()
 
@@ -36,20 +37,38 @@
     // Configure the view for the selected state
 }
 
-- (void)setChapter:(BookChapter *)chapter
+- (void)setChapter:(BookChapter *)chapter andBookId:(NSString*)bookId andLanguageCode:(LanguageCode)languageCode
 {
     _chapter = chapter;
-    
-    _chapterNameLbl.text = @"";
-    _priceLabel.text = @"";
-    [_buyButton setTitle:@"BUY" forState:UIControlStateNormal];
-    
     if (_chapter == nil) {
         return;
     }
+
+    if(languageCode == LAN_SI){
+        _chapterNameLbl.font = [UIFont fontWithName:@"FMAbhaya" size:18];
+    }else{
+        _chapterNameLbl.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
+    }
     
-    _chapterNameLbl.text = _chapter.english_title ? _chapter.english_title : @"";
-    _priceLabel.text = _chapter.price ? [NSString stringWithFormat:@"Rs: %f",_chapter.price] : @"";
+    NSString *buttonText=@"Download";
+    if(_chapter.isPurchased){
+        if([FileOperator isAudioFileExists:bookId andFileIndex:_chapter.chapter_id]){
+            buttonText=@"Play";
+        }
+    }else{
+        if(_chapter.price>0){
+            buttonText=@"Buy";
+        }
+    }
+    _chapterNameLbl.text = @"";
+    _priceLabel.text = @"";
+    
+    [_buyButton setTitle:buttonText forState:UIControlStateNormal];
+    
+    
+
+    _chapterNameLbl.text = _chapter.title ? _chapter.title : @"";
+    _priceLabel.text = _chapter.price ? [NSString stringWithFormat:@"Rs: %.02f",_chapter.price] : @"Free";
 //    [_buyButton setTitle: (_chapter.isBuy || _chapter.isFree) ? @"DOWNLOAD" : @"BUY" forState:UIControlStateNormal];
 //    
 //    if (_chapter.isFree) {

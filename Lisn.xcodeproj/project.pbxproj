@@ -41,6 +41,7 @@
 		FD60DFD11CA234F6007ED360 /* AudioBook.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD01CA234F6007ED360 /* AudioBook.m */; };
 		FD60DFD41CA23523007ED360 /* BookCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD31CA23523007ED360 /* BookCategory.m */; };
 		FD9255EF1D27854700C40577 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9255EE1D27854700C40577 /* AudioPlayer.m */; };
+		FD9255F21D27BDBE00C40577 /* PurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9255F11D27BDBE00C40577 /* PurchaseViewController.m */; };
 		FD99A7DD1CA83DBF000F57EC /* FMAbhaya.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DA1CA83DBF000F57EC /* FMAbhaya.ttf */; };
 		FD99A7DE1CA83DBF000F57EC /* HelveticaNeue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DB1CA83DBF000F57EC /* HelveticaNeue.ttf */; };
 		FD99A7DF1CA83DBF000F57EC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DC1CA83DBF000F57EC /* OpenSans-Regular.ttf */; };
@@ -118,6 +119,8 @@
 		FD60DFD31CA23523007ED360 /* BookCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCategory.m; sourceTree = "<group>"; };
 		FD9255ED1D27854700C40577 /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
 		FD9255EE1D27854700C40577 /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
+		FD9255F01D27BDBE00C40577 /* PurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseViewController.h; sourceTree = "<group>"; };
+		FD9255F11D27BDBE00C40577 /* PurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseViewController.m; sourceTree = "<group>"; };
 		FD99A7DA1CA83DBF000F57EC /* FMAbhaya.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FMAbhaya.ttf; sourceTree = "<group>"; };
 		FD99A7DB1CA83DBF000F57EC /* HelveticaNeue.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeue.ttf; sourceTree = "<group>"; };
 		FD99A7DC1CA83DBF000F57EC /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -308,6 +311,8 @@
 				746F676B1CF2D663003F3F3B /* BookDetailViewController.m */,
 				7481EA2C1D279D46003F89BD /* LoginViewController.h */,
 				7481EA2D1D279D46003F89BD /* LoginViewController.m */,
+				FD9255F01D27BDBE00C40577 /* PurchaseViewController.h */,
+				FD9255F11D27BDBE00C40577 /* PurchaseViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -543,6 +548,7 @@
 				FD459F031CA3957900387C5D /* SWRevealViewController.m in Sources */,
 				74AABFA81D201A2000194FBE /* BookChapter.m in Sources */,
 				FD60DFD11CA234F6007ED360 /* AudioBook.m in Sources */,
+				FD9255F21D27BDBE00C40577 /* PurchaseViewController.m in Sources */,
 				FD0C50541C99B88C00D42B05 /* HomeViewController.m in Sources */,
 				745952D11CB2BDC800A3A204 /* BookCategoryCell.m in Sources */,
 				7481EA2E1D279D46003F89BD /* LoginViewController.m in Sources */,

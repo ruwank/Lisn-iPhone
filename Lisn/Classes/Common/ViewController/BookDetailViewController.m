@@ -12,8 +12,14 @@
 #import "AppConstant.h"
 #import "AppUtils.h"
 #import "DetailViewTableViewCell.h"
+#import "PurchaseViewController.h"
+#import "WebServiceURLs.h"
+#import "DataSource.h"
+#import "LoginViewController.h"
 
-@interface BookDetailViewController () <UITableViewDelegate, UITableViewDataSource, DetailViewTableViewCellDelegate>
+@interface BookDetailViewController () <UITableViewDelegate, UITableViewDataSource, DetailViewTableViewCellDelegate,PurchaseViewControllerDelegate,LoginViewControllerDelegate>{
+    BOOL isSelectChapter;
+}
 
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
 @property (weak, nonatomic) IBOutlet UIView *thumbDetailView;
@@ -74,7 +80,22 @@
 @implementation BookDetailViewController
 
 - (IBAction)payByCardButtonTapped:(id)sender {
+    if([[DataSource sharedInstance] isUserLogin]){
+        isSelectChapter=false;
+    UserProfile *userProfile=[[DataSource sharedInstance] getProfileInfo];
+    NSString *userId=userProfile.userId;
+    NSString *bookid=_audioBook.book_id;
     
+    float amount= (float) (([_audioBook.price floatValue]) * ((100.0-_audioBook.discount)/100.0));
+    
+    NSString *url=[NSString stringWithFormat:@"%@?userid=%@&bookid=%@&amount=%f",purchase_book_url,userId,bookid,amount];
+        [self loadPurchaseViewController:url];
+    }else{
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        LoginViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewControllerId"];
+        viewController.delegate = self;
+        [self presentViewController:viewController animated:YES completion:nil];
+    }
 }
 
 - (IBAction)payByBillButtonTapped:(id)sender {
@@ -82,7 +103,18 @@
 }
 
 - (IBAction)playButtonTapped:(id)sender {
-    
+    isSelectChapter=false;
+
+    if (_audioBook.isTotalBookPurchased && [_audioBook.chapters count] == [_audioBook.downloadedChapter count]) {
+        //Play
+    }else{
+        if(!_audioBook.isTotalBookPurchased && [_audioBook.price floatValue]< 1){
+           //Log downlaod
+        }else{
+           //Download
+        }
+        
+    }
 }
 
 - (IBAction)viewAllButtonTapped:(id)sender {
@@ -123,8 +155,58 @@
         _middleViewH.constant = 47 + _lblHeight + 8;
     }
 }
+-(void)loadPurchaseViewController:(NSString*)url{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PurchaseViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"PurchaseViewControllerId"];
+    [viewController loadUrl:url];
+    //[viewController loadUrl:@"https://www.google.lk/"];
+    viewController.delegate=self;
+    [self.navigationController pushViewController:viewController animated:YES];
+   // viewController.delegate = self;
+}
 
+-(void)updateButton{
+    if([[DataSource sharedInstance] isUserLogin] && (_audioBook.isTotalBookPurchased ||([_audioBook.price floatValue]< 1))){
+        _payByBillBtn.hidden=YES;
+        _payByCardBtn.hidden=YES;
+        _playBtn.hidden=NO;
+        if(_audioBook.isTotalBookPurchased || [_audioBook.price floatValue]< 1){
+            [_playBtn setTitle:@"Download" forState:UIControlStateNormal];
+            if([_audioBook.chapters count] == [_audioBook.downloadedChapter count]){
+                [_playBtn setTitle:@"Play" forState:UIControlStateNormal];
+            }
+        }
+        
+    }else{
+        _payByBillBtn.hidden=NO;
+        _payByCardBtn.hidden=NO;
+        _playBtn.hidden=YES;
+        
+        if([AppUtils getServiceProvider] ==PROVIDER_NONE){
+            _payByBillBtn.hidden=YES;
+            
+        }
+        else if([AppUtils getServiceProvider] ==PROVIDER_MOBITEL){
+            [_payByBillBtn setTitle:@"Add to Mobitel bill" forState:UIControlStateNormal];
+        }
+        else if([AppUtils getServiceProvider] ==PROVIDER_DIALOG){
+            [_payByBillBtn setTitle:@"Add to Dialog bill" forState:UIControlStateNormal];
 
+        }
+        else if([AppUtils getServiceProvider] ==PROVIDER_ETISALAT){
+            [_payByBillBtn setTitle:@"Add to Etisalat bill" forState:UIControlStateNormal];
+
+        }
+        _payByCardBtn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        _payByCardBtn.titleLabel.numberOfLines = 2;
+        _payByCardBtn.titleLabel.textAlignment = NSTextAlignmentCenter; // if u need
+        NSString *buttonText=[NSString stringWithFormat:@"Pay by Card (%d %% discount)",_audioBook.discount];
+        [_payByCardBtn setTitle:buttonText forState:UIControlStateNormal];
+
+        //btnPayFromCard.setText("Pay by Card (" + audioBook.getDiscount() + "% discount)");
+
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -190,21 +272,7 @@
                                    success:nil
                                    failure:nil];
     _chapterArray=_audioBook.chapters;
-//    //Temp
-//    _chapterArray = [[NSMutableArray alloc] init];
-//    
-//    for (int i = 1; i < 10; i++) {
-//        BookChapter *chapter = [[BookChapter alloc] init];
-////        chapter.chapterName = [NSString stringWithFormat:@"Chapter %d", i];
-////        chapter.chapterPrice = [NSString stringWithFormat:@"Rs. 15.0"];
-////        if (i == 1) {
-////            chapter.isFree = YES;
-////        }
-//        
-//        [_chapterArray addObject:chapter];
-//    }
-//    //End Temp
-    
+
     float tableH = _chapterArray.count * 44;
     _tableViewH.constant = tableH;
     _tableViewHeight = tableH;
@@ -258,6 +326,7 @@
     _extractGapBottomView = 0;
     
     [self readMoreButtonTapped:nil];
+    [self updateButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -297,7 +366,7 @@
     }
     
     BookChapter *chapter = [_chapterArray objectAtIndex:[indexPath row]];
-    [cell setChapter:chapter];
+    [cell setChapter:chapter andBookId:_audioBook.book_id andLanguageCode:_audioBook.lanCode];
     cell.delegate = self;
     
     return cell;
@@ -309,8 +378,27 @@
 
 #pragma mark - DetailViewTableViewCellDelegate
 - (void)detailViewTableViewCellButtonTapped:(DetailViewTableViewCell *)detailViewTableViewCell {
+    BookChapter *chapter=detailViewTableViewCell.chapter;
     
 }
+#pragma mark -PurchaseViewControllerDelegate methods
+- (void)purchaseComplete:(PaymentStatus)status{
+    
+}
+#pragma mark - LoginViewControllerDelegate
+
+- (void)loginSucceeded {
+    if (isSelectChapter) {
+        
+    }else{
+        [self payByCardButtonTapped:nil];
+    }
+}
+
+- (void)loginCancelled {
+    
+}
+
 
 
 @end

@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
+#import "AppDelegate.h"
 #import "AudioBook.h"
 
 @interface AppUtils : NSObject
++ (AppDelegate *)appDelegate;
 +(NSString *)  getCredentialsData;
 +(AFHTTPSessionManager*)getAFHTTPSessionManager;
 + (BOOL)isNetworkRechable;
@@ -19,4 +21,5 @@
 + (UIActionSheet*)getActionSheetForAudioBook:(AudioBook*)audioBook;
 + (BOOL) isValidEmail:(NSString *)checkString;
 +(NSString*)getDeviceId;
++(ServiceProvider)getServiceProvider;
 @end

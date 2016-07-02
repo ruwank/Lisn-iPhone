@@ -140,8 +140,7 @@
 -(void)loadMyBookData{
     [_myBooksArray removeAllObjects ];
 
-   UserProfile *userProfile= [[DataSource sharedInstance] getProfileInfo];
-    if(userProfile && userProfile.userId !=nil){
+    if([[DataSource sharedInstance] isUserLogin]){
         NSMutableDictionary *userBook=[[DataSource sharedInstance] getUserBook];
         NSInteger count=3;
         NSArray *uesrBook=[userBook allValues];

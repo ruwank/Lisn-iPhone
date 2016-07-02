@@ -68,21 +68,30 @@
     return [[self getRootSavePath] stringByAppendingPathComponent:type];
 }
 +(NSString *)bookSavePath{
-//    if(![self fileExists:PATH_BOOK]){
-//        [self createFilePath:PATH_BOOK];
-// 
-//    }
+
     return [self pathForType:PATH_BOOK];
 }
 +(NSString *)profileFilePath{
-//    if(![self fileExists:PATH_PROFILE]){
-//        [self createFilePath:PATH_PROFILE];
-//        
-//    }
+
     return [self pathForType:PATH_PROFILE];
 }
++(NSString*)getAudioFilePath:(NSString*)bookId andFileIndex:(int)index{
+    NSString *bookSavepath = [[self getRootSavePath] stringByAppendingPathComponent:bookId];
+    NSFileManager *manager = [NSFileManager defaultManager];
 
+    if([manager fileExistsAtPath:bookSavepath]==NO){
+        [manager createDirectoryAtPath:bookSavepath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
 
+    NSString *filePath=[bookSavepath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d.lisn",index]];
+    return filePath;
+    
+
+}
++(BOOL)isAudioFileExists:(NSString*)bookId andFileIndex:(int)index{
+    return [[NSFileManager defaultManager] fileExistsAtPath:[self getAudioFilePath:bookId andFileIndex:index]];
+
+}
 #pragma mark - Check for file
 
 +(BOOL)fileExists:(NSString *)type{
