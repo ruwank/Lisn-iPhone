@@ -111,11 +111,11 @@
     }else{
         if(!_audioBook.isTotalBookPurchased && [_audioBook.price floatValue]< 1){
            //Log downlaod
-            [WebServiceManager downloadAudioFile:_audioBook.book_id andFileIndex:1];
+            
 
         }else{
            //Download
-            [WebServiceManager downloadAudioFile:_audioBook.book_id andFileIndex:1];
+            
         }
         
     }
@@ -159,8 +159,14 @@
         _middleViewH.constant = 47 + _lblHeight + 8;
     }
 }
--(void)downloadAudioFile{
-    
+-(void)downloadAudioFile:(NSString*)bookId andFileIndex:(int)index{
+    [WebServiceManager downloadAudioFile:bookId andFileIndex:index withResponseHandeler:^(BOOL success, ErrorType errorType) {
+        if(success){
+            
+        }else{
+            
+        }
+    }];
 }
 -(void)loadPurchaseViewController:(NSString*)url{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -185,10 +191,17 @@
         }
         
     }else{
+        
         _payByBillBtn.hidden=NO;
         _payByCardBtn.hidden=NO;
         _playBtn.hidden=YES;
-        
+        if([_audioBook.price floatValue]< 1){
+            _payByBillBtn.hidden=YES;
+            _payByCardBtn.hidden=YES;
+            _playBtn.hidden=NO;
+            [_playBtn setTitle:@"Download" forState:UIControlStateNormal];
+
+        }
         if([AppUtils getServiceProvider] ==PROVIDER_NONE){
             _payByBillBtn.hidden=YES;
             

@@ -167,12 +167,13 @@
     }];
 
 }
-+(void)downloadAudioFile:(NSString*)bookId andFileIndex:(int)index{
++(void)downloadAudioFile:(NSString*)bookId andFileIndex:(int)index withResponseHandeler:(FileDownloderResponseHandler)block{
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
-//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-//    String urlParameters  = "userid="+ AppController.getInstance().getUserId()+"&bookid="+book_id+"&chapid="+fileName;
 
+    NSString *destinationfilePath=[FileOperator getAudioFilePath:bookId andFileIndex:index];
+    
+    //NSURL *filePath=[NSURL URLWithString:file];
+    
     UserProfile *userProfile=[[DataSource sharedInstance] getProfileInfo];
     NSData *plainData = [[AppUtils getCredentialsData] dataUsingEncoding:NSUTF8StringEncoding];
     NSString *encodedUsernameAndPassword = [plainData base64EncodedStringWithOptions:0];
@@ -187,42 +188,34 @@
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
 
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        
-//        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-        NSString *file=[FileOperator getAudioFilePath:bookId andFileIndex:index];
-        
-        NSURL *filePath=[NSURL URLWithString:file];
-       // return [filePath URLByAppendingPathComponent:[response suggestedFilename]];
-       // return filePath;
+       
         NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-        return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+         return [documentsDirectoryURL URLByAppendingPathComponent:@"temp.mp3"];
         
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         NSLog(@"response %@",response);
         if(error){
-            NSLog(@"File downloaded to: %@", error);
+            block(NO,ErrorTypeInternalError);
         }else{
-            NSFileManager *fileManager = [NSFileManager defaultManager];
 
-            NSString *fileSavePath=[FileOperator getAudioFilePath:bookId andFileIndex:index];
-            
-          //  NSURL *fileSavePath=[NSURL URLWithString:file];
-            
-            if ([fileManager fileExistsAtPath:fileSavePath] == YES) {
-                [fileManager removeItemAtPath:fileSavePath error:&error];
+            NSString *sourceFilePath=[[FileOperator getRootDirectory] stringByAppendingPathComponent:@"temp.mp3"];
+            NSError * err = NULL;
+            NSFileManager * fm = [[NSFileManager alloc] init];
+            BOOL result = [fm moveItemAtPath:sourceFilePath toPath:destinationfilePath error:&err];
+            if(!result){
+                block(NO,ErrorTypeInternalError);
+            }else{
+                block(YES,ErrorTypeNone);
+
             }
-            NSURL *destinationUrl=[NSURL URLWithString:fileSavePath];
-
-            NSData *fileData = [NSData dataWithContentsOfURL:filePath];
-            [fileData writeToURL:destinationUrl atomically:NO];
-            
-           // [fileManager copyItemAtPath:filePath.absoluteString toPath:fileSavePath error:&error];
+                NSLog(@"Error: %@", err);
             
             NSLog(@"File downloaded to: %@", filePath.absoluteString);
-            NSLog(@"File destinationUrl to: %@", destinationUrl);
+           // NSLog(@"File destinationUrl to: %@", destinationUrl);
         }
         
     }];
     [downloadTask resume];
 }
+
 @end
