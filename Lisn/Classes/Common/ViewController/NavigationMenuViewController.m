@@ -7,8 +7,9 @@
 //
 
 #import "NavigationMenuViewController.h"
+#import "LoginViewController.h"
 
-@interface NavigationMenuViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface NavigationMenuViewController () <UITableViewDelegate, UITableViewDataSource, LoginViewControllerDelegate>
 
 @end
 
@@ -72,14 +73,41 @@
     return cell;
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    
+    if ([identifier isEqualToString:@"my_books_segue_id"]) {
+        
+        BOOL haveToLog = YES;
+        if (haveToLog) {
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            LoginViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewControllerId"];
+            viewController.delegate = self;
+            [self presentViewController:viewController animated:YES completion:nil];
+
+            return NO;
+        }
+    }
+    
+    return YES;
 }
-*/
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+}
+
+#pragma mark - LoginViewControllerDelegate
+
+- (void)loginSucceeded {
+    [self performSegueWithIdentifier:@"my_books_segue_id" sender:nil];
+}
+
+- (void)loginCancelled {
+    [self performSegueWithIdentifier:@"home_segue_id" sender:nil];
+}
 
 @end
