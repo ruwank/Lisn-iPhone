@@ -97,6 +97,7 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [self removePlayer];
     
 }
 - (void)bookCategorySelected:(BookCategory *)bookCategory
@@ -214,28 +215,23 @@
     if(self.selectedStoreBookCell != NULL){
         [_selectedStoreBookCell showPrivewView:NO];
         [_selectedStoreBookCell setPlayButtonStateTo:NO];
-        if(self.previewPlayer){
-                if ([self observationInfo]!=nil)
-                {
-                    [self.previewPlayer removeObserver:self forKeyPath:@"status"];
-                }
-            
-            [self.previewPlayer pause];
-        }
-        if ([_timer isValid]) {
-            [_timer invalidate];
-        }
-        _timer = nil;
     }
+    if(self.previewPlayer){
+        [self.previewPlayer pause];
+    }
+    if ([_timer isValid]) {
+        [_timer invalidate];
+    }
+    _timer = nil;
 }
 
 -(void)playSelectedPreview{
-    if (self.previewPlayer) {
-        if ([self observationInfo]!=nil)
-        {
-            [self.previewPlayer removeObserver:self forKeyPath:@"status"];
-        }
-    }
+//    if (self.previewPlayer) {
+//        if ([self observationInfo]!=nil)
+//        {
+//            [self.previewPlayer removeObserver:self forKeyPath:@"status"];
+//        }
+//    }
     NSString *audioFileUrl=_selectedStoreBookCell.cellObject.preview_audio;
     AVPlayer *player = [[AVPlayer alloc]initWithURL:[NSURL URLWithString:audioFileUrl]];
     self.previewPlayer = player;
@@ -255,12 +251,12 @@
     [_selectedStoreBookCell showActivityIndicator:NO];
 }
 -(void)removeSelectedPreviewCell{
-    if (self.previewPlayer) {
-            if ([self observationInfo]!=nil)
-            {
-                [self.previewPlayer removeObserver:self forKeyPath:@"status"];
-            }
-    }
+//    if (self.previewPlayer) {
+//            if ([self observationInfo]!=nil)
+//            {
+//                [self.previewPlayer removeObserver:self forKeyPath:@"status"];
+//            }
+//    }
     if(_selectedStoreBookCell){
         [_selectedStoreBookCell setPlayButtonStateTo:NO];
         [_selectedStoreBookCell showPrivewView:NO];
@@ -273,6 +269,8 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
     if (object == self.previewPlayer && [keyPath isEqualToString:@"status"]) {
+        [self.previewPlayer removeObserver:self forKeyPath:@"status"];
+
         if (_previewPlayer.status == AVPlayerStatusFailed) {
             NSLog(@"AVPlayer Failed");
             [self removeSelectedPreviewCell];

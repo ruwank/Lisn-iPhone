@@ -40,6 +40,7 @@
 		FD459F031CA3957900387C5D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD459F021CA3957900387C5D /* SWRevealViewController.m */; };
 		FD60DFD11CA234F6007ED360 /* AudioBook.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD01CA234F6007ED360 /* AudioBook.m */; };
 		FD60DFD41CA23523007ED360 /* BookCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = FD60DFD31CA23523007ED360 /* BookCategory.m */; };
+		FD9255EF1D27854700C40577 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9255EE1D27854700C40577 /* AudioPlayer.m */; };
 		FD99A7DD1CA83DBF000F57EC /* FMAbhaya.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DA1CA83DBF000F57EC /* FMAbhaya.ttf */; };
 		FD99A7DE1CA83DBF000F57EC /* HelveticaNeue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DB1CA83DBF000F57EC /* HelveticaNeue.ttf */; };
 		FD99A7DF1CA83DBF000F57EC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DC1CA83DBF000F57EC /* OpenSans-Regular.ttf */; };
@@ -115,6 +116,8 @@
 		FD60DFD01CA234F6007ED360 /* AudioBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioBook.m; sourceTree = "<group>"; };
 		FD60DFD21CA23523007ED360 /* BookCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCategory.h; sourceTree = "<group>"; };
 		FD60DFD31CA23523007ED360 /* BookCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCategory.m; sourceTree = "<group>"; };
+		FD9255ED1D27854700C40577 /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
+		FD9255EE1D27854700C40577 /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
 		FD99A7DA1CA83DBF000F57EC /* FMAbhaya.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FMAbhaya.ttf; sourceTree = "<group>"; };
 		FD99A7DB1CA83DBF000F57EC /* HelveticaNeue.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeue.ttf; sourceTree = "<group>"; };
 		FD99A7DC1CA83DBF000F57EC /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -249,6 +252,7 @@
 		84018DF71C99350C009C9403 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FD9255EC1D27854700C40577 /* AudioPlayer */,
 				74AABFA21D20191200194FBE /* Views */,
 				FD2A690A1CA5A2D000B63131 /* ViewController */,
 				FDA87E111D26A22700FEED71 /* UserProfile.h */,
@@ -370,6 +374,15 @@
 				FD459F021CA3957900387C5D /* SWRevealViewController.m */,
 			);
 			path = SWRevealViewController;
+			sourceTree = "<group>";
+		};
+		FD9255EC1D27854700C40577 /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				FD9255ED1D27854700C40577 /* AudioPlayer.h */,
+				FD9255EE1D27854700C40577 /* AudioPlayer.m */,
+			);
+			path = AudioPlayer;
 			sourceTree = "<group>";
 		};
 		FD99A7D81CA83DBF000F57EC /* Resources */ = {
@@ -524,6 +537,7 @@
 				FD2A691B1CA5A47400B63131 /* ContactUsViewController.m in Sources */,
 				74AABFA51D20193900194FBE /* DetailViewTableViewCell.m in Sources */,
 				FDA87E131D26A22700FEED71 /* UserProfile.m in Sources */,
+				FD9255EF1D27854700C40577 /* AudioPlayer.m in Sources */,
 				74F9F57B1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m in Sources */,
 				84018E081C9936DD009C9403 /* AppDelegate.m in Sources */,
 				FD459F031CA3957900387C5D /* SWRevealViewController.m in Sources */,
