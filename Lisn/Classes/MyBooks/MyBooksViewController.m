@@ -15,6 +15,8 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "WebServiceURLs.h"
 #import "WebServiceManager.h"
+#import "Messages.h"
+#import "DataSource.h"
 
 @interface MyBooksViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate, FBSDKLoginButtonDelegate>
 
@@ -204,6 +206,43 @@
     NSDictionary *params = @ {@"fname": firstName, @"lname": lastName ,@"mname":middle_name, @"email" :email ,@"password":@"NULL",@"usertype":@"fb",@"os":@"iPhone",@"device":deviceId ,@"username":@"NULL" ,@"fbname":@"NULL" ,@"loc":@"NULL", @"bday":@"NULL" ,@"mobile":@"NULL" ,@"age":@"NULL" ,@"pref":@"NULL" ,@"fbid":fbid  ,@"fburl":fburl};
     
     [WebServiceManager createUserAcoount:params withResponseHandler:^(BOOL success, NSString *statusText, ErrorType errorType) {
+        if(success){
+            [self downloadUserBook];
+        }else{
+            [[[UIAlertView alloc] initWithTitle:SERVER_ERROR_TITLE message:SERVER_ERROR_MESSAGE delegate:nil cancelButtonTitle:BUTTON_OK otherButtonTitles:nil] show];
+
+        }
+    }];
+}
+-(void)userLoginCompleted:(BOOL)status{
+    if(status){
+        
+    }else{
+        [[[UIAlertView alloc] initWithTitle:SERVER_ERROR_TITLE message:SERVER_ERROR_MESSAGE delegate:nil cancelButtonTitle:BUTTON_OK otherButtonTitles:nil] show];
+    }
+}
+-(void)downloadUserBook{
+    
+  UserProfile *userProfile=  [[DataSource sharedInstance] getProfileInfo];
+
+    NSDictionary *params = @ {@"userid" :userProfile.userId};
+    
+    AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
+
+    [manager POST:user_book_list_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
+            NSLog(@"responseObject %@",responseObject);
+            NSMutableDictionary *userBook=[[NSMutableDictionary alloc] init];
+            NSMutableArray *booksDataArray=(NSMutableArray*)responseObject;
+            for (NSDictionary *dic in booksDataArray) {
+                AudioBook *audioBook=[[AudioBook alloc] initWithDataDictionary:dic];
+                [userBook setValue:audioBook forKey:audioBook.book_id];
+            }
+            [[DataSource sharedInstance] saveUserBook:userBook];
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error %@",error);
         
     }];
 }

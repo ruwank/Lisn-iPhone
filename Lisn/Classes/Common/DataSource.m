@@ -11,7 +11,7 @@
 
 
 @interface DataSource(){
-    NSMutableArray<AudioBook *> *userAudioBook;
+    NSMutableDictionary *userAudioBook;
     UserProfile *userProfile;
 
 }
@@ -22,7 +22,7 @@
 -(id)init{
     
     if(self=[super init]){
-        userAudioBook = [[NSMutableArray alloc] init];
+        userAudioBook = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -40,7 +40,7 @@
 
 //GET METHODS
 
--(NSMutableArray *)getUserBook{
+-(NSMutableDictionary *)getUserBook{
     
     if(!userAudioBook ){
             userAudioBook=[NSKeyedUnarchiver unarchiveObjectWithFile:[FileOperator bookSavePath]];
@@ -53,7 +53,7 @@
 
 //SAVE METHODS
 
--(void)saveUserBook:(NSMutableArray *)theBook{
+-(void)saveUserBook:(NSMutableDictionary *)theBook{
     
     userAudioBook=theBook;
 
@@ -80,6 +80,7 @@
 
 -(void)saveProfileInfo:(UserProfile*)profileInfo{
     
+    userProfile=profileInfo;
     if ([NSKeyedArchiver archiveRootObject:profileInfo toFile:[FileOperator profileFilePath]])
     {
         NSLog(@"SAVED profile! %@",profileInfo);

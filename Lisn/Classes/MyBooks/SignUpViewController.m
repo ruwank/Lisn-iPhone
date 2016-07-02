@@ -10,7 +10,7 @@
 #import "AppUtils.h"
 #import "WebServiceURLs.h"
 #import "WebServiceManager.h"
-
+#import "Messages.h"
 @interface SignUpViewController () <UITextFieldDelegate>
 
 
@@ -98,6 +98,11 @@
     NSDictionary *params = @ {@"fname": firstName, @"lname": lastName, @"email" :email ,@"password":password,@"usertype":@"email",@"os":@"iPhone",@"device":deviceId ,@"username":@"NULL" ,@"fbname":@"NULL" ,@"loc":@"NULL", @"bday":@"NULL" ,@"mobile":@"NULL" ,@"age":@"NULL" ,@"pref":@"NULL" ,@"fbid":@"NULL" ,@"mname":@"NULL" ,@"fburl":@"NULL"};
     [WebServiceManager createUserAcoount:params withResponseHandler:^(BOOL success, NSString *statusText, ErrorType errorType){
         
+        if(success){
+            [[[UIAlertView alloc] initWithTitle:USER_EMAIL_SIGNUP_SUCCESS_TITLE message:USER_EMAIL_SIGNUP_SUCCESS_MESSAGE delegate:nil cancelButtonTitle:BUTTON_OK otherButtonTitles:nil] show];
+        }else{
+            [[[UIAlertView alloc] initWithTitle:SERVER_ERROR_TITLE message:SERVER_ERROR_MESSAGE delegate:nil cancelButtonTitle:BUTTON_OK otherButtonTitles:nil] show];
+        }
          }];
     /*
     NSLog(@"params %@",params);
