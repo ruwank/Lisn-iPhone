@@ -12,6 +12,8 @@
 
 @interface NavigationMenuViewController () <UITableViewDelegate, UITableViewDataSource, LoginViewControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end
 
 @implementation NavigationMenuViewController
@@ -83,8 +85,8 @@
     if ([identifier isEqualToString:@"my_books_segue_id"]) {
         
         if (![[DataSource sharedInstance] isUserLogin]) {
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            LoginViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewControllerId"];
+            
+            LoginViewController * viewController = [LoginViewController getInstance];
             viewController.delegate = self;
             [self presentViewController:viewController animated:YES completion:nil];
 
@@ -106,6 +108,7 @@
 }
 
 - (void)loginCancelled {
+    [_tableView reloadData];
     [self performSegueWithIdentifier:@"home_segue_id" sender:nil];
 }
 

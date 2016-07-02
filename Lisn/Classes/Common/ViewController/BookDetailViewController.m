@@ -100,7 +100,7 @@
 }
 
 - (IBAction)payByBillButtonTapped:(id)sender {
-    
+    [self performSegueWithIdentifier:@"player_seque_id" sender:nil];
 }
 
 - (IBAction)playButtonTapped:(id)sender {
@@ -380,13 +380,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    [self payByBillButtonTapped:nil];
 }
 
 #pragma mark - DetailViewTableViewCellDelegate
 - (void)detailViewTableViewCellButtonTapped:(DetailViewTableViewCell *)detailViewTableViewCell {
     BookChapter *chapter=detailViewTableViewCell.chapter;
-    
 }
 #pragma mark -PurchaseViewControllerDelegate methods
 - (void)purchaseComplete:(PaymentStatus)status{

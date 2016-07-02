@@ -14,6 +14,8 @@
 
 @property (nonatomic, assign) id<LoginViewControllerDelegate> delegate;
 
++ (LoginViewController *)getInstance;
+
 @end
 
 @protocol LoginViewControllerDelegate  <NSObject>
