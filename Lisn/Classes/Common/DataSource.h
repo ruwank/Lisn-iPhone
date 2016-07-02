@@ -13,8 +13,8 @@
 @interface DataSource : NSObject
 
 +(instancetype)sharedInstance;
--(NSMutableArray *)getUserBook;
--(void)saveUserBook:(NSMutableArray *)theBook;
+-(NSMutableDictionary *)getUserBook;
+-(void)saveUserBook:(NSMutableDictionary *)theBook;
 -(UserProfile*)getProfileInfo;
 -(void)saveProfileInfo:(UserProfile*)profileInfo;
 

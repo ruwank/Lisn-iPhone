@@ -52,7 +52,15 @@
         [manager createDirectoryAtPath:imageSavePath withIntermediateDirectories:YES attributes:nil error:nil];
     }
 }
-
+//+(void)createFilePath:(NSString*)filePath{
+//    NSString *fileSavePath = [[self getRootSavePath] stringByAppendingPathComponent:filePath];
+//    NSLog(@"ROOT PATH : %@", fileSavePath);
+//    
+//    NSFileManager *manager = [NSFileManager defaultManager];
+//    if([manager fileExistsAtPath:fileSavePath]==NO){
+//        [manager createDirectoryAtPath:fileSavePath withIntermediateDirectories:YES attributes:nil error:nil];
+//    }
+//}
 
 #pragma mark - Convenience methods
 
@@ -60,9 +68,17 @@
     return [[self getRootSavePath] stringByAppendingPathComponent:type];
 }
 +(NSString *)bookSavePath{
+//    if(![self fileExists:PATH_BOOK]){
+//        [self createFilePath:PATH_BOOK];
+// 
+//    }
     return [self pathForType:PATH_BOOK];
 }
 +(NSString *)profileFilePath{
+//    if(![self fileExists:PATH_PROFILE]){
+//        [self createFilePath:PATH_PROFILE];
+//        
+//    }
     return [self pathForType:PATH_PROFILE];
 }
 
