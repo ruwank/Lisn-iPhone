@@ -46,6 +46,8 @@
 		FD9255F61D28168000C40577 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD9255F31D28168000C40577 /* Default-568h@2x.png */; };
 		FD9255F71D28168000C40577 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FD9255F41D28168000C40577 /* Default.png */; };
 		FD9255F81D28168000C40577 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD9255F51D28168000C40577 /* Default@2x.png */; };
+		FD9256111D28351D00C40577 /* cipher.m in Sources */ = {isa = PBXBuildFile; fileRef = FD92560E1D28351D00C40577 /* cipher.m */; };
+		FD9256121D28351D00C40577 /* NSData+AES.m in Sources */ = {isa = PBXBuildFile; fileRef = FD9256101D28351D00C40577 /* NSData+AES.m */; };
 		FD99A7DD1CA83DBF000F57EC /* FMAbhaya.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DA1CA83DBF000F57EC /* FMAbhaya.ttf */; };
 		FD99A7DE1CA83DBF000F57EC /* HelveticaNeue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DB1CA83DBF000F57EC /* HelveticaNeue.ttf */; };
 		FD99A7DF1CA83DBF000F57EC /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD99A7DC1CA83DBF000F57EC /* OpenSans-Regular.ttf */; };
@@ -130,6 +132,10 @@
 		FD9255F31D28168000C40577 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		FD9255F41D28168000C40577 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		FD9255F51D28168000C40577 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		FD92560D1D28351D00C40577 /* cipher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cipher.h; sourceTree = "<group>"; };
+		FD92560E1D28351D00C40577 /* cipher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cipher.m; sourceTree = "<group>"; };
+		FD92560F1D28351D00C40577 /* NSData+AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES.h"; sourceTree = "<group>"; };
+		FD9256101D28351D00C40577 /* NSData+AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+AES.m"; sourceTree = "<group>"; };
 		FD99A7DA1CA83DBF000F57EC /* FMAbhaya.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FMAbhaya.ttf; sourceTree = "<group>"; };
 		FD99A7DB1CA83DBF000F57EC /* HelveticaNeue.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeue.ttf; sourceTree = "<group>"; };
 		FD99A7DC1CA83DBF000F57EC /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -259,6 +265,7 @@
 		84018DF61C99350C009C9403 /* AppSupport */ = {
 			isa = PBXGroup;
 			children = (
+				FD92560C1D28351D00C40577 /* Cipher */,
 				FD459F001CA3957900387C5D /* SWRevealViewController */,
 			);
 			path = AppSupport;
@@ -402,6 +409,17 @@
 				FD9255EE1D27854700C40577 /* AudioPlayer.m */,
 			);
 			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
+		FD92560C1D28351D00C40577 /* Cipher */ = {
+			isa = PBXGroup;
+			children = (
+				FD92560D1D28351D00C40577 /* cipher.h */,
+				FD92560E1D28351D00C40577 /* cipher.m */,
+				FD92560F1D28351D00C40577 /* NSData+AES.h */,
+				FD9256101D28351D00C40577 /* NSData+AES.m */,
+			);
+			path = Cipher;
 			sourceTree = "<group>";
 		};
 		FD99A7D81CA83DBF000F57EC /* Resources */ = {
@@ -552,6 +570,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD9256121D28351D00C40577 /* NSData+AES.m in Sources */,
 				84018E011C99350C009C9403 /* AppUtils.m in Sources */,
 				FD2A690F1CA5A30A00B63131 /* LisnBaseViewController.m in Sources */,
 				84018DD41C992CAE009C9403 /* main.m in Sources */,
@@ -580,6 +599,7 @@
 				741080591CDD9E89007F9849 /* BookSearchViewController.m in Sources */,
 				FD2A691E1CA5A48600B63131 /* FeedbackViewController.m in Sources */,
 				74F9F5781CA6FEB40025FE88 /* MyBookCollectionViewCell.m in Sources */,
+				FD9256111D28351D00C40577 /* cipher.m in Sources */,
 				7448D2491CB16CF0004A1190 /* TabButtonView.m in Sources */,
 				746F676C1CF2D663003F3F3B /* BookDetailViewController.m in Sources */,
 				FD2A69101CA5A30A00B63131 /* NavigationMenuViewController.m in Sources */,

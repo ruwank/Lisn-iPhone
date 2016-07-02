@@ -111,11 +111,12 @@
     }else{
         if(!_audioBook.isTotalBookPurchased && [_audioBook.price floatValue]< 1){
            //Log downlaod
-            
+            [self downloadAudioFile:_audioBook.book_id andFileIndex:1];
+
 
         }else{
            //Download
-            
+            [self downloadAudioFile:_audioBook.book_id andFileIndex:1];
         }
         
     }
@@ -161,8 +162,10 @@
 }
 -(void)downloadAudioFile:(NSString*)bookId andFileIndex:(int)index{
     [WebServiceManager downloadAudioFile:bookId andFileIndex:index withResponseHandeler:^(BOOL success, ErrorType errorType) {
+        [self performSegueWithIdentifier:@"player_seque_id" sender:nil];
+
         if(success){
-            
+
         }else{
             
         }
