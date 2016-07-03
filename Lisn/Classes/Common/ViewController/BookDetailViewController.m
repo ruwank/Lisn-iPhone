@@ -16,6 +16,7 @@
 #import "WebServiceURLs.h"
 #import "DataSource.h"
 #import "LoginViewController.h"
+#import "WebServiceManager.h"
 
 @interface BookDetailViewController () <UITableViewDelegate, UITableViewDataSource, DetailViewTableViewCellDelegate,PurchaseViewControllerDelegate,LoginViewControllerDelegate>{
     BOOL isSelectChapter;
@@ -110,8 +111,15 @@
     }else{
         if(!_audioBook.isTotalBookPurchased && [_audioBook.price floatValue]< 1){
            //Log downlaod
+            //[self downloadAudioFile:_audioBook.book_id andFileIndex:1];
+            [self performSegueWithIdentifier:@"player_seque_id" sender:nil];
+
+
         }else{
            //Download
+           // [self downloadAudioFile:_audioBook.book_id andFileIndex:1];
+            [self performSegueWithIdentifier:@"player_seque_id" sender:nil];
+
         }
         
     }
@@ -155,6 +163,17 @@
         _middleViewH.constant = 47 + _lblHeight + 8;
     }
 }
+-(void)downloadAudioFile:(NSString*)bookId andFileIndex:(int)index{
+    [WebServiceManager downloadAudioFile:bookId andFileIndex:index withResponseHandeler:^(BOOL success, ErrorType errorType) {
+        [self performSegueWithIdentifier:@"player_seque_id" sender:nil];
+
+        if(success){
+
+        }else{
+            
+        }
+    }];
+}
 -(void)loadPurchaseViewController:(NSString*)url{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PurchaseViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"PurchaseViewControllerId"];
@@ -178,10 +197,17 @@
         }
         
     }else{
+        
         _payByBillBtn.hidden=NO;
         _payByCardBtn.hidden=NO;
         _playBtn.hidden=YES;
-        
+        if([_audioBook.price floatValue]< 1){
+            _payByBillBtn.hidden=YES;
+            _payByCardBtn.hidden=YES;
+            _playBtn.hidden=NO;
+            [_playBtn setTitle:@"Download" forState:UIControlStateNormal];
+
+        }
         if([AppUtils getServiceProvider] ==PROVIDER_NONE){
             _payByBillBtn.hidden=YES;
             

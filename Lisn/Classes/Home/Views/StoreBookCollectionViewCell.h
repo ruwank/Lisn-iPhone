@@ -32,5 +32,5 @@
 
 - (void)storeBookCollectionViewCellPlayButtontapped:(StoreBookCollectionViewCell *)storeBookCollectionViewCell lastState:(BOOL)playing;
 - (void)storeBookCollectionViewCellMenuButtontapped:(StoreBookCollectionViewCell *)storeBookCollectionViewCell;
-
+-(void)storeBookCollectionViewCellSelect:(AudioBook*)audioBook;
 @end

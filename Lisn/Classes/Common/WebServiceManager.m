@@ -9,6 +9,7 @@
 #import "WebServiceManager.h"
 #import "UserProfile.h"
 #import "DataSource.h"
+#import "FileOperator.h"
 
 @implementation WebServiceManager
 
@@ -166,4 +167,55 @@
     }];
 
 }
++(void)downloadAudioFile:(NSString*)bookId andFileIndex:(int)index withResponseHandeler:(FileDownloderResponseHandler)block{
+    AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
+
+    NSString *destinationfilePath=[FileOperator getAudioFilePath:bookId andFileIndex:index];
+    
+    //NSURL *filePath=[NSURL URLWithString:file];
+    
+    UserProfile *userProfile=[[DataSource sharedInstance] getProfileInfo];
+    NSData *plainData = [[AppUtils getCredentialsData] dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *encodedUsernameAndPassword = [plainData base64EncodedStringWithOptions:0];
+    
+    NSURL *URL = [NSURL URLWithString:book_download_url];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    [request setHTTPMethod:@"POST"];
+    [request addValue:[NSString stringWithFormat:@"Basic %@", encodedUsernameAndPassword] forHTTPHeaderField:@"Authorization"];
+     [request addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    NSString *postString = [NSString stringWithFormat:@"userid=%@&bookid=%@&chapid=%d",userProfile.userId,bookId,index];
+    [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+       
+        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+         return [documentsDirectoryURL URLByAppendingPathComponent:@"temp.mp3"];
+        
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        NSLog(@"response %@",response);
+        if(error){
+            block(NO,ErrorTypeInternalError);
+        }else{
+
+            NSString *sourceFilePath=[[FileOperator getRootDirectory] stringByAppendingPathComponent:@"temp.mp3"];
+            NSError * err = NULL;
+            NSFileManager * fm = [[NSFileManager alloc] init];
+            BOOL result = [fm moveItemAtPath:sourceFilePath toPath:destinationfilePath error:&err];
+            if(!result){
+                block(NO,ErrorTypeInternalError);
+            }else{
+                block(YES,ErrorTypeNone);
+
+            }
+                NSLog(@"Error: %@", err);
+            
+            NSLog(@"File downloaded to: %@", filePath.absoluteString);
+           // NSLog(@"File destinationUrl to: %@", destinationUrl);
+        }
+        
+    }];
+    [downloadTask resume];
+}
+
 @end
