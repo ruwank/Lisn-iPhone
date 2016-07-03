@@ -90,4 +90,9 @@ static NSString * const SHARE_SUCCESS_MESSAGE =@"Post was published successfully
 static NSString * const SHARE_ERROR_TITLE =@"Error";
 static NSString * const SHARE_ERROR_MESSAGE =@"Post was not published.";
 
+static NSString * const narrator_en=@"Narrator";
+static NSString * const narrator_si=@"lshùu";
+static NSString * const duration_en=@"Duration";
+static NSString * const duration_si=@"ld,h";
+
 #endif /* Messages_h */

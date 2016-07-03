@@ -65,6 +65,11 @@
             if([jsonDic valueForKey:@"english_description"]!= nil)
             _english_description = [jsonDic valueForKey:@"english_description"];
             
+            if([jsonDic valueForKey:@"award"]!= nil)
+                _isAwarded = [[jsonDic valueForKey:@"award"] boolValue];
+            if([jsonDic valueForKey:@"discount"]!= nil)
+                _discount = [[jsonDic valueForKey:@"discount"] intValue];
+            
             _lanCode = LAN_EN;
             if ([_language isEqualToString:@"SI"]) {
                 _lanCode = LAN_SI;
@@ -102,6 +107,12 @@
     [coder encodeObject:_english_description    forKey:@"english_description"];
     [coder encodeObject:_chapters    forKey:@"chapters"];
     [coder encodeBool:_isTotalBookPurchased  forKey:@"isTotalBookPurchased"];
+    [coder encodeInt:_lanCode forKey:@"lanCode"];
+    [coder encodeBool:_isAwarded forKey:@"isAwarded"];
+    [coder encodeBool:_isTotalBookPurchased forKey:@"isTotalBookPurchased"];
+    [coder encodeBool:_isPurchase forKey:@"isPurchase"];
+    [coder encodeInt:_discount forKey:@"discount"];
+
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -125,6 +136,11 @@
     self.english_description    = [coder decodeObjectForKey:@"english_description"];
     self.chapters    = [coder decodeObjectForKey:@"chapters"];
     self.isTotalBookPurchased=[coder decodeBoolForKey:@"isTotalBookPurchased"];
+    self.lanCode=[coder decodeIntForKey:@"lanCode"];
+    self.isAwarded=[coder decodeBoolForKey:@"isAwarded"];
+    self.isTotalBookPurchased=[coder decodeBoolForKey:@"isTotalBookPurchased"];
+    self.isPurchase=[coder decodeBoolForKey:@"isPurchase"];
+    self.discount=[coder decodeIntForKey:@"discount"];
     return self;
 }
 

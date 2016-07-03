@@ -17,9 +17,16 @@
 #import "DataSource.h"
 #import "LoginViewController.h"
 #import "WebServiceManager.h"
+#import "Messages.h"
+#import "FileOperator.h"
+#import "PlayerViewController.h"
 
-@interface BookDetailViewController () <UITableViewDelegate, UITableViewDataSource, DetailViewTableViewCellDelegate,PurchaseViewControllerDelegate,LoginViewControllerDelegate>{
+#define ALERT_VIEW_TAG_DOWNLOD_COMPETE 10
+
+@interface BookDetailViewController () <UITableViewDelegate, UITableViewDataSource, DetailViewTableViewCellDelegate,PurchaseViewControllerDelegate,LoginViewControllerDelegate,UIActionSheetDelegate>{
     BOOL isSelectChapter;
+    UIActivityIndicatorView *activityIndicator;
+    BOOL isSelectCard;
 }
 
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
@@ -75,12 +82,16 @@
 @property (nonatomic, assign) int rowLimit;
 @property (nonatomic, assign) float lblHeightLimit;
 @property (nonatomic, assign) float lblHeight;
+@property (nonatomic, strong) BookChapter *selectedChapter;
+
 
 @end
 
 @implementation BookDetailViewController
 
 - (IBAction)payByCardButtonTapped:(id)sender {
+    isSelectCard=YES;
+    isSelectChapter=NO;
     if([[DataSource sharedInstance] isUserLogin]){
         isSelectChapter=false;
     UserProfile *userProfile=[[DataSource sharedInstance] getProfileInfo];
@@ -92,33 +103,35 @@
     NSString *url=[NSString stringWithFormat:@"%@?userid=%@&bookid=%@&amount=%f",purchase_book_url,userId,bookid,amount];
         [self loadPurchaseViewController:url];
     }else{
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        LoginViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewControllerId"];
-        viewController.delegate = self;
-        [self presentViewController:viewController animated:YES completion:nil];
+        [self loadLoginScreen];
+       
     }
 }
 
 - (IBAction)payByBillButtonTapped:(id)sender {
-    [self performSegueWithIdentifier:@"player_seque_id" sender:nil];
+    isSelectChapter=NO;
+    isSelectCard=NO;
+
 }
 
 - (IBAction)playButtonTapped:(id)sender {
-    isSelectChapter=false;
+    isSelectChapter=NO;
 
     if (_audioBook.isTotalBookPurchased && [_audioBook.chapters count] == [_audioBook.downloadedChapter count]) {
         //Play
     }else{
         if(!_audioBook.isTotalBookPurchased && [_audioBook.price floatValue]< 1){
+            //[self performSegueWithIdentifier:@"player_seque_id" sender:nil];
+
            //Log downlaod
-            //[self downloadAudioFile:_audioBook.book_id andFileIndex:1];
-            [self performSegueWithIdentifier:@"player_seque_id" sender:nil];
+            [self logUserDownload];
+            //[self performSegueWithIdentifier:@"player_seque_id" sender:nil];
 
 
         }else{
            //Download
-           // [self downloadAudioFile:_audioBook.book_id andFileIndex:1];
-            [self performSegueWithIdentifier:@"player_seque_id" sender:nil];
+            [self downloadAudioBook];
+           // [self performSegueWithIdentifier:@"player_seque_id" sender:nil];
 
         }
         
@@ -163,11 +176,29 @@
         _middleViewH.constant = 47 + _lblHeight + 8;
     }
 }
+-(void)downloadAudioBook{
+    for (BookChapter *chapter in _audioBook.chapters) {
+        if(![FileOperator isAudioFileExists:_audioBook.book_id andFileIndex:chapter.chapter_id]){
+            [self downloadAudioFile:_audioBook.book_id andFileIndex:chapter.chapter_id];
+            break;
+        }
+    }
+    [activityIndicator stopAnimating];
+
+    
+}
 -(void)downloadAudioFile:(NSString*)bookId andFileIndex:(int)index{
+    [activityIndicator startAnimating];
+
     [WebServiceManager downloadAudioFile:bookId andFileIndex:index withResponseHandeler:^(BOOL success, ErrorType errorType) {
-        [self performSegueWithIdentifier:@"player_seque_id" sender:nil];
+        [activityIndicator stopAnimating];
 
         if(success){
+            if(isSelectChapter){
+                [self showDownloadCompleteMessage];
+            }else{
+                [self downloadAudioBook];
+            }
 
         }else{
             
@@ -241,7 +272,15 @@
     _payByBillBtn.layer.borderColor = RGBA(255, 255, 255, 1).CGColor;
     
     [self adjustViewHeights];
+    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    activityIndicator.center = self.view.center;
+    [self.view addSubview:activityIndicator];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self setInitialData];
+
 }
 
 - (void)adjustViewHeights
@@ -259,6 +298,7 @@
         return;
     }
     
+    NSString *naraterText=@"";
     if(_audioBook.lanCode == LAN_SI){
         _bookNameLbl.font = [UIFont fontWithName:@"FMAbhaya" size:18];
         [_bookNameLbl setTruncationToken:@"'''"];
@@ -268,6 +308,7 @@
         
         _bookReaderLbl.font = [UIFont fontWithName:@"FMAbhaya" size:14];
         [_bookReaderLbl setTruncationToken:@"'''"];
+        naraterText=[NSString stringWithFormat:@"%@-%@",narrator_si,_audioBook.narrator];
         
     }else{
         _bookNameLbl.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
@@ -278,11 +319,13 @@
         
         _bookReaderLbl.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
         [_bookReaderLbl setTruncationToken:@"..."];
+        naraterText=[NSString stringWithFormat:@"%@-%@",narrator_en,_audioBook.narrator];
+
     }
     
     _bookNameLbl.text = _audioBook.title;
     _booKAutherLbl.text = _audioBook.author;
-    //_bookReaderLbl.text = @"";
+    _bookReaderLbl.text = naraterText;
     NSString *imageURL = _audioBook.cover_image;
     
     NSMutableURLRequest *imageRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:imageURL]
@@ -401,20 +444,133 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self payByBillButtonTapped:nil];
 }
+#pragma mark
+-(void)showDownloadCompleteMessage{
+   UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:DOWNLOAD_COMPLETE_TITLE message:DOWNLOAD_COMPLETE_MESSAGE delegate:self cancelButtonTitle:BUTTON_YES otherButtonTitles:BUTTON_NO,nil];
+    alertView.tag=ALERT_VIEW_TAG_DOWNLOD_COMPETE;
+    [alertView show];
+    
+}
+-(void)loadAudioPlayer{
+    int chapterIndex=1;
+    if(isSelectChapter){
+        chapterIndex=_selectedChapter.chapter_id;
+    }else{
+        
+    }
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PlayerViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"PlayerViewControllerId"];
+    [viewController setAudioBook:_audioBook.book_id andFileIndex:chapterIndex];
+    [self.navigationController pushViewController:viewController animated:YES];
 
+}
+-(void)loadLoginScreen{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewControllerId"];
+    viewController.delegate = self;
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+-(void)showPaymentOptionActionSheet{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Payment Option"
+                                                             delegate:self
+                                                    cancelButtonTitle:nil
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Add to bill", @"Buy From Card", nil];
+    actionSheet.tag=200;
+    
+    [actionSheet showInView:self.view];
+}
+-(void)logUserDownload{
+    [activityIndicator startAnimating];
+    AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
+    
+    AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    
+    responseSerializer.acceptableContentTypes = nil;
+    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+
+    
+    NSMutableDictionary *params=[[NSMutableDictionary alloc] init];
+    UserProfile *userProfile=[[DataSource sharedInstance] getProfileInfo];
+
+    [params setValue:_audioBook.book_id forKey:@"bookid"];
+    [params setValue:userProfile.userId forKey:@"userid"];
+    
+    if(isSelectChapter){
+        [params setValue:[NSNumber numberWithInt:_selectedChapter.chapter_id] forKey:@"chapid"];
+    }else{
+        [params setValue:[NSNumber numberWithInt:0] forKey:@"chapid"];
+    }
+    NSLog(@"params %@",params);
+        [manager POST:user_download_activity_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            _audioBook.isPurchase=YES;
+            if(isSelectChapter){
+                _selectedChapter.isPurchased=YES;
+
+                [self downloadAudioFile:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id];
+            }else{
+                [self downloadAudioBook];
+                _audioBook.isTotalBookPurchased=YES;
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"error %@",error);
+            [activityIndicator stopAnimating];
+
+        }];
+}
 #pragma mark - DetailViewTableViewCellDelegate
 - (void)detailViewTableViewCellButtonTapped:(DetailViewTableViewCell *)detailViewTableViewCell {
-    BookChapter *chapter=detailViewTableViewCell.chapter;
+    isSelectChapter=YES;
+    _selectedChapter=detailViewTableViewCell.chapter;
+    
+    if([[DataSource sharedInstance] isUserLogin]){
+        if (_selectedChapter.isPurchased) {
+            if([FileOperator isAudioFileExists:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id]){
+                [self loadAudioPlayer];
+
+            }else{
+
+            [self downloadAudioFile:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id];
+            }
+        }else{
+            if(_selectedChapter.price>0){
+                [self showPaymentOptionActionSheet];
+            }else{
+                [self logUserDownload];
+            }
+        }
+    }else{
+        [self loadLoginScreen];
+    }
+    
 }
 #pragma mark -PurchaseViewControllerDelegate methods
 - (void)purchaseComplete:(PaymentStatus)status{
-    
+    if(status == RESULT_SUCCESS || status== RESULT_SUCCESS_ALREADY){
+        _audioBook.isPurchase=YES;
+        if(isSelectChapter){
+            _selectedChapter.isPurchased=YES;
+            [self downloadAudioFile:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id];
+        }else{
+            _audioBook.isTotalBookPurchased=YES;
+            [self downloadAudioBook];
+        }
+    }
 }
 #pragma mark - LoginViewControllerDelegate
 
 - (void)loginSucceeded {
     if (isSelectChapter) {
-        
+        if(_selectedChapter.isPurchased){
+            [self downloadAudioFile:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id];
+        }else{
+            if(_selectedChapter.price>0){
+                [self showPaymentOptionActionSheet];
+            }else{
+                [self logUserDownload];
+            }
+        }
     }else{
         [self payByCardButtonTapped:nil];
     }
@@ -424,6 +580,40 @@
     
 }
 
+#pragma mark -UIAlertViewDelegate method
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex              {
+    if(alertView.tag==ALERT_VIEW_TAG_DOWNLOD_COMPETE){
+        
+        if(buttonIndex == 0)//YES button pressed
+        {
+            //do something
+            [self loadAudioPlayer];
+           
+        }
+        else if(buttonIndex == 1)//NO button pressed.
+        {
+            //do something
+        }
+    }
+}
+#pragma mark -UIActionSheetDelegate method
 
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (actionSheet.tag == 200){
+        NSLog(@"The Delete confirmation action sheet. %ld",(long)buttonIndex);
+        if(buttonIndex == 0)//payby bill button pressed
+        {
+            //do something
+            
+        }
+        else if(buttonIndex == 1)//card button pressed.
+        {
+            //do something
+        }
+    }
+    
+    
+   
+}
 @end

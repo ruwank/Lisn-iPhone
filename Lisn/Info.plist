@@ -28,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1000</string>
 	<key>FacebookAppID</key>
 	<string>964802780211365</string>
 	<key>FacebookDisplayName</key>
@@ -44,7 +44,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-    
 	<key>UIAppFonts</key>
 	<array>
 		<string>FMAbhaya.ttf</string>

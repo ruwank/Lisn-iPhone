@@ -10,4 +10,5 @@
 
 @interface PlayerViewController : UIViewController
 
+-(void)setAudioBook:(NSString*)theBookId andFileIndex:(int)index;
 @end

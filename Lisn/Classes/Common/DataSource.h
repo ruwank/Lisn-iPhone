@@ -18,4 +18,5 @@
 -(UserProfile*)getProfileInfo;
 -(void)saveProfileInfo:(UserProfile*)profileInfo;
 -(BOOL)isUserLogin;
+-(void)addBookToUserBookList:(AudioBook*)theBook;
 @end

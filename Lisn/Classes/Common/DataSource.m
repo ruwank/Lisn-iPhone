@@ -22,7 +22,7 @@
 -(id)init{
     
     if(self=[super init]){
-        userAudioBook = [[NSMutableDictionary alloc] init];
+      //  userAudioBook = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -48,7 +48,11 @@
     return userAudioBook;
     //return [NSKeyedUnarchiver unarchiveObjectWithFile:[FileOperator credentialsPath]];
 }
-
+-(void)addBookToUserBookList:(AudioBook*)theBook{
+    userAudioBook=[self getUserBook];
+    [userAudioBook setValue:theBook forKey:theBook.book_id];
+    [self saveUserBook:userAudioBook];
+}
 
 
 //SAVE METHODS

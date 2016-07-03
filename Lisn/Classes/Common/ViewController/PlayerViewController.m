@@ -12,7 +12,10 @@
 
 @import AVFoundation;
 
-@interface PlayerViewController () <AVAudioPlayerDelegate>
+@interface PlayerViewController () <AVAudioPlayerDelegate>{
+    NSString *bookId;
+    int chapterIndex;
+}
 
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UILabel *currentTimeLbl;
@@ -187,14 +190,14 @@
     
     return YES;
 }
-
+-(void)setAudioBook:(NSString*)theBookId andFileIndex:(int)index{
+    bookId=theBookId;
+    chapterIndex=index;
+}
 - (void)configureAudioPlayer {
     // Create audio player with background music
-//    NSString *backgroundMusicPath = [[NSBundle mainBundle] pathForResource:@"sample_audio" ofType:@"mp3"];
-//    NSURL *backgroundMusicURL = [NSURL fileURLWithPath:backgroundMusicPath];
-   
-    //self.backgroundMusicPlayer.numberOfLoops = -1;	// Negative number means loop forever
-    NSString *audioFilePath=[FileOperator getAudioFilePath:@"1" andFileIndex:1];
+
+    NSString *audioFilePath=[FileOperator getAudioFilePath:bookId andFileIndex:chapterIndex];
     NSError* error = nil;
     NSData *fileData = [NSData dataWithContentsOfFile:audioFilePath options: 0 error: &error];
     if (fileData == nil)
@@ -203,35 +206,22 @@
     }
     else
     {
-        //NSData* key = [@"K66wl3d43I$P0937" dataUsingEncoding:NSUTF8StringEncoding];
-       // NSData* audioFileData=[self decrypt:fileData key:key];
-        NSData* audioFileData = [fileData decryptWithString:@"K66wl3d43I$P0937"];
+     
+        NSData* audioFileData = [self decryptData:fileData  WithKey:@"K66wl3d43I$P0937"];
         
-        NSString *docDirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        NSString *filePath = [NSString stringWithFormat:@"%@/%@.mp3", docDirPath , @"audio"];
-        [audioFileData writeToFile:filePath atomically:YES];
-        
-        NSError *error;
-        NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-        
-       // self.backgroundMusicPlayer=[[AVAudioPlayer alloc] initWithData:audioFileData fileTypeHint:AVFileTypeMPEGLayer3 error:&error];
+        self.backgroundMusicPlayer=[[AVAudioPlayer alloc] initWithData:audioFileData fileTypeHint:AVFileTypeMPEGLayer3 error:&error];
 
-        self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:&error];
         if (self.backgroundMusicPlayer == nil) {
             NSLog(@"AudioPlayer did not load properly: %@", [error description]);
         } else {
             [self.backgroundMusicPlayer play];
         }
-      //  self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithData:audioFileData error:&error];
+      
         if(error){
             NSLog(@"error %@",error);
         }
         self.backgroundMusicPlayer.delegate = self;  // We need this so we can restart after interruptions
-        // parse the JSON etc
     }
-
-    //NSData *plistFileData = [ AESDecryptWithPassphrase:@"K66wl3d43I$P0937"];
-
     _currentTime = 0;
     _totalTime = _backgroundMusicPlayer.duration;
     _totalTimeLbl.text = [self timeStringOfSeconds:_totalTime];
@@ -267,48 +257,34 @@
     //TODO
 }
 
-- (NSData *)decrypt:(NSData *)plainText key:(NSData *)aSymmetricKey {
-    //return [self doCipher:plainText key:aSymmetricKey context:kCCDecrypt padding:pkcs7];
-    return [self doCipher2:plainText iv:nil key:aSymmetricKey context:kCCDecrypt error:nil];
-}
-
-- (NSData *)doCipher2:(NSData *)dataIn
-                   iv:(NSData *)iv
-                  key:(NSData *)symmetricKey
-              context:(CCOperation)encryptOrDecrypt // kCCEncrypt or kCCDecrypt
-                error:(NSError **)error
+//decrypt audio file
+- (NSData *)decryptData:(NSData *)data WithKey:(NSString *)key
 {
-    CCCryptorStatus ccStatus   = kCCSuccess;
-    size_t          cryptBytes = 0;
-    NSMutableData  *dataOut    = [NSMutableData dataWithLength:dataIn.length + kCCBlockSizeAES128];
+    char keyPtr[kCCKeySizeAES256+1];
+    bzero(keyPtr, sizeof(keyPtr));
     
-    ccStatus = CCCrypt( encryptOrDecrypt,
-                       kCCAlgorithmAES128,
-                       0, //kCCOptionPKCS7Padding,
-                       symmetricKey.bytes,
-                       kCCKeySizeAES128,
-                       nil,
-                       dataIn.bytes,
-                       dataIn.length,
-                       dataOut.mutableBytes,
-                       dataOut.length,
-                       &cryptBytes);
+    [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
     
+    NSUInteger dataLength = [data length];
     
-    if (ccStatus == kCCSuccess) {
-        dataOut.length = cryptBytes;
-    }
-    else {
-        if (error) {
-            *error = [NSError errorWithDomain:@"kEncryptionError"
-                                         code:ccStatus
-                                     userInfo:nil];
-        }
-        dataOut = nil;
+    size_t bufferSize = dataLength + kCCBlockSizeAES128;
+    void *buffer = malloc(bufferSize);
+    
+    size_t numBytesDecrypted = 0;
+    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt, kCCAlgorithmAES128,
+                                          kCCOptionPKCS7Padding | kCCOptionECBMode,
+                                          keyPtr, kCCBlockSizeAES128,
+                                          NULL,
+                                          [data bytes], dataLength,
+                                          buffer, bufferSize,
+                                          &numBytesDecrypted);
+    
+    if (cryptStatus == kCCSuccess) {
+        return [NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
     }
     
-    return dataOut;
+    free(buffer);
+    return nil;
 }
-
 
 @end

@@ -210,7 +210,6 @@
             }
                 NSLog(@"Error: %@", err);
             
-            NSLog(@"File downloaded to: %@", filePath.absoluteString);
            // NSLog(@"File destinationUrl to: %@", destinationUrl);
         }
         

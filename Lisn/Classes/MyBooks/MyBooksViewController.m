@@ -15,12 +15,13 @@
 #import "WebServiceManager.h"
 #import "Messages.h"
 #import "DataSource.h"
+#import "BookDetailViewController.h"
 
 @interface MyBooksViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *myBooksCollectionView;
 
-@property (nonatomic, strong) NSMutableArray *myBooksArray;
+@property (nonatomic, strong) NSArray *myBooksArray;
 
 @property (nonatomic, assign) float cellW;
 @property (nonatomic, assign) float cellH;
@@ -55,8 +56,10 @@
 - (void)loadData
 {
     //AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSMutableDictionary *userBook=[[DataSource sharedInstance] getUserBook];
+   // NSArray *uesrBook=[userBook allValues];
     
-    _myBooksArray = [[NSMutableArray alloc] init];
+    _myBooksArray = [userBook allValues];
     
 }
 
@@ -106,6 +109,12 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    MyBookCollectionViewCell *cell = (MyBookCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    AudioBook *audioBook  = cell.cellObject;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    BookDetailViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"BookDetailViewControllerId"];
+    viewController.audioBook=audioBook;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 @end
