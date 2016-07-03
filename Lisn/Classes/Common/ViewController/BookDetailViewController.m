@@ -109,8 +109,9 @@
 }
 
 - (IBAction)payByBillButtonTapped:(id)sender {
-    isSelectChapter=NO;
-    isSelectCard=NO;
+    //isSelectChapter=NO;
+    //isSelectCard=NO;
+    [AppUtils showContentIsNotReadyAlert];
 
 }
 
@@ -201,7 +202,7 @@
             }
 
         }else{
-            
+            [AppUtils showCommonErrorAlert];
         }
     }];
 }
@@ -445,6 +446,10 @@
     [self payByBillButtonTapped:nil];
 }
 #pragma mark
+-(void)updateAudioBook{
+    [[DataSource sharedInstance] addBookToUserBookList:_audioBook];
+
+}
 -(void)showDownloadCompleteMessage{
    UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:DOWNLOAD_COMPLETE_TITLE message:DOWNLOAD_COMPLETE_MESSAGE delegate:self cancelButtonTitle:BUTTON_YES otherButtonTitles:BUTTON_NO,nil];
     alertView.tag=ALERT_VIEW_TAG_DOWNLOD_COMPETE;
@@ -471,6 +476,8 @@
     [self presentViewController:viewController animated:YES completion:nil];
 }
 -(void)showPaymentOptionActionSheet{
+    [AppUtils showContentIsNotReadyAlert];
+    /*
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Payment Option"
                                                              delegate:self
                                                     cancelButtonTitle:nil
@@ -479,6 +486,7 @@
     actionSheet.tag=200;
     
     [actionSheet showInView:self.view];
+     */
 }
 -(void)logUserDownload{
     [activityIndicator startAnimating];
@@ -507,15 +515,19 @@
             _audioBook.isPurchase=YES;
             if(isSelectChapter){
                 _selectedChapter.isPurchased=YES;
-
+                [self updateAudioBook];
                 [self downloadAudioFile:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id];
             }else{
-                [self downloadAudioBook];
                 _audioBook.isTotalBookPurchased=YES;
+                [self updateAudioBook];
+
+                [self downloadAudioBook];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"error %@",error);
             [activityIndicator stopAnimating];
+            [AppUtils showCommonErrorAlert];
+
 
         }];
 }
@@ -551,9 +563,12 @@
         _audioBook.isPurchase=YES;
         if(isSelectChapter){
             _selectedChapter.isPurchased=YES;
+            [self updateAudioBook];
+
             [self downloadAudioFile:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id];
         }else{
             _audioBook.isTotalBookPurchased=YES;
+            [self updateAudioBook];
             [self downloadAudioBook];
         }
     }
@@ -597,6 +612,7 @@
         }
     }
 }
+
 #pragma mark -UIActionSheetDelegate method
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{

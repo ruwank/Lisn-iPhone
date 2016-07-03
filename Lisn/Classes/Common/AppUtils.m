@@ -8,6 +8,8 @@
 
 #import "AppUtils.h"
 #import "AppConstant.h"
+#import "DataSource.h"
+#import "Messages.h"
 
 @implementation AppUtils
 
@@ -114,5 +116,42 @@
     NSString  *currentDeviceId = [[device identifierForVendor]UUIDString];
     return currentDeviceId;
 }
++(BOOL)isBookPurchase:(NSString*)bookId{
+    BOOL returnValue=NO;
+    if([[DataSource sharedInstance] isUserLogin]){
+    NSDictionary *userBook=[[DataSource sharedInstance] getUserBook];
+    if(userBook){
+        AudioBook *book=[userBook objectForKey:bookId];
+        if(book){
+            returnValue=YES;
+        }
 
+    }
+    }
+    return returnValue;
+}
++(BOOL)isBookChapterPurchase:(NSString*)bookId andChapter:(int)index{
+    BOOL returnValue=[self isBookPurchase:bookId];
+    if (returnValue) {
+        NSDictionary *userBook=[[DataSource sharedInstance] getUserBook];
+        AudioBook *book=[userBook objectForKey:bookId];
+        for (BookChapter *chapter in book.chapters) {
+            if(chapter.chapter_id == index){
+                returnValue=chapter.isPurchased;
+                break;
+            }
+        }
+
+    }
+    return returnValue;
+}
++(void)showContentIsNotReadyAlert{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"This section is not available yet." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+}
++(void)showCommonErrorAlert{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:ALERT_TITLE_COMMON message:ALERT_MSG_COMMON delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+
+}
 @end

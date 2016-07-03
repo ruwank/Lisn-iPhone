@@ -801,6 +801,7 @@
                                                 <state key="normal" title="BROWSE STORE"/>
                                                 <connections>
                                                     <action selector="storeButtonTapped:" destination="kiw-B9-YaZ" eventType="touchUpInside" id="Sgi-7V-D6z"/>
+                                                    <segue destination="9zo-Q9-tJT" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="7tv-oN-IV1"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -3650,5 +3651,6 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="MYx-te-oBT"/>
+        <segue reference="7tv-oN-IV1"/>
     </inferredMetricsTieBreakers>
 </document>
