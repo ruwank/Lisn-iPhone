@@ -203,10 +203,26 @@
     }
     else
     {
-        NSData* key = [@"K66wl3d43I$P0937" dataUsingEncoding:NSUTF8StringEncoding];
-        NSData* audioFileData=[self decrypt:fileData key:key];
-       // NSData* audioFileData = [fileData decryptWithString:@"K66wl3d43I$P0937"];
-        self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithData:audioFileData error:&error];
+        //NSData* key = [@"K66wl3d43I$P0937" dataUsingEncoding:NSUTF8StringEncoding];
+       // NSData* audioFileData=[self decrypt:fileData key:key];
+        NSData* audioFileData = [fileData decryptWithString:@"K66wl3d43I$P0937"];
+        
+        NSString *docDirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *filePath = [NSString stringWithFormat:@"%@/%@.mp3", docDirPath , @"audio"];
+        [audioFileData writeToFile:filePath atomically:YES];
+        
+        NSError *error;
+        NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+        
+       // self.backgroundMusicPlayer=[[AVAudioPlayer alloc] initWithData:audioFileData fileTypeHint:AVFileTypeMPEGLayer3 error:&error];
+
+        self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:&error];
+        if (self.backgroundMusicPlayer == nil) {
+            NSLog(@"AudioPlayer did not load properly: %@", [error description]);
+        } else {
+            [self.backgroundMusicPlayer play];
+        }
+      //  self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithData:audioFileData error:&error];
         if(error){
             NSLog(@"error %@",error);
         }

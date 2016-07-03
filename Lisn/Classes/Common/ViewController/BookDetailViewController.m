@@ -111,12 +111,15 @@
     }else{
         if(!_audioBook.isTotalBookPurchased && [_audioBook.price floatValue]< 1){
            //Log downlaod
-            [self downloadAudioFile:_audioBook.book_id andFileIndex:1];
+            //[self downloadAudioFile:_audioBook.book_id andFileIndex:1];
+            [self performSegueWithIdentifier:@"player_seque_id" sender:nil];
 
 
         }else{
            //Download
-            [self downloadAudioFile:_audioBook.book_id andFileIndex:1];
+           // [self downloadAudioFile:_audioBook.book_id andFileIndex:1];
+            [self performSegueWithIdentifier:@"player_seque_id" sender:nil];
+
         }
         
     }
