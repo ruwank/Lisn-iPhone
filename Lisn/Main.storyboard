@@ -2053,6 +2053,9 @@
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <state key="normal" title="DOWNLOAD"/>
+                                                            <connections>
+                                                                <action selector="buyButtonTapped:" destination="lPE-Sb-NP5" eventType="touchUpInside" id="qlA-3Y-Eup"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <constraints>

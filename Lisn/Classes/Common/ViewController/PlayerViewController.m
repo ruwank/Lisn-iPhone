@@ -12,7 +12,10 @@
 
 @import AVFoundation;
 
-@interface PlayerViewController () <AVAudioPlayerDelegate>
+@interface PlayerViewController () <AVAudioPlayerDelegate>{
+    NSString *bookId;
+    int chapterIndex;
+}
 
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UILabel *currentTimeLbl;
@@ -187,11 +190,14 @@
     
     return YES;
 }
-
+-(void)setAudioBook:(NSString*)theBookId andFileIndex:(int)index{
+    bookId=theBookId;
+    chapterIndex=index;
+}
 - (void)configureAudioPlayer {
     // Create audio player with background music
 
-    NSString *audioFilePath=[FileOperator getAudioFilePath:@"1" andFileIndex:1];
+    NSString *audioFilePath=[FileOperator getAudioFilePath:bookId andFileIndex:chapterIndex];
     NSError* error = nil;
     NSData *fileData = [NSData dataWithContentsOfFile:audioFilePath options: 0 error: &error];
     if (fileData == nil)

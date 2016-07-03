@@ -18,8 +18,6 @@
 +(NSString *) getRootDirectory;
 +(NSString *) getRootSavePath;
 +(void) checkAndCreateRootDirectory;
-+(NSString *)getImageSavePath;
-+(void)checkAndCreateImageSavePath;
 
 +(NSString *) pathForType:(NSString *)type;
 +(NSString *)profileFilePath;

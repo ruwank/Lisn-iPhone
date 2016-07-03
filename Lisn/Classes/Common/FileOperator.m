@@ -37,21 +37,14 @@
         [manager createDirectoryAtPath:rootSavePath withIntermediateDirectories:YES attributes:nil error:nil];
     }
 }
-
-+(NSString *)getImageSavePath{
-    NSString *rootSavePath = [self getRootSavePath];
-    NSString *imageSavePath = [rootSavePath stringByAppendingPathComponent:@"Images"];
-    return imageSavePath;
++(NSString *)getCachePath {
+    NSString *cacheDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *bookDirectory = [cacheDirectory stringByAppendingPathComponent:@"Book"];
+    NSLog(@"imageCachPath is %@",bookDirectory);
+    return bookDirectory;
 }
 
-+(void)checkAndCreateImageSavePath{
-    NSString *imageSavePath = [self getImageSavePath];
-    
-    NSFileManager *manager = [NSFileManager defaultManager];
-    if([manager fileExistsAtPath:imageSavePath]==NO){
-        [manager createDirectoryAtPath:imageSavePath withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-}
+
 //+(void)createFilePath:(NSString*)filePath{
 //    NSString *fileSavePath = [[self getRootSavePath] stringByAppendingPathComponent:filePath];
 //    NSLog(@"ROOT PATH : %@", fileSavePath);
@@ -77,14 +70,14 @@
 }
 +(NSString*)getAudioFilePath:(NSString*)bookId andFileIndex:(int)index{
     
-    NSString *bookSavepath = [[self getRootSavePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@",bookId]];
+    NSString *bookSavepath = [[self getCachePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"/%@",bookId]];
     NSFileManager *manager = [NSFileManager defaultManager];
 
     if([manager fileExistsAtPath:bookSavepath]==NO){
         [manager createDirectoryAtPath:bookSavepath withIntermediateDirectories:YES attributes:nil error:nil];
     }
 
-    NSString *filePath=[bookSavepath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d.mp3",index]];
+    NSString *filePath=[bookSavepath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d.lisn",index]];
     return filePath;
     
 
@@ -97,7 +90,7 @@
 
 +(BOOL)fileExists:(NSString *)type{
     
-    NSString *filepath = [[self getRootSavePath] stringByAppendingPathComponent:type];
+    NSString *filepath = [[self getCachePath] stringByAppendingPathComponent:type];
     
     return [[NSFileManager defaultManager] fileExistsAtPath:filepath];
 }
