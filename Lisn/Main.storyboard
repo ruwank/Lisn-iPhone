@@ -231,6 +231,25 @@
                                             <segue destination="0Kf-bG-kbj" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="mTL-ts-MZf"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="logout" id="J9Z-dV-ZjE">
+                                        <rect key="frame" x="0.0" y="292" width="276" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J9Z-dV-ZjE" id="hsB-Lq-3fu">
+                                            <rect key="frame" x="0.0" y="0.0" width="276" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Log Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9D-RV-yQ9">
+                                                    <rect key="frame" x="69" y="11" width="61" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="S2z-FD-g2t" kind="custom" identifier="logout_segue_id" customClass="SWRevealViewControllerSeguePushController" id="q7a-zb-lui"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="I2d-Av-NPy" id="PvX-Ha-x6e"/>
@@ -3357,7 +3376,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                     <constraint firstAttribute="width" constant="30" id="Gyd-n9-PzY"/>
                                     <constraint firstAttribute="height" constant="21" id="i7H-1o-56K"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -3367,17 +3386,17 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                     <constraint firstAttribute="height" constant="21" id="W7F-XT-S9c"/>
                                     <constraint firstAttribute="width" constant="30" id="nkh-ig-msZ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K49-wu-dxC">
-                                <rect key="frame" x="138" y="307" width="44" height="44"/>
+                                <rect key="frame" x="130" y="305" width="60" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="Dzv-0a-4wv"/>
-                                    <constraint firstAttribute="height" constant="44" id="nZL-b4-N8h"/>
+                                    <constraint firstAttribute="width" constant="60" id="Dzv-0a-4wv"/>
+                                    <constraint firstAttribute="height" constant="48" id="nZL-b4-N8h"/>
                                 </constraints>
-                                <state key="normal" title="P"/>
+                                <state key="normal" image="btn_play_start"/>
                                 <connections>
                                     <action selector="playButtonTapped:" destination="hdg-b8-jDA" eventType="touchUpInside" id="xQY-QZ-dSG"/>
                                 </connections>
@@ -3385,7 +3404,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="K49-wu-dxC" firstAttribute="top" secondItem="HPw-aF-O8I" secondAttribute="bottom" constant="8" id="55v-U7-aes"/>
+                            <constraint firstItem="K49-wu-dxC" firstAttribute="top" secondItem="HPw-aF-O8I" secondAttribute="bottom" constant="6" id="55v-U7-aes"/>
                             <constraint firstItem="8dQ-uj-jmc" firstAttribute="centerY" secondItem="mHL-2S-CqN" secondAttribute="centerY" id="6lV-r9-4J7"/>
                             <constraint firstAttribute="trailing" secondItem="HPw-aF-O8I" secondAttribute="trailing" constant="40" id="OiP-dW-IWh"/>
                             <constraint firstItem="HPw-aF-O8I" firstAttribute="centerY" secondItem="mHL-2S-CqN" secondAttribute="centerY" id="bpw-EU-lDW"/>
@@ -3632,6 +3651,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
     <resources>
         <image name="btn_play_preview_pause" width="54" height="54"/>
         <image name="btn_play_preview_start" width="54" height="54"/>
+        <image name="btn_play_start" width="48" height="48"/>
         <image name="ic_award" width="32" height="32"/>
         <image name="ic_downloaded" width="14" height="14"/>
         <image name="ic_menu" width="23" height="15"/>
@@ -3650,7 +3670,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
         <image name="ui_bg_side_menu_top" width="320" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MYx-te-oBT"/>
-        <segue reference="7tv-oN-IV1"/>
+        <segue reference="q7a-zb-lui"/>
+        <segue reference="Vbd-aU-CkW"/>
     </inferredMetricsTieBreakers>
 </document>

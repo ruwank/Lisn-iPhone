@@ -42,11 +42,15 @@
     if (!_backgroundMusicPlaying) {
         [self tryPlayMusic];
         [self startTimer];
-        [_playBtn setTitle:@"Pau" forState:UIControlStateNormal];
+       // [_playBtn setTitle:@"Pau" forState:UIControlStateNormal];
+        [_playBtn setImage:[UIImage imageNamed:@"btn_play_pause"] forState:UIControlStateNormal];
+
     }else {
         [self pauseAudio];
         [self invalidateTimer];
-        [_playBtn setTitle:@"Ply" forState:UIControlStateNormal];
+        //[_playBtn setTitle:@"Ply" forState:UIControlStateNormal];
+        [_playBtn setImage:[UIImage imageNamed:@"btn_play_start"] forState:UIControlStateNormal];
+
     }
 }
 
@@ -215,6 +219,7 @@
             NSLog(@"AudioPlayer did not load properly: %@", [error description]);
         } else {
             [self.backgroundMusicPlayer play];
+            [_playBtn setImage:[UIImage imageNamed:@"btn_play_pause"] forState:UIControlStateNormal];
         }
       
         if(error){
@@ -248,7 +253,7 @@
 }
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    [_playBtn setTitle:@"Ply" forState:UIControlStateNormal];
+    [_playBtn setImage:[UIImage imageNamed:@"btn_play_start"] forState:UIControlStateNormal];
     self.backgroundMusicPlaying = NO;
     player.currentTime = 0;
 }

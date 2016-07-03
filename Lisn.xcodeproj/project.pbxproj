@@ -53,6 +53,7 @@
 		FDA87E0D1D269E9800FEED71 /* FileOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA87E0B1D269E9800FEED71 /* FileOperator.m */; };
 		FDA87E131D26A22700FEED71 /* UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA87E121D26A22700FEED71 /* UserProfile.m */; };
 		FDA87E161D26BA8A00FEED71 /* WebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA87E151D26BA8A00FEED71 /* WebServiceManager.m */; };
+		FDBB69481D297A080069109B /* LoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = FDBB69471D297A080069109B /* LoadingIndicator.m */; };
 		FDBCE0211D2910A5009A48E4 /* cipher.m in Sources */ = {isa = PBXBuildFile; fileRef = FDBCE01F1D2910A5009A48E4 /* cipher.m */; };
 /* End PBXBuildFile section */
 
@@ -142,6 +143,8 @@
 		FDA87E121D26A22700FEED71 /* UserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfile.m; sourceTree = "<group>"; };
 		FDA87E141D26BA8A00FEED71 /* WebServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceManager.h; sourceTree = "<group>"; };
 		FDA87E151D26BA8A00FEED71 /* WebServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceManager.m; sourceTree = "<group>"; };
+		FDBB69461D297A080069109B /* LoadingIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingIndicator.h; sourceTree = "<group>"; };
+		FDBB69471D297A080069109B /* LoadingIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingIndicator.m; sourceTree = "<group>"; };
 		FDBCE01E1D2910A5009A48E4 /* cipher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cipher.h; sourceTree = "<group>"; };
 		FDBCE01F1D2910A5009A48E4 /* cipher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cipher.m; sourceTree = "<group>"; };
 		FDBCE0201D2910A5009A48E4 /* NSData+AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES.h"; sourceTree = "<group>"; };
@@ -263,6 +266,7 @@
 		84018DF61C99350C009C9403 /* AppSupport */ = {
 			isa = PBXGroup;
 			children = (
+				FDBB69451D297A080069109B /* LoadingIndicator */,
 				FDBCE01D1D291069009A48E4 /* Cipher */,
 				FD459F001CA3957900387C5D /* SWRevealViewController */,
 			);
@@ -428,6 +432,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		FDBB69451D297A080069109B /* LoadingIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				FDBB69461D297A080069109B /* LoadingIndicator.h */,
+				FDBB69471D297A080069109B /* LoadingIndicator.m */,
+			);
+			path = LoadingIndicator;
+			sourceTree = "<group>";
+		};
 		FDBCE01D1D291069009A48E4 /* Cipher */ = {
 			isa = PBXGroup;
 			children = (
@@ -571,6 +584,7 @@
 				FD2A690F1CA5A30A00B63131 /* LisnBaseViewController.m in Sources */,
 				84018DD41C992CAE009C9403 /* main.m in Sources */,
 				7419B94B1CAB8CE7002D59E9 /* TopTabsScrollView.m in Sources */,
+				FDBB69481D297A080069109B /* LoadingIndicator.m in Sources */,
 				FD2A691B1CA5A47400B63131 /* ContactUsViewController.m in Sources */,
 				74AABFA51D20193900194FBE /* DetailViewTableViewCell.m in Sources */,
 				FDA87E131D26A22700FEED71 /* UserProfile.m in Sources */,
@@ -709,7 +723,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = audio.lisn.Lisn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ef313560-b0b1-482b-80e3-5a75736ce544";
+				PROVISIONING_PROFILE = "e38ac59b-92a5-48f4-8489-9f1e8b53ff29";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -724,7 +739,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = audio.lisn.Lisn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ef313560-b0b1-482b-80e3-5a75736ce544";
+				PROVISIONING_PROFILE = "e38ac59b-92a5-48f4-8489-9f1e8b53ff29";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

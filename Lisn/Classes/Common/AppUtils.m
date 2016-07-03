@@ -135,11 +135,15 @@
     if (returnValue) {
         NSDictionary *userBook=[[DataSource sharedInstance] getUserBook];
         AudioBook *book=[userBook objectForKey:bookId];
+        if(book.isTotalBookPurchased){
+            returnValue=YES;
+        }else{
         for (BookChapter *chapter in book.chapters) {
             if(chapter.chapter_id == index){
                 returnValue=chapter.isPurchased;
                 break;
             }
+        }
         }
 
     }
