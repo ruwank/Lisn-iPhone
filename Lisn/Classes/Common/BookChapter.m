@@ -27,6 +27,8 @@
                 _price = [[jsonDic valueForKey:@"price"] floatValue];
             if([jsonDic valueForKey:@"size"]!= nil)
                 _size = [[jsonDic valueForKey:@"size"] floatValue];
+            if([jsonDic valueForKey:@"purchased"]!= nil)
+                _isPurchased = [[jsonDic valueForKey:@"purchased"] boolValue];
             
         }
     }

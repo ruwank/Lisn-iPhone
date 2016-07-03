@@ -22,7 +22,7 @@
 -(id)init{
     
     if(self=[super init]){
-        userAudioBook = [[NSMutableDictionary alloc] init];
+      //  userAudioBook = [[NSMutableDictionary alloc] init];
     }
     return self;
 }

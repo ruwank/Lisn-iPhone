@@ -84,7 +84,7 @@
         [manager createDirectoryAtPath:bookSavepath withIntermediateDirectories:YES attributes:nil error:nil];
     }
 
-    NSString *filePath=[bookSavepath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d.lisn",index]];
+    NSString *filePath=[bookSavepath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d.mp3",index]];
     return filePath;
     
 

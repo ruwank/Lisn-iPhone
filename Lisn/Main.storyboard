@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YpL-rS-UxS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YpL-rS-UxS">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -399,7 +399,7 @@
                                                                                     <action selector="playButtonTapped:" destination="Q1E-To-Ole" eventType="touchUpInside" id="ajt-SC-j48"/>
                                                                                 </connections>
                                                                             </button>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTP-8R-ee5">
+                                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTP-8R-ee5">
                                                                                 <rect key="frame" x="60" y="133" width="26" height="26"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="26" id="eht-Xd-cdS"/>
@@ -432,7 +432,7 @@
                                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </label>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBx-td-gor" userLabel="Menu Button">
+                                                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBx-td-gor" userLabel="Menu Button">
                                                                                 <rect key="frame" x="42" y="135" width="44" height="33"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="33" id="UDs-yc-EBk"/>
@@ -702,7 +702,7 @@
                                                                         <constraint firstAttribute="width" secondItem="Wgu-F9-bkw" secondAttribute="height" multiplier="2:3" id="0kn-E1-vG5"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bT-yH-yxf">
+                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bT-yH-yxf">
                                                                     <rect key="frame" x="60" y="120" width="26" height="26"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="26" id="Vaw-o9-ava"/>
@@ -710,7 +710,7 @@
                                                                     </constraints>
                                                                     <state key="normal" image="ic_menu_more_option"/>
                                                                 </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uui-ub-8Ub">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uui-ub-8Ub" customClass="ResponsiveLabel">
                                                                     <rect key="frame" x="6" y="118" width="61" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="0a4-Jn-lyg"/>
@@ -719,7 +719,7 @@
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSL-ik-1mz">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lSL-ik-1mz" customClass="ResponsiveLabel">
                                                                     <rect key="frame" x="6" y="129" width="61" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="Wza-wU-B4F"/>
@@ -728,7 +728,7 @@
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nc1-AV-ONr" userLabel="Menu Button">
+                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nc1-AV-ONr" userLabel="Menu Button">
                                                                     <rect key="frame" x="42" y="117" width="44" height="33"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="33" id="6jK-jR-koF"/>
@@ -763,8 +763,8 @@
                                                         </constraints>
                                                         <connections>
                                                             <outlet property="bgView" destination="fPG-pq-cxx" id="lh4-5f-Iob"/>
-                                                            <outlet property="bookAuther" destination="lSL-ik-1mz" id="kla-qp-BwC"/>
-                                                            <outlet property="bookName" destination="uui-ub-8Ub" id="c31-hL-r1Q"/>
+                                                            <outlet property="bookAuther" destination="lSL-ik-1mz" id="3ic-Iy-xrL"/>
+                                                            <outlet property="bookName" destination="uui-ub-8Ub" id="xKm-WP-EDx"/>
                                                             <outlet property="thumbImageView" destination="Wgu-F9-bkw" id="ZgW-D2-U0v"/>
                                                         </connections>
                                                     </collectionViewCell>
@@ -834,7 +834,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StoreBookCollectionViewCellId" id="DBR-Xp-cAO" customClass="StoreBookCollectionViewCell">
-                                                        <rect key="frame" x="4" y="7.5" width="86" height="185"/>
+                                                        <rect key="frame" x="4" y="8" width="86" height="185"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="86" height="185"/>
@@ -919,7 +919,7 @@
                                                                         <action selector="playButtonTapped:" destination="DBR-Xp-cAO" eventType="touchUpInside" id="g3e-Vf-zNI"/>
                                                                     </connections>
                                                                 </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWi-VM-T7f">
+                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zWi-VM-T7f">
                                                                     <rect key="frame" x="60" y="133" width="26" height="26"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="26" id="SZn-WK-NA3"/>
@@ -952,7 +952,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZf-j7-NOz" userLabel="Menu Button">
+                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZf-j7-NOz" userLabel="Menu Button">
                                                                     <rect key="frame" x="42" y="135" width="44" height="33"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="44" id="93z-yp-KMt"/>
@@ -962,7 +962,7 @@
                                                                         <action selector="menuButtonTapped:" destination="DBR-Xp-cAO" eventType="touchUpInside" id="fyL-1C-4OQ"/>
                                                                     </connections>
                                                                 </button>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qeZ-Gl-Did" userLabel="Rank View">
+                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qeZ-Gl-Did" userLabel="Rank View">
                                                                     <rect key="frame" x="6" y="159" width="74" height="10"/>
                                                                     <subviews>
                                                                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kEt-wc-Be8">
@@ -1143,7 +1143,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StoreBookCollectionViewCellId" id="TsL-Ft-TVm" customClass="StoreBookCollectionViewCell">
-                                                        <rect key="frame" x="4" y="7.5" width="86" height="185"/>
+                                                        <rect key="frame" x="4" y="8" width="86" height="185"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="86" height="185"/>
@@ -1228,7 +1228,7 @@
                                                                         <action selector="playButtonTapped:" destination="TsL-Ft-TVm" eventType="touchUpInside" id="TVi-3o-Dl6"/>
                                                                     </connections>
                                                                 </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AdH-xl-8nF">
+                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AdH-xl-8nF">
                                                                     <rect key="frame" x="60" y="133" width="26" height="26"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="26" id="3u8-8S-tPD"/>
@@ -1261,7 +1261,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DON-FA-Rw4" userLabel="Menu Button">
+                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DON-FA-Rw4" userLabel="Menu Button">
                                                                     <rect key="frame" x="42" y="135" width="44" height="33"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="33" id="B4l-9H-y1U"/>
@@ -1271,7 +1271,7 @@
                                                                         <action selector="menuButtonTapped:" destination="TsL-Ft-TVm" eventType="touchUpInside" id="ho6-8S-bxl"/>
                                                                     </connections>
                                                                 </button>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9j-bd-G1M" userLabel="Rank View">
+                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9j-bd-G1M" userLabel="Rank View">
                                                                     <rect key="frame" x="6" y="159" width="74" height="10"/>
                                                                     <subviews>
                                                                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rxz-o1-WAT">
@@ -1452,7 +1452,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StoreBookCollectionViewCellId" id="scZ-AE-AiS" customClass="StoreBookCollectionViewCell">
-                                                        <rect key="frame" x="4" y="7.5" width="86" height="185"/>
+                                                        <rect key="frame" x="4" y="8" width="86" height="185"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="86" height="185"/>
@@ -1537,7 +1537,7 @@
                                                                         <action selector="playButtonTapped:" destination="scZ-AE-AiS" eventType="touchUpInside" id="qa1-Vo-NZV"/>
                                                                     </connections>
                                                                 </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgf-Fr-LUk">
+                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgf-Fr-LUk">
                                                                     <rect key="frame" x="60" y="133" width="26" height="26"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="26" id="MLl-wZ-2FK"/>
@@ -1570,7 +1570,7 @@
                                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1g-NL-dBT" userLabel="Menu Button">
+                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1g-NL-dBT" userLabel="Menu Button">
                                                                     <rect key="frame" x="42" y="135" width="44" height="33"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="44" id="nKp-gR-maf"/>
@@ -1580,7 +1580,7 @@
                                                                         <action selector="menuButtonTapped:" destination="scZ-AE-AiS" eventType="touchUpInside" id="O9R-vN-cNL"/>
                                                                     </connections>
                                                                 </button>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dq4-k4-PAx" userLabel="Rank View">
+                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dq4-k4-PAx" userLabel="Rank View">
                                                                     <rect key="frame" x="6" y="159" width="74" height="10"/>
                                                                     <subviews>
                                                                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fcs-Kb-UeG">
@@ -2374,7 +2374,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                                         <constraint firstAttribute="width" secondItem="4G3-ra-ssx" secondAttribute="height" multiplier="2:3" id="vD8-Vy-Yey"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-QC-hEz">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lst-QC-hEz">
                                                     <rect key="frame" x="60" y="120" width="26" height="26"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="26" id="8so-Gb-ze0"/>
@@ -2382,7 +2382,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                                     </constraints>
                                                     <state key="normal" image="ic_menu_more_option"/>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Unf-hx-peh">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name of the book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Unf-hx-peh" customClass="ResponsiveLabel">
                                                     <rect key="frame" x="6" y="118" width="61" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="6cA-6P-yXx"/>
@@ -2391,7 +2391,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJo-YC-akZ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auther name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJo-YC-akZ" customClass="ResponsiveLabel">
                                                     <rect key="frame" x="6" y="129" width="61" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="Gat-KE-ddZ"/>
@@ -2400,7 +2400,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajz-sz-Sjo" userLabel="Menu Button">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajz-sz-Sjo" userLabel="Menu Button">
                                                     <rect key="frame" x="42" y="117" width="44" height="33"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="44" id="807-zH-Lnf"/>
@@ -2435,8 +2435,8 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                         </constraints>
                                         <connections>
                                             <outlet property="bgView" destination="7N7-fa-sBs" id="O1B-rS-eqZ"/>
-                                            <outlet property="bookAuther" destination="YJo-YC-akZ" id="4Gc-mM-Gf1"/>
-                                            <outlet property="bookName" destination="Unf-hx-peh" id="MTc-Kw-aQh"/>
+                                            <outlet property="bookAuther" destination="YJo-YC-akZ" id="aFd-2q-KbG"/>
+                                            <outlet property="bookName" destination="Unf-hx-peh" id="SuN-XY-jbv"/>
                                             <outlet property="thumbImageView" destination="4G3-ra-ssx" id="bVT-zc-mY4"/>
                                         </connections>
                                     </collectionViewCell>
@@ -3114,7 +3114,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                                         <action selector="playButtonTapped:" destination="fay-6x-RmS" eventType="touchUpInside" id="vgc-t1-kZe"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCL-8z-m2U">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCL-8z-m2U">
                                                     <rect key="frame" x="60" y="133" width="26" height="26"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="26" id="7gg-yX-8TI"/>
@@ -3147,7 +3147,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpN-BP-7hp" userLabel="Menu Button">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpN-BP-7hp" userLabel="Menu Button">
                                                     <rect key="frame" x="42" y="135" width="44" height="33"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="33" id="Zk7-UX-OpG"/>

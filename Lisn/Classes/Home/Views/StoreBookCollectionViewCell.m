@@ -11,6 +11,7 @@
 #import <ResponsiveLabel.h>
 #import "AppUtils.h"
 #import "Messages.h"
+#import "DataSource.h"
 
 @interface StoreBookCollectionViewCell()
 
@@ -118,6 +119,28 @@
 
   
     }
+    
+    if(_cellObject.isAwarded){
+        _imgAwardIcon.hidden=NO;
+        
+    }else{
+        _imgAwardIcon.hidden=YES;
+    }
+   
+    NSString *priceText=@"Free";
+    if([_cellObject.price floatValue]>0 ){
+        priceText=[NSString stringWithFormat:@"Rs. %@",_cellObject.price];
+    }
+    _priceLabel.text=priceText;
+
+    if([[DataSource sharedInstance] isUserLogin] && _cellObject.isPurchase){
+        _imgDownloadedIcon.hidden=NO;
+        _priceLabel.hidden=YES;
+    }else {
+        _imgDownloadedIcon.hidden=YES;
+        _priceLabel.hidden=NO;
+    }
+    
     NSLog(@"_cellObject.title %@",_cellObject.title);
     _bookName.text=_cellObject.title;
     _bookAuther.text=_cellObject.author;
