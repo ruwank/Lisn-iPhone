@@ -3397,6 +3397,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                     <constraint firstAttribute="height" constant="48" id="nZL-b4-N8h"/>
                                 </constraints>
                                 <state key="normal" image="btn_play_start"/>
+                                <state key="selected" image="btn_play_pause"/>
                                 <connections>
                                     <action selector="playButtonTapped:" destination="hdg-b8-jDA" eventType="touchUpInside" id="xQY-QZ-dSG"/>
                                 </connections>
@@ -3649,6 +3650,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
         </scene>
     </scenes>
     <resources>
+        <image name="btn_play_pause" width="48" height="48"/>
         <image name="btn_play_preview_pause" width="54" height="54"/>
         <image name="btn_play_preview_start" width="54" height="54"/>
         <image name="btn_play_start" width="48" height="48"/>
@@ -3662,7 +3664,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
         <image name="ic_menu_more_option" width="36" height="36"/>
         <image name="ic_menu_mybook" width="36" height="36"/>
         <image name="ic_menu_store" width="36" height="36"/>
-        <image name="ic_search" width="32" height="32"/>
+        <image name="ic_search" width="25" height="25"/>
         <image name="ic_small_star_disabled" width="18" height="18"/>
         <image name="ic_small_star_normal" width="18" height="18"/>
         <image name="img_temp_thumb" width="96" height="145"/>
