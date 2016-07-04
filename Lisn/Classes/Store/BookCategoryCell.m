@@ -14,6 +14,7 @@
 #import "DataSource.h"
 
 @interface BookCategoryCell() <UICollectionViewDataSource, UICollectionViewDelegate>{
+    UIActivityIndicatorView *activityIndicator;
 
 }
 
@@ -33,8 +34,12 @@
 - (void)awakeFromNib
 {
     [self adjustViewHeights];
+    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    activityIndicator.center = self.center;
+    [self addSubview:activityIndicator];
     
-    _booksArray = [[NSMutableArray alloc] init];
+    //_booksArray = [[NSMutableArray alloc] init];
 }
 
 - (void)adjustViewHeights
@@ -52,34 +57,44 @@
     _bookCategory = bookCategory;
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
     
-    //_booksArray=[[DataSource sharedInstance] getStoreBookFarCatergoy:_bookCategory._id];
-    [_booksArray removeAllObjects];
-
-    if(!_booksArray || [_booksArray count] ==0){
+//    if(_booksArray && [_booksArray count]>0)
+//    [_booksArray removeAllObjects];
+//     [_cellCollectionView reloadData];
+    _booksArray=[[DataSource sharedInstance] getStoreBookFarCatergoy:_bookCategory._id];
+     [_cellCollectionView reloadData];
+    [activityIndicator stopAnimating];
+    if([_booksArray count] ==0){
+       
         NSDictionary *params = @ {@"cat" :_bookCategory._id};
-
+[activityIndicator startAnimating];
         
         [manager POST:book_category_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            [activityIndicator stopAnimating];
             if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
                 
                 NSMutableArray *booksDataArray=(NSMutableArray*)responseObject;
+                NSMutableArray *dataArray=[[NSMutableArray alloc] init];
                 for (NSDictionary *dic in booksDataArray) {
                     AudioBook *audioBook=[[AudioBook alloc] initWithDataDictionary:dic];
-                    [_booksArray addObject:audioBook];
+                    [dataArray addObject:audioBook];
                 
                 }
-                [[DataSource sharedInstance] addToStoreBookDic:_booksArray andCatId:_bookCategory._id];
+                NSString *catId=[params objectForKey:@"cat"];
+                [[DataSource sharedInstance] addToStoreBookDic:[dataArray copy] andCatId:catId];
+                if([catId intValue] ==[_bookCategory._id intValue]){
+                self.booksArray=dataArray;
                 [self finishDownload];
+                }else{
+                    NSLog(@"not equal");
+                }
                 
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"error %@",error);
+            [activityIndicator stopAnimating];
             [self finishDownload];
             
         }];
-    }else{
-        [_cellCollectionView reloadData];
- 
     }
 }
 -(void)finishDownload{

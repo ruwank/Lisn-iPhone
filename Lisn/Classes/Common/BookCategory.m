@@ -13,7 +13,10 @@
     self=[super init];
     if(self){
         NSLog(@"dataDic %@",dataDic);
-        self._id=(NSString*)[dataDic objectForKey:@"id"];
+        if([dataDic objectForKey:@"id"]){
+          self._id =[NSString stringWithFormat:@"%@",[dataDic valueForKey:@"id"]];
+        }
+//        self._id=(NSString*)[dataDic objectForKey:@"id"];
         self.name=(NSString*)[dataDic objectForKey:@"name"];
         self.english_name=(NSString*)[dataDic objectForKey:@"english_name"];
     }
