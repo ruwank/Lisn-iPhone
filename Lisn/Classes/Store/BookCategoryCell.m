@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "AppUtils.h"
 #import "WebServiceURLs.h"
+#import "DataSource.h"
 
 @interface BookCategoryCell() <UICollectionViewDataSource, UICollectionViewDelegate>{
 
@@ -51,11 +52,10 @@
     _bookCategory = bookCategory;
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
     
-    
+    //_booksArray=[[DataSource sharedInstance] getStoreBookFarCatergoy:_bookCategory._id];
     [_booksArray removeAllObjects];
-    [_cellCollectionView reloadData];
 
-    if([_booksArray count] ==0){
+    if(!_booksArray || [_booksArray count] ==0){
         NSDictionary *params = @ {@"cat" :_bookCategory._id};
 
         
@@ -68,7 +68,7 @@
                     [_booksArray addObject:audioBook];
                 
                 }
-                
+                [[DataSource sharedInstance] addToStoreBookDic:_booksArray andCatId:_bookCategory._id];
                 [self finishDownload];
                 
             }
@@ -77,6 +77,9 @@
             [self finishDownload];
             
         }];
+    }else{
+        [_cellCollectionView reloadData];
+ 
     }
 }
 -(void)finishDownload{

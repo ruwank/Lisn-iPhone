@@ -20,12 +20,15 @@
 #import "Messages.h"
 #import "FileOperator.h"
 #import "PlayerViewController.h"
+#import "LoadingIndicator.h"
+
 
 #define ALERT_VIEW_TAG_DOWNLOD_COMPETE 10
+#define ALERT_VIEW_TAG_PAYMENT_COMPETE  20
 
-@interface BookDetailViewController () <UITableViewDelegate, UITableViewDataSource, DetailViewTableViewCellDelegate,PurchaseViewControllerDelegate,LoginViewControllerDelegate,UIActionSheetDelegate>{
+@interface BookDetailViewController () <UITableViewDelegate, UITableViewDataSource, DetailViewTableViewCellDelegate,PurchaseViewControllerDelegate,LoginViewControllerDelegate,UIActionSheetDelegate,LoadingIndicatorDelegate>{
     BOOL isSelectChapter;
-    UIActivityIndicatorView *activityIndicator;
+   // UIActivityIndicatorView *activityIndicator;
     BOOL isSelectCard;
 }
 
@@ -83,6 +86,7 @@
 @property (nonatomic, assign) float lblHeightLimit;
 @property (nonatomic, assign) float lblHeight;
 @property (nonatomic, strong) BookChapter *selectedChapter;
+@property (nonatomic, strong) LoadingIndicator *indicator;
 
 
 @end
@@ -109,8 +113,9 @@
 }
 
 - (IBAction)payByBillButtonTapped:(id)sender {
-    isSelectChapter=NO;
-    isSelectCard=NO;
+    //isSelectChapter=NO;
+    //isSelectCard=NO;
+    [AppUtils showContentIsNotReadyAlert];
 
 }
 
@@ -177,21 +182,27 @@
     }
 }
 -(void)downloadAudioBook{
+    BOOL downloadComplete=YES;
     for (BookChapter *chapter in _audioBook.chapters) {
         if(![FileOperator isAudioFileExists:_audioBook.book_id andFileIndex:chapter.chapter_id]){
             [self downloadAudioFile:_audioBook.book_id andFileIndex:chapter.chapter_id];
+            downloadComplete=NO;
             break;
         }
     }
-    [activityIndicator stopAnimating];
+    if(downloadComplete){
+    [self showDownloadCompleteMessage];
+    [self.indicator hide];
+    }
 
     
 }
 -(void)downloadAudioFile:(NSString*)bookId andFileIndex:(int)index{
-    [activityIndicator startAnimating];
+    self.indicator.loadingText=@"Downloading...";
+    [self.indicator show];
 
     [WebServiceManager downloadAudioFile:bookId andFileIndex:index withResponseHandeler:^(BOOL success, ErrorType errorType) {
-        [activityIndicator stopAnimating];
+        [self.indicator hide];
 
         if(success){
             if(isSelectChapter){
@@ -201,7 +212,7 @@
             }
 
         }else{
-            
+            [AppUtils showCommonErrorAlert];
         }
     }];
 }
@@ -272,10 +283,12 @@
     _payByBillBtn.layer.borderColor = RGBA(255, 255, 255, 1).CGColor;
     
     [self adjustViewHeights];
-    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
-    activityIndicator.center = self.view.center;
-    [self.view addSubview:activityIndicator];
+//    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//    activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+//    activityIndicator.center = self.view.center;
+//    [self.view addSubview:activityIndicator];
+    self.indicator = [[LoadingIndicator alloc] initWithDelegate:self];
+    self.indicator.loadingText = @"Loading";
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -445,6 +458,10 @@
     [self payByBillButtonTapped:nil];
 }
 #pragma mark
+-(void)updateAudioBook{
+    [[DataSource sharedInstance] addBookToUserBookList:_audioBook];
+
+}
 -(void)showDownloadCompleteMessage{
    UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:DOWNLOAD_COMPLETE_TITLE message:DOWNLOAD_COMPLETE_MESSAGE delegate:self cancelButtonTitle:BUTTON_YES otherButtonTitles:BUTTON_NO,nil];
     alertView.tag=ALERT_VIEW_TAG_DOWNLOD_COMPETE;
@@ -456,7 +473,7 @@
     if(isSelectChapter){
         chapterIndex=_selectedChapter.chapter_id;
     }else{
-        
+        chapterIndex=1;
     }
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PlayerViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"PlayerViewControllerId"];
@@ -471,6 +488,7 @@
     [self presentViewController:viewController animated:YES completion:nil];
 }
 -(void)showPaymentOptionActionSheet{
+    
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Select Payment Option"
                                                              delegate:self
                                                     cancelButtonTitle:nil
@@ -479,9 +497,10 @@
     actionSheet.tag=200;
     
     [actionSheet showInView:self.view];
+    
 }
 -(void)logUserDownload{
-    [activityIndicator startAnimating];
+    [self.indicator show];
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
     
     AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
@@ -507,15 +526,19 @@
             _audioBook.isPurchase=YES;
             if(isSelectChapter){
                 _selectedChapter.isPurchased=YES;
-
+                [self updateAudioBook];
                 [self downloadAudioFile:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id];
             }else{
-                [self downloadAudioBook];
                 _audioBook.isTotalBookPurchased=YES;
+                [self updateAudioBook];
+
+                [self downloadAudioBook];
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"error %@",error);
-            [activityIndicator stopAnimating];
+            [self.indicator hide];
+            [AppUtils showCommonErrorAlert];
+
 
         }];
 }
@@ -545,17 +568,46 @@
     }
     
 }
+-(void)startDownloadFile{
+    if(isSelectChapter){
+        [self downloadAudioFile:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id];
+    }else{
+       
+        [self downloadAudioBook];
+    }
+
+}
+-(void)chapterByFromCard{
+//    BookChapter bookChapter = (BookChapter) getIntent().getSerializableExtra("selectedChapter");
+//    float amount= (float) ((bookChapter.getPrice()) * ((100.0-bookChapter.getDiscount())/100.0));
+//    url=url+"&amount="+amount+"&chapid="+bookChapter.getChapter_id();
+    
+    UserProfile *userProfile=[[DataSource sharedInstance] getProfileInfo];
+    NSString *userId=userProfile.userId;
+    NSString *bookid=_audioBook.book_id;
+    
+    float amount= (float) ((_selectedChapter.price ) * ((100.0-_selectedChapter.discount)/100.0));
+    
+    NSString *url=[NSString stringWithFormat:@"%@?userid=%@&bookid=%@&amount=%f&chapid=%d",purchase_book_url,userId,bookid,amount,_selectedChapter.chapter_id];
+    [self loadPurchaseViewController:url];
+}
 #pragma mark -PurchaseViewControllerDelegate methods
 - (void)purchaseComplete:(PaymentStatus)status{
     if(status == RESULT_SUCCESS || status== RESULT_SUCCESS_ALREADY){
         _audioBook.isPurchase=YES;
         if(isSelectChapter){
             _selectedChapter.isPurchased=YES;
-            [self downloadAudioFile:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id];
+            [self updateAudioBook];
+
         }else{
             _audioBook.isTotalBookPurchased=YES;
-            [self downloadAudioBook];
+            [self updateAudioBook];
         }
+        UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:PAYMENT_COMPLETE_TITLE message:PAYMENT_COMPLETE_MESSAGE delegate:self cancelButtonTitle:BUTTON_YES otherButtonTitles:BUTTON_NO,nil];
+        alertView.tag=ALERT_VIEW_TAG_PAYMENT_COMPETE;
+        [alertView show];
+    }else{
+        [AppUtils showCommonErrorAlert];
     }
 }
 #pragma mark - LoginViewControllerDelegate
@@ -596,7 +648,22 @@
             //do something
         }
     }
+    else if(alertView.tag==ALERT_VIEW_TAG_PAYMENT_COMPETE){
+        
+        if(buttonIndex == 0)//YES button pressed
+        {
+            //do something
+            [self startDownloadFile];
+            
+        }
+        else if(buttonIndex == 1)//NO button pressed.
+        {
+            //do something
+        }
+    }
+
 }
+
 #pragma mark -UIActionSheetDelegate method
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -605,11 +672,15 @@
         if(buttonIndex == 0)//payby bill button pressed
         {
             //do something
+            [AppUtils showContentIsNotReadyAlert];
+
             
         }
         else if(buttonIndex == 1)//card button pressed.
         {
             //do something
+            [self chapterByFromCard];
+            
         }
     }
     

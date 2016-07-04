@@ -27,6 +27,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [_tableView reloadData];
+}
 
 #pragma mark - Table view data source
 
@@ -37,7 +41,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    if([[DataSource sharedInstance] isUserLogin]){
+        return 7;
+
+    }else{
+        return 6;
+
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -67,6 +77,9 @@
         case 5:
             CellIdentifier = @"contactus";
             break;
+        case 6:
+            CellIdentifier = @"logout";
+            break;
     }
     
     
@@ -92,6 +105,8 @@
 
             return NO;
         }
+    }else if([identifier isEqualToString:@"logout_segue_id"]){
+        [[DataSource sharedInstance] logOutUser];
     }
     
     return YES;

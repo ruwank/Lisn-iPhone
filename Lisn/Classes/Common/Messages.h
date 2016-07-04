@@ -83,6 +83,8 @@ static NSString * const USER_DUPLICATE_MESSAGE =@"There is an active account und
 static NSString * const USER_EXIST_TITLE =@"Almost there...";
 static NSString * const USER_EXIST_MESSAGE =@"An email has been sent to your email address. Please open it and click on the link to activate your Lisn account.";
 
+static NSString *const ALERT_TITLE_COMMON           = @"Oops!";
+static NSString *const ALERT_MSG_COMMON             = @"Something went wrong. If this continues to happen please contact us.";
 
 static NSString * const SHARE_SUCCESS_TITLE =@"Success";
 static NSString * const SHARE_SUCCESS_MESSAGE =@"Post was published successfully!.";

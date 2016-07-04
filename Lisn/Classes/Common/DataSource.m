@@ -8,11 +8,14 @@
 
 #import "DataSource.h"
 #import "FileOperator.h"
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 
 @interface DataSource(){
     NSMutableDictionary *userAudioBook;
     UserProfile *userProfile;
+    NSMutableDictionary *storeBoookDic;
 
 }
 @end
@@ -22,7 +25,7 @@
 -(id)init{
     
     if(self=[super init]){
-      //  userAudioBook = [[NSMutableDictionary alloc] init];
+        storeBoookDic = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -53,6 +56,13 @@
     [userAudioBook setValue:theBook forKey:theBook.book_id];
     [self saveUserBook:userAudioBook];
 }
+-(void)addToStoreBookDic:(NSMutableArray*)bookData andCatId:(NSString*)catId{
+    [storeBoookDic setValue:bookData forKey:catId];
+}
+-(NSMutableArray*)getStoreBookFarCatergoy:(NSString*)catId{
+    return [storeBoookDic objectForKey:catId];
+}
+
 
 
 //SAVE METHODS
@@ -80,6 +90,19 @@
         returnValue=true;
     }
     return returnValue;
+}
+-(void)logOutUser{
+    if ([FBSDKAccessToken currentAccessToken]) {
+
+    [[FBSDKLoginManager new] logOut];
+    }
+
+    UserProfile *profile=[[UserProfile alloc] init];
+    [self saveProfileInfo:profile];
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc] init];
+    [self saveUserBook:dic];
+    
+    
 }
 
 -(UserProfile*)getProfileInfo{

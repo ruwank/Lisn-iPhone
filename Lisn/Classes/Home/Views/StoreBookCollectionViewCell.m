@@ -133,7 +133,8 @@
     }
     _priceLabel.text=priceText;
 
-    if([[DataSource sharedInstance] isUserLogin] && _cellObject.isPurchase){
+    if([[DataSource sharedInstance] isUserLogin] && (_cellObject.isPurchase || [AppUtils isBookPurchase:_cellObject.book_id])){
+        _cellObject.isPurchase=YES;
         _imgDownloadedIcon.hidden=NO;
         _priceLabel.hidden=YES;
     }else {

@@ -22,4 +22,9 @@
 + (BOOL) isValidEmail:(NSString *)checkString;
 +(NSString*)getDeviceId;
 +(ServiceProvider)getServiceProvider;
++(BOOL)isBookPurchase:(NSString*)bookId;
++(BOOL)isBookChapterPurchase:(NSString*)bookId andChapter:(int)index;
++(void)showContentIsNotReadyAlert;
++(void)showCommonErrorAlert;
+
 @end
