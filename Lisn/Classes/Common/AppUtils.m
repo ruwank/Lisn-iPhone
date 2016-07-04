@@ -8,6 +8,7 @@
 
 #import "AppUtils.h"
 #import "AppConstant.h"
+#import "NSData+AES.h"
 
 @implementation AppUtils
 
@@ -113,6 +114,37 @@
     
     NSString  *currentDeviceId = [[device identifierForVendor]UUIDString];
     return currentDeviceId;
+}
+
++ (NSData *)getDecryptedDataOf:(NSData *)audioData
+{
+    NSString *key = @"K66wl3d43I$P0937";
+    
+    char keyPtr[kCCKeySizeAES256+1];
+    bzero(keyPtr, sizeof(keyPtr));
+    
+    [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
+    
+    NSUInteger dataLength = [audioData length];
+    
+    size_t bufferSize = dataLength + kCCBlockSizeAES128;
+    void *buffer = malloc(bufferSize);
+    
+    size_t numBytesDecrypted = 0;
+    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt, kCCAlgorithmAES128,
+                                          kCCOptionPKCS7Padding | kCCOptionECBMode,
+                                          keyPtr, kCCBlockSizeAES128,
+                                          NULL,
+                                          [audioData bytes], dataLength,
+                                          buffer, bufferSize,
+                                          &numBytesDecrypted);
+    
+    if (cryptStatus == kCCSuccess) {
+        return [NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
+    }
+    
+    free(buffer);
+    return nil;
 }
 
 @end

@@ -22,4 +22,7 @@
 + (BOOL) isValidEmail:(NSString *)checkString;
 +(NSString*)getDeviceId;
 +(ServiceProvider)getServiceProvider;
+
++ (NSData *)getDecryptedDataOf:(NSData *)audioData;
+
 @end
