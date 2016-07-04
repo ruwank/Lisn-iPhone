@@ -12,6 +12,9 @@
 
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 
+@property (nonatomic, strong) NSString *currentBookId;
+@property (nonatomic, assign) int currentChapterIndex;
+
 + (AudioPlayer *)getSharedInstance;
 
 - (BOOL)setAudioData:(NSData *)audioData;

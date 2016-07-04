@@ -6,6 +6,7 @@
 //
 
 #import "AudioPlayer.h"
+#import "AppConstant.h"
 
 @interface AudioPlayer() <AVAudioPlayerDelegate>
 
@@ -97,6 +98,8 @@ static AudioPlayer *instance;
 
 - (void)stopAudio
 {
+    _currentBookId = nil;
+    
     [self.audioPlayer stop];
     _backgroundMusicPlaying = NO;
 }
@@ -126,10 +129,16 @@ static AudioPlayer *instance;
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
     
     _backgroundMusicPlaying = NO;
+    [self stopAudio];
+    
+    NSDictionary *infoDic = @{PlayerNotificationTypeKey : [NSNumber numberWithInt:PlayerNotificationTypePlayingFinished]};
+    [[NSNotificationCenter defaultCenter] postNotificationName:PLAYER_NOTIFICATION object:nil userInfo:infoDic];
 }
 
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
-    
+    [self pauseAudio];
+    NSDictionary *infoDic = @{PlayerNotificationTypeKey : [NSNumber numberWithInt:PlayerNotificationTypePlayingPaused]};
+    [[NSNotificationCenter defaultCenter] postNotificationName:PLAYER_NOTIFICATION object:nil userInfo:infoDic];
 }
 
 - (void)audioSessionNotificationReceived:(NSNotification *)notification
@@ -138,8 +147,16 @@ static AudioPlayer *instance;
     if (number.intValue == AVAudioSessionInterruptionTypeBegan) {
         _backgroundMusicInterrupted = YES;
         _backgroundMusicPlaying = NO;
+        [self pauseAudio];
+        
+        NSDictionary *infoDic = @{PlayerNotificationTypeKey : [NSNumber numberWithInt:PlayerNotificationTypePlayingPaused]};
+        [[NSNotificationCenter defaultCenter] postNotificationName:PLAYER_NOTIFICATION object:nil userInfo:infoDic];
+        
     }else if (number.intValue == AVAudioSessionInterruptionTypeEnded) {
         [self playAudio];
+        
+        NSDictionary *infoDic = @{PlayerNotificationTypeKey : [NSNumber numberWithInt:PlayerNotificationTypePlayingResumed]};
+        [[NSNotificationCenter defaultCenter] postNotificationName:PLAYER_NOTIFICATION object:nil userInfo:infoDic];
     }
 }
 
