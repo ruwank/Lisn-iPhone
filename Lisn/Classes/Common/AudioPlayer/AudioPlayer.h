@@ -7,27 +7,21 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@protocol AudioPlayerDelegate
-@required
-- (void) audioFinishPlaying;
-@end
 
-@interface AudioPlayer : NSObject <AVAudioPlayerDelegate>{
-    id<NSObject, AudioPlayerDelegate>   audioDelegate;
-}
+@interface AudioPlayer : NSObject
 
-@property (nonatomic, retain) AVAudioPlayer *audioPlayer;
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 
-@property (nonatomic, retain) IBOutlet id<AudioPlayerDelegate,NSObject> audioDelegate;
++ (AudioPlayer *)getSharedInstance;
 
-// Public methods
-- (void)initPlayer:(NSString*) audioFile fileExtension:(NSString*)fileExtension;
+- (BOOL)setAudioData:(NSData *)audioData;
 
-- (void)playAudio;
+- (BOOL)playAudio;
 
 - (void)pauseAudio;
 
 - (void)stopAudio;
 
 - (BOOL)isPlaying;
+
 @end
