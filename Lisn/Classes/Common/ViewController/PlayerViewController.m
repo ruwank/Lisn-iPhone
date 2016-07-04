@@ -10,13 +10,11 @@
 #import "FileOperator.h"
 #import "AudioPlayer.h"
 #import "AppUtils.h"
+#import "PlayerBarView.h"
 
 @import AVFoundation;
 
-@interface PlayerViewController () <AVAudioPlayerDelegate>{
-    NSString *bookId;
-    int chapterIndex;
-}
+@interface PlayerViewController ()
 
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UILabel *currentTimeLbl;
@@ -24,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
 
 
+@property (nonatomic, strong) NSString *bookId;
+@property (assign) int chapterIndex;
 @property (nonatomic, strong) NSTimer *timer;
 @property (assign) int totalTime;
 @property (assign) int currentTime;
@@ -34,22 +34,24 @@
 
 - (IBAction)playButtonTapped:(id)sender {
     
-    if (_playBtn.selected) {
+    if (!_playBtn.selected) {
         if (![[AudioPlayer getSharedInstance] playAudio]) {
             //ToDo show error msg on can't play
         }
         [self startTimer];
-        _playBtn.selected = NO;
+        _playBtn.selected = YES;
     }else {
         [[AudioPlayer getSharedInstance] pauseAudio];
         [self invalidateTimer];
-        _playBtn.selected = YES;
+        _playBtn.selected = NO;
     }
 }
 
 - (void)dealloc
 {
     [self invalidateTimer];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     NSLog(@"dealloc : %@",[self description]);
 }
@@ -58,10 +60,32 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    if ([PlayerBarView isVisible]) {
+        [PlayerBarView hideView];
+    }
+    
     AudioPlayer *player = [AudioPlayer getSharedInstance];
+    
+    BOOL isNewFile = YES;
+    
+    if (player.currentBookId != nil) {
+        NSString *cBookId = [NSString stringWithFormat:@"%@", player.currentBookId];
+        if ([cBookId isEqualToString:_bookId] && player.currentChapterIndex == _chapterIndex) {
+            isNewFile = NO;
+        }
+    }
+    
+    if (isNewFile) {
+        [player stopAudio];
+    }
+    
+    player.currentBookId = _bookId;
+    player.currentChapterIndex = _chapterIndex;
+    
     if ([player isPlaying]) {
         [self timerFired:nil];
         [self startTimer];
+        _playBtn.selected = YES;
     } else {
         
         BOOL canPlay = NO;
@@ -80,6 +104,49 @@
         if (!canPlay) {
             //ToDo show error msg on can't play
         }
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerNotificationReceived:) name:PLAYER_NOTIFICATION object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [PlayerBarView showView];
+}
+
+- (void)startPlaying
+{
+    [self startTimer];
+    _playBtn.selected = YES;
+}
+
+- (void)stopPlaying
+{
+    [self invalidateTimer];
+    _currentTime = 0;
+    
+    [self updateSlider];
+    [self updateElapsedTime];
+    _playBtn.selected = NO;
+}
+
+- (void)pausePlaying
+{
+    [self invalidateTimer];
+    _playBtn.selected = NO;
+}
+
+- (void)playerNotificationReceived:(NSNotification *)notification
+{
+    NSNumber *number = [notification.userInfo objectForKey:PlayerNotificationTypeKey];
+    if (number.intValue == PlayerNotificationTypePlayingFinished) {
+        [self stopPlaying];
+    }else if (number.intValue == PlayerNotificationTypePlayingPaused) {
+        [self pausePlaying];
+    }else if (number.intValue == PlayerNotificationTypePlayingResumed) {
+        [self startPlaying];
     }
 }
 
@@ -151,13 +218,13 @@
 #pragma mark - PlayerCodes
 
 -(void)setAudioBook:(NSString*)theBookId andFileIndex:(int)index{
-    bookId = theBookId;
-    chapterIndex = index;
+    _bookId = theBookId;
+    _chapterIndex = index;
 }
 
 - (NSData *)getAudioData
 {
-    NSString *audioFilePath = [FileOperator getAudioFilePath:bookId andFileIndex:chapterIndex];
+    NSString *audioFilePath = [FileOperator getAudioFilePath:_bookId andFileIndex:_chapterIndex];
     NSError* error = nil;
     NSData *fileData = [NSData dataWithContentsOfFile:audioFilePath options: 0 error: &error];
     
