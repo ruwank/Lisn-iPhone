@@ -27,4 +27,6 @@
 +(void)showContentIsNotReadyAlert;
 +(void)showCommonErrorAlert;
 
++ (NSData *)getDecryptedDataOf:(NSData *)audioData;
+
 @end

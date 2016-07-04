@@ -21,6 +21,7 @@
 		74DCF9F91D27FF63001FBC26 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DCF9F81D27FF63001FBC26 /* PlayerViewController.m */; };
 		74F9F5781CA6FEB40025FE88 /* MyBookCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F9F5771CA6FEB40025FE88 /* MyBookCollectionViewCell.m */; };
 		74F9F57B1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F9F57A1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m */; };
+		74FC2C081D2A0D03006AE58D /* PlayerBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FC2C071D2A0D03006AE58D /* PlayerBarView.m */; };
 		74FDF28D1CF1EB9100D14617 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FDF28C1CF1EB9100D14617 /* SignUpViewController.m */; };
 		84018DD41C992CAE009C9403 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84018DD31C992CAE009C9403 /* main.m */; };
 		84018DDF1C992CAE009C9403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84018DDE1C992CAE009C9403 /* Assets.xcassets */; };
@@ -84,6 +85,8 @@
 		74F9F5771CA6FEB40025FE88 /* MyBookCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBookCollectionViewCell.m; sourceTree = "<group>"; };
 		74F9F5791CA6FF0D0025FE88 /* StoreBookCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreBookCollectionViewCell.h; sourceTree = "<group>"; };
 		74F9F57A1CA6FF0D0025FE88 /* StoreBookCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreBookCollectionViewCell.m; sourceTree = "<group>"; };
+		74FC2C061D2A0D03006AE58D /* PlayerBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerBarView.h; sourceTree = "<group>"; };
+		74FC2C071D2A0D03006AE58D /* PlayerBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerBarView.m; sourceTree = "<group>"; };
 		74FDF28B1CF1EB9100D14617 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		74FDF28C1CF1EB9100D14617 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		84018DCF1C992CAE009C9403 /* Lisn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lisn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +189,8 @@
 			children = (
 				74AABFA31D20193900194FBE /* DetailViewTableViewCell.h */,
 				74AABFA41D20193900194FBE /* DetailViewTableViewCell.m */,
+				74FC2C061D2A0D03006AE58D /* PlayerBarView.h */,
+				74FC2C071D2A0D03006AE58D /* PlayerBarView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -464,6 +469,7 @@
 				84018DCD1C992CAE009C9403 /* Resources */,
 				518FC93C80F730FB71F19589 /* [CP] Embed Pods Frameworks */,
 				00FBC49C0574ED596E93BC2A /* [CP] Copy Pods Resources */,
+				3C549C1CB2A20FBD59DACC14 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -543,6 +549,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lisn/Pods-Lisn-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		3C549C1CB2A20FBD59DACC14 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lisn/Pods-Lisn-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		518FC93C80F730FB71F19589 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -583,6 +604,7 @@
 				84018E011C99350C009C9403 /* AppUtils.m in Sources */,
 				FD2A690F1CA5A30A00B63131 /* LisnBaseViewController.m in Sources */,
 				84018DD41C992CAE009C9403 /* main.m in Sources */,
+				74FC2C081D2A0D03006AE58D /* PlayerBarView.m in Sources */,
 				7419B94B1CAB8CE7002D59E9 /* TopTabsScrollView.m in Sources */,
 				FDBB69481D297A080069109B /* LoadingIndicator.m in Sources */,
 				FD2A691B1CA5A47400B63131 /* ContactUsViewController.m in Sources */,

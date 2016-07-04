@@ -6,57 +6,158 @@
 //
 
 #import "AudioPlayer.h"
+#import "AppConstant.h"
 
-@interface AudioPlayer()
+@interface AudioPlayer() <AVAudioPlayerDelegate>
+
+@property (strong, nonatomic) AVAudioSession *audioSession;
+@property (assign) BOOL backgroundMusicPlaying;
+@property (assign) BOOL backgroundMusicInterrupted;
+
+@property (assign) BOOL canPlayAudio;
 
 @end
 
+static AudioPlayer *instance;
+
 @implementation AudioPlayer
 
-@synthesize  audioDelegate;
-
-- (void)initPlayer:(NSString*) audioFile fileExtension:(NSString*)fileExtension
++ (AudioPlayer *)getSharedInstance
 {
-    NSURL *audioFileLocationURL = [[NSBundle mainBundle] URLForResource:audioFile withExtension:fileExtension];
-    NSError *error;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audioFileLocationURL error:&error];
-    self.audioPlayer.delegate = self;
-}
--(void)playAudioFile:(NSString*)filePath{
-    if(self.audioPlayer ){
-        
+    if (instance == nil) {
+        instance = [[AudioPlayer alloc] init];
     }
+    
+    return instance;
 }
-/*
- * Simply fire the play Event
- */
-- (void)playAudio {
+
+- (void)dealloc
+{
+    [self stopAudio];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioSessionNotificationReceived:) name:AVAudioSessionInterruptionNotification object:nil];
+    }
+    
+    return self;
+}
+
+- (BOOL)setAudioData:(NSData *)audioData
+{
+    [self configureAudioSession];
+    
+    NSError* error = nil;
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:audioData fileTypeHint:AVFileTypeMPEGLayer3 error:&error];
+    
+    if (self.audioPlayer == nil) {
+        NSLog(@"AudioPlayer did not load properly: %@", [error description]);
+    }
+    
+    if(error){
+        NSLog(@"error %@",error);
+        return NO;
+    }
+    
+    self.audioPlayer.delegate = self;
+    
+    return YES;
+}
+
+- (BOOL)playAudio {
+    
+    if (!_canPlayAudio) {
+        return NO;
+    }
+    
+    if ([self.audioSession isOtherAudioPlaying]) {
+        return NO;
+    }
+    
+    if (self.backgroundMusicPlaying) {
+        return YES;
+    }
+    
     [self.audioPlayer prepareToPlay];
     [self.audioPlayer play];
+    _backgroundMusicPlaying = YES;
+    _backgroundMusicInterrupted = NO;
+    
+    return YES;
 }
 
-/*
- * Simply fire the pause Event
- */
-- (void)pauseAudio {
+- (void)pauseAudio
+{
     [self.audioPlayer pause];
-}
-/*
- * Simply fire the stop Event
- */
-- (void)stopAudio{
-    [self.audioPlayer stop];
+    _backgroundMusicPlaying = NO;
 }
 
-/*
- * Simply check audio is currently playing or not
- */
-- (BOOL)isPlaying {
+- (void)stopAudio
+{
+    _currentBookId = nil;
+    
+    [self.audioPlayer stop];
+    _backgroundMusicPlaying = NO;
+}
+
+- (BOOL)isPlaying
+{
     return self.audioPlayer.playing;
 }
+
+- (void)configureAudioSession
+{
+    self.audioSession = [AVAudioSession sharedInstance];
+
+    NSError *setCategoryError = nil;
+    [self.audioSession setCategory:AVAudioSessionCategoryAmbient error:&setCategoryError];
+    
+    if (setCategoryError) {
+        NSLog(@"Error setting category! %ld", (long)[setCategoryError code]);
+        _canPlayAudio = NO;
+    }
+    
+    _canPlayAudio = YES;
+}
+
+#pragma mark - AVAudioPlayerDelegate
+
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    //NSLog(@"finished");
-    [self.audioDelegate performSelector:@selector(audioFinishPlaying)];
+    
+    _backgroundMusicPlaying = NO;
+    [self stopAudio];
+    
+    NSDictionary *infoDic = @{PlayerNotificationTypeKey : [NSNumber numberWithInt:PlayerNotificationTypePlayingFinished]};
+    [[NSNotificationCenter defaultCenter] postNotificationName:PLAYER_NOTIFICATION object:nil userInfo:infoDic];
+}
+
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+    [self pauseAudio];
+    NSDictionary *infoDic = @{PlayerNotificationTypeKey : [NSNumber numberWithInt:PlayerNotificationTypePlayingPaused]};
+    [[NSNotificationCenter defaultCenter] postNotificationName:PLAYER_NOTIFICATION object:nil userInfo:infoDic];
+}
+
+- (void)audioSessionNotificationReceived:(NSNotification *)notification
+{
+    NSNumber *number = [notification.userInfo objectForKey:AVAudioSessionInterruptionTypeKey];
+    if (number.intValue == AVAudioSessionInterruptionTypeBegan) {
+        _backgroundMusicInterrupted = YES;
+        _backgroundMusicPlaying = NO;
+        [self pauseAudio];
+        
+        NSDictionary *infoDic = @{PlayerNotificationTypeKey : [NSNumber numberWithInt:PlayerNotificationTypePlayingPaused]};
+        [[NSNotificationCenter defaultCenter] postNotificationName:PLAYER_NOTIFICATION object:nil userInfo:infoDic];
+        
+    }else if (number.intValue == AVAudioSessionInterruptionTypeEnded) {
+        [self playAudio];
+        
+        NSDictionary *infoDic = @{PlayerNotificationTypeKey : [NSNumber numberWithInt:PlayerNotificationTypePlayingResumed]};
+        [[NSNotificationCenter defaultCenter] postNotificationName:PLAYER_NOTIFICATION object:nil userInfo:infoDic];
+    }
 }
 
 

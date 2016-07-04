@@ -10,6 +10,7 @@
 #import "AppConstant.h"
 #import "DataSource.h"
 #import "Messages.h"
+#import "NSData+AES.h"
 
 @implementation AppUtils
 
@@ -119,14 +120,14 @@
 +(BOOL)isBookPurchase:(NSString*)bookId{
     BOOL returnValue=NO;
     if([[DataSource sharedInstance] isUserLogin]){
-    NSDictionary *userBook=[[DataSource sharedInstance] getUserBook];
-    if(userBook){
-        AudioBook *book=[userBook objectForKey:bookId];
-        if(book){
-            returnValue=YES;
+        NSDictionary *userBook=[[DataSource sharedInstance] getUserBook];
+        if(userBook){
+            AudioBook *book=[userBook objectForKey:bookId];
+            if(book){
+                returnValue=YES;
+            }
+            
         }
-
-    }
     }
     return returnValue;
 }
@@ -138,14 +139,14 @@
         if(book.isTotalBookPurchased){
             returnValue=YES;
         }else{
-        for (BookChapter *chapter in book.chapters) {
-            if(chapter.chapter_id == index){
-                returnValue=chapter.isPurchased;
-                break;
+            for (BookChapter *chapter in book.chapters) {
+                if(chapter.chapter_id == index){
+                    returnValue=chapter.isPurchased;
+                    break;
+                }
             }
         }
-        }
-
+        
     }
     return returnValue;
 }
@@ -156,6 +157,38 @@
 +(void)showCommonErrorAlert{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:ALERT_TITLE_COMMON message:ALERT_MSG_COMMON delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
-
+    
 }
+
++ (NSData *)getDecryptedDataOf:(NSData *)audioData
+{
+    NSString *key = @"K66wl3d43I$P0937";
+    
+    char keyPtr[kCCKeySizeAES256+1];
+    bzero(keyPtr, sizeof(keyPtr));
+    
+    [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
+    
+    NSUInteger dataLength = [audioData length];
+    
+    size_t bufferSize = dataLength + kCCBlockSizeAES128;
+    void *buffer = malloc(bufferSize);
+    
+    size_t numBytesDecrypted = 0;
+    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt, kCCAlgorithmAES128,
+                                          kCCOptionPKCS7Padding | kCCOptionECBMode,
+                                          keyPtr, kCCBlockSizeAES128,
+                                          NULL,
+                                          [audioData bytes], dataLength,
+                                          buffer, bufferSize,
+                                          &numBytesDecrypted);
+    
+    if (cryptStatus == kCCSuccess) {
+        return [NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
+    }
+    
+    free(buffer);
+    return nil;
+}
+
 @end
