@@ -19,4 +19,8 @@
 -(void)saveProfileInfo:(UserProfile*)profileInfo;
 -(BOOL)isUserLogin;
 -(void)addBookToUserBookList:(AudioBook*)theBook;
+-(void)logOutUser;
+
+-(void)addToStoreBookDic:(NSMutableArray*)bookData andCatId:(NSString*)catId;
+-(NSMutableArray*)getStoreBookFarCatergoy:(NSString*)catId;
 @end

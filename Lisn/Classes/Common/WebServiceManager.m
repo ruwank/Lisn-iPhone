@@ -168,6 +168,14 @@
 
 }
 +(void)downloadAudioFile:(NSString*)bookId andFileIndex:(int)index withResponseHandeler:(FileDownloderResponseHandler)block{
+    
+    NSString *filePath=[[FileOperator getRootDirectory] stringByAppendingPathComponent:@"temp.mp3"];
+    NSError *error;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+    if (success) {
+    }
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
 
     NSString *destinationfilePath=[FileOperator getAudioFilePath:bookId andFileIndex:index];

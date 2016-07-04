@@ -8,6 +8,7 @@
 
 #import "DetailViewTableViewCell.h"
 #import "FileOperator.h"
+#import "AppUtils.h"
 
 @interface DetailViewTableViewCell()
 
@@ -51,7 +52,8 @@
     }
     
     NSString *buttonText=@"Download";
-    if(_chapter.isPurchased){
+    if(_chapter.isPurchased || [AppUtils isBookChapterPurchase:bookId andChapter:_chapter.chapter_id]){
+        _chapter.isPurchased=YES;
         if([FileOperator isAudioFileExists:bookId andFileIndex:_chapter.chapter_id]){
             buttonText=@"Play";
         }

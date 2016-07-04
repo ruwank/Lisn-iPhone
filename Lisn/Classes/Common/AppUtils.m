@@ -115,6 +115,15 @@
     NSString  *currentDeviceId = [[device identifierForVendor]UUIDString];
     return currentDeviceId;
 }
++(BOOL)isBookPurchase:(NSString*)bookId{
+    BOOL returnValue=NO;
+    if([[DataSource sharedInstance] isUserLogin]){
+    NSDictionary *userBook=[[DataSource sharedInstance] getUserBook];
+    if(userBook){
+        AudioBook *book=[userBook objectForKey:bookId];
+        if(book){
+            returnValue=YES;
+        }
 
 + (NSData *)getDecryptedDataOf:(NSData *)audioData
 {

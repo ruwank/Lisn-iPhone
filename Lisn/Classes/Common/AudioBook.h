@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BookChapter.h"
 
 @interface AudioBook : NSObject<NSCoding>
 
