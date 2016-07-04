@@ -85,3 +85,14 @@ typedef enum  {
 
 
 #define CONTACT_US_MAIL     @"info@lisn.audio"
+
+#define PLAYER_NOTIFICATION @"player_notification"
+#define PlayerNotificationTypeKey    @"PlayerNotificationTypeKey"
+#define PlayerNotificationTypePlayingFinished   1
+#define PlayerNotificationTypePlayingPaused   2
+#define PlayerNotificationTypePlayingResumed   3
+
+
+
+
+
