@@ -56,6 +56,7 @@
 		FDA87E161D26BA8A00FEED71 /* WebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA87E151D26BA8A00FEED71 /* WebServiceManager.m */; };
 		FDBB69481D297A080069109B /* LoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = FDBB69471D297A080069109B /* LoadingIndicator.m */; };
 		FDBCE0211D2910A5009A48E4 /* cipher.m in Sources */ = {isa = PBXBuildFile; fileRef = FDBCE01F1D2910A5009A48E4 /* cipher.m */; };
+		FDC499EC1D3018CF00502BB5 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC499EB1D3018CF00502BB5 /* MainMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,6 +152,8 @@
 		FDBCE01E1D2910A5009A48E4 /* cipher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cipher.h; sourceTree = "<group>"; };
 		FDBCE01F1D2910A5009A48E4 /* cipher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cipher.m; sourceTree = "<group>"; };
 		FDBCE0201D2910A5009A48E4 /* NSData+AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AES.h"; sourceTree = "<group>"; };
+		FDC499EA1D3018CF00502BB5 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
+		FDC499EB1D3018CF00502BB5 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,6 +344,8 @@
 				FD9255F11D27BDBE00C40577 /* PurchaseViewController.m */,
 				74DCF9F71D27FF63001FBC26 /* PlayerViewController.h */,
 				74DCF9F81D27FF63001FBC26 /* PlayerViewController.m */,
+				FDC499EA1D3018CF00502BB5 /* MainMenuViewController.h */,
+				FDC499EB1D3018CF00502BB5 /* MainMenuViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -616,6 +621,7 @@
 				FD459F031CA3957900387C5D /* SWRevealViewController.m in Sources */,
 				74AABFA81D201A2000194FBE /* BookChapter.m in Sources */,
 				FD60DFD11CA234F6007ED360 /* AudioBook.m in Sources */,
+				FDC499EC1D3018CF00502BB5 /* MainMenuViewController.m in Sources */,
 				FD9255F21D27BDBE00C40577 /* PurchaseViewController.m in Sources */,
 				FD0C50541C99B88C00D42B05 /* HomeViewController.m in Sources */,
 				745952D11CB2BDC800A3A204 /* BookCategoryCell.m in Sources */,

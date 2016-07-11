@@ -42,42 +42,42 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if([[DataSource sharedInstance] isUserLogin]){
-        return 7;
+        return 4;
 
     }else{
-        return 6;
+        return 3;
 
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"home";
+    static NSString *CellIdentifier = @"feedback";
     
     
     switch ( indexPath.row )
     {
+//        case 0:
+//            CellIdentifier = @"home";
+//            break;
+//            
+//        case 1:
+//            CellIdentifier = @"store";
+//            break;
+//            
+//        case 2:
+//            CellIdentifier = @"mybooks";
+//            break;
         case 0:
-            CellIdentifier = @"home";
-            break;
-            
-        case 1:
-            CellIdentifier = @"store";
-            break;
-            
-        case 2:
-            CellIdentifier = @"mybooks";
-            break;
-        case 3:
             CellIdentifier = @"feedback";
             break;
-        case 4:
+        case 1:
             CellIdentifier = @"aboutus";
             break;
-        case 5:
+        case 2:
             CellIdentifier = @"contactus";
             break;
-        case 6:
+        case 3:
             CellIdentifier = @"logout";
             break;
     }
