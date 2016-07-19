@@ -10,7 +10,6 @@
 #import "FileOperator.h"
 #import "AudioPlayer.h"
 #import "AppUtils.h"
-#import "PlayerBarView.h"
 
 @import AVFoundation;
 
@@ -60,10 +59,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if ([PlayerBarView isVisible]) {
-        [PlayerBarView hideView];
-    }
-    
     AudioPlayer *player = [AudioPlayer getSharedInstance];
     
     BOOL isNewFile = YES;
@@ -112,8 +107,6 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
-    [PlayerBarView showView];
 }
 
 - (void)startPlaying
