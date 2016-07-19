@@ -104,6 +104,24 @@ static AudioPlayer *instance;
     _backgroundMusicPlaying = NO;
 }
 
+- (void)seekTo:(int)timeGap
+{
+    if ([self isPlaying]) {
+        int totalT = _audioPlayer.duration;
+        int currentT = _audioPlayer.currentTime;
+        
+        int newTime = currentT + timeGap;
+        
+        if (newTime < 0) {
+            _audioPlayer.currentTime = 0;
+        }else if (newTime > totalT) {
+            _audioPlayer.currentTime = totalT - 2;
+        }else {
+            _audioPlayer.currentTime = newTime;
+        }
+    }
+}
+
 - (BOOL)isPlaying
 {
     return self.audioPlayer.playing;
