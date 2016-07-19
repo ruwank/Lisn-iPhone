@@ -475,10 +475,12 @@
     }else{
         chapterIndex=1;
     }
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PlayerViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"PlayerViewControllerId"];
     [viewController setAudioBook:_audioBook.book_id andFileIndex:chapterIndex];
-    [self.navigationController pushViewController:viewController animated:YES];
+    
+    [self presentViewController:viewController animated:YES completion:nil];
 
 }
 -(void)loadLoginScreen{
