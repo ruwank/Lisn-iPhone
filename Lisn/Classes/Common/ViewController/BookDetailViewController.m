@@ -28,7 +28,7 @@
 
 @interface BookDetailViewController () <UITableViewDelegate, UITableViewDataSource, DetailViewTableViewCellDelegate,PurchaseViewControllerDelegate,LoginViewControllerDelegate,UIActionSheetDelegate,LoadingIndicatorDelegate>{
     BOOL isSelectChapter;
-   // UIActivityIndicatorView *activityIndicator;
+    UIActivityIndicatorView *activityIndicator;
     BOOL isSelectCard;
 }
 
@@ -86,7 +86,7 @@
 @property (nonatomic, assign) float lblHeightLimit;
 @property (nonatomic, assign) float lblHeight;
 @property (nonatomic, strong) BookChapter *selectedChapter;
-@property (nonatomic, strong) LoadingIndicator *indicator;
+//@property (nonatomic, strong) LoadingIndicator *indicator;
 
 
 @end
@@ -192,17 +192,17 @@
     }
     if(downloadComplete){
     [self showDownloadCompleteMessage];
-    [self.indicator hide];
+    [activityIndicator stopAnimating];
     }
 
     
 }
 -(void)downloadAudioFile:(NSString*)bookId andFileIndex:(int)index{
-    self.indicator.loadingText=@"Downloading...";
-    [self.indicator show];
+    //self.indicator.loadingText=@"Downloading...";
+    //[self.indicator show];
 
     [WebServiceManager downloadAudioFile:bookId andFileIndex:index withResponseHandeler:^(BOOL success, ErrorType errorType) {
-        [self.indicator hide];
+        [activityIndicator stopAnimating];
 
         if(success){
             if(isSelectChapter){
@@ -283,12 +283,12 @@
     _payByBillBtn.layer.borderColor = RGBA(255, 255, 255, 1).CGColor;
     
     [self adjustViewHeights];
-//    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-//    activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
-//    activityIndicator.center = self.view.center;
-//    [self.view addSubview:activityIndicator];
-    self.indicator = [[LoadingIndicator alloc] initWithDelegate:self];
-    self.indicator.loadingText = @"Loading";
+    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    activityIndicator.center = self.view.center;
+    [self.view addSubview:activityIndicator];
+//    self.indicator = [[LoadingIndicator alloc] initWithDelegate:self];
+//    self.indicator.loadingText = @"Loading";
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -500,7 +500,7 @@
     
 }
 -(void)logUserDownload{
-    [self.indicator show];
+    [activityIndicator startAnimating];
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
     
     AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
@@ -536,7 +536,7 @@
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"error %@",error);
-            [self.indicator hide];
+            [activityIndicator stopAnimating];
             [AppUtils showCommonErrorAlert];
 
 

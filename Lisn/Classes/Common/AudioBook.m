@@ -20,7 +20,7 @@
             _ISBN = [jsonDic valueForKey:@"ISBN"];
             
             if([jsonDic valueForKey:@"book_id"]!= nil)
-            _book_id = [jsonDic valueForKey:@"book_id"];
+                _book_id =[NSString stringWithFormat:@"%@",[jsonDic valueForKey:@"book_id"]]; 
             
             if([jsonDic valueForKey:@"duration"]!= nil)
             _duration = [jsonDic valueForKey:@"duration"];
