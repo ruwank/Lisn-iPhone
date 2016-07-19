@@ -25,7 +25,6 @@
 -(id)init{
     
     if(self=[super init]){
-        storeBoookDic = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -57,10 +56,18 @@
     [self saveUserBook:userAudioBook];
 }
 -(void)addToStoreBookDic:(NSMutableArray*)bookData andCatId:(NSString*)catId{
+    if(!storeBoookDic){
+        storeBoookDic = [[NSMutableDictionary alloc] init];
+
+    }
     [storeBoookDic setValue:bookData forKey:catId];
 }
 -(NSMutableArray*)getStoreBookFarCatergoy:(NSString*)catId{
-    return [storeBoookDic objectForKey:catId];
+    if ([storeBoookDic objectForKey:catId]) {
+        return [storeBoookDic objectForKey:catId];
+    } else {
+        return [[NSMutableArray alloc] init];
+    }
 }
 
 
