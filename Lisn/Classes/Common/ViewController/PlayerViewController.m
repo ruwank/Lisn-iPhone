@@ -31,6 +31,11 @@
 
 @implementation PlayerViewController
 
+- (IBAction)closeButtonTapped:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)playButtonTapped:(id)sender {
     
     if (!_playBtn.selected) {
@@ -44,6 +49,16 @@
         [self invalidateTimer];
         _playBtn.selected = NO;
     }
+}
+
+- (IBAction)fowerdButtonTapped:(id)sender
+{
+    [[AudioPlayer getSharedInstance] seekTo:30];
+}
+
+- (IBAction)replayButtonTapped:(id)sender
+{
+    [[AudioPlayer getSharedInstance] seekTo:-30];
 }
 
 - (void)dealloc
@@ -77,7 +92,12 @@
     player.currentBookId = _bookId;
     player.currentChapterIndex = _chapterIndex;
     
-    if ([player isPlaying]) {
+    if (!isNewFile && [player isPlaying]) {
+        [self timerFired:nil];
+        [self startTimer];
+        _playBtn.selected = YES;
+    }else if (!isNewFile && ![player isPlaying]) {
+        [player playAudio];
         [self timerFired:nil];
         [self startTimer];
         _playBtn.selected = YES;
