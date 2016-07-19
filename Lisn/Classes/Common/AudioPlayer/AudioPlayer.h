@@ -27,4 +27,6 @@
 
 - (BOOL)isPlaying;
 
+- (void)seekTo:(int)timeGap;
+
 @end

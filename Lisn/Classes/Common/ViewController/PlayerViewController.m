@@ -10,7 +10,6 @@
 #import "FileOperator.h"
 #import "AudioPlayer.h"
 #import "AppUtils.h"
-#import "PlayerBarView.h"
 
 @import AVFoundation;
 
@@ -32,6 +31,11 @@
 
 @implementation PlayerViewController
 
+- (IBAction)closeButtonTapped:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)playButtonTapped:(id)sender {
     
     if (!_playBtn.selected) {
@@ -47,6 +51,16 @@
     }
 }
 
+- (IBAction)fowerdButtonTapped:(id)sender
+{
+    [[AudioPlayer getSharedInstance] seekTo:30];
+}
+
+- (IBAction)replayButtonTapped:(id)sender
+{
+    [[AudioPlayer getSharedInstance] seekTo:-30];
+}
+
 - (void)dealloc
 {
     [self invalidateTimer];
@@ -59,10 +73,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    if ([PlayerBarView isVisible]) {
-        [PlayerBarView hideView];
-    }
     
     AudioPlayer *player = [AudioPlayer getSharedInstance];
     
@@ -82,7 +92,12 @@
     player.currentBookId = _bookId;
     player.currentChapterIndex = _chapterIndex;
     
-    if ([player isPlaying]) {
+    if (!isNewFile && [player isPlaying]) {
+        [self timerFired:nil];
+        [self startTimer];
+        _playBtn.selected = YES;
+    }else if (!isNewFile && ![player isPlaying]) {
+        [player playAudio];
         [self timerFired:nil];
         [self startTimer];
         _playBtn.selected = YES;
@@ -112,8 +127,6 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
-    [PlayerBarView showView];
 }
 
 - (void)startPlaying
