@@ -21,12 +21,13 @@
 #import "FileOperator.h"
 #import "PlayerViewController.h"
 #import "LoadingIndicator.h"
-
+#import <StoreKit/StoreKit.h>
 
 #define ALERT_VIEW_TAG_DOWNLOD_COMPETE 10
 #define ALERT_VIEW_TAG_PAYMENT_COMPETE  20
+static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
 
-@interface BookDetailViewController () <UITableViewDelegate, UITableViewDataSource, DetailViewTableViewCellDelegate,PurchaseViewControllerDelegate,LoginViewControllerDelegate,UIActionSheetDelegate,LoadingIndicatorDelegate>{
+@interface BookDetailViewController () <UITableViewDelegate, UITableViewDataSource, DetailViewTableViewCellDelegate,PurchaseViewControllerDelegate,LoginViewControllerDelegate,UIActionSheetDelegate,LoadingIndicatorDelegate,SKPaymentTransactionObserver, SKProductsRequestDelegate>{
     BOOL isSelectChapter;
     UIActivityIndicatorView *activityIndicator;
     BOOL isSelectCard;
@@ -87,6 +88,7 @@
 @property (nonatomic, assign) float lblHeight;
 @property (nonatomic, strong) BookChapter *selectedChapter;
 //@property (nonatomic, strong) LoadingIndicator *indicator;
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
 
 
 @end
@@ -97,6 +99,9 @@
     isSelectCard=YES;
     isSelectChapter=NO;
     if([[DataSource sharedInstance] isUserLogin]){
+        [self buyAudioBook];
+        
+        /*
         isSelectChapter=false;
     UserProfile *userProfile=[[DataSource sharedInstance] getProfileInfo];
     NSString *userId=userProfile.userId;
@@ -106,6 +111,7 @@
     
     NSString *url=[NSString stringWithFormat:@"%@?userid=%@&bookid=%@&amount=%f",purchase_book_url,userId,bookid,amount];
         [self loadPurchaseViewController:url];
+        */
     }else{
         [self loadLoginScreen];
        
@@ -409,6 +415,12 @@
     
     [self readMoreButtonTapped:nil];
     [self updateButton];
+    
+    //
+    _payByBillBtn.hidden=YES;
+    _chapterTableView.hidden=YES;
+    _middleViewTop.constant =_shrinkGapMiddleView;
+    _viewAllBtn.hidden=YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -593,6 +605,118 @@
     NSString *url=[NSString stringWithFormat:@"%@?userid=%@&bookid=%@&amount=%f&chapid=%d",purchase_book_url,userId,bookid,amount,_selectedChapter.chapter_id];
     [self loadPurchaseViewController:url];
 }
+#pragma mark -InApp purchase methods
+
+- (void)buyAudioBook{
+    NSLog(@"User requests to remove ads");
+    NSString *productId=[NSString stringWithFormat:@"%@%@",BUNDLE_ID,_audioBook.book_id];
+    if([SKPaymentQueue canMakePayments]){
+        NSLog(@"User can make payments");
+        _loadingView.hidden=NO;
+        SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:productId]];
+        productsRequest.delegate = self;
+        [productsRequest start];
+        
+    }
+    else{
+        NSLog(@"User cannot make payments due to parental controls");
+        //this is called the user cannot make payments, most likely due to parental controls
+    }
+}
+
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response{
+    SKProduct *validProduct = nil;
+    NSInteger count = [response.products count];
+    if(count > 0){
+        validProduct = [response.products objectAtIndex:0];
+        NSLog(@"Products Available!");
+        [self purchase:validProduct];
+    }
+    else if(!validProduct){
+        _loadingView.hidden=NO;
+
+        NSLog(@"No products available");
+        //this is called if your product id is not valid, this shouldn't be called unless that happens.
+    }
+}
+
+- (void)purchase:(SKProduct *)product{
+    SKPayment *payment = [SKPayment paymentWithProduct:product];
+    
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    [[SKPaymentQueue defaultQueue] addPayment:payment];
+}
+
+- (IBAction) restore{
+    //this is called when the user restores purchases, you should hook this up to a button
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+}
+
+- (void) paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+    NSLog(@"received restored transactions: %lu", (unsigned long)queue.transactions.count);
+    for(SKPaymentTransaction *transaction in queue.transactions){
+        if(transaction.transactionState == SKPaymentTransactionStateRestored){
+            //called when the user successfully restores a purchase
+            NSLog(@"Transaction state -> Restored");
+            
+            //if you have more than one in-app purchase product,
+            //you restore the correct product for the identifier.
+            //For example, you could use
+            //if(productID == kRemoveAdsProductIdentifier)
+            //to get the product identifier for the
+            //restored purchases, you can use
+            //
+            //NSString *productID = transaction.payment.productIdentifier;
+            [self completeInAppPurchase];
+            [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+            break;
+        }
+    }
+}
+
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions{
+    for(SKPaymentTransaction *transaction in transactions){
+        switch(transaction.transactionState){
+            case SKPaymentTransactionStatePurchasing: NSLog(@"Transaction state -> Purchasing");
+                //called when the user is in the process of purchasing, do not add any of your own code here.
+                break;
+            case SKPaymentTransactionStatePurchased:
+                //this is called when the user has successfully purchased the package (Cha-Ching!)
+                [self completeInAppPurchase]; //you can add your code for what you want to happen when the user buys the purchase here, for this tutorial we use removing ads
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                NSLog(@"Transaction state -> Purchased");
+                break;
+            case SKPaymentTransactionStateRestored:
+                NSLog(@"Transaction state -> Restored");
+                //add the same code as you did from SKPaymentTransactionStatePurchased here
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                break;
+            case SKPaymentTransactionStateFailed:
+                //called when the transaction does not finish
+                if(transaction.error.code == SKErrorPaymentCancelled){
+                    NSLog(@"Transaction state -> Cancelled");
+                    //the user cancelled the payment ;(
+                }
+                _loadingView.hidden=YES;
+
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                break;
+        }
+    }
+}
+-(void)completeInAppPurchase{
+    _audioBook.isPurchase=YES;
+    _audioBook.isTotalBookPurchased=YES;
+    [self updateAudioBook];
+    _loadingView.hidden=YES;
+
+    UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:PAYMENT_COMPLETE_TITLE message:PAYMENT_COMPLETE_MESSAGE delegate:self cancelButtonTitle:BUTTON_YES otherButtonTitles:BUTTON_NO,nil];
+    alertView.tag=ALERT_VIEW_TAG_PAYMENT_COMPETE;
+    [alertView show];
+}
+
 #pragma mark -PurchaseViewControllerDelegate methods
 - (void)purchaseComplete:(PaymentStatus)status{
     if(status == RESULT_SUCCESS || status== RESULT_SUCCESS_ALREADY){

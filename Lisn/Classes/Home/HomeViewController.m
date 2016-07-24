@@ -57,7 +57,8 @@
 
 @implementation HomeViewController
 - (IBAction)storeButtonTapped:(id)sender {
-    
+   [ self.tabBarController setSelectedIndex:1];
+
 }
 
 - (void)viewDidLoad {
