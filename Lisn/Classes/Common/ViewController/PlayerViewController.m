@@ -88,6 +88,7 @@
     if (isNewFile) {
         [player stopAudio];
     }
+    //
     
     player.currentBookId = _bookId;
     player.currentChapterIndex = _chapterIndex;

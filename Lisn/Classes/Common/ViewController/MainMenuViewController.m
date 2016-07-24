@@ -7,8 +7,11 @@
 //
 
 #import "MainMenuViewController.h"
+#import "PlayerViewController.h"
+#import "DataSource.h"
+#import "LoginViewController.h"
 
-@interface MainMenuViewController ()<UITabBarControllerDelegate>
+@interface MainMenuViewController ()<UITabBarControllerDelegate,LoginViewControllerDelegate>
 
 @end
 
@@ -16,6 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.delegate=self;
+    /*
     UIImage *buttonImage = [UIImage imageNamed:@"btn_play_start"];
     UIImage *highlightImage = [UIImage imageNamed:@"btn_play_start"];
     
@@ -34,6 +39,7 @@
         button.center = center;
     }
     [self.view addSubview:button];
+     */
     // Do any additional setup after loading the view.
 }
 
@@ -43,9 +49,60 @@
 }
 - (BOOL)tabBarController:(UITabBarController *)tabBarController
 shouldSelectViewController:(UIViewController *)viewController{
-    return YES;
+   // return YES;
+    if ([viewController class] ==[PlayerViewController class]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+        if([[DataSource sharedInstance] isUserLogin]){
+            NSMutableDictionary *userBook=[[DataSource sharedInstance] getUserBook];
+            NSArray *uesrBook=[userBook allValues];
+            
+            if([uesrBook count]>0){
+        PlayerViewController * playerViewController = [storyboard instantiateViewControllerWithIdentifier:@"PlayerViewControllerId"];
+       // [viewController setAudioBook:_audioBook.book_id andFileIndex:chapterIndex];
+        
+        [tabBarController presentViewController:playerViewController animated:YES completion:nil];
+            }else{
+                [self showMybookEmptyMessage];
+
+            }
+        }else{
+            LoginViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewControllerId"];
+            viewController.delegate = self;
+            [tabBarController presentViewController:viewController animated:YES completion:nil];
+        }
+        //[tabBarController presentModalViewController:navController animated:YES];
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
+#pragma mark - LoginViewControllerDelegate
+
+- (void)loginSucceeded {
+    
+    NSMutableDictionary *userBook=[[DataSource sharedInstance] getUserBook];
+    NSArray *uesrBook=[userBook allValues];
+    
+    if([uesrBook count]>0){
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        PlayerViewController * playerViewController = [storyboard instantiateViewControllerWithIdentifier:@"PlayerViewControllerId"];
+        // [viewController setAudioBook:_audioBook.book_id andFileIndex:chapterIndex];
+        
+        [self presentViewController:playerViewController animated:YES completion:nil];
+    }else{
+        [self showMybookEmptyMessage];
+    }
+    
+}
+
+- (void)loginCancelled {
+    
+}
+-(void)showMybookEmptyMessage{
+   [[[UIAlertView alloc] initWithTitle:@"" message:@"First download book from store" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];}
 /*
 #pragma mark - Navigation
 

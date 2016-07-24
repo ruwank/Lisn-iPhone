@@ -88,6 +88,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
 @property (nonatomic, assign) float lblHeight;
 @property (nonatomic, strong) BookChapter *selectedChapter;
 //@property (nonatomic, strong) LoadingIndicator *indicator;
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
 
 
 @end
@@ -414,6 +415,12 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     
     [self readMoreButtonTapped:nil];
     [self updateButton];
+    
+    //
+    _payByBillBtn.hidden=YES;
+    _chapterTableView.hidden=YES;
+    _middleViewTop.constant =_shrinkGapMiddleView;
+    _viewAllBtn.hidden=YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -605,7 +612,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     NSString *productId=[NSString stringWithFormat:@"%@%@",BUNDLE_ID,_audioBook.book_id];
     if([SKPaymentQueue canMakePayments]){
         NSLog(@"User can make payments");
-        
+        _loadingView.hidden=NO;
         SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:productId]];
         productsRequest.delegate = self;
         [productsRequest start];
@@ -626,6 +633,8 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
         [self purchase:validProduct];
     }
     else if(!validProduct){
+        _loadingView.hidden=NO;
+
         NSLog(@"No products available");
         //this is called if your product id is not valid, this shouldn't be called unless that happens.
     }
@@ -690,6 +699,8 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
                     NSLog(@"Transaction state -> Cancelled");
                     //the user cancelled the payment ;(
                 }
+                _loadingView.hidden=YES;
+
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 break;
         }
@@ -699,7 +710,8 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     _audioBook.isPurchase=YES;
     _audioBook.isTotalBookPurchased=YES;
     [self updateAudioBook];
-    
+    _loadingView.hidden=YES;
+
     UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:PAYMENT_COMPLETE_TITLE message:PAYMENT_COMPLETE_MESSAGE delegate:self cancelButtonTitle:BUTTON_YES otherButtonTitles:BUTTON_NO,nil];
     alertView.tag=ALERT_VIEW_TAG_PAYMENT_COMPETE;
     [alertView show];
