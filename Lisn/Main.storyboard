@@ -2153,7 +2153,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                 </constraints>
                             </scrollView>
                             <view hidden="YES" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3N-81-otH">
-                                <rect key="frame" x="16" y="44" width="288" height="475"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="udn-7C-sbg">
                                         <rect key="frame" x="134" y="228" width="20" height="20"/>
@@ -2190,6 +2190,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                     </view>
                     <navigationItem key="navigationItem" title="Details" id="L0D-Wr-su4"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="udn-7C-sbg" id="Umn-fO-hZ4"/>
                         <outlet property="alphaView" destination="kkG-O0-DaZ" id="qd3-O5-zUS"/>
                         <outlet property="bgThumbView" destination="9Nv-HK-T1k" id="TLe-kC-CQo"/>
                         <outlet property="booKAutherLbl" destination="lN9-84-QTr" id="IDb-lP-H0c"/>
@@ -2202,6 +2203,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                         <outlet property="bottomViewTop" destination="ZBW-HH-lDB" id="J9H-k0-lUX"/>
                         <outlet property="chapterTableView" destination="EOE-Ug-fLM" id="iB1-Wg-w8U"/>
                         <outlet property="discriptionLabel" destination="UMe-ty-INe" id="i9Z-P0-qNB"/>
+                        <outlet property="loadingLabel" destination="BMq-rL-fjO" id="cRZ-Fx-dMb"/>
                         <outlet property="loadingView" destination="A3N-81-otH" id="dEc-nT-x2u"/>
                         <outlet property="mainScrollView" destination="JUK-qK-m8k" id="ilW-zb-PJ8"/>
                         <outlet property="middleView" destination="MWE-MP-zbq" id="tcx-dP-BsN"/>
