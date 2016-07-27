@@ -37,7 +37,9 @@
     // Dispose of any resources that can be recreated.
 }
 #pragma mark
-
+-(void)loadTutorialScreen{
+    
+}
 - (void)loadHomeScreen
 {
     if(finishDelay && finishDownload){
