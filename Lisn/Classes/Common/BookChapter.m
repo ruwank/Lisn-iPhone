@@ -42,7 +42,7 @@
     [coder encodeFloat:_price     forKey:@"price"];
     [coder encodeFloat:_size     forKey:@"size"];
     [coder encodeBool:_isPurchased forKey:@"isPurchased"];
-    
+    [coder encodeInt: _lastSeekPoint forKey:@"lastSeekPoint"];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -53,7 +53,8 @@
     self.discount    = [coder decodeFloatForKey:@"discount"];
     self.price    = [coder decodeFloatForKey:@"price"] ;
     self.size    = [coder decodeFloatForKey:@"size"];
-    self.isPurchased=[coder decodeBoolForKey:@"isPurchased"];
+    self.isPurchased = [coder decodeBoolForKey:@"isPurchased"];
+    self.lastSeekPoint    = [coder decodeIntForKey:@"lastSeekPoint"];
    
     return self;
 }

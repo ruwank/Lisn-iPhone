@@ -111,7 +111,7 @@
     [coder encodeBool:_isTotalBookPurchased forKey:@"isTotalBookPurchased"];
     [coder encodeBool:_isPurchase forKey:@"isPurchase"];
     [coder encodeInt:_discount forKey:@"discount"];
-
+    [coder encodeInt:_lastPlayChapterIndex forKey:@"lastPlayChapterIndex"];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -140,6 +140,7 @@
     self.isTotalBookPurchased=[coder decodeBoolForKey:@"isTotalBookPurchased"];
     self.isPurchase=[coder decodeBoolForKey:@"isPurchase"];
     self.discount=[coder decodeIntForKey:@"discount"];
+    self.lastPlayChapterIndex=[coder decodeIntForKey:@"lastPlayChapterIndex"];
     return self;
 }
 
