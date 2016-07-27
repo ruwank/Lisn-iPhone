@@ -75,66 +75,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    AudioPlayer *player = [AudioPlayer getSharedInstance];
-    
-    BOOL isNewFile = YES;
-    
-    if (player.currentBookId != nil) {
-        NSString *cBookId = [NSString stringWithFormat:@"%@", player.currentBookId];
-        if ([cBookId isEqualToString:_bookId] && player.currentChapterIndex == _chapterIndex) {
-            isNewFile = NO;
-        }
-    }
-    
-    if (isNewFile) {
-        [player stopAudio];
-    }
-    //
-    
-    player.currentBookId = _bookId;
-    player.currentChapterIndex = _chapterIndex;
-    
-    if (!isNewFile && [player isPlaying]) {
-        [self timerFired:nil];
-        [self startTimer];
-        _playBtn.selected = YES;
-    }else if (!isNewFile && ![player isPlaying]) {
-        [player playAudio];
-        [self timerFired:nil];
-        [self startTimer];
-        _playBtn.selected = YES;
-    } else {
-        
-        BOOL canPlay = NO;
-        
-        NSData *data = [self getAudioData];
-        if (data) {
-            if ([player setAudioData:data]) {
-                if ([player playAudio]) {
-                    canPlay = YES;
-                    [self startTimer];
-                    _playBtn.selected = YES;
-                }
-            }
-        }
-        
-        if (!canPlay) {
-            //ToDo show error msg on can't play
-        }
-    }
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerNotificationReceived:) name:PLAYER_NOTIFICATION object:nil];
     
     //Get chapter list
-    NSMutableDictionary *userBook=[[DataSource sharedInstance] getUserBook];
+//    NSMutableDictionary *userBook=[[DataSource sharedInstance] getUserBook];
+//
+//    AudioBook *audioBook=[userBook objectForKey:_bookId];
+//    NSArray *chaptes=audioBook.chapters;
+}
 
-    AudioBook *audioBook=[userBook objectForKey:_bookId];
-    NSArray *chaptes=audioBook.chapters;
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
-    //check audio file available
-//    if([FileOperator isAudioFileExists:bookId andFileIndex:_chapter.chapter_id]){
-//        
-//    }
+    AudioPlayer *player = [AudioPlayer getSharedInstance];
+    [player startPlayerWithBook:_bookId andChapterIndex:_chapterIndex];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -170,9 +125,15 @@
     if (number.intValue == PlayerNotificationTypePlayingFinished) {
         [self stopPlaying];
     }else if (number.intValue == PlayerNotificationTypePlayingPaused) {
+        _currentTime = [AudioPlayer getSharedInstance].audioPlayer.currentTime;
         [self pausePlaying];
     }else if (number.intValue == PlayerNotificationTypePlayingResumed) {
+        _currentTime = [AudioPlayer getSharedInstance].audioPlayer.currentTime;
+        
         [self startPlaying];
+        
+        NSString *bookId = [notification.userInfo objectForKey:PlayerNotificationBookIdKey];
+        int chapterIndex = [[notification.userInfo objectForKey:PlayerNotificationChapterIndexKey] intValue];
     }
 }
 
@@ -183,6 +144,8 @@
 
 - (void)startTimer
 {
+    [self invalidateTimer];
+    
     _totalTime = [AudioPlayer getSharedInstance].audioPlayer.duration;
     _totalTimeLbl.text = [self timeStringOfSeconds:_totalTime];
     
@@ -213,7 +176,7 @@
         _slider.value = 0.0f;
         return;
     }
-    
+    NSLog(@"SliderTime: %d", _currentTime);
     _slider.value = _currentTime / (_totalTime * 1.0f);
 }
 

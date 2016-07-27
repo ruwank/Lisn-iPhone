@@ -14,6 +14,7 @@
 @property float discount,size,price;
 @property int chapter_id;
 @property  BOOL isPurchased;
+@property int lastSeekPoint;
 
 
 - (instancetype)initWithDataDictionary:(NSDictionary *)jsonDic;

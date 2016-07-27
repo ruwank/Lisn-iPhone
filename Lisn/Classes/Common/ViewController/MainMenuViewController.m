@@ -50,12 +50,12 @@
 - (BOOL)tabBarController:(UITabBarController *)tabBarController
 shouldSelectViewController:(UIViewController *)viewController{
    // return YES;
-    if ([viewController class] ==[PlayerViewController class]) {
+    if ([viewController class] == [PlayerViewController class]) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
         if([[DataSource sharedInstance] isUserLogin]){
             NSMutableDictionary *userBook=[[DataSource sharedInstance] getUserBook];
-            NSArray *uesrBook=[userBook allValues];
+            NSArray *uesrBook = [userBook allValues];
             
             if([uesrBook count]>0){
         PlayerViewController * playerViewController = [storyboard instantiateViewControllerWithIdentifier:@"PlayerViewControllerId"];
@@ -64,7 +64,6 @@ shouldSelectViewController:(UIViewController *)viewController{
         [tabBarController presentViewController:playerViewController animated:YES completion:nil];
             }else{
                 [self showMybookEmptyMessage];
-
             }
         }else{
             LoginViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewControllerId"];

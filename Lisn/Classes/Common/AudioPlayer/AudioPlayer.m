@@ -7,6 +7,9 @@
 
 #import "AudioPlayer.h"
 #import "AppConstant.h"
+#import "FileOperator.h"
+#import "AppUtils.h"
+#import "DataSource.h"
 
 @interface AudioPlayer() <AVAudioPlayerDelegate>
 
@@ -45,6 +48,72 @@ static AudioPlayer *instance;
     }
     
     return self;
+}
+
+- (void)startPlayerWithBook:(NSString *)bookId andChapterIndex:(int)chapterIndex
+{
+    BOOL isNewFile = YES;
+    
+    if (_currentBookId != nil) {
+        NSString *cBookId = [NSString stringWithFormat:@"%@", _currentBookId];
+        if ([cBookId isEqualToString:bookId] && _currentChapterIndex == chapterIndex) {
+            isNewFile = NO;
+        }
+    }
+    
+    if (isNewFile) {
+        [self stopAudio];
+        NSDictionary *infoDic = @{PlayerNotificationTypeKey : [NSNumber numberWithInt:PlayerNotificationTypePlayingPaused]};
+        [[NSNotificationCenter defaultCenter] postNotificationName:PLAYER_NOTIFICATION object:nil userInfo:infoDic];
+    }
+    
+    _currentBookId = bookId;
+    _currentChapterIndex = chapterIndex;
+    
+    if (!isNewFile && [self isPlaying]) {
+        
+        NSDictionary *infoDic = @{PlayerNotificationTypeKey : [NSNumber numberWithInt:PlayerNotificationTypePlayingResumed],
+                                  PlayerNotificationBookIdKey : _currentBookId,
+                                  PlayerNotificationChapterIndexKey : [NSNumber numberWithInt:_currentChapterIndex]};
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:PLAYER_NOTIFICATION object:nil userInfo:infoDic];
+        
+    }else if (!isNewFile && ![self isPlaying]) {
+        [self playAudio];
+        
+        NSDictionary *infoDic = @{PlayerNotificationTypeKey : [NSNumber numberWithInt:PlayerNotificationTypePlayingResumed],
+                                  PlayerNotificationBookIdKey : _currentBookId,
+                                  PlayerNotificationChapterIndexKey : [NSNumber numberWithInt:_currentChapterIndex]};
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:PLAYER_NOTIFICATION object:nil userInfo:infoDic];
+        
+    } else {
+        NSData *data = [self getAudioData];
+        if (data) {
+            if ([self setAudioData:data]) {
+                if ([self playAudio]) {
+                    
+                    NSMutableDictionary *userBook = [[DataSource sharedInstance] getUserBook];
+                    AudioBook *audioBook = [userBook objectForKey:_currentBookId];
+                    
+                    NSArray *chapters = audioBook.chapters;
+                    if (chapters && chapters.count > _currentChapterIndex) {
+                        BookChapter *chapter = [chapters objectAtIndex:_currentChapterIndex];
+                        if (chapter.lastSeekPoint > 0) {
+                            [self seekTo:chapter.lastSeekPoint];
+                        }
+                    }
+                    
+                    NSDictionary *infoDic = @{PlayerNotificationTypeKey : [NSNumber numberWithInt:PlayerNotificationTypePlayingResumed],
+                                              PlayerNotificationBookIdKey : _currentBookId,
+                                              PlayerNotificationChapterIndexKey : [NSNumber numberWithInt:_currentChapterIndex]};
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:PLAYER_NOTIFICATION object:nil userInfo:infoDic];
+                    
+                }
+            }
+        }
+    }
 }
 
 - (BOOL)setAudioData:(NSData *)audioData
@@ -92,13 +161,40 @@ static AudioPlayer *instance;
 
 - (void)pauseAudio
 {
+    NSMutableDictionary *userBook = [[DataSource sharedInstance] getUserBook];
+    AudioBook *audioBook = [userBook objectForKey:_currentBookId];
+    audioBook.lastPlayChapterIndex = _currentChapterIndex;
+    
+    NSArray *chapters = audioBook.chapters;
+    if (chapters && chapters.count > _currentChapterIndex) {
+        BookChapter *chapter = [chapters objectAtIndex:_currentChapterIndex];
+        chapter.lastSeekPoint = self.audioPlayer.currentTime;
+    }
+    
+    [[DataSource sharedInstance] saveUserBook:userBook];
+    
     [self.audioPlayer pause];
     _backgroundMusicPlaying = NO;
 }
 
 - (void)stopAudio
 {
-    _currentBookId = nil;
+    if (_currentBookId) {
+        NSMutableDictionary *userBook = [[DataSource sharedInstance] getUserBook];
+        AudioBook *audioBook = [userBook objectForKey:_currentBookId];
+        audioBook.lastPlayChapterIndex = _currentChapterIndex;
+        
+        NSArray *chapters = audioBook.chapters;
+        if (chapters && chapters.count > _currentChapterIndex) {
+            BookChapter *chapter = [chapters objectAtIndex:_currentChapterIndex];
+            chapter.lastSeekPoint = self.audioPlayer.currentTime;
+            if (self.audioPlayer.currentTime == self.audioPlayer.duration) {
+                chapter.lastSeekPoint = 0;
+            }
+        }
+        
+        [[DataSource sharedInstance] saveUserBook:userBook];
+    }
     
     [self.audioPlayer stop];
     _backgroundMusicPlaying = NO;
@@ -142,9 +238,50 @@ static AudioPlayer *instance;
     _canPlayAudio = YES;
 }
 
+- (NSData *)getAudioData
+{
+    NSString *audioFilePath = [FileOperator getAudioFilePath:_currentBookId andFileIndex:_currentChapterIndex];
+    NSError* error = nil;
+    NSData *fileData = [NSData dataWithContentsOfFile:audioFilePath options: 0 error: &error];
+    
+    if (fileData == nil) {
+        return nil;
+    }
+    
+    NSData *decryptedData = [AppUtils getDecryptedDataOf:fileData];
+    if (decryptedData == nil) {
+        return nil;
+    }
+    
+    return decryptedData;
+}
+
 #pragma mark - AVAudioPlayerDelegate
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    
+    NSLog(@"audioPlayerDidFinishPlaying successfully");
+    
+    //Get chapter list
+    NSMutableDictionary *userBook = [[DataSource sharedInstance] getUserBook];
+    AudioBook *audioBook = [userBook objectForKey:_currentBookId];
+    NSArray *chapters = audioBook.chapters;
+    
+    if (chapters && chapters.count > _currentChapterIndex + 1) {
+        
+        NSLog(@"Next chapter exist");
+        
+        BookChapter *chapter = [chapters objectAtIndex:_currentChapterIndex + 1];
+        chapter.lastSeekPoint = 0;
+        [[DataSource sharedInstance] saveUserBook:userBook];
+        
+        NSLog(@"Next chapter will play from 0 time");
+        
+        [self startPlayerWithBook:_currentBookId andChapterIndex:_currentChapterIndex + 1];
+        return;
+    }
+    
+    NSLog(@"All book read complete. No more chapters.");
     
     _backgroundMusicPlaying = NO;
     [self stopAudio];
@@ -173,7 +310,10 @@ static AudioPlayer *instance;
     }else if (number.intValue == AVAudioSessionInterruptionTypeEnded) {
         [self playAudio];
         
-        NSDictionary *infoDic = @{PlayerNotificationTypeKey : [NSNumber numberWithInt:PlayerNotificationTypePlayingResumed]};
+        NSDictionary *infoDic = @{PlayerNotificationTypeKey : [NSNumber numberWithInt:PlayerNotificationTypePlayingResumed],
+                                  PlayerNotificationBookIdKey : _currentBookId,
+                                  PlayerNotificationChapterIndexKey : [NSNumber numberWithInt:_currentChapterIndex]};
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:PLAYER_NOTIFICATION object:nil userInfo:infoDic];
     }
 }
