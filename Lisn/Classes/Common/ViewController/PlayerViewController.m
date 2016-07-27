@@ -11,15 +11,23 @@
 #import "AudioPlayer.h"
 #import "AppUtils.h"
 #import "DataSource.h"
+#import "UIImageView+AFNetworking.h"
+#import "iCarousel.h"
+#import "AudioCoverFlowCell.h"
+#import <ResponsiveLabel.h>
 
 @import AVFoundation;
 
-@interface PlayerViewController ()
+@interface PlayerViewController () <iCarouselDataSource, iCarouselDelegate>
 
 @property (weak, nonatomic) IBOutlet UISlider *slider;
 @property (weak, nonatomic) IBOutlet UILabel *currentTimeLbl;
 @property (weak, nonatomic) IBOutlet UILabel *totalTimeLbl;
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+@property (weak, nonatomic) IBOutlet ResponsiveLabel *bookNameLbl;
+@property (weak, nonatomic) IBOutlet UILabel *chapterLbl;
+@property (weak, nonatomic) IBOutlet iCarousel *iCarouselView;
 
 
 @property (nonatomic, strong) NSString *bookId;
@@ -27,6 +35,11 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (assign) int totalTime;
 @property (assign) int currentTime;
+
+@property (nonatomic, strong) NSArray *chapterArray;
+@property (assign) float cellW;
+@property (assign) float cellH;
+@property (nonatomic, strong) NSString *bookImgUrl;
 
 @end
 
@@ -75,13 +88,41 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerNotificationReceived:) name:PLAYER_NOTIFICATION object:nil];
     
-    //Get chapter list
-//    NSMutableDictionary *userBook=[[DataSource sharedInstance] getUserBook];
-//
-//    AudioBook *audioBook=[userBook objectForKey:_bookId];
-//    NSArray *chaptes=audioBook.chapters;
+    _cellH = 220;
+    _cellW = _cellH/1.5;
+    
+    NSMutableDictionary *userBook = [[DataSource sharedInstance] getUserBook];
+    AudioBook *audioBook = [userBook objectForKey:_bookId];
+    _bookImgUrl = audioBook.cover_image;
+    
+    _chapterArray = audioBook.chapters;
+    _iCarouselView.type = iCarouselTypeCoverFlow2;
+    [_iCarouselView reloadData];
+    
+    [_iCarouselView scrollToItemAtIndex:0 animated:YES];
+    
+    NSMutableURLRequest *imageRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:_bookImgUrl]
+                                                                cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                            timeoutInterval:60];
+    [_bgImageView setImageWithURLRequest:imageRequest
+                        placeholderImage:[UIImage imageNamed:@"AppIcon"]
+                                 success:nil
+                                 failure:nil];
+    
+    if(audioBook.lanCode == LAN_SI){
+        _bookNameLbl.font = [UIFont fontWithName:@"FMAbhaya" size:18];
+        [_bookNameLbl setTruncationToken:@"'''"];
+        
+    }else{
+        _bookNameLbl.font = [UIFont fontWithName:@"HelveticaNeue" size:18];
+        [_bookNameLbl setTruncationToken:@"..."];
+    }
+    
+    _bookNameLbl.text = audioBook.title;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -132,8 +173,11 @@
         
         [self startPlaying];
         
-        NSString *bookId = [notification.userInfo objectForKey:PlayerNotificationBookIdKey];
+        //NSString *bookId = [notification.userInfo objectForKey:PlayerNotificationBookIdKey];
         int chapterIndex = [[notification.userInfo objectForKey:PlayerNotificationChapterIndexKey] intValue];
+        
+        _chapterLbl.text = [NSString stringWithFormat:@"Chapter %d", chapterIndex];
+        [_iCarouselView scrollToItemAtIndex:chapterIndex-1 animated:YES];
     }
 }
 
@@ -176,7 +220,7 @@
         _slider.value = 0.0f;
         return;
     }
-    NSLog(@"SliderTime: %d", _currentTime);
+    
     _slider.value = _currentTime / (_totalTime * 1.0f);
 }
 
@@ -227,6 +271,55 @@
     }
     
     return decryptedData;
+}
+
+#pragma mark -
+#pragma mark iCarousel methods
+
+- (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel
+{
+    //return the total number of items in the carousel
+    return [_chapterArray count];
+}
+
+- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
+{
+    //create new view if no view is available for recycling
+    if (view == nil)
+    {
+        AudioCoverFlowCell *cell = [[AudioCoverFlowCell alloc] initWithFrame:CGRectMake(0, 0, _cellW, _cellW)];
+        cell.thumbUrl = _bookImgUrl;
+        cell.chapterId = (int)index + 1;
+        view = cell;
+    }
+    else
+    {
+        AudioCoverFlowCell *cell = (AudioCoverFlowCell *)view;
+        cell.chapterId = (int)index + 1;
+    }
+    
+    return view;
+}
+
+- (CGFloat)carouselItemWidth:(iCarousel *)carousel
+{
+    return 200;
+}
+
+- (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
+{
+    if (option == iCarouselOptionSpacing)
+    {
+        return value * 1.1;
+    }
+    return value;
+}
+
+- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index {
+    if (_chapterIndex != (int)index - 1) {
+        AudioPlayer *player = [AudioPlayer getSharedInstance];
+        [player startPlayerWithBook:_bookId andChapterIndex:(int)index + 1];
+    }
 }
 
 @end

@@ -97,8 +97,8 @@ static AudioPlayer *instance;
                     AudioBook *audioBook = [userBook objectForKey:_currentBookId];
                     
                     NSArray *chapters = audioBook.chapters;
-                    if (chapters && chapters.count > _currentChapterIndex) {
-                        BookChapter *chapter = [chapters objectAtIndex:_currentChapterIndex];
+                    if (chapters && chapters.count >= _currentChapterIndex) {
+                        BookChapter *chapter = [chapters objectAtIndex:_currentChapterIndex-1];
                         if (chapter.lastSeekPoint > 0) {
                             [self seekTo:chapter.lastSeekPoint];
                         }
@@ -166,8 +166,8 @@ static AudioPlayer *instance;
     audioBook.lastPlayChapterIndex = _currentChapterIndex;
     
     NSArray *chapters = audioBook.chapters;
-    if (chapters && chapters.count > _currentChapterIndex) {
-        BookChapter *chapter = [chapters objectAtIndex:_currentChapterIndex];
+    if (chapters && chapters.count >= _currentChapterIndex) {
+        BookChapter *chapter = [chapters objectAtIndex:_currentChapterIndex-1];
         chapter.lastSeekPoint = self.audioPlayer.currentTime;
     }
     
@@ -185,12 +185,14 @@ static AudioPlayer *instance;
         audioBook.lastPlayChapterIndex = _currentChapterIndex;
         
         NSArray *chapters = audioBook.chapters;
-        if (chapters && chapters.count > _currentChapterIndex) {
-            BookChapter *chapter = [chapters objectAtIndex:_currentChapterIndex];
+        if (chapters && chapters.count >= _currentChapterIndex) {
+            BookChapter *chapter = [chapters objectAtIndex:_currentChapterIndex-1];
             chapter.lastSeekPoint = self.audioPlayer.currentTime;
             if (self.audioPlayer.currentTime == self.audioPlayer.duration) {
                 chapter.lastSeekPoint = 0;
             }
+        }else {
+            audioBook.lastPlayChapterIndex = 1;
         }
         
         [[DataSource sharedInstance] saveUserBook:userBook];
@@ -267,12 +269,12 @@ static AudioPlayer *instance;
     AudioBook *audioBook = [userBook objectForKey:_currentBookId];
     NSArray *chapters = audioBook.chapters;
     
-    if (chapters && chapters.count > _currentChapterIndex + 1) {
+    if (chapters && chapters.count >= _currentChapterIndex) {
         
         NSLog(@"Next chapter exist");
         
-        BookChapter *chapter = [chapters objectAtIndex:_currentChapterIndex + 1];
-        chapter.lastSeekPoint = 0;
+        BookChapter *nextChapter = [chapters objectAtIndex:_currentChapterIndex];
+        nextChapter.lastSeekPoint = 0;
         [[DataSource sharedInstance] saveUserBook:userBook];
         
         NSLog(@"Next chapter will play from 0 time");
