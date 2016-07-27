@@ -17,8 +17,6 @@
 
 + (AudioPlayer *)getSharedInstance;
 
-- (BOOL)setAudioData:(NSData *)audioData;
-
 - (BOOL)playAudio;
 
 - (void)pauseAudio;
@@ -28,5 +26,7 @@
 - (BOOL)isPlaying;
 
 - (void)seekTo:(int)timeGap;
+
+- (void)startPlayerWithBook:(NSString *)bookId andChapterIndex:(int)chapterIndex;
 
 @end

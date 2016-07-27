@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YpL-rS-UxS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YpL-rS-UxS">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -811,7 +811,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StoreBookCollectionViewCellId" id="DBR-Xp-cAO" customClass="StoreBookCollectionViewCell">
-                                                        <rect key="frame" x="4" y="8" width="86" height="185"/>
+                                                        <rect key="frame" x="4" y="7.5" width="86" height="185"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="86" height="185"/>
@@ -1120,7 +1120,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StoreBookCollectionViewCellId" id="TsL-Ft-TVm" customClass="StoreBookCollectionViewCell">
-                                                        <rect key="frame" x="4" y="8" width="86" height="185"/>
+                                                        <rect key="frame" x="4" y="7.5" width="86" height="185"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="86" height="185"/>
@@ -1429,7 +1429,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StoreBookCollectionViewCellId" id="scZ-AE-AiS" customClass="StoreBookCollectionViewCell">
-                                                        <rect key="frame" x="4" y="8" width="86" height="185"/>
+                                                        <rect key="frame" x="4" y="7.5" width="86" height="185"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="86" height="185"/>
@@ -3262,10 +3262,10 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
             </objects>
             <point key="canvasLocation" x="2940" y="939"/>
         </scene>
-        <!--Lisn-->
+        <!--Data Source-->
         <scene sceneID="12M-6q-kB6">
             <objects>
-                <viewController storyboardIdentifier="PlayerViewControllerId" id="hdg-b8-jDA" customClass="PlayerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlayerViewControllerId" automaticallyAdjustsScrollViewInsets="NO" id="hdg-b8-jDA" customClass="PlayerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sif-Sc-SF8"/>
                         <viewControllerLayoutGuide type="bottom" id="rvz-CG-Fbv"/>
@@ -3274,7 +3274,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEV-rY-ica">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AEV-rY-ica" userLabel="Bar View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rwv-1f-NZJ">
@@ -3296,11 +3296,81 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                     <constraint firstAttribute="trailing" secondItem="Rwv-1f-NZJ" secondAttribute="trailing" id="rCx-nF-f2W"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q1D-oO-HjH" userLabel="Bg Image View">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OCI-Sp-kfN">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                    </imageView>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfP-rw-ACw">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="YHL-N7-NZw">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                        <vibrancyEffect>
+                                            <blurEffect style="dark"/>
+                                        </vibrancyEffect>
+                                    </visualEffectView>
+                                    <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d94-6F-X7F" userLabel="Alpha View">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="OCI-Sp-kfN" firstAttribute="leading" secondItem="q1D-oO-HjH" secondAttribute="leading" id="5SK-MP-S1b"/>
+                                    <constraint firstAttribute="bottom" secondItem="OCI-Sp-kfN" secondAttribute="bottom" id="7ss-uP-Ex6"/>
+                                    <constraint firstAttribute="trailing" secondItem="rfP-rw-ACw" secondAttribute="trailing" id="9Jm-gg-R4Y"/>
+                                    <constraint firstAttribute="bottom" secondItem="rfP-rw-ACw" secondAttribute="bottom" id="Dqf-fg-3rW"/>
+                                    <constraint firstItem="d94-6F-X7F" firstAttribute="top" secondItem="q1D-oO-HjH" secondAttribute="top" id="fYy-Zl-FYr"/>
+                                    <constraint firstItem="rfP-rw-ACw" firstAttribute="top" secondItem="q1D-oO-HjH" secondAttribute="top" id="grI-yK-8FV"/>
+                                    <constraint firstItem="d94-6F-X7F" firstAttribute="leading" secondItem="q1D-oO-HjH" secondAttribute="leading" id="izk-uA-1gB"/>
+                                    <constraint firstAttribute="trailing" secondItem="OCI-Sp-kfN" secondAttribute="trailing" id="j0L-6u-YC8"/>
+                                    <constraint firstAttribute="trailing" secondItem="d94-6F-X7F" secondAttribute="trailing" id="kxs-rs-dnf"/>
+                                    <constraint firstItem="OCI-Sp-kfN" firstAttribute="top" secondItem="q1D-oO-HjH" secondAttribute="top" id="qqc-oM-47c"/>
+                                    <constraint firstAttribute="bottom" secondItem="d94-6F-X7F" secondAttribute="bottom" id="uM1-pU-sND"/>
+                                    <constraint firstItem="rfP-rw-ACw" firstAttribute="leading" secondItem="q1D-oO-HjH" secondAttribute="leading" id="zhX-s3-QHk"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IC0-W6-1Fs" userLabel="Book Name" customClass="ResponsiveLabel">
+                                <rect key="frame" x="8" y="72" width="304" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="22r-gA-5H7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="customTruncationEnabled" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eUk-gr-KAL" userLabel="Flow View" customClass="iCarousel">
+                                <rect key="frame" x="8" y="104" width="304" height="260"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="234" id="cFI-R8-X8I"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="hdg-b8-jDA" id="Wj9-46-Eri"/>
+                                    <outlet property="delegate" destination="hdg-b8-jDA" id="4ji-sP-LXE"/>
+                                </connections>
+                            </view>
                             <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="HPw-aF-O8I">
-                                <rect key="frame" x="38" y="269" width="244" height="31"/>
+                                <rect key="frame" x="38" y="364" width="244" height="31"/>
                             </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chapter 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KL4-Vg-cbT">
+                                <rect key="frame" x="60" y="340" width="200" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="nAH-ZL-dSp"/>
+                                    <constraint firstAttribute="height" constant="21" id="uF7-3p-GTU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dQ-uj-jmc">
-                                <rect key="frame" x="4" y="273" width="30" height="21"/>
+                                <rect key="frame" x="4" y="369" width="30" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="Gyd-n9-PzY"/>
                                     <constraint firstAttribute="height" constant="21" id="i7H-1o-56K"/>
@@ -3310,7 +3380,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ElC-8C-44x">
-                                <rect key="frame" x="286" y="274" width="30" height="21"/>
+                                <rect key="frame" x="286" y="369" width="30" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="W7F-XT-S9c"/>
                                     <constraint firstAttribute="width" constant="30" id="nkh-ig-msZ"/>
@@ -3320,7 +3390,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K49-wu-dxC">
-                                <rect key="frame" x="130" y="305" width="60" height="48"/>
+                                <rect key="frame" x="130" y="400" width="60" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="Dzv-0a-4wv"/>
                                     <constraint firstAttribute="height" constant="48" id="nZL-b4-N8h"/>
@@ -3332,7 +3402,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yh5-gy-XPB">
-                                <rect key="frame" x="4" y="305" width="60" height="48"/>
+                                <rect key="frame" x="4" y="400" width="60" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="EDD-RS-wa8"/>
                                     <constraint firstAttribute="width" constant="60" id="HFz-ZC-OVE"/>
@@ -3344,7 +3414,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYm-i4-oFS">
-                                <rect key="frame" x="256" y="305" width="60" height="48"/>
+                                <rect key="frame" x="256" y="400" width="60" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="MEi-uW-qKd"/>
                                     <constraint firstAttribute="width" constant="60" id="mF8-e3-8rs"/>
@@ -3359,29 +3429,45 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="K49-wu-dxC" firstAttribute="top" secondItem="HPw-aF-O8I" secondAttribute="bottom" constant="6" id="55v-U7-aes"/>
-                            <constraint firstItem="8dQ-uj-jmc" firstAttribute="centerY" secondItem="mHL-2S-CqN" secondAttribute="centerY" id="6lV-r9-4J7"/>
                             <constraint firstAttribute="trailing" secondItem="hYm-i4-oFS" secondAttribute="trailing" constant="4" id="EKL-B2-yuR"/>
                             <constraint firstItem="yh5-gy-XPB" firstAttribute="leading" secondItem="mHL-2S-CqN" secondAttribute="leading" constant="4" id="Fh8-BI-NVk"/>
+                            <constraint firstItem="eUk-gr-KAL" firstAttribute="top" secondItem="IC0-W6-1Fs" secondAttribute="bottom" constant="12" id="GW8-Sd-Cb1"/>
+                            <constraint firstAttribute="trailing" secondItem="IC0-W6-1Fs" secondAttribute="trailing" constant="8" id="M8C-b6-ho2"/>
+                            <constraint firstAttribute="trailing" secondItem="q1D-oO-HjH" secondAttribute="trailing" id="MfP-dV-fov"/>
                             <constraint firstAttribute="trailing" secondItem="AEV-rY-ica" secondAttribute="trailing" id="N6H-OU-6fO"/>
+                            <constraint firstItem="q1D-oO-HjH" firstAttribute="leading" secondItem="mHL-2S-CqN" secondAttribute="leading" id="NcV-XA-B7o"/>
                             <constraint firstAttribute="trailing" secondItem="HPw-aF-O8I" secondAttribute="trailing" constant="40" id="OiP-dW-IWh"/>
+                            <constraint firstItem="HPw-aF-O8I" firstAttribute="top" secondItem="AEV-rY-ica" secondAttribute="bottom" constant="300" id="Pw9-s4-OY3"/>
+                            <constraint firstAttribute="trailing" secondItem="eUk-gr-KAL" secondAttribute="trailing" constant="8" id="R1e-yL-J2S"/>
+                            <constraint firstItem="8dQ-uj-jmc" firstAttribute="top" secondItem="HPw-aF-O8I" secondAttribute="top" constant="5" id="Rqs-Fm-nQc"/>
                             <constraint firstItem="hYm-i4-oFS" firstAttribute="top" secondItem="HPw-aF-O8I" secondAttribute="bottom" constant="6" id="Xw0-Yb-vD6"/>
+                            <constraint firstItem="q1D-oO-HjH" firstAttribute="top" secondItem="AEV-rY-ica" secondAttribute="bottom" id="Zd3-4v-f9V"/>
                             <constraint firstItem="AEV-rY-ica" firstAttribute="top" secondItem="mHL-2S-CqN" secondAttribute="top" id="bb8-mF-d0H"/>
-                            <constraint firstItem="HPw-aF-O8I" firstAttribute="centerY" secondItem="mHL-2S-CqN" secondAttribute="centerY" id="bpw-EU-lDW"/>
                             <constraint firstItem="yh5-gy-XPB" firstAttribute="top" secondItem="HPw-aF-O8I" secondAttribute="bottom" constant="6" id="c8N-mr-Cez"/>
                             <constraint firstItem="K49-wu-dxC" firstAttribute="centerX" secondItem="mHL-2S-CqN" secondAttribute="centerX" id="d2b-f9-wyh"/>
                             <constraint firstAttribute="trailing" secondItem="ElC-8C-44x" secondAttribute="trailing" constant="4" id="eKn-dZ-K3w"/>
                             <constraint firstItem="HPw-aF-O8I" firstAttribute="leading" secondItem="mHL-2S-CqN" secondAttribute="leading" constant="40" id="far-jy-8ic"/>
-                            <constraint firstItem="ElC-8C-44x" firstAttribute="centerY" secondItem="mHL-2S-CqN" secondAttribute="centerY" id="hPL-dc-i4X"/>
+                            <constraint firstItem="KL4-Vg-cbT" firstAttribute="centerX" secondItem="mHL-2S-CqN" secondAttribute="centerX" id="h39-5x-oeu"/>
+                            <constraint firstItem="IC0-W6-1Fs" firstAttribute="leading" secondItem="mHL-2S-CqN" secondAttribute="leading" constant="8" id="iPP-e2-zmw"/>
+                            <constraint firstItem="IC0-W6-1Fs" firstAttribute="top" secondItem="AEV-rY-ica" secondAttribute="bottom" constant="8" id="kEb-wv-Y2B"/>
                             <constraint firstItem="AEV-rY-ica" firstAttribute="leading" secondItem="mHL-2S-CqN" secondAttribute="leading" id="nf9-KV-BdS"/>
+                            <constraint firstItem="ElC-8C-44x" firstAttribute="top" secondItem="HPw-aF-O8I" secondAttribute="top" constant="5" id="oaS-Zc-JBm"/>
                             <constraint firstItem="AEV-rY-ica" firstAttribute="centerX" secondItem="mHL-2S-CqN" secondAttribute="centerX" id="oga-OH-I4g"/>
+                            <constraint firstItem="rvz-CG-Fbv" firstAttribute="top" secondItem="q1D-oO-HjH" secondAttribute="bottom" id="pQn-gR-soF"/>
                             <constraint firstItem="8dQ-uj-jmc" firstAttribute="leading" secondItem="mHL-2S-CqN" secondAttribute="leading" constant="4" id="so2-tN-aVG"/>
+                            <constraint firstItem="HPw-aF-O8I" firstAttribute="top" secondItem="KL4-Vg-cbT" secondAttribute="bottom" constant="3" id="twf-Lz-xHh"/>
                             <constraint firstItem="HPw-aF-O8I" firstAttribute="centerX" secondItem="mHL-2S-CqN" secondAttribute="centerX" id="tz5-To-Yec"/>
+                            <constraint firstItem="eUk-gr-KAL" firstAttribute="leading" secondItem="mHL-2S-CqN" secondAttribute="leading" constant="8" id="vzl-hb-sto"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Player" image="ic_menu_player" id="HyP-qw-5Js"/>
                     <navigationItem key="navigationItem" title="Lisn" id="yuL-2t-7pt"/>
                     <connections>
+                        <outlet property="bgImageView" destination="OCI-Sp-kfN" id="JF0-wZ-EuL"/>
+                        <outlet property="bookNameLbl" destination="IC0-W6-1Fs" id="baY-Kg-lMU"/>
+                        <outlet property="chapterLbl" destination="KL4-Vg-cbT" id="Ngk-hb-LPM"/>
                         <outlet property="currentTimeLbl" destination="8dQ-uj-jmc" id="Lgl-B6-5II"/>
+                        <outlet property="iCarouselView" destination="eUk-gr-KAL" id="hfT-31-lcp"/>
                         <outlet property="playBtn" destination="K49-wu-dxC" id="EGX-Nk-saU"/>
                         <outlet property="slider" destination="HPw-aF-O8I" id="Ab0-TR-YMf"/>
                         <outlet property="totalTimeLbl" destination="ElC-8C-44x" id="j2j-nJ-AKk"/>
@@ -3659,7 +3745,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
         <image name="ui_bg_logo" width="90" height="90"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="q7a-zb-lui"/>
+        <segue reference="qYW-Jz-cO9"/>
         <segue reference="h0j-vW-rYl"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.93333333330000001" green="0.62352941179999999" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>

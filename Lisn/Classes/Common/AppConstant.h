@@ -88,6 +88,8 @@ typedef enum  {
 
 #define PLAYER_NOTIFICATION @"player_notification"
 #define PlayerNotificationTypeKey    @"PlayerNotificationTypeKey"
+#define PlayerNotificationBookIdKey    @"PlayerNotificationBookIdKey"
+#define PlayerNotificationChapterIndexKey    @"PlayerNotificationChapterIndexKey"
 #define PlayerNotificationTypePlayingFinished   1
 #define PlayerNotificationTypePlayingPaused   2
 #define PlayerNotificationTypePlayingResumed   3

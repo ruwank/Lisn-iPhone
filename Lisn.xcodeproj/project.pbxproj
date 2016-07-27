@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		741565371CDF612D00795F82 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 741565361CDF612D00795F82 /* MessageUI.framework */; };
+		74BE78CD1D48786E004D1C8B /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BE78CC1D48786E004D1C8B /* iCarousel.m */; };
+		74BE78D01D48859B004D1C8B /* AudioCoverFlowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BE78CF1D48859B004D1C8B /* AudioCoverFlowCell.m */; };
 		FD5B4F421D3E6A9D0060A74C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD5B4ED51D3E6A9D0060A74C /* Assets.xcassets */; };
 		FD5B4F431D3E6A9D0060A74C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD5B4ED61D3E6A9D0060A74C /* LaunchScreen.storyboard */; };
 		FD5B4F441D3E6A9D0060A74C /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5B4EDB1D3E6A9D0060A74C /* AboutUsViewController.m */; };
@@ -63,6 +65,10 @@
 
 /* Begin PBXFileReference section */
 		741565361CDF612D00795F82 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		74BE78CB1D48786E004D1C8B /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		74BE78CC1D48786E004D1C8B /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		74BE78CE1D48859B004D1C8B /* AudioCoverFlowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioCoverFlowCell.h; sourceTree = "<group>"; };
+		74BE78CF1D48859B004D1C8B /* AudioCoverFlowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioCoverFlowCell.m; sourceTree = "<group>"; };
 		84018DCF1C992CAE009C9403 /* Lisn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lisn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D27BB1A12749D59D3F831C98 /* libPods-Lisn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D490021ED8F50DF5EDB64FF4 /* Pods-Lisn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.release.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +179,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		74BE78CA1D48786E004D1C8B /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				74BE78CB1D48786E004D1C8B /* iCarousel.h */,
+				74BE78CC1D48786E004D1C8B /* iCarousel.m */,
+			);
+			path = iCarousel;
+			sourceTree = "<group>";
+		};
 		84018DC61C992CAE009C9403 = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +273,7 @@
 		FD5B4EDE1D3E6A9D0060A74C /* AppSupport */ = {
 			isa = PBXGroup;
 			children = (
+				74BE78CA1D48786E004D1C8B /* iCarousel */,
 				FD5B4EDF1D3E6A9D0060A74C /* Cipher */,
 				FD5B4EE31D3E6A9D0060A74C /* LoadingIndicator */,
 				FD5B4EE61D3E6A9D0060A74C /* SWRevealViewController */,
@@ -359,6 +375,8 @@
 				FD5B4F0E1D3E6A9D0060A74C /* DetailViewTableViewCell.m */,
 				FD5B4F0F1D3E6A9D0060A74C /* PlayerBarView.h */,
 				FD5B4F101D3E6A9D0060A74C /* PlayerBarView.m */,
+				74BE78CE1D48859B004D1C8B /* AudioCoverFlowCell.h */,
+				74BE78CF1D48859B004D1C8B /* AudioCoverFlowCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -605,6 +623,7 @@
 				FD5B4F4D1D3E6A9D0060A74C /* BookChapter.m in Sources */,
 				FD5B4F621D3E6A9D0060A74C /* SignUpViewController.m in Sources */,
 				FD5B4F4A1D3E6A9D0060A74C /* AudioBook.m in Sources */,
+				74BE78CD1D48786E004D1C8B /* iCarousel.m in Sources */,
 				FD5B4F611D3E6A9D0060A74C /* MyBooksViewController.m in Sources */,
 				FD5B4F5A1D3E6A9D0060A74C /* WebServiceManager.m in Sources */,
 				FD5B4F5E1D3E6A9D0060A74C /* MyBookCollectionViewCell.m in Sources */,
@@ -616,6 +635,7 @@
 				FD5B4F641D3E6A9D0060A74C /* BookSearchViewController.m in Sources */,
 				FD5B4F6C1D3E6A9D0060A74C /* main.m in Sources */,
 				FD5B4F5F1D3E6A9D0060A74C /* StoreBookCollectionViewCell.m in Sources */,
+				74BE78D01D48859B004D1C8B /* AudioCoverFlowCell.m in Sources */,
 				FD5B4F671D3E6A9D0060A74C /* TopTabsScrollView.m in Sources */,
 				FD5B4F481D3E6A9D0060A74C /* SWRevealViewController.m in Sources */,
 				FD5B4F5B1D3E6A9D0060A74C /* ContactUsViewController.m in Sources */,
