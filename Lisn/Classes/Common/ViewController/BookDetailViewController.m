@@ -29,7 +29,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
 
 @interface BookDetailViewController () <UITableViewDelegate, UITableViewDataSource, DetailViewTableViewCellDelegate,PurchaseViewControllerDelegate,LoginViewControllerDelegate,UIActionSheetDelegate,LoadingIndicatorDelegate,SKPaymentTransactionObserver, SKProductsRequestDelegate>{
     BOOL isSelectChapter;
-    UIActivityIndicatorView *activityIndicator;
+    //UIActivityIndicatorView *activityIndicator;
     BOOL isSelectCard;
 }
 
@@ -89,7 +89,9 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
 @property (nonatomic, strong) BookChapter *selectedChapter;
 //@property (nonatomic, strong) LoadingIndicator *indicator;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
+@property (weak, nonatomic) IBOutlet UILabel *loadingLabel;
 
 @end
 
@@ -198,7 +200,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     }
     if(downloadComplete){
     [self showDownloadCompleteMessage];
-    [activityIndicator stopAnimating];
+    [self hiddenLoadingView];
     }
 
     
@@ -206,10 +208,9 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
 -(void)downloadAudioFile:(NSString*)bookId andFileIndex:(int)index{
     //self.indicator.loadingText=@"Downloading...";
     //[self.indicator show];
-
+    [self showLoadingView:[NSString stringWithFormat:@"Downloading Chapter %d",index]];
     [WebServiceManager downloadAudioFile:bookId andFileIndex:index withResponseHandeler:^(BOOL success, ErrorType errorType) {
-        [activityIndicator stopAnimating];
-
+        [self hiddenLoadingView];
         if(success){
             if(isSelectChapter){
                 [self showDownloadCompleteMessage];
@@ -289,12 +290,22 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     _payByBillBtn.layer.borderColor = RGBA(255, 255, 255, 1).CGColor;
     
     [self adjustViewHeights];
-    activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    activityIndicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
-    activityIndicator.center = self.view.center;
-    [self.view addSubview:activityIndicator];
+    
 //    self.indicator = [[LoadingIndicator alloc] initWithDelegate:self];
 //    self.indicator.loadingText = @"Loading";
+}
+-(void)showLoadingView:(NSString*)message{
+    _loadingView.hidden=NO;
+    if(message){
+        _loadingLabel.text=message;
+    }
+    [ _activityIndicator startAnimating];
+}
+-(void)hiddenLoadingView{
+    _loadingView.hidden=YES;
+
+    [ _activityIndicator stopAnimating];
+
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -514,7 +525,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     
 }
 -(void)logUserDownload{
-    [activityIndicator startAnimating];
+    [self showLoadingView:@"Loading..."];
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
     
     AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
@@ -550,7 +561,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"error %@",error);
-            [activityIndicator stopAnimating];
+            [self hiddenLoadingView];
             [AppUtils showCommonErrorAlert];
 
 
@@ -680,10 +691,13 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     for(SKPaymentTransaction *transaction in transactions){
         switch(transaction.transactionState){
             case SKPaymentTransactionStatePurchasing: NSLog(@"Transaction state -> Purchasing");
+                [self showLoadingView:@"Purchasing"];
                 //called when the user is in the process of purchasing, do not add any of your own code here.
                 break;
             case SKPaymentTransactionStatePurchased:
                 //this is called when the user has successfully purchased the package (Cha-Ching!)
+                //[self showLoadingView:@"Purchased "];
+
                 [self completeInAppPurchase]; //you can add your code for what you want to happen when the user buys the purchase here, for this tutorial we use removing ads
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 NSLog(@"Transaction state -> Purchased");
@@ -699,7 +713,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
                     NSLog(@"Transaction state -> Cancelled");
                     //the user cancelled the payment ;(
                 }
-                _loadingView.hidden=YES;
+                [self hiddenLoadingView];
 
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 break;
@@ -710,7 +724,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     _audioBook.isPurchase=YES;
     _audioBook.isTotalBookPurchased=YES;
     [self updateAudioBook];
-    _loadingView.hidden=YES;
+    [self hiddenLoadingView];
 
     UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:PAYMENT_COMPLETE_TITLE message:PAYMENT_COMPLETE_MESSAGE delegate:self cancelButtonTitle:BUTTON_YES otherButtonTitles:BUTTON_NO,nil];
     alertView.tag=ALERT_VIEW_TAG_PAYMENT_COMPETE;

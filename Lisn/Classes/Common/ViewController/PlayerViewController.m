@@ -10,6 +10,7 @@
 #import "FileOperator.h"
 #import "AudioPlayer.h"
 #import "AppUtils.h"
+#import "DataSource.h"
 
 @import AVFoundation;
 
@@ -123,6 +124,17 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerNotificationReceived:) name:PLAYER_NOTIFICATION object:nil];
+    
+    //Get chapter list
+    NSMutableDictionary *userBook=[[DataSource sharedInstance] getUserBook];
+
+    AudioBook *audioBook=[userBook objectForKey:_bookId];
+    NSArray *chaptes=audioBook.chapters;
+    
+    //check audio file available
+//    if([FileOperator isAudioFileExists:bookId andFileIndex:_chapter.chapter_id]){
+//        
+//    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
