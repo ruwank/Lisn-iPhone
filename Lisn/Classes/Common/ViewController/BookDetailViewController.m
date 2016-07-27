@@ -132,20 +132,31 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
 
     if (_audioBook.isTotalBookPurchased && [_audioBook.chapters count] == [_audioBook.downloadedChapter count]) {
         //Play
+        [self loadAudioPlayer];
     }else{
         if(!_audioBook.isTotalBookPurchased && [_audioBook.price floatValue]< 1){
             //[self performSegueWithIdentifier:@"player_seque_id" sender:nil];
 
            //Log downlaod
-            [self logUserDownload];
+            if([[DataSource sharedInstance] isUserLogin]){
+                [self logUserDownload];
+            }else{
+                [self loadLoginScreen];
+                
+            }
+
             //[self performSegueWithIdentifier:@"player_seque_id" sender:nil];
 
 
         }else{
+            if([[DataSource sharedInstance] isUserLogin]){
+
            //Download
             [self downloadAudioBook];
-           // [self performSegueWithIdentifier:@"player_seque_id" sender:nil];
-
+            }else{
+                [self loadLoginScreen];
+                
+            }
         }
         
     }
@@ -764,7 +775,11 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
             }
         }
     }else{
-        [self payByCardButtonTapped:nil];
+        if(_selectedChapter.price>0){
+            [self payByCardButtonTapped:nil];
+        }else{
+            [self logUserDownload];
+        }
     }
 }
 

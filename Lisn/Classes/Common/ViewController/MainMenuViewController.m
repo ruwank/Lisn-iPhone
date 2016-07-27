@@ -10,8 +10,11 @@
 #import "PlayerViewController.h"
 #import "DataSource.h"
 #import "LoginViewController.h"
+#import "MyBooksViewController.h"
 
-@interface MainMenuViewController ()<UITabBarControllerDelegate,LoginViewControllerDelegate>
+@interface MainMenuViewController ()<UITabBarControllerDelegate,LoginViewControllerDelegate>{
+    int selectedTab;
+}
 
 @end
 
@@ -50,7 +53,8 @@
 - (BOOL)tabBarController:(UITabBarController *)tabBarController
 shouldSelectViewController:(UIViewController *)viewController{
    // return YES;
-    if ([viewController class] == [PlayerViewController class]) {
+    //if ([viewController class] == [PlayerViewController class]) {
+    if(viewController == [tabBarController.viewControllers objectAtIndex:2]){
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 
         if([[DataSource sharedInstance] isUserLogin]){
@@ -66,13 +70,29 @@ shouldSelectViewController:(UIViewController *)viewController{
                 [self showMybookEmptyMessage];
             }
         }else{
+            selectedTab=2;
             LoginViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewControllerId"];
             viewController.delegate = self;
             [tabBarController presentViewController:viewController animated:YES completion:nil];
         }
         //[tabBarController presentModalViewController:navController animated:YES];
         return NO;
-    } else {
+    }
+   else if (viewController == [tabBarController.viewControllers objectAtIndex:3] )
+    {
+         if(![[DataSource sharedInstance] isUserLogin]){
+             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+selectedTab=3;
+             LoginViewController * viewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewControllerId"];
+             viewController.delegate = self;
+             [tabBarController presentViewController:viewController animated:YES completion:nil];
+             return NO;
+         }else{
+             return YES;
+         }
+        
+    }
+    else {
         return YES;
     }
 }
@@ -81,6 +101,7 @@ shouldSelectViewController:(UIViewController *)viewController{
 
 - (void)loginSucceeded {
     
+    if(selectedTab==2){
     NSMutableDictionary *userBook=[[DataSource sharedInstance] getUserBook];
     NSArray *uesrBook=[userBook allValues];
     
@@ -94,6 +115,11 @@ shouldSelectViewController:(UIViewController *)viewController{
     }else{
         [self showMybookEmptyMessage];
     }
+    }
+    else if(selectedTab==3){
+        self.selectedIndex=3;
+    }
+
     
 }
 

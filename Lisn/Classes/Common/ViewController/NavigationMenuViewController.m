@@ -88,33 +88,39 @@
     
     return cell;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row ==3){
+        [[DataSource sharedInstance] logOutUser];
+        [_tableView reloadData];
+    }
+}
 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-    
-    if ([identifier isEqualToString:@"my_books_segue_id"]) {
-        
-        if (![[DataSource sharedInstance] isUserLogin]) {
-            
-            LoginViewController * viewController = [LoginViewController getInstance];
-            viewController.delegate = self;
-            [self presentViewController:viewController animated:YES completion:nil];
+//- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+//    
+//    if ([identifier isEqualToString:@"my_books_segue_id"]) {
+//        
+//        if (![[DataSource sharedInstance] isUserLogin]) {
+//            
+//            LoginViewController * viewController = [LoginViewController getInstance];
+//            viewController.delegate = self;
+//            [self presentViewController:viewController animated:YES completion:nil];
+//
+//            return NO;
+//        }
+//    }else if([identifier isEqualToString:@"logout_segue_id"]){
+//        [[DataSource sharedInstance] logOutUser];
+//    }
+//    
+//    return YES;
+//}
 
-            return NO;
-        }
-    }else if([identifier isEqualToString:@"logout_segue_id"]){
-        [[DataSource sharedInstance] logOutUser];
-    }
-    
-    return YES;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    
+//}
 
 #pragma mark - LoginViewControllerDelegate
 

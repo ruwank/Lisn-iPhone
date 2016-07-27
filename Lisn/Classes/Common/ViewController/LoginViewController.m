@@ -26,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *forgotPassBtn;
 @property (weak, nonatomic) IBOutlet UIButton *createAccBtn;
+@property (weak, nonatomic) IBOutlet UIView *loadingView;
+@property (weak, nonatomic) IBOutlet UILabel *loadingText;
 
 @end
 
@@ -94,13 +96,16 @@
     NSString *email = [AppUtils trimmedStringOfString:_emailField.text];
     NSString *password = [AppUtils trimmedStringOfString:_passwordField.text];
     
-    AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
+    //AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
     
     NSString *deviceId=[AppUtils getDeviceId];
     
     NSDictionary *params = @ {@"email" :email ,@"password":password,@"usertype":@"email",@"os":@"iPhone",@"device":deviceId};
-    
+    _loadingView.hidden=NO;
+
     [WebServiceManager loginUser:params withResponseHandeler:^(BOOL success, ErrorType errorType) {
+        _loadingView.hidden=YES;
+
         if(success){
             [self userLoginCompleted:YES];
   
@@ -139,8 +144,11 @@
         middle_name = [jsonDic valueForKey:@"middle_name"];
     
     NSDictionary *params = @ {@"fname": firstName, @"lname": lastName ,@"mname":middle_name, @"email" :email ,@"password":@"NULL",@"usertype":@"fb",@"os":@"iPhone",@"device":deviceId ,@"username":@"NULL" ,@"fbname":@"NULL" ,@"loc":@"NULL", @"bday":@"NULL" ,@"mobile":@"NULL" ,@"age":@"NULL" ,@"pref":@"NULL" ,@"fbid":fbid  ,@"fburl":fburl};
-    
+    _loadingView.hidden=NO;
+
     [WebServiceManager createUserAcoount:params withResponseHandler:^(BOOL success, NSString *statusText, ErrorType errorType) {
+        _loadingView.hidden=YES;
+
         if(success){
             [self userLoginCompleted:YES];
         }else{
@@ -160,7 +168,7 @@
 }
 
 - (void)downloadUserBook {
-    
+     _loadingView.hidden=NO;
     UserProfile *userProfile =  [[DataSource sharedInstance] getProfileInfo];
     
     NSDictionary *params = @ {@"userid" :userProfile.userId};
@@ -168,6 +176,8 @@
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
     
     [manager POST:user_book_list_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        _loadingView.hidden=YES;
         if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
             NSLog(@"responseObject %@",responseObject);
             NSMutableDictionary *userBook=[[NSMutableDictionary alloc] init];
@@ -188,6 +198,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error %@",error);
+         _loadingView.hidden=YES;
         if (_delegate) {
             [_delegate loginSucceeded];
             [self dismissViewControllerAnimated:YES completion:nil];
