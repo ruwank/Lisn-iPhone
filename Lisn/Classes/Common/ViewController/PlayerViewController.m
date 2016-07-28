@@ -95,6 +95,16 @@
     _cellH = 220;
     _cellW = _cellH/1.5;
     
+    if(!_bookId || _bookId.length<1){
+        AudioPlayer *player = [AudioPlayer getSharedInstance];
+
+        if(player.isPlaying){
+            _bookId=player.currentBookId;
+            _chapterIndex=player.currentChapterIndex;
+        }
+    }else{
+        
+    }
     NSMutableDictionary *userBook = [[DataSource sharedInstance] getUserBook];
     AudioBook *audioBook = [userBook objectForKey:_bookId];
     _bookImgUrl = audioBook.cover_image;
@@ -128,9 +138,19 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
     AudioPlayer *player = [AudioPlayer getSharedInstance];
-    [player startPlayerWithBook:_bookId andChapterIndex:_chapterIndex];
+
+    if (!player.isPlaying) {
+        [player startPlayerWithBook:_bookId andChapterIndex:_chapterIndex];
+
+    }else{
+        _currentTime = [AudioPlayer getSharedInstance].audioPlayer.currentTime;
+        
+        [self startPlaying];
+        
+        _chapterLbl.text = [NSString stringWithFormat:@"Chapter %d", _chapterIndex];
+        [_iCarouselView scrollToItemAtIndex:_chapterIndex-1 animated:NO];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated

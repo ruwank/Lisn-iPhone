@@ -2261,49 +2261,6 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
             </objects>
             <point key="canvasLocation" x="2479" y="212"/>
         </scene>
-        <!--Purchase View Controller-->
-        <scene sceneID="fme-Kw-6VP">
-            <objects>
-                <viewController storyboardIdentifier="PurchaseViewControllerId" id="LCR-U3-n0N" customClass="PurchaseViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="a3p-QL-gqX"/>
-                        <viewControllerLayoutGuide type="bottom" id="pin-CT-KvK"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="swz-uI-VGg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vQ-y4-es1">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="delegate" destination="LCR-U3-n0N" id="QT0-iL-GBw"/>
-                                </connections>
-                            </webView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uCI-el-5qa">
-                                <rect key="frame" x="150" y="274" width="20" height="20"/>
-                            </activityIndicatorView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="uCI-el-5qa" firstAttribute="centerX" secondItem="swz-uI-VGg" secondAttribute="centerX" id="63U-oe-Hdi"/>
-                            <constraint firstAttribute="trailing" secondItem="2vQ-y4-es1" secondAttribute="trailing" id="GDM-YT-bUh"/>
-                            <constraint firstItem="uCI-el-5qa" firstAttribute="centerY" secondItem="swz-uI-VGg" secondAttribute="centerY" id="Q86-QU-mGC"/>
-                            <constraint firstItem="pin-CT-KvK" firstAttribute="top" secondItem="2vQ-y4-es1" secondAttribute="bottom" id="l83-ze-xx9"/>
-                            <constraint firstItem="2vQ-y4-es1" firstAttribute="leading" secondItem="swz-uI-VGg" secondAttribute="leading" id="sJc-fa-mHv"/>
-                            <constraint firstItem="2vQ-y4-es1" firstAttribute="top" secondItem="a3p-QL-gqX" secondAttribute="bottom" id="xie-1f-6yT"/>
-                        </constraints>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <connections>
-                        <outlet property="activityIndicator" destination="uCI-el-5qa" id="yY8-fI-1IQ"/>
-                        <outlet property="webview" destination="2vQ-y4-es1" id="eNL-hZ-U0B"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JMp-I4-oCF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2949" y="-607"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="02F-AW-fsx">
             <objects>
@@ -3283,12 +3240,12 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rwv-1f-NZJ">
-                                        <rect key="frame" x="240" y="20" width="80" height="44"/>
+                                        <rect key="frame" x="276" y="20" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="CMA-rp-pwk"/>
-                                            <constraint firstAttribute="width" constant="80" id="cNE-w1-b9D"/>
+                                            <constraint firstAttribute="width" constant="44" id="cNE-w1-b9D"/>
                                         </constraints>
-                                        <state key="normal" title="Close"/>
+                                        <state key="normal" image="ic_cancel"/>
                                         <connections>
                                             <action selector="closeButtonTapped:" destination="hdg-b8-jDA" eventType="touchUpInside" id="VwC-Ea-D3d"/>
                                         </connections>
@@ -3351,7 +3308,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eUk-gr-KAL" userLabel="Flow View" customClass="iCarousel">
-                                <rect key="frame" x="8" y="104" width="304" height="260"/>
+                                <rect key="frame" x="8" y="105" width="304" height="234"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="234" id="cFI-R8-X8I"/>
@@ -3498,12 +3455,12 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0c-lQ-cBC">
-                                        <rect key="frame" x="220" y="2" width="100" height="40"/>
+                                        <rect key="frame" x="276" y="0.0" width="44" height="44"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="fLh-w7-ZOr"/>
-                                            <constraint firstAttribute="height" constant="40" id="kpo-Gd-GQJ"/>
+                                            <constraint firstAttribute="width" constant="44" id="fLh-w7-ZOr"/>
+                                            <constraint firstAttribute="height" constant="44" id="kpo-Gd-GQJ"/>
                                         </constraints>
-                                        <state key="normal" title="Cancel"/>
+                                        <state key="normal" image="ic_cancel"/>
                                         <connections>
                                             <action selector="cancelButtonTapped:" destination="l62-TP-JYe" eventType="touchUpInside" id="Kz8-5i-jBe"/>
                                         </connections>
@@ -3772,6 +3729,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
         <image name="btn_play_preview_start" width="54" height="54"/>
         <image name="btn_play_start" width="48" height="48"/>
         <image name="ic_award" width="32" height="32"/>
+        <image name="ic_cancel" width="44" height="44"/>
         <image name="ic_downloaded" width="14" height="14"/>
         <image name="ic_forward_30_white" width="48" height="48"/>
         <image name="ic_menu" width="23" height="15"/>

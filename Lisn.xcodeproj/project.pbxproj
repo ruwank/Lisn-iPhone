@@ -31,7 +31,6 @@
 		FD5B4F541D3E6A9D0060A74C /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5B4F051D3E6A9D0060A74C /* MainMenuViewController.m */; };
 		FD5B4F551D3E6A9D0060A74C /* NavigationMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5B4F071D3E6A9D0060A74C /* NavigationMenuViewController.m */; };
 		FD5B4F561D3E6A9D0060A74C /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5B4F091D3E6A9D0060A74C /* PlayerViewController.m */; };
-		FD5B4F571D3E6A9D0060A74C /* PurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5B4F0B1D3E6A9D0060A74C /* PurchaseViewController.m */; };
 		FD5B4F581D3E6A9D0060A74C /* DetailViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5B4F0E1D3E6A9D0060A74C /* DetailViewTableViewCell.m */; };
 		FD5B4F591D3E6A9D0060A74C /* PlayerBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5B4F101D3E6A9D0060A74C /* PlayerBarView.m */; };
 		FD5B4F5A1D3E6A9D0060A74C /* WebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5B4F121D3E6A9D0060A74C /* WebServiceManager.m */; };
@@ -116,8 +115,6 @@
 		FD5B4F071D3E6A9D0060A74C /* NavigationMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationMenuViewController.m; sourceTree = "<group>"; };
 		FD5B4F081D3E6A9D0060A74C /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
 		FD5B4F091D3E6A9D0060A74C /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
-		FD5B4F0A1D3E6A9D0060A74C /* PurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseViewController.h; sourceTree = "<group>"; };
-		FD5B4F0B1D3E6A9D0060A74C /* PurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseViewController.m; sourceTree = "<group>"; };
 		FD5B4F0D1D3E6A9D0060A74C /* DetailViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewTableViewCell.h; sourceTree = "<group>"; };
 		FD5B4F0E1D3E6A9D0060A74C /* DetailViewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewTableViewCell.m; sourceTree = "<group>"; };
 		FD5B4F0F1D3E6A9D0060A74C /* PlayerBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerBarView.h; sourceTree = "<group>"; };
@@ -362,8 +359,6 @@
 				FD5B4F071D3E6A9D0060A74C /* NavigationMenuViewController.m */,
 				FD5B4F081D3E6A9D0060A74C /* PlayerViewController.h */,
 				FD5B4F091D3E6A9D0060A74C /* PlayerViewController.m */,
-				FD5B4F0A1D3E6A9D0060A74C /* PurchaseViewController.h */,
-				FD5B4F0B1D3E6A9D0060A74C /* PurchaseViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -646,7 +641,6 @@
 				FD5B4F4E1D3E6A9D0060A74C /* DataSource.m in Sources */,
 				FD5B4F441D3E6A9D0060A74C /* AboutUsViewController.m in Sources */,
 				FD5B4F551D3E6A9D0060A74C /* NavigationMenuViewController.m in Sources */,
-				FD5B4F571D3E6A9D0060A74C /* PurchaseViewController.m in Sources */,
 				FD5B4F5C1D3E6A9D0060A74C /* FeedbackViewController.m in Sources */,
 				FD5B4F511D3E6A9D0060A74C /* BookDetailViewController.m in Sources */,
 				FD5B4F4B1D3E6A9D0060A74C /* AudioPlayer.m in Sources */,
