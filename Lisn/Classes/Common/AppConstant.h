@@ -95,6 +95,7 @@ typedef enum  {
 #define PlayerNotificationTypePlayingResumed   3
 
 
+#define IS_SHOW_TURTORIAL     @"is_show_turtorial"
 
 
 

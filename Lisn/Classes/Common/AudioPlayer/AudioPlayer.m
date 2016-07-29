@@ -170,7 +170,8 @@ static AudioPlayer *instance;
         BookChapter *chapter = [chapters objectAtIndex:_currentChapterIndex-1];
         chapter.lastSeekPoint = self.audioPlayer.currentTime;
     }
-    
+    [AppUtils appDelegate].lastPlayBookId=_currentBookId;
+
     [[DataSource sharedInstance] saveUserBook:userBook];
     
     [self.audioPlayer pause];
@@ -194,7 +195,7 @@ static AudioPlayer *instance;
         }else {
             audioBook.lastPlayChapterIndex = 1;
         }
-        
+        [AppUtils appDelegate].lastPlayBookId=_currentBookId;
         [[DataSource sharedInstance] saveUserBook:userBook];
     }
     
@@ -219,7 +220,12 @@ static AudioPlayer *instance;
         }
     }
 }
+- (void)seekToTime:(int)newTime{
+    if ([self isPlaying]) {
+        _audioPlayer.currentTime = newTime;
 
+    }
+}
 - (BOOL)isPlaying
 {
     return self.audioPlayer.playing;

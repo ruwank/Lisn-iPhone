@@ -12,6 +12,7 @@
 #import "AppUtils.h"
 #import "AppDelegate.h"
 #import "BookCategory.h"
+#import "TurtorialViewController.h"
 
 @interface MainViewController (){
     bool finishDelay,finishDownload;
@@ -29,6 +30,11 @@
 
     [self downloadInitialData];
 
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:IS_SHOW_TURTORIAL])
+    {
+        TurtorialViewController * viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TurtorialViewController"];
+        [self presentViewController:viewController animated:YES completion:nil];
+    }
     // Do any additional setup after loading the view from its nib.
 }
 

@@ -10,6 +10,8 @@
 		741565371CDF612D00795F82 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 741565361CDF612D00795F82 /* MessageUI.framework */; };
 		74BE78CD1D48786E004D1C8B /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BE78CC1D48786E004D1C8B /* iCarousel.m */; };
 		74BE78D01D48859B004D1C8B /* AudioCoverFlowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BE78CF1D48859B004D1C8B /* AudioCoverFlowCell.m */; };
+		FD3FDB351D4AF6C800CCCD73 /* TurtorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3FDB341D4AF6C800CCCD73 /* TurtorialViewController.m */; };
+		FD3FDB381D4AF7C100CCCD73 /* TurtorialContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3FDB371D4AF7C100CCCD73 /* TurtorialContentViewController.m */; };
 		FD5B4F421D3E6A9D0060A74C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD5B4ED51D3E6A9D0060A74C /* Assets.xcassets */; };
 		FD5B4F431D3E6A9D0060A74C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD5B4ED61D3E6A9D0060A74C /* LaunchScreen.storyboard */; };
 		FD5B4F441D3E6A9D0060A74C /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5B4EDB1D3E6A9D0060A74C /* AboutUsViewController.m */; };
@@ -72,6 +74,10 @@
 		D27BB1A12749D59D3F831C98 /* libPods-Lisn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Lisn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D490021ED8F50DF5EDB64FF4 /* Pods-Lisn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.release.xcconfig"; sourceTree = "<group>"; };
 		F65BA1D66F76076F70B775A0 /* Pods-Lisn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lisn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lisn/Pods-Lisn.debug.xcconfig"; sourceTree = "<group>"; };
+		FD3FDB331D4AF6C800CCCD73 /* TurtorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TurtorialViewController.h; sourceTree = "<group>"; };
+		FD3FDB341D4AF6C800CCCD73 /* TurtorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TurtorialViewController.m; sourceTree = "<group>"; };
+		FD3FDB361D4AF7C100CCCD73 /* TurtorialContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TurtorialContentViewController.h; sourceTree = "<group>"; };
+		FD3FDB371D4AF7C100CCCD73 /* TurtorialContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TurtorialContentViewController.m; sourceTree = "<group>"; };
 		FD5B4ED51D3E6A9D0060A74C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD5B4ED71D3E6A9D0060A74C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD5B4EDA1D3E6A9D0060A74C /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
@@ -222,6 +228,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FD3FDB321D4AF6A200CCCD73 /* Turtorial */ = {
+			isa = PBXGroup;
+			children = (
+				FD3FDB331D4AF6C800CCCD73 /* TurtorialViewController.h */,
+				FD3FDB341D4AF6C800CCCD73 /* TurtorialViewController.m */,
+				FD3FDB361D4AF7C100CCCD73 /* TurtorialContentViewController.h */,
+				FD3FDB371D4AF7C100CCCD73 /* TurtorialContentViewController.m */,
+			);
+			path = Turtorial;
+			sourceTree = "<group>";
+		};
 		FD5B4ED41D3E6A9D0060A74C /* Lisn */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +259,7 @@
 		FD5B4ED81D3E6A9D0060A74C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				FD3FDB321D4AF6A200CCCD73 /* Turtorial */,
 				FD5B4ED91D3E6A9D0060A74C /* AboutUs */,
 				FD5B4EDC1D3E6A9D0060A74C /* AppDelegate.h */,
 				FD5B4EDD1D3E6A9D0060A74C /* AppDelegate.m */,
@@ -484,6 +502,7 @@
 				84018DCD1C992CAE009C9403 /* Resources */,
 				518FC93C80F730FB71F19589 /* [CP] Embed Pods Frameworks */,
 				00FBC49C0574ED596E93BC2A /* [CP] Copy Pods Resources */,
+				FDC5EFDE1D4BAF5000F8EEFE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -600,6 +619,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		FDC5EFDE1D4BAF5000F8EEFE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 8dd3c7d2affefb5e1f718950934ea9eb9ba0ca10 a3effc7a61cadfb15ac575cf459cd471138acee964e1472df9f5be5060216537";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -621,6 +653,7 @@
 				74BE78CD1D48786E004D1C8B /* iCarousel.m in Sources */,
 				FD5B4F611D3E6A9D0060A74C /* MyBooksViewController.m in Sources */,
 				FD5B4F5A1D3E6A9D0060A74C /* WebServiceManager.m in Sources */,
+				FD3FDB381D4AF7C100CCCD73 /* TurtorialContentViewController.m in Sources */,
 				FD5B4F5E1D3E6A9D0060A74C /* MyBookCollectionViewCell.m in Sources */,
 				FD5B4F581D3E6A9D0060A74C /* DetailViewTableViewCell.m in Sources */,
 				FD5B4F531D3E6A9D0060A74C /* LoginViewController.m in Sources */,
@@ -639,6 +672,7 @@
 				FD5B4F661D3E6A9D0060A74C /* TabButtonView.m in Sources */,
 				FD5B4F451D3E6A9D0060A74C /* AppDelegate.m in Sources */,
 				FD5B4F4E1D3E6A9D0060A74C /* DataSource.m in Sources */,
+				FD3FDB351D4AF6C800CCCD73 /* TurtorialViewController.m in Sources */,
 				FD5B4F441D3E6A9D0060A74C /* AboutUsViewController.m in Sources */,
 				FD5B4F551D3E6A9D0060A74C /* NavigationMenuViewController.m in Sources */,
 				FD5B4F5C1D3E6A9D0060A74C /* FeedbackViewController.m in Sources */,

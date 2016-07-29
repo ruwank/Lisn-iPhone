@@ -69,11 +69,15 @@
             if([jsonDic valueForKey:@"discount"]!= nil)
                 _discount = [[jsonDic valueForKey:@"discount"] intValue];
             
+            if([jsonDic valueForKey:@"purchased"]!= nil)
+                _isPurchase = [[jsonDic valueForKey:@"purchased"] boolValue];
+            
             _lanCode = LAN_EN;
             if ([_language isEqualToString:@"SI"]) {
                 _lanCode = LAN_SI;
             }
             
+
             if([jsonDic valueForKey:@"chapters"]!= nil && [[jsonDic valueForKey:@"chapters"] isKindOfClass:[NSArray class]] ){
                 NSMutableArray *chapterArray=[[NSMutableArray alloc] init];
                 for (NSDictionary *chapter in [jsonDic valueForKey:@"chapters"]) {

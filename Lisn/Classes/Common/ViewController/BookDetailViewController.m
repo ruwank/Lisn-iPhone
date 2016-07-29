@@ -294,9 +294,10 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
         _payByCardBtn.titleLabel.numberOfLines = 2;
         _payByCardBtn.titleLabel.textAlignment = NSTextAlignmentCenter; // if u need
         NSString *buttonText=[NSString stringWithFormat:@"Pay by Card (%d %% discount)",_audioBook.discount];
+        buttonText=@"Buy";
         [_payByCardBtn setTitle:buttonText forState:UIControlStateNormal];
 
-        //btnPayFromCard.setText("Pay by Card (" + audioBook.getDiscount() + "% discount)");
+     
 
     }
 }
@@ -448,7 +449,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     //
     _payByBillBtn.hidden=YES;
     _chapterTableView.hidden=YES;
-    _middleViewTop.constant =_shrinkGapMiddleView;
+    _middleViewTop.constant =_shrinkGapMiddleView-120;
     _viewAllBtn.hidden=YES;
 }
 

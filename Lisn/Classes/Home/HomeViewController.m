@@ -18,6 +18,7 @@
 #import "AppUtils.h"
 #import "BookDetailViewController.h"
 #import "DataSource.h"
+#import <Crashlytics/Crashlytics.h>
 
 @interface HomeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, StoreBookCollectionViewCellDelegate,UIActionSheetDelegate>{
     NSTimer *_timer;
@@ -66,6 +67,7 @@
     // Do any additional setup after loading the view from its nib.
     [self adjustViewHeights];
     [self loadData];
+    
 
 }
 -(void)viewWillAppear:(BOOL)animated{

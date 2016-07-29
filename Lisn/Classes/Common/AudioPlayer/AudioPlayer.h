@@ -26,7 +26,7 @@
 - (BOOL)isPlaying;
 
 - (void)seekTo:(int)timeGap;
-
+- (void)seekToTime:(int)newTime;
 - (void)startPlayerWithBook:(NSString *)bookId andChapterIndex:(int)chapterIndex;
 
 @end

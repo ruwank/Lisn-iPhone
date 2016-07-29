@@ -29,7 +29,7 @@
     [FileOperator checkAndCreateRootDirectory];
 
     
-    //[Fabric with:@[[Crashlytics class]]];
+    [Fabric with:@[[Crashlytics class]]];
 
     // Override point for customization after application launch.
     
@@ -40,8 +40,12 @@
 //    self.window.rootViewController = mainNav;
 //    [self.window makeKeyAndVisible];
     
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+    pageControl.backgroundColor = [UIColor whiteColor];
     
-    [self setServiceProvider];
+   // [self setServiceProvider];
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     

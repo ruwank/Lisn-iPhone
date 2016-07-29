@@ -9,6 +9,7 @@
 #import "NavigationMenuViewController.h"
 #import "LoginViewController.h"
 #import "DataSource.h"
+#import "TurtorialViewController.h"
 
 @interface NavigationMenuViewController () <UITableViewDelegate, UITableViewDataSource, LoginViewControllerDelegate>
 
@@ -42,10 +43,10 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if([[DataSource sharedInstance] isUserLogin]){
-        return 4;
+        return 5;
 
     }else{
-        return 3;
+        return 4;
 
     }
 }
@@ -78,6 +79,9 @@
             CellIdentifier = @"contactus";
             break;
         case 3:
+            CellIdentifier = @"tour";
+            break;
+        case 4:
             CellIdentifier = @"logout";
             break;
     }
@@ -90,6 +94,10 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row ==3){
+        TurtorialViewController * viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"TurtorialViewController"];
+        [self presentViewController:viewController animated:YES completion:nil];
+    }
+    else if(indexPath.row ==4){
         [[DataSource sharedInstance] logOutUser];
         [_tableView reloadData];
     }

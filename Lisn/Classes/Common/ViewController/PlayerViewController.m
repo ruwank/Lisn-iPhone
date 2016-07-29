@@ -74,7 +74,15 @@
 {
     [[AudioPlayer getSharedInstance] seekTo:-30];
 }
-
+- (IBAction)sliderValueChanged:(UISlider *)sender {
+    NSLog(@"slider value = %f", sender.value);
+    AudioPlayer *player = [AudioPlayer getSharedInstance];
+    
+    if (player.isPlaying) {
+        int seekValue=sender.value*_totalTime;
+        [player seekToTime:seekValue];
+    }
+}
 - (void)dealloc
 {
     [self invalidateTimer];
@@ -89,6 +97,7 @@
     // Do any additional setup after loading the view.
     
     self.automaticallyAdjustsScrollViewInsets = NO;
+    NSMutableDictionary *userBook = [[DataSource sharedInstance] getUserBook];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerNotificationReceived:) name:PLAYER_NOTIFICATION object:nil];
     
@@ -97,15 +106,35 @@
     
     if(!_bookId || _bookId.length<1){
         AudioPlayer *player = [AudioPlayer getSharedInstance];
-
+        
         if(player.isPlaying){
             _bookId=player.currentBookId;
             _chapterIndex=player.currentChapterIndex;
+            
+        }else{
+            NSString *lastPlayBookId= [AppUtils appDelegate].lastPlayBookId;
+            if(lastPlayBookId){
+                AudioBook *lastPlayAudioBook = [userBook objectForKey:lastPlayBookId];
+                if(lastPlayAudioBook){
+                    _bookId=lastPlayBookId;
+                    _chapterIndex=lastPlayAudioBook.lastPlayChapterIndex;
+                }else{
+                    NSArray *values = [userBook allValues];
+                    AudioBook *lastPlayAudioBook =[values objectAtIndex:0];
+                    _bookId=lastPlayAudioBook.book_id;
+                    _chapterIndex=lastPlayAudioBook.lastPlayChapterIndex;
+                    
+                }
+                
+            }else{
+                NSArray *values = [userBook allValues];
+                AudioBook *lastPlayAudioBook =[values objectAtIndex:0];
+                _bookId=lastPlayAudioBook.book_id;
+                _chapterIndex=lastPlayAudioBook.lastPlayChapterIndex;
+            }
         }
-    }else{
-        
     }
-    NSMutableDictionary *userBook = [[DataSource sharedInstance] getUserBook];
+    
     AudioBook *audioBook = [userBook objectForKey:_bookId];
     _bookImgUrl = audioBook.cover_image;
     
@@ -133,16 +162,18 @@
     }
     
     _bookNameLbl.text = audioBook.title;
+    [_slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     AudioPlayer *player = [AudioPlayer getSharedInstance];
-
+    
     if (!player.isPlaying) {
         [player startPlayerWithBook:_bookId andChapterIndex:_chapterIndex];
-
+        
     }else{
         _currentTime = [AudioPlayer getSharedInstance].audioPlayer.currentTime;
         
@@ -178,6 +209,7 @@
 {
     [self invalidateTimer];
     _playBtn.selected = NO;
+    
 }
 
 - (void)playerNotificationReceived:(NSNotification *)notification
