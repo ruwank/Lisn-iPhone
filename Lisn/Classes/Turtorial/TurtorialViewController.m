@@ -21,15 +21,19 @@
     _pageImages = @[@"page1", @"page2", @"page3", @"page4"];
     
      // Create page view controller
-     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
+    // self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
+    self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+    
      self.pageViewController.dataSource = self;
      
      TurtorialContentViewController *startingViewController = [self viewControllerAtIndex:0];
      NSArray *viewControllers = @[startingViewController];
-     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+
+     //[self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
      
      // Change the size of page view controller
-     self.pageViewController.view.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 100);
+     self.pageViewController.view.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44);
      
      [self addChildViewController:_pageViewController];
      [self.view addSubview:_pageViewController.view];
@@ -38,9 +42,9 @@
     for (UIView *subview in self.pageViewController.view.subviews) {
         if ([subview isKindOfClass:[UIPageControl class]]) {
             UIPageControl *pageControl = (UIPageControl *)subview;
-            pageControl.pageIndicatorTintColor = [UIColor yellowColor];
-            pageControl.currentPageIndicatorTintColor = [UIColor greenColor];
-            pageControl.backgroundColor = [UIColor blueColor];
+            pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+            pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+            pageControl.backgroundColor = [UIColor whiteColor];
         }
     }
     [self saveData];

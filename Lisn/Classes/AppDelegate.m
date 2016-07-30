@@ -40,10 +40,7 @@
 //    self.window.rootViewController = mainNav;
 //    [self.window makeKeyAndVisible];
     
-    UIPageControl *pageControl = [UIPageControl appearance];
-    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-    pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
-    pageControl.backgroundColor = [UIColor whiteColor];
+  
     
    // [self setServiceProvider];
     [[FBSDKApplicationDelegate sharedInstance] application:application
