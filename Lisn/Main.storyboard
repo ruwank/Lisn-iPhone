@@ -2732,11 +2732,11 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
             </objects>
             <point key="canvasLocation" x="719" y="1674"/>
         </scene>
-        <!--My Book-->
+        <!--My Books-->
         <scene sceneID="ki2-ye-HD1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gVh-PY-Euc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My Book" image="ic_menu_mybook" id="Hp6-eP-s3s"/>
+                    <tabBarItem key="tabBarItem" title="My Books" image="ic_menu_mybook" id="Hp6-eP-s3s"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="ic_menu" id="CIF-TK-K7C">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2849,7 +2849,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DM4-3s-xt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2023" y="2163"/>
+            <point key="canvasLocation" x="2011" y="2276"/>
         </scene>
         <!--Store-->
         <scene sceneID="Pau-q2-fbt">

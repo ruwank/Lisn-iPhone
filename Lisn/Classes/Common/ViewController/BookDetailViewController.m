@@ -20,7 +20,6 @@
 #import "FileOperator.h"
 #import "PlayerViewController.h"
 #import "LoadingIndicator.h"
-#import <StoreKit/StoreKit.h>
 
 #define ALERT_VIEW_TAG_DOWNLOD_COMPETE 10
 #define ALERT_VIEW_TAG_PAYMENT_COMPETE  20
@@ -232,9 +231,13 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
 -(void)downloadAudioFile:(NSString*)bookId andFileIndex:(int)index{
     //self.indicator.loadingText=@"Downloading...";
     //[self.indicator show];
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+
     [self showLoadingView:[NSString stringWithFormat:@"Downloading Chapter %d",index]];
     [WebServiceManager downloadAudioFile:bookId andFileIndex:index withResponseHandeler:^(BOOL success, ErrorType errorType) {
         [self hiddenLoadingView];
+        [UIApplication sharedApplication].idleTimerDisabled = NO;
+
         if(success){
             if(isSelectChapter){
                 [self showDownloadCompleteMessage];
@@ -642,9 +645,11 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     if([SKPaymentQueue canMakePayments]){
         NSLog(@"User can make payments");
         _loadingView.hidden=NO;
-        SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:productId]];
-        productsRequest.delegate = self;
-        [productsRequest start];
+        [UIApplication sharedApplication].idleTimerDisabled = YES;
+        SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:productId]];
+        self.productsRequest=request;
+        request.delegate = self;
+        [request start];
         
     }
     else{
@@ -658,6 +663,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     NSInteger count = [response.products count];
     if(count > 0){
         validProduct = [response.products objectAtIndex:0];
+        self.product=validProduct;
         NSLog(@"Products Available!");
         [self purchase:validProduct];
     }
@@ -670,7 +676,8 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
 }
 
 - (void)purchase:(SKProduct *)product{
-    SKPayment *payment = [SKPayment paymentWithProduct:product];
+    
+    SKPayment *payment = [SKPayment paymentWithProduct:self.product];
     
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
@@ -684,6 +691,8 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
 
 - (void) paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
 {
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
+
     NSLog(@"received restored transactions: %lu", (unsigned long)queue.transactions.count);
     for(SKPaymentTransaction *transaction in queue.transactions){
         if(transaction.transactionState == SKPaymentTransactionStateRestored){
