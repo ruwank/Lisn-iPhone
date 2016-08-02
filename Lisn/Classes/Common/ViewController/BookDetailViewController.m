@@ -102,19 +102,19 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
         [self buyAudioBook];
         
         /*
-        isSelectChapter=false;
-    UserProfile *userProfile=[[DataSource sharedInstance] getProfileInfo];
-    NSString *userId=userProfile.userId;
-    NSString *bookid=_audioBook.book_id;
-    
-    float amount= (float) (([_audioBook.price floatValue]) * ((100.0-_audioBook.discount)/100.0));
-    
-    NSString *url=[NSString stringWithFormat:@"%@?userid=%@&bookid=%@&amount=%f",purchase_book_url,userId,bookid,amount];
-        [self loadPurchaseViewController:url];
-        */
+         isSelectChapter=false;
+         UserProfile *userProfile=[[DataSource sharedInstance] getProfileInfo];
+         NSString *userId=userProfile.userId;
+         NSString *bookid=_audioBook.book_id;
+         
+         float amount= (float) (([_audioBook.price floatValue]) * ((100.0-_audioBook.discount)/100.0));
+         
+         NSString *url=[NSString stringWithFormat:@"%@?userid=%@&bookid=%@&amount=%f",purchase_book_url,userId,bookid,amount];
+         [self loadPurchaseViewController:url];
+         */
     }else{
         [self loadLoginScreen];
-       
+        
     }
 }
 
@@ -122,12 +122,12 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     //isSelectChapter=NO;
     //isSelectCard=NO;
     [AppUtils showContentIsNotReadyAlert];
-
+    
 }
 
 - (IBAction)playButtonTapped:(id)sender {
     isSelectChapter=NO;
-
+    
     if (_audioBook.isTotalBookPurchased && [_audioBook.chapters count] == [_audioBook.downloadedChapter count]) {
         //Play
         [self loadAudioPlayer];
@@ -135,30 +135,30 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
         if([[DataSource sharedInstance] isUserLogin] && [self isTotalChapterDownloaded]){
             [self loadAudioPlayer];
         }else{
-        if(!_audioBook.isTotalBookPurchased && [_audioBook.price floatValue]< 1){
-            //[self performSegueWithIdentifier:@"player_seque_id" sender:nil];
-
-           //Log downlaod
-            if([[DataSource sharedInstance] isUserLogin]){
-                [self logUserDownload];
-            }else{
-                [self loadLoginScreen];
+            if(!_audioBook.isTotalBookPurchased && [_audioBook.price floatValue]< 1){
+                //[self performSegueWithIdentifier:@"player_seque_id" sender:nil];
                 
-            }
-
-            //[self performSegueWithIdentifier:@"player_seque_id" sender:nil];
-
-
-        }else{
-            if([[DataSource sharedInstance] isUserLogin]){
-
-           //Download
-            [self downloadAudioBook];
-            }else{
-                [self loadLoginScreen];
+                //Log downlaod
+                if([[DataSource sharedInstance] isUserLogin]){
+                    [self logUserDownload];
+                }else{
+                    [self loadLoginScreen];
+                    
+                }
                 
+                //[self performSegueWithIdentifier:@"player_seque_id" sender:nil];
+                
+                
+            }else{
+                if([[DataSource sharedInstance] isUserLogin]){
+                    
+                    //Download
+                    [self downloadAudioBook];
+                }else{
+                    [self loadLoginScreen];
+                    
+                }
             }
-        }
         }
         
     }
@@ -212,10 +212,10 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
         }
     }
     if(downloadComplete){
-    [self showDownloadCompleteMessage];
-    [self hiddenLoadingView];
+        [self showDownloadCompleteMessage];
+        [self hiddenLoadingView];
     }
-
+    
     
 }
 -(BOOL)isTotalChapterDownloaded{
@@ -232,19 +232,19 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     //self.indicator.loadingText=@"Downloading...";
     //[self.indicator show];
     [UIApplication sharedApplication].idleTimerDisabled = YES;
-
+    
     [self showLoadingView:[NSString stringWithFormat:@"Downloading Chapter %d",index]];
     [WebServiceManager downloadAudioFile:bookId andFileIndex:index withResponseHandeler:^(BOOL success, ErrorType errorType) {
         [self hiddenLoadingView];
         [UIApplication sharedApplication].idleTimerDisabled = NO;
-
+        
         if(success){
             if(isSelectChapter){
                 [self showDownloadCompleteMessage];
             }else{
                 [self downloadAudioBook];
             }
-
+            
         }else{
             [AppUtils showCommonErrorAlert];
         }
@@ -276,7 +276,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
             if([self isTotalChapterDownloaded]){
                 [_playBtn setTitle:@"Play" forState:UIControlStateNormal];
             }
-
+            
         }
         if([AppUtils getServiceProvider] ==PROVIDER_NONE){
             _payByBillBtn.hidden=YES;
@@ -287,11 +287,11 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
         }
         else if([AppUtils getServiceProvider] ==PROVIDER_DIALOG){
             [_payByBillBtn setTitle:@"Add to Dialog bill" forState:UIControlStateNormal];
-
+            
         }
         else if([AppUtils getServiceProvider] ==PROVIDER_ETISALAT){
             [_payByBillBtn setTitle:@"Add to Etisalat bill" forState:UIControlStateNormal];
-
+            
         }
         _payByCardBtn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _payByCardBtn.titleLabel.numberOfLines = 2;
@@ -299,10 +299,13 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
         NSString *buttonText=[NSString stringWithFormat:@"Pay by Card (%d %% discount)",_audioBook.discount];
         buttonText=@"Buy";
         [_payByCardBtn setTitle:buttonText forState:UIControlStateNormal];
-
-     
-
+        
+        
+        
     }
+}
+- (void)dealloc {
+    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -313,8 +316,8 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     
     [self adjustViewHeights];
     
-//    self.indicator = [[LoadingIndicator alloc] initWithDelegate:self];
-//    self.indicator.loadingText = @"Loading";
+    //    self.indicator = [[LoadingIndicator alloc] initWithDelegate:self];
+    //    self.indicator.loadingText = @"Loading";
 }
 -(void)showLoadingView:(NSString*)message{
     _loadingView.hidden=NO;
@@ -325,14 +328,14 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
 }
 -(void)hiddenLoadingView{
     _loadingView.hidden=YES;
-
+    
     [ _activityIndicator stopAnimating];
-
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setInitialData];
-
+    
 }
 
 - (void)adjustViewHeights
@@ -349,7 +352,16 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     if (_audioBook == nil) {
         return;
     }
-    
+    NSDictionary *userBook=[[DataSource sharedInstance] getUserBook];
+    if([[DataSource sharedInstance] isUserLogin] && userBook){
+        AudioBook *book=[userBook objectForKey:_audioBook.book_id];
+        if(book){
+            _audioBook.isPurchase=book.isPurchase;
+            _audioBook.isTotalBookPurchased=book.isTotalBookPurchased;
+            
+        }
+    }
+   
     NSString *naraterText=@"";
     if(_audioBook.lanCode == LAN_SI){
         _bookNameLbl.font = [UIFont fontWithName:@"FMAbhaya" size:18];
@@ -372,7 +384,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
         _bookReaderLbl.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
         [_bookReaderLbl setTruncationToken:@"..."];
         naraterText=[NSString stringWithFormat:@"%@-%@",narrator_en,_audioBook.narrator];
-
+        
     }
     
     _bookNameLbl.text = _audioBook.title;
@@ -384,16 +396,16 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
                                                                 cachePolicy:NSURLRequestReturnCacheDataElseLoad
                                                             timeoutInterval:60];
     [_bookThumbView setImageWithURLRequest:imageRequest
-                           placeholderImage:[UIImage imageNamed:@"AppIcon"]
-                                    success:nil
-                                    failure:nil];
-    
-    [_bgThumbView setImageWithURLRequest:imageRequest
                           placeholderImage:[UIImage imageNamed:@"AppIcon"]
                                    success:nil
                                    failure:nil];
+    
+    [_bgThumbView setImageWithURLRequest:imageRequest
+                        placeholderImage:[UIImage imageNamed:@"AppIcon"]
+                                 success:nil
+                                 failure:nil];
     _chapterArray=_audioBook.chapters;
-
+    
     float tableH = _chapterArray.count * 44;
     _tableViewH.constant = tableH;
     _tableViewHeight = tableH;
@@ -462,14 +474,14 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 #pragma mark - Table view data source
 
@@ -505,10 +517,10 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
 #pragma mark
 -(void)updateAudioBook{
     [[DataSource sharedInstance] addBookToUserBookList:_audioBook];
-
+    
 }
 -(void)showDownloadCompleteMessage{
-   UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:DOWNLOAD_COMPLETE_TITLE message:DOWNLOAD_COMPLETE_MESSAGE delegate:self cancelButtonTitle:BUTTON_YES otherButtonTitles:BUTTON_NO,nil];
+    UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:DOWNLOAD_COMPLETE_TITLE message:DOWNLOAD_COMPLETE_MESSAGE delegate:self cancelButtonTitle:BUTTON_YES otherButtonTitles:BUTTON_NO,nil];
     alertView.tag=ALERT_VIEW_TAG_DOWNLOD_COMPETE;
     [alertView show];
     
@@ -526,7 +538,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     [viewController setAudioBook:_audioBook.book_id andFileIndex:chapterIndex];
     
     [self presentViewController:viewController animated:YES completion:nil];
-
+    
 }
 -(void)loadLoginScreen{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -555,11 +567,11 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     responseSerializer.acceptableContentTypes = nil;
     [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-
+    
     
     NSMutableDictionary *params=[[NSMutableDictionary alloc] init];
     UserProfile *userProfile=[[DataSource sharedInstance] getProfileInfo];
-
+    
     [params setValue:_audioBook.book_id forKey:@"bookid"];
     [params setValue:userProfile.userId forKey:@"userid"];
     
@@ -569,25 +581,25 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
         [params setValue:[NSNumber numberWithInt:0] forKey:@"chapid"];
     }
     NSLog(@"params %@",params);
-        [manager POST:user_download_activity_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            _audioBook.isPurchase=YES;
-            if(isSelectChapter){
-                _selectedChapter.isPurchased=YES;
-                [self updateAudioBook];
-                [self downloadAudioFile:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id];
-            }else{
-                _audioBook.isTotalBookPurchased=YES;
-                [self updateAudioBook];
-
-                [self downloadAudioBook];
-            }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"error %@",error);
-            [self hiddenLoadingView];
-            [AppUtils showCommonErrorAlert];
-
-
-        }];
+    [manager POST:user_download_activity_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        _audioBook.isPurchase=YES;
+        if(isSelectChapter){
+            _selectedChapter.isPurchased=YES;
+            [self updateAudioBook];
+            [self downloadAudioFile:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id];
+        }else{
+            _audioBook.isTotalBookPurchased=YES;
+            [self updateAudioBook];
+            
+            [self downloadAudioBook];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error %@",error);
+        [self hiddenLoadingView];
+        [AppUtils showCommonErrorAlert];
+        
+        
+    }];
 }
 #pragma mark - DetailViewTableViewCellDelegate
 - (void)detailViewTableViewCellButtonTapped:(DetailViewTableViewCell *)detailViewTableViewCell {
@@ -598,10 +610,10 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
         if (_selectedChapter.isPurchased) {
             if([FileOperator isAudioFileExists:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id]){
                 [self loadAudioPlayer];
-
+                
             }else{
-
-            [self downloadAudioFile:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id];
+                
+                [self downloadAudioFile:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id];
             }
         }else{
             if(_selectedChapter.price>0){
@@ -619,15 +631,15 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     if(isSelectChapter){
         [self downloadAudioFile:_audioBook.book_id andFileIndex:_selectedChapter.chapter_id];
     }else{
-       
+        
         [self downloadAudioBook];
     }
-
+    
 }
 -(void)chapterByFromCard{
-//    BookChapter bookChapter = (BookChapter) getIntent().getSerializableExtra("selectedChapter");
-//    float amount= (float) ((bookChapter.getPrice()) * ((100.0-bookChapter.getDiscount())/100.0));
-//    url=url+"&amount="+amount+"&chapid="+bookChapter.getChapter_id();
+    //    BookChapter bookChapter = (BookChapter) getIntent().getSerializableExtra("selectedChapter");
+    //    float amount= (float) ((bookChapter.getPrice()) * ((100.0-bookChapter.getDiscount())/100.0));
+    //    url=url+"&amount="+amount+"&chapid="+bookChapter.getChapter_id();
     
     UserProfile *userProfile=[[DataSource sharedInstance] getProfileInfo];
     NSString *userId=userProfile.userId;
@@ -644,7 +656,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     NSString *productId=[NSString stringWithFormat:@"%@%@",BUNDLE_ID,_audioBook.book_id];
     if([SKPaymentQueue canMakePayments]){
         NSLog(@"User can make payments");
-        _loadingView.hidden=NO;
+        [self showLoadingView:@"Loading.."];
         [UIApplication sharedApplication].idleTimerDisabled = YES;
         SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:productId]];
         self.productsRequest=request;
@@ -668,31 +680,45 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
         [self purchase:validProduct];
     }
     else if(!validProduct){
-        _loadingView.hidden=NO;
-
+        [self hiddenLoadingView];
+        [[[UIAlertView alloc] initWithTitle:@"" message:@"No products available" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         NSLog(@"No products available");
         //this is called if your product id is not valid, this shouldn't be called unless that happens.
     }
 }
 
 - (void)purchase:(SKProduct *)product{
-    
+    if(self.product && self.product.productIdentifier !=nil){
+    [AppUtils userInteractionEnabled:NO];
     SKPayment *payment = [SKPayment paymentWithProduct:self.product];
     
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
+    }else{
+        [AppUtils userInteractionEnabled:YES];
+        [AppUtils showCommonErrorAlert];
+
+    }
 }
 
 - (IBAction) restore{
+    if(self.product && self.product.productIdentifier !=nil){
+
+    [AppUtils userInteractionEnabled:NO];
+    
     //this is called when the user restores purchases, you should hook this up to a button
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+    }else{
+        [AppUtils userInteractionEnabled:YES];
+        [AppUtils showCommonErrorAlert];
+    }
 }
 
 - (void) paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
 {
     [UIApplication sharedApplication].idleTimerDisabled = NO;
-
+    
     NSLog(@"received restored transactions: %lu", (unsigned long)queue.transactions.count);
     for(SKPaymentTransaction *transaction in queue.transactions){
         if(transaction.transactionState == SKPaymentTransactionStateRestored){
@@ -724,7 +750,8 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
             case SKPaymentTransactionStatePurchased:
                 //this is called when the user has successfully purchased the package (Cha-Ching!)
                 //[self showLoadingView:@"Purchased "];
-
+                [AppUtils userInteractionEnabled:YES];
+                
                 [self completeInAppPurchase]; //you can add your code for what you want to happen when the user buys the purchase here, for this tutorial we use removing ads
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 NSLog(@"Transaction state -> Purchased");
@@ -739,9 +766,14 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
                 if(transaction.error.code == SKErrorPaymentCancelled){
                     NSLog(@"Transaction state -> Cancelled");
                     //the user cancelled the payment ;(
+                    [[[UIAlertView alloc] initWithTitle:@"" message:@"Transaction Cancelled" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                }else{
+                    [[[UIAlertView alloc] initWithTitle:@"" message:@"Transaction Failed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
                 }
+                [AppUtils userInteractionEnabled:YES];
+                
                 [self hiddenLoadingView];
-
+                
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 break;
         }
@@ -752,7 +784,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     _audioBook.isTotalBookPurchased=YES;
     [self updateAudioBook];
     [self hiddenLoadingView];
-
+    
     UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:PAYMENT_COMPLETE_TITLE message:PAYMENT_COMPLETE_MESSAGE delegate:self cancelButtonTitle:BUTTON_YES otherButtonTitles:BUTTON_NO,nil];
     alertView.tag=ALERT_VIEW_TAG_PAYMENT_COMPETE;
     [alertView show];
@@ -793,7 +825,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
         {
             //do something
             [self loadAudioPlayer];
-           
+            
         }
         else if(buttonIndex == 1)//NO button pressed.
         {
@@ -805,7 +837,8 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
         if(buttonIndex == 0)//YES button pressed
         {
             //do something
-            [self startDownloadFile];
+           // [self startDownloadFile];
+             [self logUserDownload];
             
         }
         else if(buttonIndex == 1)//NO button pressed.
@@ -813,7 +846,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
             //do something
         }
     }
-
+    
 }
 
 #pragma mark -UIActionSheetDelegate method
@@ -835,6 +868,6 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
     }
     
     
-   
+    
 }
 @end

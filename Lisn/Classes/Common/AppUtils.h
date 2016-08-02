@@ -28,5 +28,5 @@
 +(void)showCommonErrorAlert;
 
 + (NSData *)getDecryptedDataOf:(NSData *)audioData;
-
++(void)userInteractionEnabled:(BOOL)value;
 @end

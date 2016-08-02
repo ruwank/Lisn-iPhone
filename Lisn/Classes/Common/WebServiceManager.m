@@ -22,7 +22,7 @@
     [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-       NSLog(@"params %@",params);
+    NSLog(@"params %@",params);
     [manager POST:user_add_url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //TODO
         NSString* responseString = [NSString stringWithUTF8String:[responseObject bytes]];
@@ -41,8 +41,8 @@
                 NSString *separate1=[createResponse objectAtIndex:i];
                 NSArray* separate2 = [separate1 componentsSeparatedByString: @"="];
                 NSString *key=[separate2 objectAtIndex:0];
-               key= [key stringByTrimmingCharactersInSet:
-                 [NSCharacterSet whitespaceCharacterSet]];
+                key= [key stringByTrimmingCharactersInSet:
+                      [NSCharacterSet whitespaceCharacterSet]];
                 NSLog(@"separate3 %@",key);
                 if(key && [key isEqualToString:@"UID"]){
                     uid=[separate2 objectAtIndex:1];
@@ -59,7 +59,7 @@
                 if(key && [key isEqualToString:@"STATUS"]){
                     statusString=[separate2 objectAtIndex:1];
                 }
-
+                
             }
             if([type isEqualToString:@"fb"]){
                 UserProfile *userProfile=[[UserProfile alloc] init];
@@ -75,7 +75,7 @@
                 block(NO,@"",ErrorTypeInternalError);
             }
         }
-
+        
         
         NSLog(@"responseObject %@",responseObject);
         NSLog(@"responseObject class %@",responseString);
@@ -85,7 +85,7 @@
         if (block) {
             block(NO,@"",ErrorTypeInternalError);
         }
-
+        
         
     }];
     
@@ -139,11 +139,11 @@
                 }
                 
             }
-                UserProfile *userProfile=[[UserProfile alloc] init];
-                userProfile.fbId=fbId;
-                userProfile.userName=userName;
-                userProfile.userId=uid;
-                [[DataSource sharedInstance] saveProfileInfo:userProfile];
+            UserProfile *userProfile=[[UserProfile alloc] init];
+            userProfile.fbId=fbId;
+            userProfile.userName=userName;
+            userProfile.userId=uid;
+            [[DataSource sharedInstance] saveProfileInfo:userProfile];
             
             block(YES,ErrorTypeNone);
             
@@ -165,19 +165,18 @@
         
         
     }];
-
+    
 }
 +(void)downloadAudioFile:(NSString*)bookId andFileIndex:(int)index withResponseHandeler:(FileDownloderResponseHandler)block{
     
     NSString *filePath=[[FileOperator getRootDirectory] stringByAppendingPathComponent:@"temp.mp3"];
     NSError *error;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-
+    
     BOOL success = [fileManager removeItemAtPath:filePath error:&error];
-    if (success) {
-    }
+    
     AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
-
+    
     NSString *destinationfilePath=[FileOperator getAudioFilePath:bookId andFileIndex:index];
     
     //NSURL *filePath=[NSURL URLWithString:file];
@@ -190,35 +189,51 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
     [request setHTTPMethod:@"POST"];
     [request addValue:[NSString stringWithFormat:@"Basic %@", encodedUsernameAndPassword] forHTTPHeaderField:@"Authorization"];
-     [request addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
     NSString *postString = [NSString stringWithFormat:@"userid=%@&bookid=%@&chapid=%d",userProfile.userId,bookId,index];
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
-
+    
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-       
+        
         NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-         return [documentsDirectoryURL URLByAppendingPathComponent:@"temp.mp3"];
+        return [documentsDirectoryURL URLByAppendingPathComponent:@"temp.mp3"];
         
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         NSLog(@"response %@",response);
         if(error){
             block(NO,ErrorTypeInternalError);
         }else{
-
-            NSString *sourceFilePath=[[FileOperator getRootDirectory] stringByAppendingPathComponent:@"temp.mp3"];
-            NSError * err = NULL;
-            NSFileManager * fm = [[NSFileManager alloc] init];
-            BOOL result = [fm moveItemAtPath:sourceFilePath toPath:destinationfilePath error:&err];
-            if(!result){
-                block(NO,ErrorTypeInternalError);
-            }else{
-                block(YES,ErrorTypeNone);
-
+            BOOL valliedContent=YES;
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+            if ([response respondsToSelector:@selector(allHeaderFields)]) {
+                NSDictionary *dictionary = [httpResponse allHeaderFields];
+                NSNumber *lengthNumber = [dictionary objectForKey:@"Content-Length"];
+               // NSUInteger contentLength = [lengthNumber unsignedIntegerValue];
+                if(!lengthNumber || [lengthNumber integerValue]<100){
+                    valliedContent=NO;
+                }
             }
+            if(valliedContent){
+                
+                
+                NSString *sourceFilePath=[[FileOperator getRootDirectory] stringByAppendingPathComponent:@"temp.mp3"];
+                NSError * err = NULL;
+                NSFileManager * fm = [[NSFileManager alloc] init];
+                BOOL result = [fm moveItemAtPath:sourceFilePath toPath:destinationfilePath error:&err];
+                if(!result){
+                    block(NO,ErrorTypeInternalError);
+                }else{
+                    block(YES,ErrorTypeNone);
+                    
+                }
                 NSLog(@"Error: %@", err);
+            }else{
+                block(NO,ErrorTypeInternalError);
+                
+            }
             
-           // NSLog(@"File destinationUrl to: %@", destinationUrl);
+            // NSLog(@"File destinationUrl to: %@", destinationUrl);
         }
         
     }];

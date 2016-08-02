@@ -13,12 +13,15 @@
 #import "AppDelegate.h"
 #import "BookCategory.h"
 #import "BookCategoryCell.h"
+#import <AFNetworking/AFNetworking.h>
 
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVPlayer.h>
 #import <AVFoundation/AVPlayerItem.h>
 #import <AVFoundation/AVAsset.h>
 #import "BookDetailViewController.h"
+#import "AppUtils.h"
+#import "WebServiceURLs.h"
 
 @interface StoreViewController () <TabButtonViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate,StoreBookCollectionViewCellDelegate>{
     NSTimer *_timer;
@@ -62,8 +65,39 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     _categoriesArray = [[NSMutableArray alloc] init];
+    [self loadCatergory];
+    
+}
+-(void)loadBookCatergory{
+    
+    AFHTTPSessionManager *manager = [AppUtils getAFHTTPSessionManager];
+    
+    [manager POST:book_category_list_url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if(responseObject != NULL && [responseObject isKindOfClass:[NSArray class]]){
+            NSMutableArray *dataArray=(NSMutableArray*)responseObject;
+            NSMutableArray *categoryArray=[[NSMutableArray alloc] init];
+            for (int i=0; i<[dataArray count]; i++) {
+                NSDictionary *dataDic=[dataArray objectAtIndex:i];
+                BookCategory *bookCategory=[[BookCategory alloc] initWithDataDic:dataDic];
+                [categoryArray addObject:bookCategory];
+            }
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+
+            appDelegate.bookCategories=categoryArray;
+            [self loadCatergory];
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+       // [self finishDownload];
+        
+    }];
+
+}
+-(void)loadCatergory{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+
+    if([appDelegate.bookCategories count]>0){
     [_categoriesArray addObjectsFromArray:appDelegate.bookCategories];
     
     float scrollContentW = 0;
@@ -90,8 +124,10 @@
     }
     
     _topTabScrollView.contentSize = CGSizeMake(scrollContentW, 44);
+    }else{
+        [self loadBookCatergory];
+    }
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

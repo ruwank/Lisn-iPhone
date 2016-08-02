@@ -190,5 +190,7 @@
     free(buffer);
     return nil;
 }
-
++(void)userInteractionEnabled:(BOOL)value{
+    [self appDelegate].window.userInteractionEnabled=value;
+}
 @end

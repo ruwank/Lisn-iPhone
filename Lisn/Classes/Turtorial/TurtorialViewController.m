@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _pageImages = @[@"page1", @"page2", @"page3", @"page4"];
+    _pageImages = @[@"page1", @"page2", @"page3", @"page4", @"page5", @"page6"];
     
      // Create page view controller
     // self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
