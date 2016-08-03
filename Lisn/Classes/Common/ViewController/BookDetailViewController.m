@@ -768,7 +768,7 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
                     //the user cancelled the payment ;(
                     [[[UIAlertView alloc] initWithTitle:@"" message:@"Transaction Cancelled" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
                 }else{
-                    [[[UIAlertView alloc] initWithTitle:@"" message:@"Transaction Failed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                    [[[UIAlertView alloc] initWithTitle:@"Transaction Failed" message:transaction.error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
                 }
                 [AppUtils userInteractionEnabled:YES];
                 
