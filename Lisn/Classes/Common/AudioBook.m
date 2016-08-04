@@ -70,7 +70,7 @@
                 _discount = [[jsonDic valueForKey:@"discount"] intValue];
             
             if([jsonDic valueForKey:@"purchased"]!= nil)
-                _isPurchase = [[jsonDic valueForKey:@"purchased"] boolValue];
+                _isTotalBookPurchased = [[jsonDic valueForKey:@"purchased"] boolValue];
             
             _lanCode = LAN_EN;
             if ([_language isEqualToString:@"SI"]) {

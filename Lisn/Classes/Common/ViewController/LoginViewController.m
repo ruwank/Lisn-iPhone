@@ -184,7 +184,7 @@
             NSMutableArray *booksDataArray=(NSMutableArray*)responseObject;
             for (NSDictionary *dic in booksDataArray) {
                 AudioBook *audioBook=[[AudioBook alloc] initWithDataDictionary:dic];
-                
+                audioBook.isPurchase=true;
                 [userBook setValue:audioBook forKey:audioBook.book_id];
             }
             [[DataSource sharedInstance] saveUserBook:userBook];

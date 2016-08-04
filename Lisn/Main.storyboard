@@ -4,7 +4,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Main Menu View Controller-->
@@ -285,18 +284,11 @@
                                     <outlet property="delegate" destination="I2d-Av-NPy" id="z4E-bS-H0H"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ui_bg_logo" translatesAutoresizingMaskIntoConstraints="NO" id="zKx-6I-Mes">
-                                <rect key="frame" x="78" y="44" width="164" height="3"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="zKx-6I-Mes" firstAttribute="leading" secondItem="9ek-bc-mgI" secondAttribute="leadingMargin" constant="62" id="0g7-0o-MzV"/>
-                            <constraint firstItem="rnw-25-cTR" firstAttribute="top" secondItem="zKx-6I-Mes" secondAttribute="bottom" constant="-47" id="3Br-mb-QHI"/>
                             <constraint firstItem="rnw-25-cTR" firstAttribute="leading" secondItem="9ek-bc-mgI" secondAttribute="leading" id="aVC-Xo-Zgf"/>
-                            <constraint firstItem="zKx-6I-Mes" firstAttribute="top" secondItem="UUJ-RK-Zbv" secondAttribute="bottom" id="kW0-I3-Pba"/>
                             <constraint firstAttribute="trailing" secondItem="rnw-25-cTR" secondAttribute="trailing" id="nPp-pW-fPR"/>
-                            <constraint firstItem="zKx-6I-Mes" firstAttribute="centerX" secondItem="rnw-25-cTR" secondAttribute="centerX" id="o86-hN-hUi"/>
                             <constraint firstItem="rnw-25-cTR" firstAttribute="top" secondItem="UUJ-RK-Zbv" secondAttribute="bottom" constant="-44" id="r8Q-Tt-8A9"/>
                             <constraint firstItem="9DO-ew-0GY" firstAttribute="top" secondItem="rnw-25-cTR" secondAttribute="bottom" constant="54" id="yYw-7A-xFa"/>
                         </constraints>
@@ -3782,6 +3774,7 @@ The methods in the UIConstrai ntBasedLayo utDebugging category on UIView listed 
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="495-1x-J5Z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.93333333330000001" green="0.62352941179999999" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
