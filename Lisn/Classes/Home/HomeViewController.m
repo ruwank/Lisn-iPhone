@@ -53,12 +53,17 @@
 
 @property (nonatomic, strong) StoreBookCollectionViewCell *selectedStoreBookCell;
 @property (nonatomic, strong) AVPlayer *previewPlayer;
+@property (weak, nonatomic) IBOutlet UIButton *moreMybookButton;
 
 @end
 
 @implementation HomeViewController
 - (IBAction)storeButtonTapped:(id)sender {
    [ self.tabBarController setSelectedIndex:1];
+
+}
+- (IBAction)moreMyBookButtonTapped:(id)sender {
+    [ self.tabBarController setSelectedIndex:3];
 
 }
 
@@ -142,6 +147,7 @@
 
 -(void)loadMyBookData{
     [_myBooksArray removeAllObjects ];
+    _moreMybookButton.hidden=YES;
 
     if([[DataSource sharedInstance] isUserLogin]){
         NSMutableDictionary *userBook=[[DataSource sharedInstance] getUserBook];
@@ -153,6 +159,9 @@
         }
         for (int index=0; index<count; index++) {
             [_myBooksArray addObject:[uesrBook objectAtIndex:index]];
+        }
+        if([uesrBook count]>3){
+             _moreMybookButton.hidden=NO;
         }
     }
     if (_myBooksArray.count == 0) {

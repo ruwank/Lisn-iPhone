@@ -707,9 +707,10 @@
                                         <rect key="frame" x="6" y="0.0" width="308" height="204"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Books" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vEf-wy-5u4">
-                                                <rect key="frame" x="4" y="0.0" width="300" height="28"/>
+                                                <rect key="frame" x="4" y="0.0" width="128" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="KVz-EX-0Ep"/>
+                                                    <constraint firstAttribute="width" constant="128" id="TVT-Ob-4kp"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -814,24 +815,38 @@
                                                     <outlet property="delegate" destination="kiw-B9-YaZ" id="Cbp-HJ-nWq"/>
                                                 </connections>
                                             </collectionView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcv-fY-hA9">
+                                                <rect key="frame" x="175" y="0.0" width="133" height="32"/>
+                                                <color key="backgroundColor" red="0.93333333330000001" green="0.62352941179999999" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="ATv-cB-OeB"/>
+                                                    <constraint firstAttribute="width" constant="133" id="zJw-tz-rWz"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <state key="normal" title="More"/>
+                                                <connections>
+                                                    <action selector="moreMyBookButtonTapped:" destination="kiw-B9-YaZ" eventType="touchUpInside" id="u0A-iz-Rcl"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="vEf-wy-5u4" firstAttribute="leading" secondItem="PQR-AY-lwN" secondAttribute="leading" constant="4" id="AHe-Ic-fac"/>
                                             <constraint firstItem="vEf-wy-5u4" firstAttribute="top" secondItem="PQR-AY-lwN" secondAttribute="top" id="HKZ-BH-pTO"/>
                                             <constraint firstAttribute="bottom" secondItem="9Kc-iR-2Di" secondAttribute="bottom" constant="18" id="Olw-Tp-OGF"/>
+                                            <constraint firstAttribute="trailing" secondItem="zcv-fY-hA9" secondAttribute="trailing" id="S6c-P5-l89"/>
+                                            <constraint firstItem="zcv-fY-hA9" firstAttribute="top" secondItem="PQR-AY-lwN" secondAttribute="top" id="Ssp-1L-a4P"/>
                                             <constraint firstItem="9Kc-iR-2Di" firstAttribute="leading" secondItem="PQR-AY-lwN" secondAttribute="leading" id="Vs6-yq-55b"/>
                                             <constraint firstAttribute="trailing" secondItem="9Kc-iR-2Di" secondAttribute="trailing" id="aqz-x1-CS8"/>
                                             <constraint firstAttribute="height" constant="204" id="b8J-pv-a40"/>
-                                            <constraint firstAttribute="trailing" secondItem="vEf-wy-5u4" secondAttribute="trailing" constant="4" id="mF2-FU-HPU"/>
                                             <constraint firstItem="9Kc-iR-2Di" firstAttribute="top" secondItem="vEf-wy-5u4" secondAttribute="bottom" constant="8" id="oa1-WH-xab"/>
+                                            <constraint firstItem="vEf-wy-5u4" firstAttribute="leading" secondItem="PQR-AY-lwN" secondAttribute="leading" constant="4" id="xcJ-Th-BXQ"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZq-M8-hiZ" userLabel="Store Btn View">
                                         <rect key="frame" x="6" y="204" width="308" height="48"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iiD-Mv-cKO">
-                                                <rect key="frame" x="165" y="8" width="133" height="32"/>
+                                                <rect key="frame" x="175" y="8" width="133" height="32"/>
                                                 <color key="backgroundColor" red="0.93333333333333335" green="0.62352941176470589" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="id2-MK-KbY"/>
@@ -847,7 +862,7 @@
                                         <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="iiD-Mv-cKO" firstAttribute="top" secondItem="xZq-M8-hiZ" secondAttribute="top" constant="8" id="4MN-vB-nq4"/>
-                                            <constraint firstAttribute="trailing" secondItem="iiD-Mv-cKO" secondAttribute="trailing" constant="10" id="cbo-eO-7PY"/>
+                                            <constraint firstAttribute="trailing" secondItem="iiD-Mv-cKO" secondAttribute="trailing" id="cbo-eO-7PY"/>
                                             <constraint firstAttribute="height" constant="48" id="fyK-XC-Iy4"/>
                                         </constraints>
                                     </view>
@@ -1812,6 +1827,7 @@
                     <navigationItem key="navigationItem" title="Home" id="oNA-04-Yn8"/>
                     <connections>
                         <outlet property="contentScrollView" destination="n8J-rR-gZb" id="d1A-Vu-3uW"/>
+                        <outlet property="moreMybookButton" destination="zcv-fY-hA9" id="6dC-Er-ShW"/>
                         <outlet property="myBookLayConstHeight" destination="b8J-pv-a40" id="oHd-dw-5k7"/>
                         <outlet property="myBooksCollectionView" destination="9Kc-iR-2Di" id="JYz-4S-ER3"/>
                         <outlet property="myBooksView" destination="PQR-AY-lwN" id="tj2-Lf-UY9"/>

@@ -653,7 +653,11 @@ static NSString * const BUNDLE_ID =@"audio.lisn.Lisn.";
 
 - (void)buyAudioBook{
     NSLog(@"User requests to remove ads");
+    
     NSString *productId=[NSString stringWithFormat:@"%@%@",BUNDLE_ID,_audioBook.book_id];
+    if([_audioBook.book_id isEqualToString:@"6"] ){
+        productId=@"Lisn.6";
+    }
     if([SKPaymentQueue canMakePayments]){
         NSLog(@"User can make payments");
         [self showLoadingView:@"Loading.."];
